@@ -8,5 +8,15 @@ app.config(function($stateProvider, $urlRouterProvider){
        .state('main',{
            url:'/',
            templateUrl: 'client/app/views/main.html'
-       });
+       })
+       .state('inscription',{
+           url:'/inscription',
+           templateUrl: 'client/app/views/inscription.html'
+       })
+       .state('connexion',{
+           url:'/connexion',
+           templateUrl: 'client/app/views/connexion.html'
+       })
+
+   ;
 });
