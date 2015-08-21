@@ -3,14 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * Proprietaire
+ * User
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\ProprietaireRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  */
-class Proprietaire
+class User extends BaseUser
 {
     /**
      * @var integer
@@ -19,30 +20,30 @@ class Proprietaire
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected  $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nomProprietaire", type="string", length=255)
+     * @ORM\Column(name="nomUser", type="string", length=255)
      */
-    private $nomProprietaire;
+    private $nomUser;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenomProprietaire", type="string", length=255)
+     * @ORM\Column(name="prenomUser", type="string", length=255)
      */
-    private $prenomProprietaire;
+    private $prenomUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quartier",inversedBy="proprietaires")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quartier",inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private $quartier;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="proprietaire")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="users")
      */
     private $articles;
 
@@ -57,55 +58,56 @@ class Proprietaire
     }
 
     /**
-     * Set nomProprietaire
+     * Set nomUser
      *
-     * @param string $nomProprietaire
-     * @return Proprietaire
+     * @param string $nomUser
+     * @return User
      */
-    public function setNomProprietaire($nomProprietaire)
+    public function setNomUser($nomUser)
     {
-        $this->nomProprietaire = $nomProprietaire;
+        $this->nomUser = $nomUser;
 
         return $this;
     }
 
     /**
-     * Get nomProprietaire
+     * Get nomUser
      *
      * @return string 
      */
-    public function getNomProprietaire()
+    public function getNomUser()
     {
-        return $this->nomProprietaire;
+        return $this->nomUser;
     }
 
     /**
-     * Set prenomProprietaire
+     * Set prenomUser
      *
-     * @param string $prenomProprietaire
-     * @return Proprietaire
+     * @param string $prenomUser
+     * @return User
      */
-    public function setPrenomProprietaire($prenomProprietaire)
+    public function setPrenomUser($prenomUser)
     {
-        $this->prenomProprietaire = $prenomProprietaire;
+        $this->prenomUser = $prenomUser;
 
         return $this;
     }
 
     /**
-     * Get prenomProprietaire
+     * Get prenomUser
      *
      * @return string 
      */
-    public function getPrenomProprietaire()
+    public function getPrenomUser()
     {
-        return $this->prenomProprietaire;
+        return $this->prenomUser;
     }
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -113,7 +115,7 @@ class Proprietaire
      * Set quartier
      *
      * @param \AppBundle\Entity\Quartier $quartier
-     * @return Proprietaire
+     * @return User
      */
     public function setQuartier(\AppBundle\Entity\Quartier $quartier)
     {
@@ -136,7 +138,7 @@ class Proprietaire
      * Add articles
      *
      * @param \AppBundle\Entity\Article $articles
-     * @return Proprietaire
+     * @return User
      */
     public function addArticle(\AppBundle\Entity\Article $articles)
     {

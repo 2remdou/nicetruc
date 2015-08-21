@@ -43,10 +43,10 @@ class Article
     private $datePublication;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Proprietaire",inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $proprietaire;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie",inversedBy="articles")
@@ -134,26 +134,26 @@ class Article
     }
 
     /**
-     * Set proprietaire
+     * Set user
      *
-     * @param \AppBundle\Entity\Proprietaire $proprietaire
+     * @param \AppBundle\Entity\User $user
      * @return Article
      */
-    public function setProprietaire(\AppBundle\Entity\Proprietaire $proprietaire)
+    public function setUser(\AppBundle\Entity\User $user)
     {
-        $this->proprietaire = $proprietaire;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get proprietaire
+     * Get user
      *
-     * @return \AppBundle\Entity\Proprietaire 
+     * @return \AppBundle\Entity\User 
      */
-    public function getProprietaire()
+    public function getUser()
     {
-        return $this->proprietaire;
+        return $this->user;
     }
 
     /**

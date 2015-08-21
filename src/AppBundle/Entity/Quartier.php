@@ -34,9 +34,9 @@ class Quartier
      */
     private $ville;
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Proprietaire",mappedBy="quartier")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User",mappedBy="quartier")
      */
-    private $proprietaires;
+    private $users;
 
 
     /**
@@ -76,7 +76,7 @@ class Quartier
      */
     public function __construct()
     {
-        $this->proprietaires = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -103,35 +103,35 @@ class Quartier
     }
 
     /**
-     * Add proprietaires
+     * Add users
      *
-     * @param \AppBundle\Entity\Proprietaire $proprietaires
+     * @param \AppBundle\Entity\User $users
      * @return Quartier
      */
-    public function addProprietaire(\AppBundle\Entity\Proprietaire $proprietaires)
+    public function addUser(\AppBundle\Entity\User $users)
     {
-        $this->proprietaires[] = $proprietaires;
+        $this->users[] = $users;
 
         return $this;
     }
 
     /**
-     * Remove proprietaires
+     * Remove users
      *
-     * @param \AppBundle\Entity\Proprietaire $proprietaires
+     * @param \AppBundle\Entity\User $users
      */
-    public function removeProprietaire(\AppBundle\Entity\Proprietaire $proprietaires)
+    public function removeUser(\AppBundle\Entity\User $users)
     {
-        $this->proprietaires->removeElement($proprietaires);
+        $this->users->removeElement($users);
     }
 
     /**
-     * Get proprietaires
+     * Get users
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProprietaires()
+    public function getUsers()
     {
-        return $this->proprietaires;
+        return $this->users;
     }
 }
