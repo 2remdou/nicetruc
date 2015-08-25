@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{ED016D88-924B-4550-9568-5C488D92DEBF}" Label="" LastModificationDate="1440077208" Name="nicetruc" Objects="31" Symbols="9" Target="Analyse" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{ED016D88-924B-4550-9568-5C488D92DEBF}" Label="" LastModificationDate="1440144398" Name="nicetruc" Objects="33" Symbols="9" Target="Analyse" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -1734,11 +1734,11 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Class>
 <o:Class Id="o21">
 <a:ObjectID>28D71AC9-CC7C-429E-ADA8-D3E58F390DBC</a:ObjectID>
-<a:Name>Proprietaire</a:Name>
-<a:Code>Proprietaire</a:Code>
+<a:Name>User</a:Name>
+<a:Code>User</a:Code>
 <a:CreationDate>1440076386</a:CreationDate>
 <a:Creator>mdoutoure</a:Creator>
-<a:ModificationDate>1440076672</a:ModificationDate>
+<a:ModificationDate>1440144398</a:ModificationDate>
 <a:Modifier>mdoutoure</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
