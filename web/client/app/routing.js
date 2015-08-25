@@ -17,6 +17,10 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/connexion',
            templateUrl: 'client/app/views/connexion.html'
        })
+        .state('test',{
+                   url:'/test',
+                   templateUrl: 'client/app/views/test.html'
+               })
 
    ;
 });
