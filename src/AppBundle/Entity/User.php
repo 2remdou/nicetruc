@@ -10,6 +10,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser
 {
@@ -165,5 +166,13 @@ class User extends BaseUser
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * @ORM\PrePersist
+     *
+     */
+    public function prePersist(){
+        $this->setUsername($this->getEmail());
     }
 }
