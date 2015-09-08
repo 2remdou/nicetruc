@@ -39,7 +39,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quartier",inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $quartier;
 
@@ -168,11 +168,10 @@ class User extends BaseUser
         return $this->articles;
     }
 
-    /**
-     * @ORM\PrePersist
-     *
-     */
-    public function prePersist(){
+    public function setEmail($email)
+    {
+       parent::setEmail($email);
         $this->setUsername($this->getEmail());
     }
+
 }

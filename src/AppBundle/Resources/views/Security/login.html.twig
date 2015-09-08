@@ -13,8 +13,8 @@
                         <h4>Connexion</h4>
                         <form id="login-form" action="{{ path("fos_user_security_check") }}" method="post" role="form" name="formConnexion">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                            <div class="form-group" ng-class="{'has-error':formConnexion._email.$dirty && formConnexion._email.$invalid,'has-success':formConnexion._email.$dirty && formConnexion._email.$valid}">
-                                <input type="email" name="_email" id="email" tabindex="1" class="form-control" placeholder="Adresse Email" ng-model="email" required="required">
+                            <div class="form-group">
+                                <input type="email" name="_username" id="email" tabindex="1" class="form-control" placeholder="Adresse Email" ng-model="email" required="required">
                                     <span ng-show="formConnexion._email.$dirty && formConnexion._email.$invalid">
                                         Ce format d'adresse est invalide.
                                     </span>

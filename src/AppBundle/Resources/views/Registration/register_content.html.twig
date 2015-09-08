@@ -14,21 +14,21 @@
                             {{ form_row(form.prenomUser,{'attr':{'ng-model': 'newUser.prenomUser'}}) }}
                         </div>
 
-                        <div class="form-group" ng-class="{'has-error':formInscription.email.$dirty && formInscription.email.$invalid,'has-success':formInscription.email.$dirty && formInscription.email.$valid}">
-                            {{ form_row(form.email,{'attr':{'ng-model': 'newUser.email'},'full_name':'email'}) }}
+                        <div class="form-group">
+                            {{ form_row(form.email,{'attr':{'ng-model': 'newUser.email'}}) }}
                             <span ng-show="formInscription.email.$dirty && formInscription.email.$invalid">
                                 Cette adresse est invalide.
                             </span>
                         </div>
 
-                        <div class="form-group" ng-class="{'has-error':formInscription.password.$dirty && formInscription.password.$invalid,'has-success':formInscription.password.$dirty && formInscription.password.$valid}">
-                            {{ form_row(form.plainPassword,{'attr':{'ng-model': 'newUser.password','ng-minlength': 1},'full_name':'password'}) }}
+                        <div class="form-group">
+                            {{ form_row(form.plainPassword,{'attr':{'ng-model': 'newUser.password'}}) }}
                             <span ng-show="formInscription.password.$dirty && formInscription.password.$error.minlength">
                                 La longueur est invalide
                             </span>
                         </div>
-                        <div class="form-group" ng-class="{'has-error':formInscription.confirmationPassword.$dirty && formInscription.confirmationPassword.$invalid,'has-success':formInscription.confirmationPassword.$dirty && formInscription.confirmationPassword.$valid}">
-                            {{ form_row(form.confirmationPassword,{'attr':{'ng-model': 'newUser.confirmationPassword','ng-minlength': 1,'equals-to':'formInscription.password'},'full_name':'confirmationPassword'}) }}
+                        <div class="form-group">
+                            {{ form_row(form.confirmationPassword,{'attr':{'ng-model': 'newUser.confirmationPassword'}}) }}
                             <span class="text-danger" ng-show="formInscription.confirmationPassword.$invalid">
                                 Les deux password doivent etre identiques
                             </span>
@@ -40,6 +40,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{ form_row(form._token) }}
                     </form>
                 </div>
             </div>

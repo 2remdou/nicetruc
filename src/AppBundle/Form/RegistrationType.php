@@ -47,6 +47,7 @@ class RegistrationType  extends AbstractType
                     'placeholder' => 'Confirmation mot de passe'
                 )
             ))
+            ->remove('username')
         ;
     }
 
