@@ -1,5 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block content %}
-{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    <section class="col-md-8 col-md-offset-2">
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    </section>
 {% endblock content%}

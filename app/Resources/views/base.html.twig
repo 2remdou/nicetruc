@@ -40,7 +40,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">NiceTruc</a>
+                    <a class="navbar-brand" href="{{ path('homepage') }}">NiceTruc</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -57,7 +57,7 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Profil</a></li>
+                                    <li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
                                     <li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
                                 </ul>
                             </div>
@@ -91,11 +91,11 @@
                 {% endblock messageFlash%}
             </section>
 
-            <section class="col-md-8 col-md-offset-2">
+            {#<section class="col-md-8 col-md-offset-2">#}
                 {% block content %}
 
                 {% endblock content %}
-            </section>
+            {#</section>#}
 
         {% endblock body %}
     </div>
@@ -107,6 +107,7 @@
             'client/bower_components/jquery/dist/jquery.min.js'
             'client/bower_components/bootstrap/dist/js/bootstrap.min.js'
             'client/bower_components/angular-ui-router/release/angular-ui-router.min.js'
+            'client/bower_components/ui.bootstrap/src/tabs/tabs.js'
 
             'client/app/app.js'
             'client/app/routing.js'
