@@ -1,13 +1,13 @@
 {% extends "::base.html.twig" %}
 
-{% block body %}
+{% block content %}
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 form-login">
+            <div class="col-md-6 form-login">
                 <div class="row">
                     <div class="col-lg-12">
                         <h4>Connexion</h4>
@@ -49,4 +49,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

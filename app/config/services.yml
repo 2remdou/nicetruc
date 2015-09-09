@@ -8,6 +8,14 @@ services:
         class: AppBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: nicetruc_user_registration }
+
+    nicetruc.login.success.handler:
+        class: AppBundle\Handler\LoginSuccessHandler
+        arguments: [@security.token_storage,@security.authorization_checker,@router]
+
+    nicetruc.login.failure.handler:
+        class: AppBundle\Handler\LoginFailureHandler
+        arguments: [@router]
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

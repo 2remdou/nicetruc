@@ -24,6 +24,8 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager
+                success_handler: nicetruc.login.success.handler
+                failure_handler: nicetruc.login.failure.handler
 
             logout: true
             anonymous: true

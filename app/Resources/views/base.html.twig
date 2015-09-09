@@ -46,12 +46,26 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#/test">Test</a>
+                            {#<a href="#/test">Test</a>#}
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('fos_user_registration_register') }}" id="btnAbout">Inscription</a></li>
-                        <li><a href="{{ path('fos_user_security_login') }}" id="btnAbout">Connexion</a></li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="profil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    {{ app.user.nomUser }}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Profil</a></li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <li><a href="{{ path('fos_user_registration_register') }}" id="btnAbout">Inscription</a></li>
+                            <li><a href="{{ path('fos_user_security_login') }}" id="btnAbout">Connexion</a></li>
+                        {% endif %}
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -60,9 +74,33 @@
         </nav>
     {% endblock %}
 
-    {% block body %}
 
-    {% endblock %}
+    <div class="container">
+        {% block body %}
+            <section class="col-md-8 col-md-offset-2">
+                {% block messageFlash %}
+                    {% set typeMessages = ['info', 'success', 'warning', 'danger'] %}
+                    {% for typeMessage in typeMessages %}
+                        {% for message in app.session.flashbag.get(typeMessage) %}
+                            <div class="alert alert-dismissible alert-{{ typeMessage }}">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <p class="text-center">{{ message }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endblock messageFlash%}
+            </section>
+
+            <section class="col-md-8 col-md-offset-2">
+                {% block content %}
+
+                {% endblock content %}
+            </section>
+
+        {% endblock body %}
+    </div>
+
+
     {% block javascripts %}
         {% javascripts
             'client/bower_components/angular/angular.min.js'
