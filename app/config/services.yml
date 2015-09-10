@@ -18,6 +18,15 @@ services:
         arguments: ["AppBundle\Entity\User"]
         tags:
             - { name: form.type, alias: nicetruc_user_profile }
+    nicetruc.form.ville:
+        class: AppBundle\Form\VilleType
+        tags:
+            - { name: form.type, alias: nicetruc_ville }
+
+    nicetruc.form.ville:
+        class: AppBundle\Form\VilleType
+        tags:
+            - { name: form.type, alias: nicetruc_ville }
 
     nicetruc.login.success.handler:
         class: AppBundle\Handler\LoginSuccessHandler

@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use AppBundle\Form\QuartierType;
 
 class ProfileFormType extends AbstractType
 {
@@ -104,7 +105,6 @@ class ProfileFormType extends AbstractType
             ->add('plainPassword','password',array(
                 'label' => 'Mot de passe',
                 'required' => true,
-                'constraints' => new UserPassword(),
                 'attr' => array(
                     'placeholder' => 'Nouveau mot de passe'
                 )
@@ -113,10 +113,24 @@ class ProfileFormType extends AbstractType
                 'label' => 'Confirmation',
                 'required' => true,
                 'mapped' => false,
-                'constraints' => new UserPassword(),
                 'attr' => array(
                     'placeholder' => 'Confirmation mot de passe'
                 )
+            ))
+            ->add('telephone',null,array(
+                'label' => 'Telephone',
+                'attr' => array(
+                    'placeholder' => 'Numero de telephone'
+                )
+            ))
+            ->add('siteWeb',null,array(
+                'label' => 'Site Web',
+                'attr' => array(
+                    'placeholder' => 'Site web'
+                )
+            ))
+            ->add('quartier',new QuartierType(),array(
+                'label' => false
             ))
             ->remove('username')
         ;
