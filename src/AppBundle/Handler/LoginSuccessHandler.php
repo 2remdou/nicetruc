@@ -38,7 +38,7 @@ class LoginSuccessHandler  implements AuthenticationSuccessHandlerInterface
      */
     public function onAuthenticationSuccess(Request $request,TokenInterface $token)
     {
-        if($this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')){
+        if($this->authorizationCh2ecker->isGranted('IS_AUTHENTICATED_FULLY')){
             $user = $token->getUser();
             $session = $request->getSession();
             $session->getFlashBag()->add('success',$user->getNomUser().', nous sommes super content de vous revoir');
