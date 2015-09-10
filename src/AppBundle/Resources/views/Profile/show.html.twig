@@ -1,5 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block content %}
-{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+    <div class="col-sm-8 col-sm-offset-2">
+        {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+    </div>
 {% endblock content %}

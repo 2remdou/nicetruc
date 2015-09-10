@@ -4,10 +4,20 @@ parameters:
 #    parameter_name: value
 
 services:
+    nicetruc.user.class:
+        class: AppBundle\Entity\User
+
     nicetruc.form.registration:
         class: AppBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: nicetruc_user_registration }
+
+    nicetruc.form.profile:
+        class: AppBundle\Form\ProfileFormType
+#        arguments: [@nicetruc.user.class]
+        arguments: ["AppBundle\Entity\User"]
+        tags:
+            - { name: form.type, alias: nicetruc_user_profile }
 
     nicetruc.login.success.handler:
         class: AppBundle\Handler\LoginSuccessHandler

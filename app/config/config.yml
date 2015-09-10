@@ -89,3 +89,6 @@ fos_user:
     registration:
         form:
             type: nicetruc_user_registration
+    profile:
+        form:
+            type: nicetruc_user_profile
