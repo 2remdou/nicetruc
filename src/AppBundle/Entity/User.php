@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\GroupInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -40,14 +42,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone",type="string",length=255)
+     * @ORM\Column(name="telephone",type="string",length=255,nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="siteWeb",type="string",length=255)
+     * @ORM\Column(name="siteWeb",type="string",length=255,nullable=true)
      */
     private $siteWeb;
 
@@ -62,6 +64,14 @@ class User extends BaseUser
      */
     private $articles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group")
+     * @ORM\JoinTable(name="nicetruc_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
     /**
      * Get id
      *
@@ -233,5 +243,36 @@ class User extends BaseUser
     public function getSiteWeb()
     {
         return $this->siteWeb;
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \AppBundle\Entity\Group $groups
+     * @return User
+     */
+    public function addGroup(GroupInterface $group)
+    {
+        parent::addGroup($group);
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \AppBundle\Entity\Group $groups
+     */
+    public function removeGroup(GroupInterface $groups)
+    {
+        parent::removeGroup($groups);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGroups()
+    {
+        parent::getGroups();
     }
 }

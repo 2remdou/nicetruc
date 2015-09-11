@@ -47,6 +47,13 @@ class RegistrationType  extends AbstractType
                     'placeholder' => 'Confirmation mot de passe'
                 )
             ))
+            ->add('groups', 'entity', array(
+                'class' => 'AppBundle:Group',
+                'choice_label' => 'name',
+                'label' => 'Selectionner un groupe',
+                'multiple' => true,
+                'expanded'=>true
+            ))
             ->remove('username')
         ;
     }

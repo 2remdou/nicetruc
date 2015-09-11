@@ -40,14 +40,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone",type="string",length=255)
+     * @ORM\Column(name="telephone",type="string",length=255,nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="siteWeb",type="string",length=255)
+     * @ORM\Column(name="siteWeb",type="string",length=255,nullable=true)
      */
     private $siteWeb;
 
@@ -62,6 +62,14 @@ class User extends BaseUser
      */
     private $articles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group")
+     * @ORM\JoinTable(name="nicetruc_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
     /**
      * Get id
      *
@@ -187,5 +195,54 @@ class User extends BaseUser
        parent::setEmail($email);
         $this->setUsername($this->getEmail());
     }
+
+
+    /**
+     * Set telephone
+     *
+     * @param string $telephone
+     * @return User
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * Get telephone
+     *
+     * @return string 
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * Set siteWeb
+     *
+     * @param string $siteWeb
+     * @return User
+     */
+    public function setSiteWeb($siteWeb)
+    {
+        $this->siteWeb = $siteWeb;
+
+        return $this;
+    }
+
+    /**
+     * Get siteWeb
+     *
+     * @return string 
+     */
+    public function getSiteWeb()
+    {
+        return $this->siteWeb;
+    }
+
+
 
 }
