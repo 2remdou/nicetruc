@@ -58,6 +58,10 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     <li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                        <li><a href="{{ path('nicetruc_ville') }}">Ville</a></li>
+                                        <li><a href="{{ path('nicetruc_quartier') }}">Quartier</a></li>
+                                    {% endif %}
                                     <li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
                                 </ul>
                             </div>
@@ -92,9 +96,11 @@
             </section>
 
             {#<section class="col-md-8 col-md-offset-2">#}
+            <div ui-view>
                 {% block content %}
 
                 {% endblock content %}
+            </div>
             {#</section>#}
 
         {% endblock body %}
@@ -112,6 +118,14 @@
 
             'client/app/app.js'
             'client/app/routing.js'
+            'client/app/config.js'
+
+            'client/app/services/VilleService.js'
+            'client/app/services/QuartierService.js'
+
+            'client/app/controllers/VilleController.js'
+            'client/app/controllers/QuartierController.js'
+            'client/app/controllers/ProfileController.js'
 
             'client/app/directives/equalsTo.js'
             'client/app/ui.bootstrap/ui-bootstrap-tabs-0.13.4.js'

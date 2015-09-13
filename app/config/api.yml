@@ -1,0 +1,12 @@
+sylius_resource:
+    settings:
+        paginate: false
+    resources:
+        app.ville:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Ville
+        app.quartier:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Quartier

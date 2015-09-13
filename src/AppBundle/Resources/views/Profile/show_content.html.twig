@@ -1,106 +1,33 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<div ng-controller="ProfileController">
 
-<tabset type="tabs">
-    <tab heading="Profil" active="true">
-        <div class="row">
-            <div class="pd-20">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Information Personnelle</div>
-                    <div class="panel-body">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Nom:</label>
-                                <div class="col-xs-7 controls">{{ app.user.nomUser }}</div>
-                                <!-- col-sm-10 -->
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Prenom:</label>
-                                <div class="col-xs-7 controls">{{ app.user.prenomUser }}</div>
-                                <!-- col-sm-10 -->
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Email:</label>
-                                <div class="col-xs-7 controls">{{ app.user.email }}</div>
-                                <!-- col-sm-10 -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">Adresse</div>
-                    <div class="panel-body">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Ville:</label>
-                                <div class="col-xs-7 controls">Mariah</div>
-                                <!-- col-sm-10 -->
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Quartier:</label>
-                                <div class="col-xs-7 controls">Mariah</div>
-                                <!-- col-sm-10 -->
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Telephone:</label>
-                                <div class="col-xs-7 controls">Mariah</div>
-                                <!-- col-sm-10 -->
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <label class="col-xs-5 control-label">Site web:</label>
-                                <div class="col-xs-7 controls">Mariah</div>
-                                <!-- col-sm-10 -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </tab>
-    <tab heading="Modifier">
-        <div class="row">
-            <div class="pd-20">
-
-                <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    <tabset type="tabs" >
+        <tab heading="Profil" active="true">
+            <div class="row">
+                <div class="pd-20">
                     <div class="panel panel-default">
                         <div class="panel-heading">Information Personnelle</div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                {{ form_row(form.nomUser) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-xs-5 control-label">Nom:</label>
+                                    <div class="col-xs-7 controls">{{ app.user.nomUser }}</div>
+                                    <!-- col-sm-10 -->
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                {{ form_row(form.prenomUser) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-xs-5 control-label">Prenom:</label>
+                                    <div class="col-xs-7 controls">{{ app.user.prenomUser }}</div>
+                                    <!-- col-sm-10 -->
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                {{ form_row(form.email) }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Mot de passe</div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                {{ form_row(form.actuelPassword) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(form.plainPassword) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_row(form.confirmationPassword) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-xs-5 control-label">Email:</label>
+                                    <div class="col-xs-7 controls">{{ app.user.email }}</div>
+                                    <!-- col-sm-10 -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,27 +35,116 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Adresse</div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                {{ form_row(form.telephone) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-xs-5 control-label">Ville:</label>
+                                    <div class="col-xs-7 controls">{{ app.user.quartier.ville.libelleVille }}</div>
+                                    <!-- col-sm-10 -->
+                                </div>
                             </div>
-                            <div class="form-group">
-                                {{ form_row(form.siteWeb) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-xs-5 control-label">Quartier:</label>
+                                    <div class="col-xs-7 controls">{{ app.user.quartier.libelleQuartier }}</div>
+                                    <!-- col-sm-10 -->
+                                </div>
                             </div>
-                            <div class="form-group">
-                                {{ form_row(form.quartier.ville.libelleVille) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-xs-5 control-label">Telephone:</label>
+                                    <div class="col-xs-7 controls">{{ app.user.telephone }}</div>
+                                    <!-- col-sm-10 -->
+                                </div>
                             </div>
-                            <div class="form-group">
-                                {{ form_row(form.quartier.libelleQuartier) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <label class="col-xs-5 control-label">Site web:</label>
+                                    <div class="col-xs-7 controls">{{ app.user.siteWeb }}</div>
+                                    <!-- col-sm-10 -->
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-                    </div>
-                </form>
-            </div>
-        </div>
 
-    </tab>
-</tabset>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Modifier">
+            <div class="row">
+                <div class="pd-20">
+
+                    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Information Personnelle</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    {{ form_row(form.nomUser) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_row(form.prenomUser) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_row(form.email) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Mot de passe</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    {{ form_row(form.actuelPassword) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(form.plainPassword) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(form.confirmationPassword) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Adresse</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    {{ form_row(form.telephone) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(form.siteWeb) }}
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <label for="fos_user_profile_form_ville" class="required">Ville</label>
+                                        <select class="form-control" id="fos_user_profile_form_ville" name="fos_user_profile_form[ville]"
+                                                ng-model="ville"
+                                                ng-options="ville.libelleVille
+                                            for ville in villes track by ville.id" ng-change="changeVille(ville)">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <label for="fos_user_profile_form_quartier" class="required">Quartier</label>
+                                        <select class="form-control" id="fos_user_profile_form_quartier" name="fos_user_profile_form[quartier]"
+                                                ng-model="quartier"
+                                                ng-options="quartier.libelleQuartier
+                                            for quartier in quartiers track by quartier.id">>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </tab>
+    </tabset>
+</div>
 

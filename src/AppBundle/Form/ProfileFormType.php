@@ -34,12 +34,12 @@ class ProfileFormType extends AbstractType
     {
         $this->buildUserForm($builder, $options);
 
-        $builder->add('current_password', 'password', array(
+/*        $builder->add('current_password', 'password', array(
             'label' => 'form.current_password',
             'translation_domain' => 'FOSUserBundle',
             'mapped' => false,
             'constraints' => new UserPassword(),
-        ));
+        ));*/
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -59,6 +59,7 @@ class ProfileFormType extends AbstractType
     public function getName()
     {
         return 'nicetruc_user_profile';
+//        return null;
     }
 
     public function getParent()
@@ -95,23 +96,23 @@ class ProfileFormType extends AbstractType
             ))
             ->add('actuelPassword','password',array(
                 'label' => 'Mot de passe',
-                'required' => true,
+                'required' => false,
                 'mapped' => false,
-                'constraints' => new UserPassword(),
+//                'constraints' => new UserPassword(),
                 'attr' => array(
                     'placeholder' => 'Mot de passe actuel'
                 )
             ))
             ->add('plainPassword','password',array(
                 'label' => 'Mot de passe',
-                'required' => true,
+                'required' => false,
                 'attr' => array(
                     'placeholder' => 'Nouveau mot de passe'
                 )
             ))
             ->add('confirmationPassword','password',array(
                 'label' => 'Confirmation',
-                'required' => true,
+                'required' => false,
                 'mapped' => false,
                 'attr' => array(
                     'placeholder' => 'Confirmation mot de passe'
@@ -129,10 +130,24 @@ class ProfileFormType extends AbstractType
                     'placeholder' => 'Site web'
                 )
             ))
-            ->add('quartier',new QuartierType(),array(
-                'label' => false
+            ->add('quartier','entity',array(
+                'class' => 'AppBundle:Quartier',
+                'choice_label' => 'libelleQuartier',
+                'attr' => array(
+                    'ng-model'=>'quartier.libelleQuartier'
+                )
+            ))
+            ->add('ville','entity',array(
+                'class' => 'AppBundle:Ville',
+                'choice_label' => 'libelleVille',
+                'mapped' => false,
+                'attr' => array(
+                    'ng-model'=>'ville.libelleVille'
+                )
             ))
             ->remove('username')
+            ->remove('current_password')
+
         ;
     }
 }

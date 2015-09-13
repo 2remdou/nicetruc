@@ -245,34 +245,47 @@ class User extends BaseUser
         return $this->siteWeb;
     }
 
+    public function setGroups(\FOS\UserBundle\Model\GroupInterface $groups=null)
+    {
+        if($groups === null){
+            return $this;
+        }
+        return $this->addGroup($groups);
+    }
+
     /**
-     * Add groups
+     * Returns the user roles
      *
-     * @param \AppBundle\Entity\Group $groups
-     * @return User
+     * @return array The roles
      */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+
+        foreach ($this->getGroups() as $group) {
+            if(is_array($group->getRoles()))
+                $roles = array_merge($roles, $group->getRoles());
+            $roles[] = $group->getRoles();
+
+        }
+
+        // we need to make sure to have at least one role
+        $roles[] = static::ROLE_DEFAULT;
+        return array_unique($roles);
+    }
+
     public function addGroup(GroupInterface $group)
     {
-        parent::addGroup($group);
+        if(!in_array($group->getRoles(),$this->getRoles())){
+            $this->addRole($group->getRoles()) ;
+        }
+
+        if (!$this->getGroups()->contains($group)) {
+            $this->getGroups()->add($group);
+        }
+
+
+        return $this;
     }
 
-    /**
-     * Remove groups
-     *
-     * @param \AppBundle\Entity\Group $groups
-     */
-    public function removeGroup(GroupInterface $groups)
-    {
-        parent::removeGroup($groups);
-    }
-
-    /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGroups()
-    {
-        parent::getGroups();
-    }
 }

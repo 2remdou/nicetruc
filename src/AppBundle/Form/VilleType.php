@@ -16,7 +16,7 @@ class VilleType extends AbstractType
     {
         $builder
             ->add('libelleVille',null,array(
-                    'label' => 'Nom de la  ville',
+                'label' => 'Nom de la  ville',
                 ));
     }
     

@@ -5,22 +5,10 @@ app.config(function($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise("/");
    $stateProvider
-       .state('main',{
-           url:'/',
-           templateUrl: 'client/app/views/main.html'
+       .state('ville',{
+           url:'/ville',
+           templateUrl: '/client/app/views/ville.html',
+           controller: 'VilleController'
        })
-       .state('inscription',{
-           url:'/inscription',
-           templateUrl: 'client/app/views/inscription.html'
-       })
-       .state('connexion',{
-           url:'/connexion',
-           templateUrl: 'client/app/views/connexion.html'
-       })
-        .state('test',{
-                   url:'/test',
-                   templateUrl: 'client/app/views/test.html'
-               })
-
    ;
 });

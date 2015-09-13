@@ -22,8 +22,9 @@ class QuartierType extends AbstractType
                     'placeholder' => 'Nom du quartier'
                 )
             ))
-            ->add('ville',new VilleType(),array(
-                'label' => false
+            ->add('ville','entity',array(
+                'class' => 'AppBundle:Ville',
+                'property'=> 'libelleVille'
             ))
         ;
     }

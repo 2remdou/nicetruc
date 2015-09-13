@@ -14,7 +14,6 @@ services:
 
     nicetruc.form.profile:
         class: AppBundle\Form\ProfileFormType
-#        arguments: [@nicetruc.user.class]
         arguments: ["AppBundle\Entity\User"]
         tags:
             - { name: form.type, alias: nicetruc_user_profile }

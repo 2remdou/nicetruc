@@ -51,9 +51,7 @@ class RegistrationType  extends AbstractType
                 'class' => 'AppBundle:Group',
                 'choice_label' => 'name',
                 'label' => 'Selectionner un groupe',
-                'multiple' => true,
-                'expanded'=>true
-            ))
+                ))
             ->remove('username')
         ;
     }

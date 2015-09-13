@@ -60,3 +60,12 @@ button#profil {
 .pd-20{
     padding: 20px !important;
 }
+
+.btn-120{
+    width: 120px;
+    /*height: 20px;*/
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+
+}

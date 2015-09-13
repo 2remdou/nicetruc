@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Quartier
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\QuartierRepository")
+ * @ExclusionPolicy("all")
  */
 class Quartier
 {
@@ -18,6 +22,8 @@ class Quartier
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose()
+     * @SerializedName("id")
      */
     private $id;
 
@@ -25,12 +31,16 @@ class Quartier
      * @var string
      *
      * @ORM\Column(name="libelleQuartier", type="string", length=255)
+     * @Expose()
+     * @SerializedName("libelleQuartier")
      */
     private $libelleQuartier;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Ville",inversedBy="quartiers")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose()
+     * @SerializedName("ville")
      */
     private $ville;
     /**
