@@ -6,6 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\GroupInterface;
 use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * User
@@ -13,6 +16,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -29,6 +33,8 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="nomUser", type="string", length=255)
+     * @Expose()
+     * @SerializedName("nomUser")
      */
     private $nomUser;
 
@@ -36,6 +42,8 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="prenomUser", type="string", length=255)
+     * @Expose()
+     * @SerializedName("prenomUser")
      */
     private $prenomUser;
 
@@ -43,6 +51,8 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="telephone",type="string",length=255,nullable=true)
+     * @Expose()
+     * @SerializedName("telephone")
      */
     private $telephone;
 
@@ -50,17 +60,22 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="siteWeb",type="string",length=255,nullable=true)
+     * @Expose()
+     * @SerializedName("siteWeb")
      */
     private $siteWeb;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quartier",inversedBy="users")
      * @ORM\JoinColumn(nullable=true)
+     * @Expose()
+     * @SerializedName("quartiers")
      */
     private $quartier;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="users")
+     * @Expose()
      */
     private $articles;
 

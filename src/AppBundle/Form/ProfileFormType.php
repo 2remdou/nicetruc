@@ -94,7 +94,7 @@ class ProfileFormType extends AbstractType
                     'placeholder' => 'Adresse email'
                 )
             ))
-            ->add('actuelPassword','password',array(
+/*            ->add('actuelPassword','password',array(
                 'label' => 'Mot de passe',
                 'required' => false,
                 'mapped' => false,
@@ -117,7 +117,7 @@ class ProfileFormType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Confirmation mot de passe'
                 )
-            ))
+            ))*/
             ->add('telephone',null,array(
                 'label' => 'Telephone',
                 'attr' => array(

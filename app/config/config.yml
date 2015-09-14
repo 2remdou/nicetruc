@@ -90,10 +90,15 @@ fos_user:
     registration:
         form:
             type: nicetruc_user_registration
+            name: nicetruc_user_registration_form
     profile:
         form:
             type: nicetruc_user_profile
-#            type: nicetruc_user_profile
+            name: nicetruc_user_profile_form
+    change_password:
+        form:
+            type: nicetruc_user_change_password
+            name: nicetrue_user_change_password_form
     group:
         group_class: AppBundle\Entity\Group
 

@@ -17,6 +17,13 @@ services:
         arguments: ["AppBundle\Entity\User"]
         tags:
             - { name: form.type, alias: nicetruc_user_profile }
+
+    nicetruc.form.change.password:
+        class: AppBundle\Form\ChangePasswordFormType
+        arguments: ["AppBundle\Entity\User"]
+        tags:
+            - { name: form.type, alias: nicetruc_user_change_password }
+
     nicetruc.form.ville:
         class: AppBundle\Form\VilleType
         tags:

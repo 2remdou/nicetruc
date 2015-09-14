@@ -2,7 +2,7 @@
 <div ng-controller="ProfileController">
 
     <tabset type="tabs" >
-        <tab heading="Profil" active="true">
+        <tab heading="Profil">
             <div class="row">
                 <div class="pd-20">
                     <div class="panel panel-default">
@@ -38,15 +38,19 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <label class="col-xs-5 control-label">Ville:</label>
-                                    <div class="col-xs-7 controls">{{ app.user.quartier.ville.libelleVille }}</div>
+                                    {% if app.user.quartier %}
+                                        <div class="col-xs-7 controls">{{ app.user.quartier.ville.libelleVille }}</div>
+                                    {% endif %}
                                     <!-- col-sm-10 -->
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row">
                                     <label class="col-xs-5 control-label">Quartier:</label>
-                                    <div class="col-xs-7 controls">{{ app.user.quartier.libelleQuartier }}</div>
+                                    {% if app.user.quartier %}
+                                        <div class="col-xs-7 controls">{{ app.user.quartier.libelleQuartier }}</div>
                                     <!-- col-sm-10 -->
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -69,7 +73,7 @@
                 </div>
             </div>
         </tab>
-        <tab heading="Modifier">
+        <tab heading="Modifier"  active="true">
             <div class="row">
                 <div class="pd-20">
 
@@ -91,20 +95,6 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Mot de passe</div>
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    {{ form_row(form.actuelPassword) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form_row(form.plainPassword) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form_row(form.confirmationPassword) }}
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">Adresse</div>
@@ -117,21 +107,23 @@
                                 </div>
                                 <div class="form-group">
                                     <div>
-                                        <label for="fos_user_profile_form_ville" class="required">Ville</label>
-                                        <select class="form-control" id="fos_user_profile_form_ville" name="fos_user_profile_form[ville]"
+                                        <label for="nicetruc_user_profile_form_ville" class="required">Ville</label>
+                                        <select class="form-control" id="nicetruc_user_profile_form_ville" name="nicetruc_user_profile_form[ville]"
                                                 ng-model="ville"
                                                 ng-options="ville.libelleVille
-                                            for ville in villes track by ville.id" ng-change="changeVille(ville)">
+                                            for ville in villes track by ville.id" ng-change="changeVille(ville)"
+                                               {% if app.user.quartier %} ng-init="ville.id={{ app.user.quartier.ville.id }}" {% endif %}>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div>
-                                        <label for="fos_user_profile_form_quartier" class="required">Quartier</label>
-                                        <select class="form-control" id="fos_user_profile_form_quartier" name="fos_user_profile_form[quartier]"
+                                        <label for="nicetruc_user_profile_form_quartier" class="required">Quartier</label>
+                                        <select class="form-control" id="nicetruc_user_profile_form_quartier" name="nicetruc_user_profile_form[quartier]"
                                                 ng-model="quartier"
                                                 ng-options="quartier.libelleQuartier
-                                            for quartier in quartiers track by quartier.id">>
+                                            for quartier in quartiers|filter:{id:{{ app.user.quartier.id }}} track by quartier.id"
+                                                {% if app.user.quartier %} ng-init="quartier.id={{ app.user.quartier.id }}" {% endif %}>
                                         </select>
                                     </div>
                                 </div>
@@ -140,6 +132,28 @@
                         <div>
                             <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
                         </div>
+                    </form>
+                    <form action="{{ path('fos_user_change_password') }}" {{ form_enctype(form) }} method="POST">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Mot de passe actuel</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    {{ form_row(formPassword.current_password) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(formPassword.plainPassword) }}
+                                </div>
+{#
+                                <div class="form-group">
+                                    {{ form_row(form.confirmationPassword) }}
+                                </div>
+#}
+                                <div class="form-group">
+                                    <input type="submit" value="Changer" class="btn btn-info"/>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>

@@ -5,14 +5,19 @@ fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 app_ville:
-    defaults:
-        _sylius:
-            flash: ~
+#    defaults:
+#        _sylius:
+#            flash: ~
     resource: app.ville
     type: sylius.api
     prefix: /api
 
 app_quartier:
     resource: app.quartier
+    type: sylius.api
+    prefix: /api
+
+app_user:
+    resource: app.user
     type: sylius.api
     prefix: /api

@@ -9,7 +9,7 @@ app.config(function($interpolateProvider) {
 
 
 app.config(function(RestangularProvider) {
-    RestangularProvider.setBaseUrl('http://localhost:8000/app_dev.php/api');
+    RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
      RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          if(operation === 'put' || operation=== 'post'){

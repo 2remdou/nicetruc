@@ -34,5 +34,12 @@ class NiceTrucController extends Controller
         return $this->render('AppBundle::quartier.html.twig');
     }
 
+    /**
+     * @Route("/resetp")
+     */
+    public function resetPasswordAction(Request $request){
+
+    }
+
 
 }
