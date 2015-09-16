@@ -1,0 +1,51 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+    <div class="row" ng-controller="CategorieController">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Parametrage des Categories</h4>
+                    <form id="login-form" method="post" role="form" name="formCategorie">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="libelleCategorie">Nom de la categorie</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" name="libelleCategorie" id="libelleCategorie" tabindex="1" class="form-control" placeholder="Nom de la categorie" ng-model="categorie.libelleCategorie">
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="form-control btn btn-120" ng-click="create(categorie)"> Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Liste Categories</div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom Categorie</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="categorie in categories">
+                                        <th scope="row">//$index+1//</th>
+                                        <td><span ng-hide="categorie.visible">//categorie.libelleCategorie//</span> <input type="text" ng-show="categorie.visible" ng-model="categorie.libelleCategorie"></td>
+                                        <td><button ng-hide="categorie.visible" ng-click="update(categorie)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button><button ng-show="categorie.visible" ng-click="valideUpdate(categorie)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button></td>
+                                        <td><button ng-click="delete(categorie)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content%}

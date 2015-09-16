@@ -6,12 +6,18 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: AppBundle\Entity\Ville
+
         app.quartier:
             driver: doctrine/orm
             classes:
                 model: AppBundle\Entity\Quartier
+
         app.user:
-#            methods: [GET]
             driver: doctrine/orm
             classes:
                 model: AppBundle\Entity\User
+
+        app.categorie:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Categorie

@@ -35,10 +35,19 @@ class NiceTrucController extends Controller
     }
 
     /**
-     * @Route("/resetp")
+     * @Route("/article",name="nicetruc_article")
+     * @Security("has_role('ROLE_USER')")
      */
-    public function resetPasswordAction(Request $request){
+    public function articleAction(Request $request){
+        return $this->render('AppBundle::article.html.twig');
+    }
 
+    /**
+     * @Route("/categorie",name="nicetruc_categorie")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
+    public function categorieAction(Request $request){
+        return $this->render('AppBundle::categorie.html.twig');
     }
 
 

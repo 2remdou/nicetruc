@@ -21,3 +21,8 @@ app_user:
     resource: app.user
     type: sylius.api
     prefix: /api
+
+app_categorie:
+    resource: app.categorie
+    type: sylius.api
+    prefix: /api

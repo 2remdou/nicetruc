@@ -17,6 +17,10 @@ app.config(function(RestangularProvider) {
                  delete element.id;
                  delete element.visible;
              }
+             else if(what === 'categories/'){
+                 delete element.id;
+                 delete element.visible;
+             }
              else if(what === 'quartiers/'){
                  var id=element.ville.id;
                  delete  element.ville;

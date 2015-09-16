@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Categorie
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\CategorieRepository")
+ * @ExclusionPolicy("all")
  */
 class Categorie
 {
@@ -18,6 +22,8 @@ class Categorie
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose()
+     * @SerializedName("id")
      */
     private $id;
 
@@ -25,11 +31,14 @@ class Categorie
      * @var string
      *
      * @ORM\Column(name="libelleCategorie", type="string", length=255)
+     * @Expose()
+     * @SerializedName("libelleCategorie")
      */
     private $libelleCategorie;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="categorie")
+     * @SerializedName("articles")
      */
     private $articles;
 
