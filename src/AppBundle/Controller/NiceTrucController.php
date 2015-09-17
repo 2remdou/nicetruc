@@ -50,5 +50,29 @@ class NiceTrucController extends Controller
         return $this->render('AppBundle::categorie.html.twig');
     }
 
+    /**
+     * @Route("/boitier",name="nicetruc_boitier")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
+    public function BoitierAction(Request $request){
+        return $this->render('AppBundle::boitier.html.twig');
+    }
+
+    /**
+     * @Route("/carburant",name="nicetruc_carburant")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
+    public function CarburantAction(Request $request){
+        return $this->render('AppBundle::carburant.html.twig');
+    }
+
+    /**
+     * @Route("/marque",name="nicetruc_marque")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
+    public function MarqueAction(Request $request){
+        return $this->render('AppBundle::marque.html.twig');
+    }
+
 
 }

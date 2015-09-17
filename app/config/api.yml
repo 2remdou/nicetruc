@@ -21,3 +21,18 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: AppBundle\Entity\Categorie
+
+        app.boitier:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Boitier
+
+        app.carburant:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Carburant
+
+        app.marque:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Marque

@@ -26,3 +26,18 @@ app_categorie:
     resource: app.categorie
     type: sylius.api
     prefix: /api
+
+app_boitier:
+    resource: app.boitier
+    type: sylius.api
+    prefix: /api
+
+app_carburant:
+    resource: app.carburant
+    type: sylius.api
+    prefix: /api
+
+app_marque:
+    resource: app.marque
+    type: sylius.api
+    prefix: /api

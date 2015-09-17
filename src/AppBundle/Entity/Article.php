@@ -21,12 +21,6 @@ class Article
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="libelleArticle", type="string", length=255)
-     */
-    private $libelleArticle;
 
     /**
      * @var string
@@ -64,28 +58,6 @@ class Article
         return $this->id;
     }
 
-    /**
-     * Set libelleArticle
-     *
-     * @param string $libelleArticle
-     * @return Article
-     */
-    public function setLibelleArticle($libelleArticle)
-    {
-        $this->libelleArticle = $libelleArticle;
-
-        return $this;
-    }
-
-    /**
-     * Get libelleArticle
-     *
-     * @return string 
-     */
-    public function getLibelleArticle()
-    {
-        return $this->libelleArticle;
-    }
 
     /**
      * Set description

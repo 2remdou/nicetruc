@@ -1,0 +1,51 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+    <div class="row" ng-controller="MarqueController">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Parametrage Marque</h4>
+                    <form id="login-form" method="post" role="form" name="formMarque">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="libelleMarque">Nom de la marque</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" name="libelleMarque" id="libelleMarque" tabindex="1" class="form-control" placeholder="Nom de la marque" ng-model="marque.libelleMarque">
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="form-control btn btn-info" ng-click="create(marque)"> Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Liste Marques</div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom Marque</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="marque in marques">
+                                        <th scope="row">//$index+1//</th>
+                                        <td><span ng-hide="marque.visible">//marque.libelleMarque//</span> <input type="text" ng-show="marque.visible" ng-model="marque.libelleMarque"></td>
+                                        <td><button ng-hide="marque.visible" ng-click="update(marque)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button><button ng-show="marque.visible" ng-click="valideUpdate(marque)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button></td>
+                                        <td><button ng-click="delete(marque)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content%}

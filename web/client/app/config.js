@@ -12,12 +12,9 @@ app.config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
      RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
+         var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/'];
          if(operation === 'put' || operation=== 'post'){
-             if(what === 'villes/'){
-                 delete element.id;
-                 delete element.visible;
-             }
-             else if(what === 'categories/'){
+             if(standardRoute.indexOf(what) !==-1){
                  delete element.id;
                  delete element.visible;
              }

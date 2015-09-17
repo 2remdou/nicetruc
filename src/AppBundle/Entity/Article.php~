@@ -21,12 +21,6 @@ class Article
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="libelleArticle", type="string", length=255)
-     */
-    private $libelleArticle;
 
     /**
      * @var string
@@ -43,10 +37,10 @@ class Article
     private $datePublication;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Proprietaire",inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $proprietaire;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie",inversedBy="articles")
@@ -64,28 +58,6 @@ class Article
         return $this->id;
     }
 
-    /**
-     * Set libelleArticle
-     *
-     * @param string $libelleArticle
-     * @return Article
-     */
-    public function setLibelleArticle($libelleArticle)
-    {
-        $this->libelleArticle = $libelleArticle;
-
-        return $this;
-    }
-
-    /**
-     * Get libelleArticle
-     *
-     * @return string 
-     */
-    public function getLibelleArticle()
-    {
-        return $this->libelleArticle;
-    }
 
     /**
      * Set description
@@ -131,5 +103,51 @@ class Article
     public function getDatePublication()
     {
         return $this->datePublication;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Article
+     */
+    public function setUser(\AppBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     * @return Article
+     */
+    public function setCategorie(\AppBundle\Entity\Categorie $categorie)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \AppBundle\Entity\Categorie 
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }

@@ -1,0 +1,76 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
+
+
+/**
+ * Carburant
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\CarburantRepository")
+ */
+class Carburant
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelleCarburant", type="string", length=255)
+     */
+    private $libelleCarburant;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="carburant")
+     * @Expose()
+     * @SerializedName("voitures")
+     */
+    private $voitures;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set libelleCarburant
+     *
+     * @param string $libelleCarburant
+     * @return Carburant
+     */
+    public function setLibelleCarburant($libelleCarburant)
+    {
+        $this->libelleCarburant = $libelleCarburant;
+
+        return $this;
+    }
+
+    /**
+     * Get libelleCarburant
+     *
+     * @return string 
+     */
+    public function getLibelleCarburant()
+    {
+        return $this->libelleCarburant;
+    }
+}
