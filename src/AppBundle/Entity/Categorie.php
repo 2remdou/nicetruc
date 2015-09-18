@@ -37,10 +37,10 @@ class Categorie
     private $libelleCategorie;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="categorie")
      * @SerializedName("articles")
      */
-    private $articles;
+    private $voitures;
 
     /**
      * Get id

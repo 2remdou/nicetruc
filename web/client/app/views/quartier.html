@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Parametrage Quartier</h4>
+                    <form id="login-form" method="post" role="form" name="formVille" class="form-login">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="libelleQuartier">Nom du quartier</label>
+                                <input type="text" name="libelleQuartier" id="libelleQuartier" tabindex="1" class="form-control" placeholder="Nom du quartier" ng-model="quartier.libelleQuartier">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="ville" class="control-label">Selectionner la ville</label>
+                                <select class="form-control" tabindex="2" id="ville" ng-model="quartier.ville"
+                                        ng-options="ville.libelleVille
+                                            for ville in villes track by ville.id">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for=""></label>
+                            <div class="form-group">
+                                <button class="form-control btn btn-info" ng-click="create(quartier)"> Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Liste Quartiers</div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom Quartier</th>
+                                        <th>Ville</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="quartier in quartiers">
+                                        <th scope="row">//$index+1//</th>
+                                        <td>
+                                            <span ng-hide="quartier.visible">//quartier.libelleQuartier//</span>
+                                            <input type="text" ng-show="quartier.visible" ng-model="quartier.libelleQuartier"></td>
+                                        <td>
+                                            <span ng-hide="quartier.visible">//quartier.ville.libelleVille//</span>
+                                            <select class="form-control" ng-show="quartier.visible" ng-model="quartier.ville"
+                                                    ng-options="ville.libelleVille
+                                            for ville in villes track by ville.id">
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button ng-hide="quartier.visible" ng-click="update(quartier)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
+                                            <button ng-show="quartier.visible" ng-click="valideUpdate(quartier)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button>
+                                        </td>
+                                        <td>
+                                            <button ng-click="delete(quartier)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

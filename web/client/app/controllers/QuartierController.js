@@ -1,7 +1,7 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('QuartierController',['$scope','VilleService','QuartierService',function($scope,VilleService,QuartierService){
+app.controller('QuartierController',['$scope','VilleService','QuartierService','$window',function($scope,VilleService,QuartierService,$window){
     $scope.villes = VilleService.list().$object;
     $scope.quartiers = QuartierService.list().$object;
     $scope.quartier = {};

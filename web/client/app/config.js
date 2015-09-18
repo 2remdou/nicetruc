@@ -17,6 +17,9 @@ app.config(function(RestangularProvider) {
              if(standardRoute.indexOf(what) !==-1){
                  delete element.id;
                  delete element.visible;
+                 if(element.hasOwnProperty('voitures')){
+                     delete element.voitures;
+                 }
              }
              else if(what === 'quartiers/'){
                  var id=element.ville.id;

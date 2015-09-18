@@ -74,10 +74,10 @@ class User extends BaseUser
     private $quartier;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="users")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="users")
      * @Expose()
      */
-    private $articles;
+    private $voitures;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group")

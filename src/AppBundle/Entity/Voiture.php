@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use AppBundle\Model\Article;
 
 
 /**
@@ -25,7 +26,7 @@ class Voiture extends Article
      * @Expose()
      * @SerializedName("id")
      */
-    private $id;
+    protected  $id;
 
     /**
      * @var integer
@@ -104,6 +105,18 @@ class Voiture extends Article
      * @SerializedName("carburant")
      */
     private $carburant;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected  $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie",inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected  $categorie;
 
 
 

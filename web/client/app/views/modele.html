@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Parametrage des Modele</h4>
+                    <form id="login-form" method="post" role="form" name="formMarque" class="form-login">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="libelleModele">Nom du modele</label>
+                                <input type="text" name="libelleModele" id="libelleModele" tabindex="1" class="form-control" placeholder="Nom du modele" ng-model="modele.libelleModele">
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="marque" class="control-label">Selectionner une marque</label>
+                                <select class="form-control" tabindex="2" id="marque" ng-model="modele.marque"
+                                        ng-options="marque.libelleMarque
+                                            for marque in marques track by marque.id">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for=""></label>
+                            <div class="form-group">
+                                <button class="form-control btn btn-info" ng-click="create(modele)"> Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom Modele</th>
+                                        <th>Marque</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="modele in modeles">
+                                        <th scope="row">//$index+1//</th>
+                                        <td>
+                                            <span ng-hide="modele.visible">//modele.libelleModele//</span>
+                                            <input type="text" ng-show="modele.visible" ng-model="modele.libelleModele"></td>
+                                        <td>
+                                            <span ng-hide="modele.visible">//modele.marque.libelleMarque//</span>
+                                            <select class="form-control" ng-show="modele.visible" ng-model="modele.marque"
+                                                    ng-options="marque.libelleMarque
+                                            for marque in marques track by marque.id">
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button ng-hide="modele.visible" ng-click="update(modele)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
+                                            <button ng-show="modele.visible" ng-click="valideUpdate(modele)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button>
+                                        </td>
+                                        <td>
+                                            <button ng-click="delete(modele)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
