@@ -1,7 +1,7 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('VoitureController',['$scope','MarqueService','ModeleService','CarburantService','BoitierService','ModeleMarqueService',
+app.controller('SearchVoitureController',['$scope','MarqueService','ModeleService','CarburantService','BoitierService','ModeleMarqueService',
                 function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService){
 
     $scope.marques = MarqueService.list().$object;
@@ -11,12 +11,13 @@ app.controller('VoitureController',['$scope','MarqueService','ModeleService','Ca
 
 
     $scope.loadModele = function(marque){
-        var res= _.find($scope.modeleMarques,function(modeleMarque){
-            if(modeleMarque.marque.hasOwnProperty('id')){
-                return modeleMarque.marque.id === marque.id;
+        $scope.modeles=[];
+
+        angular.forEach($scope.modeleMarques,function(modeleMarque){
+            if(modeleMarque.marque.id===marque.id){
+                $scope.modeles.push(modeleMarque.modele);
             }
-        });
-        console.log(res);
+        })
     };
 
     }]);

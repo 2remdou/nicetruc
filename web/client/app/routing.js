@@ -47,8 +47,8 @@ app.config(function($stateProvider, $urlRouterProvider){
        })
        .state('voitures',{
            url:'/voitures',
-           templateUrl: '/client/app/views/voiture.html',
-           controller: 'VoitureController'
+           templateUrl: '/client/app/views/searchVoiture.html',
+           controller: 'SearchVoitureController'
        })
 
    ;

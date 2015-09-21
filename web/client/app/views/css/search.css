@@ -29,7 +29,8 @@
 }
 .nice-group
 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    margin-right: 0px;
     position: relative;
     width: 100%;
 }

@@ -10,7 +10,7 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
     $scope.create = function(modeleMarque,modele){
 
         //verifier si le meme libelle existe
-        var exist = getModele(modele);
+        var exist = getModeleByLibelle(modele);
         //creer le modele si n'existe pas
         if(exist == undefined){
             ModeleService.create(modele).then(function(data){
