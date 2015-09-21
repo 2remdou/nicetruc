@@ -1,0 +1,19 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Ajouter d'une annonce</h4>
+                <form id="login-form" method="post" role="form" name="formArticle">
+                    <div class="form-group">
+                        <label for="categorie" class="control-label">Selectionner une categorie</label>
+                        <select class="form-control" tabindex="1" id="categorie" ng-model="article.categorie"
+                                ng-options="categorie.libelleCategorie
+                                            for categorie in categories track by categorie.id">
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

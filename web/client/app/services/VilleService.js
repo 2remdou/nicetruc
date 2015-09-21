@@ -18,6 +18,9 @@ app.service('VilleService',function($rootScope,Restangular){
     };
 
     this.update = function(ville){
+        if(ville.hasOwnProperty('quartiers')){
+            delete ville.quartiers;
+        }
         ville.put().then(function(){
            $rootScope.$broadcast('ville.update');
         });

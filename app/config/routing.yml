@@ -41,3 +41,18 @@ app_marque:
     resource: app.marque
     type: sylius.api
     prefix: /api
+
+app_modele:
+    resource: app.modele
+    type: sylius.api
+    prefix: /api
+
+app_modelemarque:
+    resource: app.modelemarque
+    type: sylius.api
+    prefix: /api
+
+app_voiture:
+    resource: app.voiture
+    type: sylius.api
+    prefix: /api

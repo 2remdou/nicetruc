@@ -1,8 +1,7 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('ModeleController',['$scope','MarqueService','ModeleService','$window',function($scope,MarqueService,ModeleService,$window){
-    $scope.marques = MarqueService.list().$object;
+app.controller('ModeleController',['$scope','MarqueService','ModeleService',function($scope,MarqueService,ModeleService){
     $scope.modeles = ModeleService.list().$object;
     $scope.modele = {};
 

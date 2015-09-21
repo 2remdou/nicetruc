@@ -38,7 +38,17 @@ app.config(function($stateProvider, $urlRouterProvider){
        .state('modeles',{
            url:'/modeles',
            templateUrl: '/client/app/views/modele.html',
-           controller: 'ModeleController'
+           controller: 'ModeleMarqueController'
+       })
+       .state('annonces',{
+           url:'/annonces',
+           templateUrl: '/client/app/views/annonce.html',
+           controller: 'AnnonceController'
+       })
+       .state('voitures',{
+           url:'/voitures',
+           templateUrl: '/client/app/views/voiture.html',
+           controller: 'VoitureController'
        })
 
    ;

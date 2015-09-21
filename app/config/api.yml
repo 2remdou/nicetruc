@@ -36,3 +36,18 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: AppBundle\Entity\Marque
+
+        app.modele:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Modele
+
+        app.modelemarque:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\ModeleMarque
+
+        app.voiture:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Voiture

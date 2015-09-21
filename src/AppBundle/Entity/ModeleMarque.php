@@ -34,7 +34,7 @@ class ModeleMarque
     private $marque;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Modele",inversedBy="modeleMarques")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Modele",inversedBy="modeleMarques",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Expose()
      * @SerializedName("modele")

@@ -8,24 +8,25 @@
         <meta name="author" content="mdoutoure">
 
         <title>{% block title %}nicetruc!{% endblock %}</title>
+{#
         {% block stylesheets %}
+
             {% stylesheets
-                'client/bower_components/bootstrap/dist/css/bootstrap.min.css'
+                'client/bower_components/bootstrap/dist/css/bootstrap.css'
                 'client/app/views/css/main.css'
                 'client/app/views/css/inscription.css'
             filter='cssrewrite'
             output='client/compiled/main.css'%}
-                <link rel="stylesheet" href="{{ asset_url }}" />
+                <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
             {% endstylesheets %}
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
-        <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
-        <![endif]-->
+        {% endblock stylesheets%}
+#}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="client/bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="client/app/views/css/main.css" type="text/css">
+        <link rel="stylesheet" href="client/app/views/css/inscription.css" type="text/css">
+        <link rel="stylesheet" href="client/app/views/css/search.css" type="text/css">
     </head>
     <body>
     {% block nav %}
@@ -58,7 +59,8 @@
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     <li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
-                                    <li><a ui-sref="articles">Ajouter une annonce</a></li>
+                                    <li><a ui-sref="annonces">Ajouter une annonce</a></li>
+                                    <li><a ui-sref="voitures">voiture</a></li>
                                     <li><a ui-sref="marques">Ajouter une marque</a></li>
                                     <li><a ui-sref="modeles">Ajouter un modele</a></li>
                                     {% if is_granted('ROLE_SUPER_ADMIN') %}
@@ -134,16 +136,19 @@
             'client/app/services/BoitierService.js'
             'client/app/services/MarqueService.js'
             'client/app/services/ModeleService.js'
+            'client/app/services/ModeleMarqueService.js'
 
             'client/app/controllers/VilleController.js'
             'client/app/controllers/QuartierController.js'
             'client/app/controllers/ProfileController.js'
             'client/app/controllers/CategorieController.js'
-            'client/app/controllers/ArticleController.js'
+            'client/app/controllers/AnnonceController.js'
             'client/app/controllers/CarburantController.js'
             'client/app/controllers/BoitierController.js'
             'client/app/controllers/MarqueController.js'
             'client/app/controllers/ModeleController.js'
+            'client/app/controllers/ModeleMarqueController.js'
+            'client/app/controllers/VoitureController.js'
 
             'client/app/directives/equalsTo.js'
             'client/app/ui.bootstrap/ui-bootstrap-tabs-0.13.4.js'
