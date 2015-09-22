@@ -1,0 +1,22 @@
+
+<div class="col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12" id="annonce">
+    <section id="etape1" class="etape -separator">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group mandatory">
+                    <label for="Marque" class="text-primary control-label col-md-4">Marque :</label>
+                    <div class="col-md-7">
+                        <select class="form-control" tabindex="0" id="marque" ng-model="search.marque"
+                                ng-options="marque.libelleMarque
+                                            for marque in marques track by marque.id"
+                                ng-change="loadModele(search.marque)">
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+    <section id="etape2" class="etape row etat-off">
+
+    </section>
+</div>
