@@ -49,20 +49,12 @@ class Voiture extends Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateAcquisition", type="date")
+     * @ORM\Column(name="anneeModele", type="date")
      * @Expose()
-     * @SerializedName("dateAcquisition")
+     * @SerializedName("anneeModele")
      */
-    private $dateAcquisition;
+    private $anneeModele;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="nbreRoueMotrice", type="integer")
-     * @Expose()
-     * @SerializedName("nbreRoueMotrice")
-     */
-    private $nbreRoueMotrice;
 
     /**
      * @var integer
@@ -177,26 +169,26 @@ class Voiture extends Article
     }
 
     /**
-     * Set dateAcquisition
+     * Set anneeModele
      *
-     * @param \DateTime $dateAcquisition
+     * @param \Date $anneeModele
      * @return Voiture
      */
-    public function setDateAcquisition($dateAcquisition)
+    public function setAnneeModele($anneeModele)
     {
-        $this->dateAcquisition = $dateAcquisition;
+        $this->anneeModele = $anneeModele;
 
         return $this;
     }
 
     /**
-     * Get dateAcquisition
+     * Get anneeModele
      *
-     * @return \DateTime 
+     * @return \Date
      */
-    public function getDateAcquisition()
+    public function getAnneeModele()
     {
-        return $this->dateAcquisition;
+        return $this->anneeModele;
     }
 
     /**
