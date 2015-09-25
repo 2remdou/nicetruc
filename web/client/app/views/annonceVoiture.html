@@ -1,7 +1,6 @@
 
-<div class="col-md-offset-1 col-md-10 col-xs-offset-0 col-xs-12" id="annonce">
-    <div  id="etape1">
-        <div class="col-md-6 col-xs-12">
+<div class="col-md-offset-0 col-md-12 col-xs-offset-0 col-xs-12" id="annonce">
+        <div class="col-md-6 col-xs-12  mg-top-20">
             <form class="form-horizontal">
                 <fieldset>
                     <!--marque-->
@@ -31,7 +30,7 @@
                             <label for="kmParcouru" class="text-primary control-label">Kilométrage :</label>
                         </div>
                         <div class="col-md-7">
-                            <input id="kmParcouru" name="kmParcouru" ng-model="voiture.kmParcouru" placeholder="Kilométrage *" type="number" class="form-control" min="0" max="999999">
+                            <input id="kmParcouru" name="kmParcouru" ng-model="voiture.kmParcouru" tabindex="2" placeholder="Kilométrage *" type="number" class="form-control" min="0" max="999999">
                         </div>
                     </div>
                     <!--anneeModele-->
@@ -40,7 +39,7 @@
                             <label for="anneeModele" class="text-primary control-label">Année du modèle :</label>
                         </div>
                         <div class="col-md-7">
-                            <input id="anneeModele" name="anneeModele" ng-model="voiture.anneModele" placeholder="Année du modèle :" type="number" class="form-control" min="1900" max="//date//">
+                            <input id="anneeModele" name="anneeModele" ng-model="voiture.anneModele" tabindex="3" placeholder="Année du modèle :" type="number" class="form-control" min="1900" max="//date//">
                         </div>
                     </div>
                     <!--Prix-->
@@ -49,7 +48,7 @@
                             <label for="prix" class="text-primary control-label">Prix de vente :</label>
                         </div>
                         <div class="col-md-7">
-                            <input id="prix" name="prix" ng-model="voiture.prix" placeholder="Prix de vente :" type="number" class="form-control" min="0">
+                            <input id="prix" name="prix" ng-model="voiture.prix" tabindex="4" placeholder="Prix de vente :" type="number" class="form-control" min="0">
                         </div>
                     </div>
                     <!--nbrePorte-->
@@ -58,7 +57,7 @@
                             <label for="nbrePorte" class="text-primary control-label">Nombre de portes:</label>
                         </div>
                         <div class="col-md-7">
-                            <input id="nbrePorte" name="nbrePorte" ng-model="voiture.nbrePorte" placeholder="Nombre de portes :" type="number" class="form-control" min="0">
+                            <input id="nbrePorte" name="nbrePorte" ng-model="voiture.nbrePorte" tabindex="5" placeholder="Nombre de portes :" type="number" class="form-control" min="0">
                         </div>
                     </div>
                     <!--nbreSiege-->
@@ -67,16 +66,52 @@
                             <label for="nbreSiege" class="text-primary control-label">Nombre de sieges:</label>
                         </div>
                         <div class="col-md-7">
-                            <input id="nbreSiege" name="nbreSiege" ng-model="voiture.nbreSiege" placeholder="Nombre de sieges :" type="number" class="form-control" min="0">
+                            <input id="nbreSiege" name="nbreSiege" ng-model="voiture.nbreSiege" tabindex="6" placeholder="Nombre de sieges :" type="number" class="form-control" min="0">
+                        </div>
+                    </div>
+                    <!--description-->
+                    <div class="form-group">
+                        <label for="description" class="text-primary control-label col-md-4">Description :</label>
+                        <div class="col-md-7">
+                            <textarea class="form-control" cols="20" id="description" ng-model="voiture.description"  maxlength="1600" minlength="20" name="description" placeholder="Description de votre annonce *" rows="4"></textarea>
                         </div>
                     </div>
                 </fieldset>
             </form>
         </div>
-        <!--<div class="col-md-6 col-xs-12">-->
+        <div class="col-md-6 col-xs-12  mg-top-20">
+            <div class="row title col-md-12">
+                <strong class="text-primary">Mes photos</strong>
+            </div>
+            <div class="row content">
+                <div class="carousel slide col-md-12" data-ride="carousel" data-interval="false">
 
-        <!--</div>-->
-    </div>
+                    <div class="carousel-inner margin-bottom-20 col-md-12">
+                        <div class="item active srle">
+                            <div id="mainPicture" class="thumbnail without-margin">
 
+                                <div id="mainPictureLinkAsText" class="text-primary"><strong>Ajouter une photo</strong></div>
+                                <span class="spinner"><i class="icon-spin icon-spinner"></i></span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="thumbnails-container col-md-12 col-sm-12 col-xs-12">
+                        <ul class="thumbnails-carousel clearfix" id="otherPictures">
+
+                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
+
+                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
+
+                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
+
+                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </div>

@@ -66,5 +66,12 @@ button#profil {
     /*height: 20px;*/
     color: #fff;
     border-color: #46b8da;
+}
 
+.mg-top-20{
+    margin-top: 20px !important;
+}
+
+ul{
+    list-style-type: none;
 }

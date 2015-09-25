@@ -20,3 +20,33 @@
     box-shadow: 0 1px 0 #dfdfe0, 0 2px 0 #e7e7e7, 0 3px 0 #fcfcfc, 0 4px 0 #f7f7f8, 0 5px #ededee;
     padding-bottom: 10px;
 }
+
+#mainPicture {
+    background-image: url(/client/app/views/images/voiture-large.png);
+    background-repeat: no-repeat;
+    border: 1px solid #7f7f7f;
+    border-radius: 0;
+    height: 16em;
+    min-width: 100%;
+    background-size: 16em;
+    background-position: center center;
+    text-align: center;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.otherPicture {
+    background-image: url(/client/app/views/images/voiture-small.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid #d6d6d6;
+    min-height: 47px;
+    margin-left: 2%;
+    margin-right: 1%;
+    cursor: pointer;
+    cursor: hand;
+}
+#otherPictures
+{
+    padding: 0px !important;
+}
