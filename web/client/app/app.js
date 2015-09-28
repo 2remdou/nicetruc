@@ -4,7 +4,8 @@
 var app = angular.module('app',[
     'ui.router',
     'ui.bootstrap.tabs',
-    'restangular'
+    'restangular',
+    'ngFileUpload'
 ]);
 
 

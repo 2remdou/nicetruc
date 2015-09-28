@@ -79,21 +79,24 @@
                 </fieldset>
             </form>
         </div>
+    <!--images-->
         <div class="col-md-6 col-xs-12  mg-top-20">
             <div class="row title col-md-12">
                 <strong class="text-primary">Mes photos</strong>
             </div>
             <div class="row content">
-                <div class="carousel slide col-md-12" data-ride="carousel" data-interval="false">
+                <div class="col-md-12">
 
-                    <div class="carousel-inner margin-bottom-20 col-md-12">
-                        <div class="item active srle">
-                            <div id="mainPicture" class="thumbnail without-margin">
+                    <div class="col-md-12">
+                        <div>
+                            <div id="mainPicture" type="file" ngf-select="" ng-model="mainPic" name="file" accept="image/*" required="">
+                                <div ngf-thumbnail="mainPic">
+
+                                </div>
+                            </div>
 
                                 <div id="mainPictureLinkAsText" class="text-primary"><strong>Ajouter une photo</strong></div>
                                 <span class="spinner"><i class="icon-spin icon-spinner"></i></span>
-
-                            </div>
                         </div>
                     </div>
 

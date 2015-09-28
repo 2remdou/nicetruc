@@ -43,7 +43,7 @@ app.config(function($stateProvider, $urlRouterProvider){
        .state('annonces',{
            url:'/annonces',
            templateUrl: '/client/app/views/annonceVoiture.html',
-           controller: 'AnnonceController'
+           controller: 'AnnonceVoitureController'
        })
        .state('voitures',{
            url:'/voitures',
