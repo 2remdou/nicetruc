@@ -110,6 +110,13 @@ class Voiture extends Article
      */
     protected  $categorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image",mappedBy="voiture",cascade={"persist", "remove"})
+     * @Expose()
+     * @SerializedName("images")
+     */
+    protected $images;
+
 
 
     /**

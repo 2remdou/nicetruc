@@ -22,7 +22,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "sylius/resource-bundle": "^0.14.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "vich/uploader-bundle": "^0.14.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

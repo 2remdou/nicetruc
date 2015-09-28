@@ -22,7 +22,7 @@
 }
 
 #mainPicture {
-    background-image: url(/client/app/views/images/voiture-large.png);
+    background-image: url(/client/app/images/voiture-large.png);
     background-repeat: no-repeat;
     border: 1px solid #7f7f7f;
     border-radius: 0;
@@ -36,7 +36,7 @@
 }
 
 .otherPicture {
-    background-image: url(/client/app/views/images/voiture-small.png);
+    background-image: url(/client/app/images/voiture-small.png);
     background-position: center center;
     background-repeat: no-repeat;
     border: 1px solid #d6d6d6;

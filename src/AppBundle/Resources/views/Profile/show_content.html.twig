@@ -111,7 +111,7 @@
                                         <select class="form-control" id="nicetruc_user_profile_form_ville" name="nicetruc_user_profile_form[ville]"
                                                 ng-model="ville"
                                                 ng-options="ville.libelleVille
-                                            for ville in villes track by ville.id" ng-change="changeVille(ville)"
+                                            for ville in villes track by ville.id" ng-change="hp (ville)"
                                                {% if app.user.quartier %} ng-init="ville.id={{ app.user.quartier.ville.id }}" {% endif %}>
                                         </select>
                                     </div>
