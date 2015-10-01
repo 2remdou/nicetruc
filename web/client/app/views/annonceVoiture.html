@@ -81,40 +81,11 @@
         </div>
     <!--images-->
         <div class="col-md-6 col-xs-12  mg-top-20">
-            <div class="row title col-md-12">
-                <strong class="text-primary">Mes photos</strong>
-            </div>
-            <div class="row content">
-                <div class="col-md-12">
-
-                    <div class="col-md-12">
-                        <div>
-                            <div id="mainPicture" type="file" ngf-select="" ng-model="mainPic" name="file" accept="image/*" required="">
-                                <div ngf-thumbnail="mainPic">
-
-                                </div>
-                            </div>
-
-                                <div id="mainPictureLinkAsText" class="text-primary"><strong>Ajouter une photo</strong></div>
-                                <span class="spinner"><i class="icon-spin icon-spinner"></i></span>
-                        </div>
-                    </div>
-
-
-                    <div class="thumbnails-container col-md-12 col-sm-12 col-xs-12">
-                        <ul class="thumbnails-carousel clearfix" id="otherPictures">
-
-                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
-
-                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
-
-                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
-
-                            <li class="col-md-3 col-sm-4 col-xs-2"><span class="thumbnail otherPicture"></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <button type="file" nv-file-select="" uploader="uploader">Selectionner</button>
+                </li>
+            </ul>
         </div>
     </section>
 </div>
