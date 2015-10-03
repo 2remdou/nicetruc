@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 
 class NiceTrucController extends Controller
 {
@@ -74,5 +76,24 @@ class NiceTrucController extends Controller
         return $this->render('AppBundle::marque.html.twig');
     }
 
+    /**
+     * @Route("/images/",name="nicetruc_image")
+     */
+    public function ImageAction(Request $request){
+        $files = $request->files;
+        foreach($files as $file){
+            $image = new Image();
+            $image->setImageFile($file);
+            $image->setImageName($file);
+        }
+
+        $responseData = 'voila'.dump($files);
+        $response = new Response($responseData);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+/*        return $this->render('AppBundle::test.html.twig',array(
+            'element' => $files,
+        ));*/
+    }
 
 }

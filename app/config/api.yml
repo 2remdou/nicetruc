@@ -51,3 +51,8 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: AppBundle\Entity\Voiture
+
+        app.image:
+            driver: doctrine/orm
+            classes:
+                model: AppBundle\Entity\Image

@@ -56,3 +56,8 @@ app_voiture:
     resource: app.voiture
     type: sylius.api
     prefix: /api
+
+#app_image:
+#    resource: app.image
+#    type: sylius.api
+#    prefix: /api
