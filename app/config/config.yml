@@ -132,3 +132,19 @@ vich_uploader:
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
+
+knp_gaufrette:
+    adapters:
+        local_uploads_voiture:
+            local:
+                directory: %kernel.root_dir%/../web/client/app/images/voitures
+    filesystems:
+        uploads:
+            adapter: local_uploads_voiture
+
+srio_rest_upload:
+    storages:
+        default:
+            filesystem: gaufrette.uploads_filesystem
+
+    resumable_entity_class: ~

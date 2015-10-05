@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class NiceTrucController extends Controller
 {
@@ -80,20 +81,20 @@ class NiceTrucController extends Controller
      * @Route("/images/",name="nicetruc_image")
      */
     public function ImageAction(Request $request){
-        $files = $request->files;
-        foreach($files as $file){
-            $image = new Image();
-            $image->setImageFile($file);
-            $image->setImageName($file);
+        $uploadHandler = $this->get('srio_rest_upload.upload_handler');
+        $result = $uploadHandler->handleRequest($request);
+
+        if (($response = $result->getResponse()) !== null) {
+            return $response;
         }
 
-        $responseData = 'voila'.dump($files);
-        $response = new Response($responseData);
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
-/*        return $this->render('AppBundle::test.html.twig',array(
-            'element' => $files,
-        ));*/
+        if (($file = $result->getFile()) !== null) {
+            // Store the file path in an entity, call an API,
+            // do whatever with the uploaded file here.
+            return new Response($file->getName( ));
+        }
+
+        throw new BadRequestHttpException('Unable to handle upload request');
     }
 
 }

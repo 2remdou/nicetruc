@@ -24,6 +24,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new SRIO\RestUploadBundle\SRIORestUploadBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
