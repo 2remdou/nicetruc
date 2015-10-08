@@ -4,13 +4,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
-class NiceTrucController extends Controller
+class NiceTrucController extends FOSRestController
 {
     /**
      * @Route("/", name="homepage")
@@ -79,8 +80,9 @@ class NiceTrucController extends Controller
 
     /**
      * @Route("/images/",name="nicetruc_image")
+     * @Rest\View()
      */
-    public function ImageAction(Request $request){
+    public function postImageAction(Request $request){
         $uploadHandler = $this->get('srio_rest_upload.upload_handler');
         $result = $uploadHandler->handleRequest($request);
 

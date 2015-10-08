@@ -9,6 +9,10 @@ imports:
 parameters:
     locale: fr
 
+sensio_framework_extra:
+    view:
+        annotations: false
+
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -109,6 +113,7 @@ fos_rest:
             json: true
             xml:  false
             html: true
+        view_response_listener: 'force'
     routing_loader:
         default_format: json
     format_listener:

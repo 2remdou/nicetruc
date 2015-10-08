@@ -30,7 +30,7 @@ app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueServic
     $scope.create = function(files,voiture){
 
         Upload.upload({
-           url:'http://127.0.0.1:8000/app_dev.php/images',
+           url:'http://127.0.0.1:8000/app_dev.php/api/images',
             method: 'POST',
             file: files
         });

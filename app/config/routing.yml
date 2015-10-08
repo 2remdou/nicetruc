@@ -57,7 +57,7 @@ app_voiture:
     type: sylius.api
     prefix: /api
 
-#app_image:
-#    resource: app.image
-#    type: sylius.api
-#    prefix: /api
+image_voiture:
+    type: rest
+    resource: AppBundle\Controller\NiceTrucController
+    prefix: /api
