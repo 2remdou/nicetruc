@@ -8,7 +8,7 @@ app.config(function($interpolateProvider) {
 });
 
 
-app.config(function(RestangularProvider,$injector,TokenHandler) {
+app.config(function(RestangularProvider/*,TokenHandler*/) {
     RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
      RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
@@ -53,7 +53,7 @@ app.config(function(RestangularProvider,$injector,TokenHandler) {
          return element;
      });
 
-    RestangularProvider.addFullRequestInterceptor(
+    /*RestangularProvider.addFullRequestInterceptor(
         function (element, operation, route, url, headers, params, httpConfig) {
 
             $http.defaults.headers.common['X-WSSE'] =
@@ -67,5 +67,5 @@ app.config(function(RestangularProvider,$injector,TokenHandler) {
                 params: params,
                 httpConfig: httpConfig
             };
-    });
+    });*/
 });

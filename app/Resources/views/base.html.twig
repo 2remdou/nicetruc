@@ -76,7 +76,8 @@
                             </div>
                         {% else %}
                             <li><a href="{{ path('fos_user_registration_register') }}" id="btnAbout">Inscription</a></li>
-                            <li><a href="{{ path('fos_user_security_login') }}" id="btnAbout">Connexion</a></li>
+                            <li><a ui-sref="login" id="btnAbout">Connexion</a></li>
+                            {#<li><a href="{{ path('fos_user_security_login') }}" id="btnAbout">Connexion</a></li>#}
                         {% endif %}
 
                     </ul>
@@ -129,10 +130,10 @@
             'client/bower_components/angular-file-upload/dist/angular-file-upload.min.js'
             'client/bower_components/ng-file-upload/ng-file-upload.min.js'
 
-            'client/cryptoJS/sha1.js'
-            'client/cryptoJS/sha512.js'
-            'client/cryptoJS/md5.js'
-            'client/cryptoJS/enc-base64-min.js'
+            'client/app/cryptoJS/sha1.js'
+            'client/app/cryptoJS/sha512.js'
+            'client/app/cryptoJS/md5.js'
+            'client/app/cryptoJS/enc-base64-min.js'
 
             'client/app/app.js'
             'client/app/routing.js'
@@ -149,6 +150,9 @@
             'client/app/services/ModeleMarqueService.js'
             'client/app/services/ImageService.js'
             'client/app/services/VoitureService.js'
+            'client/app/services/LoginService.js'
+
+
             'client/app/services/Base64.js'
             'client/app/services/TokenHandler.js'
             'client/app/services/Salt.js'
@@ -165,6 +169,7 @@
             'client/app/controllers/ModeleController.js'
             'client/app/controllers/ModeleMarqueController.js'
             'client/app/controllers/SearchVoitureController.js'
+            'client/app/controllers/LoginController.js'
 
             'client/app/directives/equalsTo.js'
             'client/app/directives/ntThumb.js'

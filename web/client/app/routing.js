@@ -5,6 +5,11 @@ app.config(function($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise("/");
    $stateProvider
+       .state('login',{
+           url:'/login',
+           templateUrl: '/client/app/views/login.html',
+           controller: 'LoginController'
+       })
        .state('villes',{
            url:'/villes',
            templateUrl: '/client/app/views/ville.html',
