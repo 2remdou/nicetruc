@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use SRIO\RestUploadBundle\Upload\UploadHandler;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class NiceTrucController extends FOSRestController
 {
@@ -83,20 +85,27 @@ class NiceTrucController extends FOSRestController
      * @Rest\View()
      */
     public function postImageAction(Request $request){
-        $uploadHandler = $this->get('srio_rest_upload.upload_handler');
-        $result = $uploadHandler->handleRequest($request);
-
-        if (($response = $result->getResponse()) !== null) {
-            return $response;
-        }
-
-        if (($file = $result->getFile()) !== null) {
-            // Store the file path in an entity, call an API,
-            // do whatever with the uploaded file here.
-            return new Response($file->getName( ));
-        }
-
-        throw new BadRequestHttpException('Unable to handle upload request');
+        $files = $request->files;
+        $image = new Image();
+        $image->setImageFile($files);
+        return $files;
     }
+
+    /**
+     * @Route("/{username}/salt", requirements={"username" = "\w+"})
+     */
+    public function saltAction($username)
+    {
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByUsername($username);
+        if ( is_null($user) )
+        {
+            throw new HttpException(400, "Error User Not Found");
+        }
+
+        return new JsonResponse(array('salt' => $user->getSalt()));
+    }
+
 
 }

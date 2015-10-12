@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\FileBag;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -89,10 +90,12 @@ class Image
     }
 
     /**
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     * @param File|\Symfony\Component\HttpFoundation\FileBag $image
      */
-    public function setImageFile(File $image = null)
+    public function setImageFile(FileBag $image = null)
     {
+        //$im = new File($image->getPath());
+//        $name = sha1(uniqid(mt_rand(), true));
         $this->imageFile = $image;
 
     }

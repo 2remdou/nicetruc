@@ -8,7 +8,7 @@ app.config(function($interpolateProvider) {
 });
 
 
-app.config(function(RestangularProvider) {
+app.config(function(RestangularProvider,$injector,TokenHandler) {
     RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
      RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
@@ -41,7 +41,31 @@ app.config(function(RestangularProvider) {
                  element.marque = idMarque;
                  element.modele = idModele;
              }
+             else if(what === 'voitures/'){
+                 delete element.marque;
+                 delete element.modele;
+
+                 element.modeleMarque = element.modeleMarque.id;
+                 element.boitier = element.boitier.id;
+                 element.carburant = element.carburant.id;
+             }
          }
          return element;
      });
+
+    RestangularProvider.addFullRequestInterceptor(
+        function (element, operation, route, url, headers, params, httpConfig) {
+
+            $http.defaults.headers.common['X-WSSE'] =
+                TokenHandler.getCredentials(
+                    AuthHandler.authentication.user.username,
+                    AuthHandler.authentication.secret);
+
+            return {
+                element: element,
+                headers: headers,
+                params: params,
+                httpConfig: httpConfig
+            };
+    });
 });

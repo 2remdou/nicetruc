@@ -12,7 +12,7 @@
                                 <select class="form-control" tabindex="0" id="marque" ng-model="voiture.marque"
                                         ng-options="marque.libelleMarque
                                             for marque in marques track by marque.id"
-                                        ng-change="loadModele(voiture.marque)">
+                                        ng-change="selectMarque(voiture.marque)">
                                 </select>
                             </div>
                         </div>
@@ -22,7 +22,8 @@
                             <div class="col-md-7">
                                 <select class="form-control" tabindex="1" id="modele" ng-model="voiture.modele"
                                         ng-options="modele.libelleModele
-                                            for modele in modeles track by modele.id">
+                                            for modele in modeles track by modele.id"
+                                        ng-change="selectModele(voiture.modele)">
                                 </select>
                             </div>
                         </div>
@@ -63,7 +64,7 @@
                                 <label for="anneeModele" class="text-primary control-label">Année du modèle :</label>
                             </div>
                             <div class="col-md-7">
-                                <input id="anneeModele" name="anneeModele" ng-model="voiture.anneModele" tabindex="3" placeholder="Année du modèle :" type="number" class="form-control" min="1900" max="//date//">
+                                <input id="anneeModele" name="anneeModele" ng-model="voiture.anneeModele" tabindex="3" placeholder="Année du modèle :" type="number" class="form-control" min="1900" max="//date//">
                             </div>
                         </div>
                         <!--Prix-->
@@ -130,7 +131,7 @@
                 </div>
 
                 <div class="col-md-12 col-xs-12 text-center">
-                    <button class="btn btn-primary btn-lg btn-ta" ng-click="create(files,voiture)">
+                    <button class="btn btn-primary btn-lg btn-ta" ng-click="create(voiture)">
                         <span class="spinner">
                             <i class="icon-spin icon-spinner"></i>
                         </span>&nbsp;Ajouter mon annonce

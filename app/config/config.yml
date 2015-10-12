@@ -10,8 +10,9 @@ parameters:
     locale: fr
 
 sensio_framework_extra:
-    view:
-        annotations: false
+    view:    { annotations: false }
+    router:  { annotations: true }
+    request: { converters: true }
 
 framework:
     #esi:             ~
@@ -113,7 +114,7 @@ fos_rest:
             json: true
             xml:  false
             html: true
-        view_response_listener: 'force'
+        view_response_listener: force
     routing_loader:
         default_format: json
     format_listener:

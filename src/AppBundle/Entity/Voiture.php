@@ -112,6 +112,7 @@ class Voiture extends Article
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image",mappedBy="voiture",cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      * @Expose()
      * @SerializedName("images")
      */

@@ -52,6 +52,16 @@ app_modelemarque:
     type: sylius.api
     prefix: /api
 
+app_modelesmarques:
+    path: /marques/{idMarque}/modeles/{idModele}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.modeleMarque:showAction
+        _sylius:
+            criteria:
+                marque: [idMarque]
+                modele: [idModele]
+
 app_voiture:
     resource: app.voiture
     type: sylius.api

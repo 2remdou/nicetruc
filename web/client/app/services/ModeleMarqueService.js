@@ -28,4 +28,8 @@ app.service('ModeleMarqueService',function($rootScope,Restangular){
             $rootScope.$broadcast('modeleMarque.delete');
         });
     }
+
+    this.getId= function(marque,modele){
+       return _modelemarqueService.one('marques',marque).one('modeles',modele).get();
+    }
 });
