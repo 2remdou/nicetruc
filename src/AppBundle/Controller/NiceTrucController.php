@@ -91,21 +91,4 @@ class NiceTrucController extends FOSRestController
         return $files;
     }
 
-    /**
-     * @Route("/{username}/salt", requirements={"username" = "\w+"})
-     */
-    public function saltAction($username)
-    {
-        $userManager = $this->container->get('fos_user.user_manager');
-
-        $user = $userManager->findUserByUsername($username);
-        if ( is_null($user) )
-        {
-            throw new HttpException(400, "Error User Not Found");
-        }
-
-        return new JsonResponse(array('salt' => $user->getSalt()));
-    }
-
-
 }
