@@ -2,30 +2,11 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('LoginService',function($rootScope,Restangular){
+app.service('LoginService',function($rootScope,Restangular,$http){
 
-    var _boitierService = Restangular.all('boitiers/');
+    var _loginService = Restangular.all('login');
 
-    this.list = function(){
-        $rootScope.$broadcast('boitier.list');
-        return _boitierService.getList();
-    }
-
-    this.create = function(boitier){
-        _boitierService.post(boitier).then(function(){
-            $rootScope.$broadcast('boitier.create');
-        });
-    };
-
-    this.update = function(boitier){
-        boitier.put().then(function(){
-           $rootScope.$broadcast('boitier.update');
-        });
-    };
-
-    this.delete = function(boitier){
-        boitier.remove().then(function(){
-            $rootScope.$broadcast('boitier.delete');
-        })
+    this.login = function(user){
+       return $http.post('/api/login',user);
     }
 });

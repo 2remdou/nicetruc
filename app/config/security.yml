@@ -20,6 +20,7 @@ security:
             pattern:   ^/api/
             stateless: true
             wsse:      true
+            anonymous : true
             wsse:      { lifetime: 30 }
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

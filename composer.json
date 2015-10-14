@@ -24,7 +24,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "vich/uploader-bundle": "^0.14.0",
-        "srio/rest-upload-bundle": "^2.0"
+        "srio/rest-upload-bundle": "^2.0",
+        "nelmio/api-doc-bundle": "^2.9"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
