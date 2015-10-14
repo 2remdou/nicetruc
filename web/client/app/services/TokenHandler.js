@@ -1,7 +1,7 @@
 /**
  * Created by touremamadou on 11/10/2015.
  */
-app.factory('TokenHandler', [ '$http', 'Base64', function($http, Base64) {
+app.factory('TokenHandler', ['$http', 'Base64', function($http, Base64) {
     var tokenHandler = {};
     var token = 'none';
 
