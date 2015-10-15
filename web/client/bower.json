@@ -21,6 +21,7 @@
     "es5-shim": "~4.1.13",
     "ng-file-upload": "~8.0.1",
     "restangular": "~1.5.1",
-    "ui.bootstrap": "~0.13.4"
+    "ui.bootstrap": "~0.13.4",
+    "angular-cookies": "~1.4.7"
   }
 }

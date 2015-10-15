@@ -6,7 +6,8 @@ var app = angular.module('app',[
     'ui.bootstrap.tabs',
     'restangular',
     'angularFileUpload',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ngCookies'
 ]);
 
 var generateNameImage = function(){

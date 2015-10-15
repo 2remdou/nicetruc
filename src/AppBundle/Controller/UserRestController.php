@@ -22,6 +22,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class UserRestController extends FOSRestController
 {
+    /**
+     * Return the overall user list.
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Retourne le salt d'un user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("/api/salt/l/{locale}/h/{hote}/d/{domaine}", name="nicetruc_salt", requirements={"email" = "\w+"})
+     * @return View
+     */
+    public function getSalt($locale,$hote,$domaine){
+        $email = $locale.'@'.$hote.'.'.$domaine;
+        $userManager = $this->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByUsernameOrEmail($email);
+        $view = View::create();
+        if(!user){
+            $view->setStatusCode(404)->setData("Utilisateur introuvable");
+            return $view;
+        }
+
+        return $view->setStatusCode(200)->setData($user->getSalt());
+    }
 
     /**
      * Return the overall user list.
@@ -47,7 +74,7 @@ class UserRestController extends FOSRestController
         $view = View::create();
 
         if (!$user) {
-            $view->setStatusCode(404)->setData("Utilisateur introuvable");
+            $view->setStatusCode(404)->setData("Utilisateur introuvable email");
             return $view;
         }
 
@@ -58,7 +85,7 @@ class UserRestController extends FOSRestController
         $password = $encoder->encodePassword($paramFetcher->get('password'), $salt);
 
         if($password!==$user->getPassword()){
-            $view->setStatusCode(404)->setData("Utilisateur introuvable");
+            $view->setStatusCode(404)->setData("Utilisateur introuvable password");
             return $view;
         }
 

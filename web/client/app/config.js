@@ -8,7 +8,12 @@ app.config(function($interpolateProvider) {
 });
 
 
-app.config(function(RestangularProvider/*,TokenHandler*/) {
+app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHandlerProvider',
+    function(RestangularProvider,$injector, TokenHandlerProvider, AuthHandlerProvider) {
+
+    var TokenHandler = $injector.instantiate(TokenHandlerProvider.$get);
+    var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);
+
     RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
      RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
@@ -53,19 +58,20 @@ app.config(function(RestangularProvider/*,TokenHandler*/) {
          return element;
      });
 
-    /*RestangularProvider.addFullRequestInterceptor(
-        function (element, operation, route, url, headers, params, httpConfig) {
-
-            $http.defaults.headers.common['X-WSSE'] =
+    RestangularProvider.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
+        if(url.indexOf('salt')!==-1){
+            headers['X-WSSE'] =
                 TokenHandler.getCredentials(
-                    AuthHandler.authentication.user.username,
-                    AuthHandler.authentication.secret);
+                    AuthHandler.email(),
+                    AuthHandler.secret()
+                );
+        }
 
-            return {
-                element: element,
-                headers: headers,
-                params: params,
-                httpConfig: httpConfig
-            };
-    });*/
-});
+        return {
+            element: element,
+            headers: headers,
+            params: params,
+            httpConfig: httpConfig
+        };
+    });
+}]);
