@@ -16,4 +16,8 @@ app.service('LoginService',function($rootScope,Restangular,$http){
         var domaine=email.substring(email.indexOf('.')+1);
         return Restangular.one('salt').one('l',locale).one('h',hote).one('d',domaine).get();
     };
+
+    this.checkLogin = function(){
+        return Restangular.one('checkLogin').get();
+    }
 });

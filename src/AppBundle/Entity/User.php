@@ -75,7 +75,6 @@ class User extends BaseUser
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="users")
-     * @Expose()
      */
     private $voitures;
 

@@ -36,18 +36,36 @@ class UserRestController extends FOSRestController
      * @Route("/api/salt/l/{locale}/h/{hote}/d/{domaine}", name="nicetruc_salt", requirements={"email" = "\w+"})
      * @return View
      */
-    public function getSalt($locale,$hote,$domaine){
+    public function getSaltAction($locale,$hote,$domaine){
         $email = $locale.'@'.$hote.'.'.$domaine;
-        $userManager = $this->get('fos_user.user_manager');
+        $userManager = $this->container->get('fos_user.user_manager');
 
         $user = $userManager->findUserByUsernameOrEmail($email);
         $view = View::create();
-        if(!user){
+        if(!$user){
             $view->setStatusCode(404)->setData("Utilisateur introuvable");
             return $view;
         }
 
-        return $view->setStatusCode(200)->setData($user->getSalt());
+        return $view->setStatusCode(200)->setData(array('salt'=>$user->getSalt()));
+    }
+ /**
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "verification token",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+      * @Route("/api/checkLogin", name="nicetruc_checklogin")
+     * @return View
+     */
+    public function checkLoginAction(){
+        $user = $this->getUser();
+        $view = View::create();
+        return $view->setStatusCode(200)->setData(array('user'=>$user));
     }
 
     /**

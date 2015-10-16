@@ -5,10 +5,31 @@ app.config(function($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise("/");
    $stateProvider
+       .state('nicetruc',{
+           url:'/',
+           views:{
+               'nav':{
+                   url:'/',
+                   templateUrl: '/client/app/views/main.html',
+                   controller: 'MainController'
+               },
+               'content':{
+                   url:'/login',
+                   templateUrl: '/client/app/views/login.html',
+                   controller: 'LoginController'
+               }
+           }
+       })
+/*
+
        .state('login',{
-           url:'/login',
-           templateUrl: '/client/app/views/login.html',
-           controller: 'LoginController'
+           views : {
+               'content':{
+                   url:'/login',
+                   templateUrl: '/client/app/views/login.html',
+                   controller: 'LoginController'
+               }
+           }
        })
        .state('villes',{
            url:'/villes',
@@ -55,6 +76,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            templateUrl: '/client/app/views/searchVoiture.html',
            controller: 'SearchVoitureController'
        })
+*/
 
    ;
 });

@@ -8,20 +8,19 @@
         <meta name="author" content="mdoutoure">
 
         <title>{% block title %}nicetruc!{% endblock %}</title>
-{#
-        {% block stylesheets %}
+
+{#        {% block stylesheets %}
 
             {% stylesheets
                 'client/bower_components/bootstrap/dist/css/bootstrap.css'
-                'client/app/views/css/main.css'
+                 'client/app/views/css/main.css'
                 'client/app/views/css/inscription.css'
             filter='cssrewrite'
             output='client/compiled/main.css'%}
                 <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
             {% endstylesheets %}
 
-        {% endblock stylesheets%}
-#}
+        {% endblock stylesheets%}#}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <link rel="stylesheet" href="client/bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
         <link rel="stylesheet" href="client/app/views/css/main.css" type="text/css">
@@ -30,87 +29,26 @@
         <link rel="stylesheet" href="client/app/views/css/annonce.css" type="text/css">
     </head>
     <body>
-    {% block nav %}
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ path('homepage') }}">NiceTruc</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            {#<a href="#/test">Test</a>#}
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="profil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    {{ app.user.nomUser }}
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
-                                    <li><a ui-sref="annonces">Ajouter une annonce</a></li>
-                                    <li><a ui-sref="voitures">voiture</a></li>
-                                    <li><a ui-sref="marques">Ajouter une marque</a></li>
-                                    <li><a ui-sref="modeles">Ajouter un modele</a></li>
-                                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                        <li><a ui-sref="villes">Ville</a></li>
-                                        <li><a ui-sref="quartiers">Quartier</a></li>
-                                        <li><a ui-sref="categories">Categorie</a></li>
-                                        <li><a ui-sref="carburants">Carburant</a></li>
-                                        <li><a ui-sref="boitiers">Boitier</a></li>
-                                    {% endif %}
-                                    <li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            <li><a href="{{ path('fos_user_registration_register') }}" id="btnAbout">Inscription</a></li>
-                            <li><a ui-sref="login" id="btnAbout">Connexion</a></li>
-                            {#<li><a href="{{ path('fos_user_security_login') }}" id="btnAbout">Connexion</a></li>#}
-                        {% endif %}
-
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container -->
-        </nav>
-    {% endblock %}
 
 
     <div class="container">
         {% block body %}
-            <section class="col-md-8 col-md-offset-2">
-                {% block messageFlash %}
-                    {% set typeMessages = ['info', 'success', 'warning', 'danger'] %}
-                    {% for typeMessage in typeMessages %}
-                        {% for message in app.session.flashbag.get(typeMessage) %}
-                            <div class="alert alert-dismissible alert-{{ typeMessage }}">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <p class="text-center">{{ message }}</p>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                {% endblock messageFlash%}
-            </section>
+            {#<section class="col-md-8 col-md-offset-2">#}
+                {#{% block messageFlash %}#}
+                    {#{% set typeMessages = ['info', 'success', 'warning', 'danger'] %}#}
+                    {#{% for typeMessage in typeMessages %}#}
+                        {#{% for message in app.session.flashbag.get(typeMessage) %}#}
+                            {#<div class="alert alert-dismissible alert-{{ typeMessage }}">#}
+                                {#<button type="button" class="close" data-dismiss="alert">×</button>#}
+                                {#<p class="text-center">{{ message }}</p>#}
+                            {#</div>#}
+                        {#{% endfor %}#}
+                    {#{% endfor %}#}
+                {#{% endblock messageFlash%}#}
+            {#</section>#}
 
             {#<section class="col-md-8 col-md-offset-2">#}
-            <div ui-view>
-                {% block content %}
 
-                {% endblock content %}
-            </div>
             {#</section>#}
 
         {% endblock body %}
@@ -160,6 +98,7 @@
             'client/app/services/Salt.js'
             'client/app/services/Digest.js'
 
+            'client/app/controllers/MainController.js'
             'client/app/controllers/VilleController.js'
             'client/app/controllers/QuartierController.js'
             'client/app/controllers/ProfileController.js'

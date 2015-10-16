@@ -59,7 +59,8 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
      });
 
     RestangularProvider.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
-        if(url.indexOf('salt')!==-1){
+        console.log(AuthHandler.email());
+        if(typeof AuthHandler.email() != 'undefined'){
             headers['X-WSSE'] =
                 TokenHandler.getCredentials(
                     AuthHandler.email(),
