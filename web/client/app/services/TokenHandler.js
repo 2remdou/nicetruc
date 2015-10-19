@@ -1,7 +1,7 @@
 /**
  * Created by touremamadou on 11/10/2015.
  */
-app.factory('TokenHandler', ['$http', 'Base64', function ($http, Base64) {
+app.factory('TokenHandler', ['$http', 'Base64','$cookies', function ($http, Base64,$cookies) {
     var tokenHandler = {};
     var token = 'none';
 
@@ -38,6 +38,14 @@ app.factory('TokenHandler', ['$http', 'Base64', function ($http, Base64) {
         var b64nonce = Base64.encode(nonce);
 
         return 'UsernameToken Username="' + username + '", PasswordDigest="' + digest + '", Nonce="' + b64nonce + '", Created="' + created + '"';
+    };
+
+    tokenHandler.clearCredentials = function () {
+        // Clear token from cache
+        $cookies.remove('email');
+        $cookies.remove('secret');
+        $cookies.remove('nomUser');
+        $cookies.remove('prenomUser');
     };
 
     // Date formater to UTC

@@ -1,19 +1,15 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window',function($scope,LoginService,$cookies,Digest,$window){
+app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope',
+    function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope){
 
     $scope.login = function(user){
-        email = $scope.user.email;
-        password = $scope.user.password;
+        var email = $scope.user.email;
+        var password = $scope.user.password;
 
-/*
-        LoginService.login(user).then(function(response){
-           console.log(response);
-        });
-*/
-
-        LoginService.getSalt(email).then(function(response){
+        LoginService.getSalt(email)
+            .then(function(response){
             var salt = response.salt;
 
             Digest.cipher(password, salt).then(function (secret) {
@@ -26,7 +22,18 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
                 $cookies.put('secret', $scope.secret);
 
                 LoginService.checkLogin().then(function(response){
-                    console.log(response);
+                    successRequest(response,$scope);
+
+                    $rootScope.user = response.user;
+
+                    $cookies.put('nomUser', $rootScope.user.nomUser);
+                    $cookies.put('prenomUser', $rootScope.user.prenomUser);
+
+
+                    $state.go('nicetruc');
+
+                },function(response){
+                    errorRequest(response,$scope);
                 });
 
             }, function (err) {

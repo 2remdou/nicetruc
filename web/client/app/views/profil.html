@@ -1,0 +1,165 @@
+<div class="col-sm-8 col-sm-offset-2">
+    <tabset type="tabs" >
+            <tab heading="Profil">
+                <div class="row">
+                    <div class="pd-20">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Information Personnelle</div>
+                            <div class="panel-body">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Nom:</label>
+                                        <div class="col-xs-7 controls">// user.nomUser //</div>
+                                        <!-- col-sm-10 -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Prenom:</label>
+                                        <div class="col-xs-7 controls">// user.prenomUser //</div>
+                                        <!-- col-sm-10 -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Email:</label>
+                                        <div class="col-xs-7 controls">// user.email //</div>
+                                        <!-- col-sm-10 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Adresse</div>
+                            <div class="panel-body">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Ville:</label>
+                                        <div class="col-xs-7 controls">// user.quartier.ville.libelleVille //</div>
+                                        <!-- col-sm-10 -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Quartier:</label>
+                                        <div class="col-xs-7 controls">// user.quartier.libelleQuartier //</div>
+                                        <!-- col-sm-10 -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Telephone:</label>
+                                        <div class="col-xs-7 controls">// user.telephone //</div>
+                                        <!-- col-sm-10 -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <label class="col-xs-5 control-label">Site web:</label>
+                                        <div class="col-xs-7 controls">// user.siteWeb //</div>
+                                        <!-- col-sm-10 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </tab>
+            <tab heading="Modifier"  active="true">
+                <div class="row">
+                    <div class="pd-20">
+
+                        <form method="POST">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Information Personnelle</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <input type="text" name="nomUser" ng-model="user.nomUser" id="nomUser" tabindex="0" class="form-control" placeholder="Nom" value="">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="text" name="prenomUser" ng-model="user.prenomUser" id="prenomUser" tabindex="1" class="form-control" placeholder="Prenom" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="email" name="email" ng-model="user.email" id="email" tabindex="2" class="form-control" placeholder="Adresse email" value="">
+                                        <span ng-show="formInscription.email.$dirty && formInscription.email.$invalid">
+                                            Cette adresse est invalide.
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Adresse</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <input type="text" name="telephone" ng-model="user.telephone" id="telephone"  class="form-control" placeholder="Telephone" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="siteWeb" ng-model="user.siteWeb" id="siteWeb" class="form-control" placeholder="Site Web" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <label for="ville" class="required">Ville</label>
+                                            <select class="form-control" id="ville" name="ville"
+                                                    ng-model="user.ville"
+                                                    ng-options="ville.libelleVille
+                                            for ville in villes track by ville.id" ng-change="selectVille(user.ville)"
+                                                    >
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <label for="quartier" class="required">Quartier</label>
+                                            <select class="form-control" id="quartier" name="quartier"
+                                                    ng-model="user.quartier"
+                                                    ng-options="quartier.libelleQuartier
+                                            for quartier in quartiers"
+                                                    >
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-info">Valider</button>
+                            </div>
+                        </form>
+                        <form method="POST">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Mot de passe actuel</div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <input type="password" name="passwordActuel" ng-model="user.passwordActuel" class="form-control" placeholder="Mot de passe Actuel" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" name="password" ng-model="user.password" class="form-control" placeholder="Nouveau Mot de passe" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" name="confirmationPassword" ng-model="user.confirmationPassword" class="form-control" placeholder="Confirmation Mot de passe" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-info">Valider</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </tab>
+        </tabset>
+</div>

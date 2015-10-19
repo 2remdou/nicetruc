@@ -8,47 +8,50 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('homepage') }}">NiceTruc</a>
+            <a class="navbar-brand" ui-sref="nicetruc">NiceTruc</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    {#<a href="#/test">Test</a>#}
-                </li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <div  ng-show="isAuthenticated" class="dropdown">
+                <div  ng-show="isAuthenticated()" class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="profil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         // user.nomUser //
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <!--<li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>-->
-                        <li><a href="#">Profil</a></li>
-                        <li><a ui-sref="annonces">Ajouter une annonce</a></li>
-                        <li><a ui-sref="voitures">voiture</a></li>
-                        <li><a ui-sref="marques">Ajouter une marque</a></li>
-                        <li><a ui-sref="modeles">Ajouter un modele</a></li>
+                        <li><a ui-sref="nicetruc.profil">Profil</a></li>
+                        <li><a ui-sref="nicetruc.annonces">Ajouter une annonce</a></li>
+                        <li><a ui-sref="nicetruc.voitures">voiture</a></li>
+                        <li><a ui-sref="nicetruc.marques">Ajouter une marque</a></li>
+                        <li><a ui-sref="nicetruc.modeles">Ajouter un modele</a></li>
                         <!--{% if is_granted('ROLE_SUPER_ADMIN') %}-->
-                        <li><a ui-sref="villes">Ville</a></li>
-                        <li><a ui-sref="quartiers">Quartier</a></li>
-                        <li><a ui-sref="categories">Categorie</a></li>
-                        <li><a ui-sref="carburants">Carburant</a></li>
-                        <li><a ui-sref="boitiers">Boitier</a></li>
+                        <li><a ui-sref="nicetruc.villes">Ville</a></li>
+                        <li><a ui-sref="nicetruc.quartiers">Quartier</a></li>
+                        <li><a ui-sref="nicetruc.categories">Categorie</a></li>
+                        <li><a ui-sref="nicetruc.carburants">Carburant</a></li>
+                        <li><a ui-sref="nicetruc.boitiers">Boitier</a></li>
                         <!--{% endif %}-->
-                        <li><a href="#">Deconnexion</a></li>
+                        <li ng-click="logout()" class="mouse-pointer">Deconnexion</li>
                         <!--<li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>-->
                     </ul>
                 </div>
-                <div ng-hide="isAuthenticated">
-                    <!--<li><a href="{{ path('fos_user_registration_register') }}" id="btnAbout">Inscription</a></li>-->
-                    <li><a href="#" >Inscription</a></li>
-                    <li><a ui-sref="login">Connexion</a></li>
-                </div>
+                    <li ng-hide="isAuthenticated()"><a ui-sref="nicetruc.inscription" >Inscription</a></li>
+                    <li ng-hide="isAuthenticated()"><a ui-sref="nicetruc.login">Connexion</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
+
+<section ng-show="showMessage" class="col-md-8 col-md-offset-2">
+    <div ng-repeat="message in messages" class="alert alert-dismissible alert-// message.typeAlert //">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <p class="text-center">//message.texte//</p>
+    </div>
+</section>
+
+</div>
+<div ui-view="content"></div>
+

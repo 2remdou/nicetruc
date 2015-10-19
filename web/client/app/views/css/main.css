@@ -75,3 +75,7 @@ button#profil {
 ul{
     list-style-type: none;
 }
+
+.mouse-pointer{
+    cursor: pointer;
+}

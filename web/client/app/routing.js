@@ -9,74 +9,120 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/',
            views:{
                'nav':{
-                   url:'/',
                    templateUrl: '/client/app/views/main.html',
                    controller: 'MainController'
-               },
+               }
+           }
+       })
+       .state('nicetruc.login',{
+           url: '/login',
+           views:{
                'content':{
-                   url:'/login',
                    templateUrl: '/client/app/views/login.html',
                    controller: 'LoginController'
                }
            }
        })
-/*
-
-       .state('login',{
-           views : {
+       .state('nicetruc.inscription',{
+           url: '/inscription',
+           views:{
                'content':{
-                   url:'/login',
-                   templateUrl: '/client/app/views/login.html',
-                   controller: 'LoginController'
+                   templateUrl: '/client/app/views/inscription.html',
+                   controller: 'InscriptionController'
                }
            }
        })
-       .state('villes',{
+       .state('nicetruc.profil',{
+           url: '/profil',
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/profil.html',
+                   controller: 'ProfilController'
+               }
+           }
+       })
+       .state('nicetruc.villes',{
            url:'/villes',
-           templateUrl: '/client/app/views/ville.html',
-           controller: 'VilleController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/ville.html',
+                   controller: 'VilleController'
+               }
+           }
        })
-       .state('quartiers',{
+       .state('nicetruc.quartiers',{
            url:'/quartiers',
-           templateUrl: '/client/app/views/quartier.html',
-           controller: 'QuartierController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/quartier.html',
+                   controller: 'QuartierController'
+               }
+           }
        })
-       .state('categories',{
+       .state('nicetruc.categories',{
            url:'/categories',
-           templateUrl: '/client/app/views/categorie.html',
-           controller: 'CategorieController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/categorie.html',
+                   controller: 'CategorieController'
+               }
+           }
        })
-       .state('carburants',{
+       .state('nicetruc.carburants',{
            url:'/carburants',
-           templateUrl: '/client/app/views/carburant.html',
-           controller: 'CarburantController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/carburant.html',
+                   controller: 'CarburantController'
+               }
+           }
        })
-       .state('boitiers',{
+       .state('nicetruc.boitiers',{
            url:'/boitiers',
-           templateUrl: '/client/app/views/boitier.html',
-           controller: 'BoitierController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/boitier.html',
+                   controller: 'BoitierController'
+               }
+           }
        })
-       .state('marques',{
+       .state('nicetruc.marques',{
            url:'/marques',
-           templateUrl: '/client/app/views/marque.html',
-           controller: 'MarqueController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/marque.html',
+                   controller: 'MarqueController'
+               }
+           }
        })
-       .state('modeles',{
+       .state('nicetruc.modeles',{
            url:'/modeles',
-           templateUrl: '/client/app/views/modele.html',
-           controller: 'ModeleMarqueController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/modele.html',
+                   controller: 'ModeleMarqueController'
+               }
+           }
        })
-       .state('annonces',{
+       .state('nicetruc.annonces',{
            url:'/annonces',
-           templateUrl: '/client/app/views/annonceVoiture.html',
-           controller: 'AnnonceVoitureController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/annonceVoiture.html',
+                   controller: 'AnnonceVoitureController'
+               }
+           }
        })
-       .state('voitures',{
+       .state('nicetruc.voitures',{
            url:'/voitures',
-           templateUrl: '/client/app/views/searchVoiture.html',
-           controller: 'SearchVoitureController'
+           views:{
+               'content':{
+                   templateUrl: '/client/app/views/searchVoiture.html',
+                   controller: 'SearchVoitureController'
+               }
+           }
        })
-*/
+
 
    ;
 });

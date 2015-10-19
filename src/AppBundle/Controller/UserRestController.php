@@ -65,7 +65,14 @@ class UserRestController extends FOSRestController
     public function checkLoginAction(){
         $user = $this->getUser();
         $view = View::create();
-        return $view->setStatusCode(200)->setData(array('user'=>$user));
+        return $view->setStatusCode(200)->setData(
+            array(
+                'data'=> array(
+                    array('texte' => 'Salut '.$user->getNomUser().', super content de vous revoir','typeAlert'=>'success')
+                ),
+                'user'=> $user
+            )
+        );
     }
 
     /**
@@ -141,6 +148,87 @@ class UserRestController extends FOSRestController
         return $token;
     }
 
+    /**
+     * cree un nouvel user
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "cree un nouvel user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @RequestParam(name="email", nullable=false, strict=true, description="Email.")
+     * @RequestParam(name="nomUser", nullable=false, strict=true, description="nom.")
+     * @RequestParam(name="prenomUser", nullable=true, strict=true, description="prenom.")
+     * @RequestParam(name="password", nullable=false, strict=true, description="mot de passe.")
+     * @RequestParam(name="confirmationPassword", nullable=false, strict=true, description="confirmation mot de passe.")
+     * @Route("/api/inscription", name="nicetruc_create_user", requirements={"email" = "\w+"})
+     * @return View
+     */
+    public function postUserAction(ParamFetcher $paramFetcher){
+
+        $view = View::create();
+
+        if($paramFetcher->get('password') !== $paramFetcher->get('confirmationPassword')){
+            $view->setStatusCode(400)->setData(array(
+                array('texte' => 'Les deux mots de passe doivent être identiques','typeAlert'=>'danger'),
+            ));
+            return $view;
+        }
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        $user = $userManager->createUser();
+        $user->setUsername($paramFetcher->get('email'));
+        $user->setEmail($paramFetcher->get('email'));
+        $user->setPlainPassword($paramFetcher->get('password'));
+        $user->setNomUser($paramFetcher->get('nomUser'));
+        $user->setPrenomUser($paramFetcher->get('prenomUser'));
+        $user->setEnabled(true);
+        $user->addRole('ROLE_USER');
+
+
+        $errors = $this->get('validator')->validate($user, array('Registration'));
+
+        if (count($errors) == 0) {
+            $userManager->updateUser($user);
+            $view->setData(array(
+               'data'=> array(
+                   array('texte' => 'Utilisateur crée avec succès','typeAlert'=>'success')
+               ),
+                'user'=> $user
+            ))
+                ->setStatusCode(200);
+            return $view;
+        } else {
+            $view = $this->getErrorsView($errors);
+            return $view;
+        }
+
+    }
+
+    /**
+     * Get the validation errors
+     *
+     * @param ConstraintViolationList $errors Validator error list
+     *
+     * @return View
+     */
+    protected function getErrorsView(ConstraintViolationList $errors)
+    {
+        $msgs = array();
+        $errorIterator = $errors->getIterator();
+        foreach ($errorIterator as $validationError) {
+            $msg = $validationError->getMessage();
+            $params = $validationError->getMessageParameters();
+            $msgs[] = array('texte'=>$this->get('translator')->trans($msg, $params, 'validators'),'typeAlert'=>'danger');
+        }
+        $view = View::create($msgs);
+        $view->setStatusCode(400);
+
+        return $view;
+    }
 
 
 }

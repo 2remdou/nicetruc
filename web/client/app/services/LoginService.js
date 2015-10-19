@@ -20,4 +20,5 @@ app.service('LoginService',function($rootScope,Restangular,$http){
     this.checkLogin = function(){
         return Restangular.one('checkLogin').get();
     }
+
 });

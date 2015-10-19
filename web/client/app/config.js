@@ -14,7 +14,9 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
     var TokenHandler = $injector.instantiate(TokenHandlerProvider.$get);
     var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);
 
-    RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
+
+
+        RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
      RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
@@ -59,7 +61,6 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
      });
 
     RestangularProvider.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
-        console.log(AuthHandler.email());
         if(typeof AuthHandler.email() != 'undefined'){
             headers['X-WSSE'] =
                 TokenHandler.getCredentials(
@@ -75,4 +76,31 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
             httpConfig: httpConfig
         };
     });
+}]);
+
+app.run(['$rootScope', 'AuthHandler','$timeout','LoginService',function($rootScope,AuthHandler,$timeout,LoginService){
+
+    $rootScope.isAuthenticated = function(){
+        var isAuth = typeof AuthHandler.email() != 'undefined';
+
+        if(isAuth && !$rootScope.user){
+            $rootScope.user = AuthHandler.getUser();
+        }
+        return isAuth;
+    };
+
+    $rootScope.$on('showMessage',function(event,messages){
+        $timeout(function(){
+            $rootScope.showMessage = false;
+            $rootScope.messages = {};
+        },10000);
+        $rootScope.showMessage = true;
+        $rootScope.messages = messages;
+    });
+
+    $rootScope.$on('hideMessage',function(event){
+        $rootScope.showMessage = false;
+        $rootScope.messages = {};
+    });
+
 }]);

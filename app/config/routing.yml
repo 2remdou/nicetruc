@@ -17,10 +17,10 @@ app_quartier:
     type: sylius.api
     prefix: /api
 
-app_user:
-    resource: app.user
-    type: sylius.api
-    prefix: /api
+#app_user:
+#    resource: app.user
+#    type: sylius.api
+#    prefix: /api
 
 app_categorie:
     resource: app.categorie

@@ -1,9 +1,9 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MainController',['$scope','$rootScropt','AuthHandler',function($scope,$rootScope,AuthHandler){
-
-    $rootScope.isAuthenticated = function(){
-      return typeof AuthHandler.email() != 'undefined';
+app.controller('MainController',['$scope','TokenHandler','$state',function($scope,TokenHandler,$state){
+    $scope.logout=function(){
+        TokenHandler.clearCredentials();
+        $state.go('nicetruc');
     };
 }]);

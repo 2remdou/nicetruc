@@ -12,10 +12,10 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\Quartier
 
-        app.user:
-            driver: doctrine/orm
-            classes:
-                model: AppBundle\Entity\User
+#        app.user:
+#            driver: doctrine/orm
+#            classes:
+#                model: AppBundle\Entity\User
 
         app.categorie:
             driver: doctrine/orm
