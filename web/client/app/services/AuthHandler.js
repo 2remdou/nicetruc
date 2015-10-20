@@ -20,7 +20,8 @@ app.factory('AuthHandler', ['$cookies', '$window', function ($cookies, $window) 
     };
 
     authHandler.getUser = function(){
-        return { email: $cookies.get('email'),nomUser: $cookies.get('nomUser'),prenomUser:$cookies.get('prenomUser') };
+        return $cookies.getObject('user');
+        //return { email: $cookies.get('email'),nomUser: $cookies.get('nomUser'),prenomUser:$cookies.get('prenomUser') };
     }
 
     return authHandler;

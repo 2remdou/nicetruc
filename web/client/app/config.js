@@ -78,15 +78,15 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
     });
 }]);
 
-app.run(['$rootScope', 'AuthHandler','$timeout','LoginService',function($rootScope,AuthHandler,$timeout,LoginService){
+app.run(['$rootScope', 'AuthHandler','$timeout',function($rootScope,AuthHandler,$timeout){
+
+    // initialisation user
+    if(typeof $rootScope.user == 'undefined'){
+        $rootScope.user = AuthHandler.getUser();
+    }
 
     $rootScope.isAuthenticated = function(){
-        var isAuth = typeof AuthHandler.email() != 'undefined';
-
-        if(isAuth && !$rootScope.user){
-            $rootScope.user = AuthHandler.getUser();
-        }
-        return isAuth;
+        return typeof AuthHandler.getUser() != 'undefined';
     };
 
     $rootScope.$on('showMessage',function(event,messages){

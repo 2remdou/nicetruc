@@ -42,10 +42,9 @@ app.factory('TokenHandler', ['$http', 'Base64','$cookies', function ($http, Base
 
     tokenHandler.clearCredentials = function () {
         // Clear token from cache
+        $cookies.remove('user');
         $cookies.remove('email');
         $cookies.remove('secret');
-        $cookies.remove('nomUser');
-        $cookies.remove('prenomUser');
     };
 
     // Date formater to UTC

@@ -26,9 +26,7 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
 
                     $rootScope.user = response.user;
 
-                    $cookies.put('nomUser', $rootScope.user.nomUser);
-                    $cookies.put('prenomUser', $rootScope.user.prenomUser);
-
+                    $cookies.putObject('user',$rootScope.user);
 
                     $state.go('nicetruc');
 
