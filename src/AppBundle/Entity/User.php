@@ -69,7 +69,7 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quartier",inversedBy="users")
      * @ORM\JoinColumn(nullable=true)
      * @Expose()
-     * @SerializedName("quartiers")
+     * @SerializedName("quartier")
      */
     private $quartier;
 

@@ -9,7 +9,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/',
            views:{
                'nav':{
-                   templateUrl: '/client/app/views/main.html',
+                   templateUrl: 'client/app/views/main.html',
                    controller: 'MainController'
                }
            }
@@ -18,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url: '/login',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/login.html',
+                   templateUrl: 'client/app/views/login.html',
                    controller: 'LoginController'
                }
            }
@@ -27,7 +27,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url: '/inscription',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/inscription.html',
+                   templateUrl: 'client/app/views/inscription.html',
                    controller: 'InscriptionController'
                }
            }
@@ -36,7 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url: '/profil',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/profil.html',
+                   templateUrl: 'client/app/views/profile.html',
                    controller: 'ProfilController'
                }
            }
@@ -45,7 +45,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/villes',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/ville.html',
+                   templateUrl: 'client/app/views/ville.html',
                    controller: 'VilleController'
                }
            }
@@ -54,7 +54,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/quartiers',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/quartier.html',
+                   templateUrl: 'client/app/views/quartier.html',
                    controller: 'QuartierController'
                }
            }
@@ -63,7 +63,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/categories',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/categorie.html',
+                   templateUrl: 'client/app/views/categorie.html',
                    controller: 'CategorieController'
                }
            }
@@ -72,7 +72,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/carburants',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/carburant.html',
+                   templateUrl: 'client/app/views/carburant.html',
                    controller: 'CarburantController'
                }
            }
@@ -81,7 +81,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/boitiers',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/boitier.html',
+                   templateUrl: 'client/app/views/boitier.html',
                    controller: 'BoitierController'
                }
            }
@@ -90,7 +90,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/marques',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/marque.html',
+                   templateUrl: 'client/app/views/marque.html',
                    controller: 'MarqueController'
                }
            }
@@ -99,7 +99,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/modeles',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/modele.html',
+                   templateUrl: 'client/app/views/modele.html',
                    controller: 'ModeleMarqueController'
                }
            }
@@ -108,7 +108,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/annonces',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/annonceVoiture.html',
+                   templateUrl: 'client/app/views/annonceVoiture.html',
                    controller: 'AnnonceVoitureController'
                }
            }
@@ -117,7 +117,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/voitures',
            views:{
                'content':{
-                   templateUrl: '/client/app/views/searchVoiture.html',
+                   templateUrl: 'client/app/views/searchVoiture.html',
                    controller: 'SearchVoitureController'
                }
            }

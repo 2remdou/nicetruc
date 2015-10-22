@@ -1,10 +1,11 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope',
-    function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope){
+app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope','TokenHandler',
+    function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope,TokenHandler){
 
     $scope.login = function(user){
+        TokenHandler.clearCredentials();
         var email = $scope.user.email;
         var password = $scope.user.password;
 
@@ -31,6 +32,9 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
                     $state.go('nicetruc');
 
                 },function(response){
+                    if(response.status==403){
+                        response.data = [{texte:'Adresse email ou mot de passe incorrect','typeAlert':'danger'}];
+                    }
                     errorRequest(response,$scope);
                 });
 

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Security\Firewall;
 
+use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
@@ -56,7 +57,13 @@ class WsseListener implements ListenerInterface
         }
 
         // By default deny authorization
-        $response = new Response();
+        $error = array(
+                        'infoError'=> array(
+                                        array('texte' => 'Adresse email ou mot de passsd
+                                        e incorrect','typeAlert'=>'success')
+                                    )
+                         );
+        $response = new Response(json_encode($error));
         $response->setStatusCode(Response::HTTP_FORBIDDEN);
         $event->setResponse($response);
     }

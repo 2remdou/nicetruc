@@ -113,7 +113,7 @@
                                                     ng-model="user.ville"
                                                     ng-options="ville.libelleVille
                                             for ville in villes track by ville.id" ng-change="selectVille(user.ville)"
-                                                    >
+                                                    ng-init="user.ville.id=user.quartier.ville.id">
                                             </select>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                                                     ng-model="user.quartier"
                                                     ng-options="quartier.libelleQuartier
                                             for quartier in quartiers"
-                                                    >
+                                                    ng-init="user.quartier.id=user.quartier.id">
                                             </select>
                                         </div>
                                     </div>
