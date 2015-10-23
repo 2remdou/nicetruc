@@ -31,16 +31,24 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
 
                     $state.go('nicetruc');
 
-                },function(response){
+                },function(response){ //error checkLogin
                     if(response.status==403){
                         response.data = [{texte:'Adresse email ou mot de passe incorrect','typeAlert':'danger'}];
+                    }
+                    else if(response.status==500){
+                        response.data = [{texte:'Ooops,Erreur etonnante lors de la connexion','typeAlert':'danger'}];
                     }
                     errorRequest(response,$scope);
                 });
 
-            }, function (err) {
-                console.log(err);
+            }, function (error) { //error cipher
+                console.log(error);
             });
-        });
+        },function(response){ //error getSalt
+                if(response.status==500){
+                    response.data = [{texte:'Ooops,Erreur etonnante lors de la connexion','typeAlert':'danger'}];
+                }
+                errorRequest(response,$scope);
+            });
     }
 }]);

@@ -19,11 +19,12 @@ use FOS\RestBundle\Request\ParamFetcher;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UserRestController extends FOSRestController
 {
     /**
-     * Return the overall user list.
+     * Retourne le salt
      *
      * @ApiDoc(
      *   resource = true,
@@ -49,8 +50,8 @@ class UserRestController extends FOSRestController
 
         return $view->setStatusCode(200)->setData(array('salt'=>$user->getSalt()));
     }
- /**
-     *
+    /**
+     * Verifie la connexion
      * @ApiDoc(
      *   resource = true,
      *   description = "verification token",
@@ -76,52 +77,35 @@ class UserRestController extends FOSRestController
     }
 
     /**
-     * Return the overall user list.
-     *
+     * Retourne un user
      * @ApiDoc(
      *   resource = true,
-     *   description = "Return the overall User List",
      *   statusCodes = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @RequestParam(name="email", nullable=false, strict=true, description="Email.")
-     * @RequestParam(name="password", nullable=false, strict=true, description="Plain Password.")
-     * @Route("/api/login", name="nicetruc_login")
+     * @Route("/api/users/{id}", name="nicetruc_user")
+     * @Method({"GET"})
      * @return View
      */
-    public function login(ParamFetcher $paramFetcher){
-
-        $userManager = $this->container->get('fos_user.user_manager');
-        $user = $userManager->findUserByUsernameOrEmail($paramFetcher->get('email'));
-
+    public function getUserAction($id){
+        $em = $this->getDoctrine();
+        $user = $em->getRepository('AppBundle:User')->findOneBy(array('id'=>$id));
         $view = View::create();
 
-        if (!$user) {
-            $view->setStatusCode(404)->setData("Utilisateur introuvable email");
+        if(!$user){
+            $view = $this->configError($view,'User introuvable','danger',404);
             return $view;
         }
 
-        $salt = $user->getSalt();
-        $factory = $this->get('security.encoder_factory');
-
-        $encoder = $factory->getEncoder($user);
-        $password = $encoder->encodePassword($paramFetcher->get('password'), $salt);
-
-        if($password!==$user->getPassword()){
-            $view->setStatusCode(404)->setData("Utilisateur introuvable password");
-            return $view;
-        }
-
-        $header = $this->generateToken($paramFetcher->get('email'), $password);
-        $data = array('X-WSSE' => $header);
-        $view->setHeader("Authorization", 'WSSE profile="UsernameToken"');
-        $view->setHeader("X-WSSE", $header);
-        $view->setStatusCode(200)->setData($data);
-        return $view;
-
+        return $view->setStatusCode(200)->setData(
+            array(
+                'user'=> $user
+            )
+        );
     }
+
 
     /**
      * Generate token for username given
@@ -165,6 +149,7 @@ class UserRestController extends FOSRestController
      * @RequestParam(name="password", nullable=false, strict=true, description="mot de passe.")
      * @RequestParam(name="confirmationPassword", nullable=false, strict=true, description="confirmation mot de passe.")
      * @Route("/api/inscription", name="nicetruc_create_user", requirements={"email" = "\w+"})
+     * @Method({"POST"})
      * @return View
      */
     public function postUserAction(ParamFetcher $paramFetcher){
@@ -209,6 +194,73 @@ class UserRestController extends FOSRestController
     }
 
     /**
+     * edit un  user
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "cree un  user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @RequestParam(name="id", nullable=false, strict=true, description="Identifiant user")
+     * @RequestParam(name="email", nullable=false, strict=true, description="Email.")
+     * @RequestParam(name="nomUser", nullable=false, strict=true, description="nom.")
+     * @RequestParam(name="prenomUser", nullable=true, strict=true, description="prenom.")
+     * @RequestParam(name="quartier", nullable=true, strict=true, description="le quartier")
+     * @RequestParam(name="telephone", nullable=true, strict=true, description="le numero de telephone.")
+     * @RequestParam(name="siteWeb", nullable=true, strict=true, description="Le site web.")
+     * @Route("/api/users/{id}", name="nicetruc_edit_user")
+     * @Method({"PUT"})
+     * @return View
+     */
+    public function putUserAction($id,ParamFetcher $paramFetcher){
+
+        $view = View::create();
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')->findOneBy(array('id'=>$id));
+        if(!$user){
+            $view = $this->configError($view,'User introuvable','danger',404);
+            return $view;
+        }
+
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByUsername($user->getUsername());
+
+        if($paramFetcher->get('email')){ $user->setUsername($paramFetcher->get('email')); $user->setEmail($paramFetcher->get('email'));}
+        if($paramFetcher->get('nomUser')){ $user->setNomUser($paramFetcher->get('nomUser'));}
+        if($paramFetcher->get('prenomUser')){ $user->setPrenomUser($paramFetcher->get('prenomUser'));}
+        if($paramFetcher->get('telephone')){ $user->setTelephone($paramFetcher->get('telephone'));}
+        if($paramFetcher->get('siteWeb')){ $user->setSiteWeb($paramFetcher->get('siteWeb'));}
+
+        if($paramFetcher->get('quartier')){
+            $quartier = $em->getRepository('AppBundle:Quartier')->find($paramFetcher->get('quartier'));
+            if(!$quartier){
+                $view=$this->configError($view,'Le quartier inconnu,veuillez le creer','danger',404);
+                return $view;
+            }
+            $user->setQuartier($quartier);
+        }
+
+
+        $errors = $this->get('validator')->validate($user, array('Update'));
+
+        if (count($errors) == 0) {
+            $userManager->updateUser($user);
+            $view = $this->configError($view,'Utilisateur modifier avec succès','success',200);
+            return $view;
+        } else {
+            $view = $this->getErrorsView($errors);
+            return $view;
+        }
+
+    }
+
+
+    /**
      * Get the validation errors
      *
      * @param ConstraintViolationList $errors Validator error list
@@ -226,6 +278,17 @@ class UserRestController extends FOSRestController
         }
         $view = View::create($msgs);
         $view->setStatusCode(400);
+
+        return $view;
+    }
+
+    protected function configError(View $view,$message,$typeMessage,$status){
+        $view->setData(array(
+            'data'=> array(
+                array('texte' => $message,'typeAlert'=>$status)
+            )
+        ))
+            ->setStatusCode(200);
 
         return $view;
     }

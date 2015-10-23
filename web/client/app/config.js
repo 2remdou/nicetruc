@@ -16,9 +16,10 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
 
 
 
-        RestangularProvider.setBaseUrl('http://localhost/nicetruc/web/app_dev.php/api');
+        RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
      RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
+         console.log(what);
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
          if(operation === 'put' || operation=== 'post'){
              if(standardRoute.indexOf(what) !==-1){
@@ -55,6 +56,9 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
                  element.modeleMarque = element.modeleMarque.id;
                  element.boitier = element.boitier.id;
                  element.carburant = element.carburant.id;
+             }
+             else if(what === 'users'){
+                 element.quartier = element.quartier.id;
              }
          }
          return element;

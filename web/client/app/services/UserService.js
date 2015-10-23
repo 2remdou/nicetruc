@@ -2,13 +2,18 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('UserService',function($rootScope,Restangular){
+app.service('UserService',['$rootScope','Restangular',function($rootScope,Restangular){
 
-    var _userService = Restangular.all('users/');
+    var _userService = Restangular.all('users');
+    var scope = $rootScope.$new();
 
     this.list = function(){
         $rootScope.$broadcast('user.list');
         return _userService.getList();
+    };
+
+    this.get = function(id){
+        return Restangular.one('users',id).get();
     }
 
     this.create = function(user){
@@ -18,8 +23,10 @@ app.service('UserService',function($rootScope,Restangular){
     };
 
     this.update = function(user){
-        user.put().then(function(){
-           $rootScope.$broadcast('user.update');
+        user.put().then(function(response){
+           successRequest(response,scope);
+        },function(response){
+            errorRequest(response,scope);
         });
     };
 
@@ -28,4 +35,4 @@ app.service('UserService',function($rootScope,Restangular){
             $rootScope.$broadcast('user.delete');
         })
     }
-});
+}]);
