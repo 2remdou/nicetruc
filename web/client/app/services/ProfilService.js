@@ -5,19 +5,10 @@
 app.service('ProfilService',['Restangular','$rootScope','$cookies','$state',
                         function(Restangular,$rootScope,$cookies,$state){
 
-    var _inscriptionService = Restangular.all('inscription');
+    var _profilService = Restangular.all('users');
 
-    this.create = function(user,scope){
-      _inscriptionService.post(user).then(function(response){
-          successRequest(response,scope);
 
-          $cookies.put('email',response.user.email);
-
-          $rootScope.user = response.user;
-
-          $state.go('nicetruc');
-      },function(response){
-          errorRequest(response,scope);
-      });
-    };
+    this.change = function(user){
+        return _profilService.one('change');
+    }
 }]);

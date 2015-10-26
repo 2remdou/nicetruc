@@ -27,6 +27,16 @@ app_categorie:
     type: sylius.api
     prefix: /api
 
+app_categorie_by_libelle:
+    path: /categories/{libelleCategorie}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.categorie:showAction
+        _sylius:
+            criteria:
+                libelleCategorie: $libelleCategorie
+    prefix: /api
+
 app_boitier:
     resource: app.boitier
     type: sylius.api

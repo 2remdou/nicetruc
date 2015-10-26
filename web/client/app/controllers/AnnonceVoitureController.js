@@ -2,9 +2,14 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueService','ModeleService',
-    'CarburantService','BoitierService','ModeleMarqueService','ImageService','VoitureService','$rootScope',
+    'CarburantService','BoitierService','ModeleMarqueService','ImageService','VoitureService','$rootScope','$state','CategorieService',
     function($scope,FileUploader,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService,
-             ImageService,VoitureService,$rootScope){
+             ImageService,VoitureService,$rootScope,$state,CategorieService){
+
+        if(!$rootScope.hasAuthorized()){
+            $state.go('nicetruc.login');
+            return;
+        }
 
         $scope.marques = MarqueService.list().$object;
         $scope.modeleMarques = ModeleMarqueService.list().$object;
@@ -24,6 +29,9 @@ app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueServic
         };
 
         $scope.selectModele = function(modele){
+            if(!modele){
+                return;
+            }
             $scope.modeleMarque = false;
             angular.forEach($scope.modeleMarques,function(modeleMarque){
                 if(modeleMarque.marque.id===$scope.marque.id && modeleMarque.modele.id===modele.id){
@@ -31,9 +39,8 @@ app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueServic
                 }
             });
             if(!$scope.modeleMarque){
-                $rootScope.$on('nicetruc.error',function(){
-                    return 'Ce modele de voiture est invalide';
-                });
+                message = [{texte:"Ce modele de voiture est invalide",'typeAlert':'danger'}];
+                scope.$emit('showMessage',message);
                 return;
             }
         };
@@ -41,8 +48,13 @@ app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueServic
 
         $scope.create = function(voiture){
             voiture.modeleMarque=$scope.modeleMarque;
-            VoitureService.create(voiture);
-            voiture={};
+            voiture.user = $rootScope.user.id;
+            voiture.categorie = 1; //voiture
+            VoitureService.create(voiture).then(function(response){
+                voiture={};
+                response.data = [{texte:"Votre annonce a été ajouté avec succes",'typeAlert':'success'}];
+                successRequest(response,$scope);
+            });
 
         }
 

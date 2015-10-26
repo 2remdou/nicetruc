@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Model\ArticleInterface;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -36,11 +37,6 @@ class Categorie
      */
     private $libelleCategorie;
 
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="categorie")
-     * @SerializedName("articles")
-     */
-    private $voitures;
 
     /**
      * Get id
@@ -82,36 +78,5 @@ class Categorie
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Add articles
-     *
-     * @param \AppBundle\Entity\Article $articles
-     * @return Categorie
-     */
-    public function addArticle(\AppBundle\Entity\Article $articles)
-    {
-        $this->articles[] = $articles;
 
-        return $this;
-    }
-
-    /**
-     * Remove articles
-     *
-     * @param \AppBundle\Entity\Article $articles
-     */
-    public function removeArticle(\AppBundle\Entity\Article $articles)
-    {
-        $this->articles->removeElement($articles);
-    }
-
-    /**
-     * Get articles
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getArticles()
-    {
-        return $this->articles;
-    }
 }

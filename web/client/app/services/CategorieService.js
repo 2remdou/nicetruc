@@ -9,7 +9,11 @@ app.service('CategorieService',function($rootScope,Restangular){
     this.list = function(){
         $rootScope.$broadcast('categorie.list');
         return _categorieService.getList();
-    }
+    };
+
+    this.getByLibelle = function(libelleCategorie){
+      return _categorieService.one(libelleCategorie).get();
+    };
 
     this.create = function(categorie){
         _categorieService.post(categorie).then(function(){

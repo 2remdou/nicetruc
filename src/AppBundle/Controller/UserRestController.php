@@ -198,7 +198,7 @@ class UserRestController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "cree un  user",
+     *   description = "modifie un  user",
      *   statusCodes = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the user is not found"
@@ -250,7 +250,72 @@ class UserRestController extends FOSRestController
 
         if (count($errors) == 0) {
             $userManager->updateUser($user);
-            $view = $this->configError($view,'Utilisateur modifier avec succès','success',200);
+            $view = $this->configError($view,'Utilisateur modifié avec succès','success',200);
+            return $view;
+        } else {
+            $view = $this->getErrorsView($errors);
+            return $view;
+        }
+
+    }
+
+    /**
+     * edit password user
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "modifie le password d'un  user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @RequestParam(name="id", nullable=false, strict=true, description="Identifiant user")
+     * @RequestParam(name="passwordActuel", nullable=false, strict=true, description="ancien mot de passe.")
+     * @RequestParam(name="password", nullable=false, strict=true, description="nouveau mot de passe.")
+     * @RequestParam(name="confirmationPassword", nullable=false, strict=true, description="confirmation mot de passe.")
+     * @Route("/api/users/change/{id}", name="nicetruc_edit_password")
+     * @Method({"PUT"})
+     * @return View
+     */
+    public function putChangeUserPasswordAction($id,ParamFetcher $paramFetcher){
+
+        $view = View::create();
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')->findOneBy(array('id'=>$id));
+        if(!$user){
+            $view = $this->configError($view,'User introuvable','danger',404);
+            return $view;
+        }
+
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByUsername($user->getUsername());
+
+        $encoder = $this->container->get('security.password_encoder');
+
+        $passwordActuel = $encoder->encodePassword($user,$paramFetcher->get('passwordActuel'));
+
+        if($user->getPassword() !== $passwordActuel){
+            $view = $this->configError($view,'Mot de passe incorrect','danger',404);
+            return $view;
+        }
+        if($paramFetcher->get('password') !== $paramFetcher->get('confirmationPassword')){
+            $view = $this->configError($view,'Le mot de passe et la confirmation doivent être identique','danger',404);
+            return $view;
+        }
+
+        $user->setPlainPassword($paramFetcher->get('password'));
+
+
+        $errors = $this->get('validator')->validate($user, array('ChangePassword'));
+
+        if (count($errors) == 0) {
+            $userManager->updatePassword($user);
+            $userManager->updateUser($user);
+
+            $view = $this->configError($view,'Mot de passe modifié avec succès','success',200);
             return $view;
         } else {
             $view = $this->getErrorsView($errors);
@@ -285,10 +350,10 @@ class UserRestController extends FOSRestController
     protected function configError(View $view,$message,$typeMessage,$status){
         $view->setData(array(
             'data'=> array(
-                array('texte' => $message,'typeAlert'=>$status)
+                array('texte' => $message,'typeAlert'=>$typeMessage)
             )
         ))
-            ->setStatusCode(200);
+            ->setStatusCode($status);
 
         return $view;
     }

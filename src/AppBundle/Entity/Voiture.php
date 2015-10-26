@@ -14,6 +14,7 @@ use AppBundle\Model\Article;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\VoitureRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Voiture extends Article
 {
@@ -47,9 +48,9 @@ class Voiture extends Article
     private $kmParcouru;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="anneeModele", type="date")
+     * @ORM\Column(name="anneeModele", type="integer")
      * @Expose()
      * @SerializedName("anneeModele")
      */
@@ -65,6 +66,7 @@ class Voiture extends Article
      */
     private $nbrePorte;
 
+
     /**
      * @var integer
      *
@@ -73,6 +75,7 @@ class Voiture extends Article
      * @SerializedName("nbreSiege")
      */
     private $nbreSiege;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ModeleMarque",inversedBy="voitures")
@@ -335,5 +338,100 @@ class Voiture extends Article
     public function getCarburant()
     {
         return $this->carburant;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Voiture
+     */
+    public function setUser(\AppBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     * @return Voiture
+     */
+    public function setCategorie(\AppBundle\Entity\Categorie $categorie)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \AppBundle\Entity\Categorie 
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \AppBundle\Entity\Image $images
+     * @return Voiture
+     */
+    public function addImage(\AppBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \AppBundle\Entity\Image $images
+     */
+    public function removeImage(\AppBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(){
+        $this->setDatePublication(new \DateTime());
     }
 }

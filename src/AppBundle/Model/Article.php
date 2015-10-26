@@ -12,6 +12,7 @@ class Article implements ArticleInterface
     /**
      * @var string
      * @ORM\Column(name="description", type="text")
+     * @ORM\JoinColumn(nullable=true)
      */
     protected  $description;
 

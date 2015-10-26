@@ -15,7 +15,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.login',{
-           url: '/login',
+           url: 'login',
            views:{
                'content':{
                    templateUrl: 'client/app/views/login.html',
@@ -24,7 +24,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.inscription',{
-           url: '/inscription',
+           url: 'inscription',
            views:{
                'content':{
                    templateUrl: 'client/app/views/inscription.html',
@@ -33,7 +33,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.profil',{
-           url: '/profil',
+           url: 'profil',
            views:{
                'content':{
                    templateUrl: 'client/app/views/profile.html',
@@ -42,7 +42,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.villes',{
-           url:'/villes',
+           url:'villes',
            views:{
                'content':{
                    templateUrl: 'client/app/views/ville.html',
@@ -51,7 +51,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.quartiers',{
-           url:'/quartiers',
+           url:'quartiers',
            views:{
                'content':{
                    templateUrl: 'client/app/views/quartier.html',
@@ -60,7 +60,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.categories',{
-           url:'/categories',
+           url:'categories',
            views:{
                'content':{
                    templateUrl: 'client/app/views/categorie.html',
@@ -69,7 +69,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.carburants',{
-           url:'/carburants',
+           url:'carburants',
            views:{
                'content':{
                    templateUrl: 'client/app/views/carburant.html',
@@ -78,7 +78,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.boitiers',{
-           url:'/boitiers',
+           url:'boitiers',
            views:{
                'content':{
                    templateUrl: 'client/app/views/boitier.html',
@@ -87,7 +87,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.marques',{
-           url:'/marques',
+           url:'marques',
            views:{
                'content':{
                    templateUrl: 'client/app/views/marque.html',
@@ -96,7 +96,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.modeles',{
-           url:'/modeles',
+           url:'modeles',
            views:{
                'content':{
                    templateUrl: 'client/app/views/modele.html',
@@ -105,7 +105,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.annonces',{
-           url:'/annonces',
+           url:'annonces',
            views:{
                'content':{
                    templateUrl: 'client/app/views/annonceVoiture.html',
@@ -114,7 +114,7 @@ app.config(function($stateProvider, $urlRouterProvider){
            }
        })
        .state('nicetruc.voitures',{
-           url:'/voitures',
+           url:'voitures',
            views:{
                'content':{
                    templateUrl: 'client/app/views/searchVoiture.html',

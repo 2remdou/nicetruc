@@ -2,14 +2,18 @@
  * Created by touremamadou on 13/09/2015.
  */
 
-app.controller('ProfilController',['$scope','VilleService','QuartierService','$rootScope','UserService','Restangular',
-                        function($scope,VilleService,QuartierService,$rootScope,UserService,Restangular){
+app.controller('ProfilController',['$scope','VilleService','QuartierService','$rootScope','UserService','Restangular','$state',
+                        function($scope,VilleService,QuartierService,$rootScope,UserService,Restangular,$state){
     $scope.villes = VilleService.list().$object;
-    $scope.quartiers = QuartierService.list().$object;
+    $scope.quartiers = [];
 
     UserService.get($rootScope.user.id).then(function(response){
-        console.log(response);
         $scope.user = Restangular.restangularizeElement(response.parentResource,response.user,response.route);
+
+        $scope.user.ville=$scope.user.quartier.ville;
+
+        $scope.quartiers.push($scope.user.quartier);
+
     },function(response){
         errorRequest(response,$scope);
     })
@@ -20,12 +24,30 @@ app.controller('ProfilController',['$scope','VilleService','QuartierService','$r
 
     $scope.saveInfo = function(user){
         user.put().then(function(response){
-            console.log(response);
-        },function(){
+            successRequest(response,$scope);
 
-
+            $state.go('nicetruc');
+        },function(response){
+            errorRequest(response,$scope);
         });
     };
+
+    $scope.changePassword = function(user){
+        var newPass = UserService.changePassword(user);
+
+        newPass.id=user.id;
+        newPass.passwordActuel = user.passwordActuel;
+        newPass.password = user.password;
+        newPass.confirmationPassword = user.confirmationPassword;
+
+        newPass.put().then(function(response){
+            successRequest(response,$scope)
+            $state.go('nicetruc');
+
+        },function(response){
+            errorRequest(response,$scope);
+        });
+    }
 
 
 }]);

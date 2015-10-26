@@ -16,10 +16,9 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
 
 
 
-        RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
+    RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
-     RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
-         console.log(what);
+    RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
          if(operation === 'put' || operation=== 'post'){
              if(standardRoute.indexOf(what) !==-1){
@@ -53,12 +52,14 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
                  delete element.marque;
                  delete element.modele;
 
-                 element.modeleMarque = element.modeleMarque.id;
-                 element.boitier = element.boitier.id;
-                 element.carburant = element.carburant.id;
+                 element.modeleMarque = extractId(element.modeleMarque);
+                 element.boitier = extractId(element.boitier);
+                 element.carburant = extractId(element.carburant);
              }
              else if(what === 'users'){
-                 element.quartier = element.quartier.id;
+                 if(element.hasOwnProperty('quartier')){
+                     element.quartier = extractId(element.quartier);
+                 }
              }
          }
          return element;
@@ -80,17 +81,30 @@ app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHand
             httpConfig: httpConfig
         };
     });
-}]);
 
-app.run(['$rootScope', 'AuthHandler','$timeout',function($rootScope,AuthHandler,$timeout){
+
+    }]);
+
+app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
+        function($rootScope,AuthHandler,$timeout,Restangular){
 
     // initialisation user
     if(typeof $rootScope.user == 'undefined'){
         $rootScope.user = AuthHandler.getUser();
     }
 
+    // verification de l'authentification
     $rootScope.isAuthenticated = function(){
         return typeof AuthHandler.getUser() != 'undefined';
+    };
+
+    // verification de l'autorisation
+    $rootScope.hasAuthorized = function(){
+        if(!$rootScope.isAuthenticated()){
+
+            return false;
+        }
+        return true;
     };
 
     $rootScope.$on('showMessage',function(event,messages){
@@ -107,4 +121,20 @@ app.run(['$rootScope', 'AuthHandler','$timeout',function($rootScope,AuthHandler,
         $rootScope.messages = {};
     });
 
-}]);
+    Restangular.setErrorInterceptor(function(response, deferred, responseHandler){
+
+        scope=$rootScope.$new();
+
+        if(response.status==400 || response.status==500){
+            response.data = [{texte:"Ooops, il est ou l'administrateur ??? Erreur vraiment etonnante",'typeAlert':'danger'}];
+        }
+        else if(response.status==404){
+            if(response.data.hasOwnProperty('data')){
+                response.data = response.data.data;
+            }
+        }
+        scope.$emit('showMessage',response.data);
+    });
+
+
+        }]);

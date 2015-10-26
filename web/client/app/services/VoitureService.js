@@ -12,9 +12,7 @@ app.service('VoitureService',function($rootScope,Restangular){
     }
 
     this.create = function(voiture){
-        _voitureService.post(voiture).then(function(){
-            $rootScope.$broadcast('voiture.create');
-        });
+        return _voitureService.post(voiture);
     };
 
     this.update = function(voiture){

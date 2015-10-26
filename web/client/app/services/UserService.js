@@ -34,5 +34,9 @@ app.service('UserService',['$rootScope','Restangular',function($rootScope,Restan
         user.remove().then(function(){
             $rootScope.$broadcast('user.delete');
         })
-    }
+    };
+
+    this.changePassword = function(){
+        return _userService.one('change');
+    };
 }]);
