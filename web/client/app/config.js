@@ -133,6 +133,9 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
                 response.data = response.data.data;
             }
         }
+        else if(response.status==403){
+            response.data = [{texte:"Vous n'avez les autorisations neccessaires pour y acceder",'typeAlert':'danger'}];
+        }
         scope.$emit('showMessage',response.data);
     });
 

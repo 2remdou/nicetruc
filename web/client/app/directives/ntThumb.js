@@ -2,7 +2,7 @@
  * Created by touremamadou on 02/10/2015.
  */
 
-app.directive('ntThumb', ['$window', function($window) {
+app.directive('ngThumb', ['$window', function($window) {
     var helper = {
         support: !!($window.FileReader && $window.CanvasRenderingContext2D),
         isFile: function(item) {
@@ -20,7 +20,7 @@ app.directive('ntThumb', ['$window', function($window) {
         link: function(scope, element, attributes) {
             if (!helper.support) return;
 
-            var params = scope.$eval(attributes.ntThumb);
+            var params = scope.$eval(attributes.ngThumb);
 
             if (!helper.isFile(params.file)) return;
             if (!helper.isImage(params.file)) return;

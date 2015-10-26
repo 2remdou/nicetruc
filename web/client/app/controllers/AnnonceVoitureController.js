@@ -10,7 +10,7 @@ app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueServic
             $state.go('nicetruc.login');
             return;
         }
-
+        $scope.uploader = new FileUploader();
         $scope.marques = MarqueService.list().$object;
         $scope.modeleMarques = ModeleMarqueService.list().$object;
         $scope.carburants = CarburantService.list().$object;
