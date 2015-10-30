@@ -2,15 +2,21 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueService','ModeleService',
-    'CarburantService','BoitierService','ModeleMarqueService','ImageService','VoitureService','$rootScope','$state','CategorieService',
+    'CarburantService','BoitierService','ModeleMarqueService','ImageService','VoitureService','$rootScope',
+    '$state','CategorieService','Restangular','$q',
     function($scope,FileUploader,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService,
-             ImageService,VoitureService,$rootScope,$state,CategorieService){
+             ImageService,VoitureService,$rootScope,$state,CategorieService,Restangular,$q){
 
         if(!$rootScope.hasAuthorized()){
             $state.go('nicetruc.login');
             return;
         }
-        $scope.uploader = new FileUploader();
+
+        uploader=$scope.uploader = new FileUploader({
+            //url : Routing.generate('nicetruc_image')
+        });
+
+
         $scope.marques = MarqueService.list().$object;
         $scope.modeleMarques = ModeleMarqueService.list().$object;
         $scope.carburants = CarburantService.list().$object;
@@ -47,15 +53,28 @@ app.controller('AnnonceVoitureController',['$scope','FileUploader','MarqueServic
 
 
         $scope.create = function(voiture){
+            //var deferred = $q.defer();
             voiture.modeleMarque=$scope.modeleMarque;
             voiture.user = $rootScope.user.id;
             voiture.categorie = 1; //voiture
             VoitureService.create(voiture).then(function(response){
+
+                var idVoiture = response.id;
+                angular.forEach($scope.uploader.queue,function(value){
+                   value.url= Routing.generate('nicetruc_image',idVoiture);
+                });
+                $scope.uploader.uploadAll();
                 voiture={};
                 response.data = [{texte:"Votre annonce a été ajouté avec succes",'typeAlert':'success'}];
                 successRequest(response,$scope);
             });
 
-        }
+        };
+
+        $scope.uploadTest = function(uploader){
+            angular.forEach($scope.uploader.queue,function(value){
+                console.log(value);
+            });
+        };
 
     }]);

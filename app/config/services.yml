@@ -54,3 +54,6 @@ services:
         class: AppBundle\Security\Firewall\WsseListener
         arguments: ["@security.token_storage", "@security.authentication.manager"]
         public: false
+
+    nicetruc.namer.voiture:
+        class: AppBundle\Naming\Namer

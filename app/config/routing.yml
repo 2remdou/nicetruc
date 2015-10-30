@@ -4,6 +4,9 @@ app:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 app_ville:
 #    defaults:
 #        _sylius:
@@ -77,7 +80,3 @@ app_voiture:
     type: sylius.api
     prefix: /api
 
-image_voiture:
-    type: rest
-    resource: AppBundle\Controller\NiceTrucController
-    prefix: /api

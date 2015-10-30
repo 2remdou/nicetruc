@@ -4,6 +4,9 @@
 {% block body %}
     <div ui-view="nav"></div>
 
+    <script type="application/javascript" src="bundles/fosjsrouting/js/router.js"></script>
+    <script type="application/javascript" src="js/fos_js_routes.js"></script>
+
     <script type="application/javascript" src="client/bower_components/angular/angular.min.js"></script>
     <script type="application/javascript" src="client/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="application/javascript" src="client/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -60,8 +63,10 @@
     <script type="application/javascript" src="client/app/controllers/LoginController.js"></script>
     <script type="application/javascript" src="client/app/controllers/InscriptionController.js"></script>
     <script type="application/javascript" src="client/app/controllers/ProfilController.js"></script>
+
     <script type="application/javascript" src="client/app/directives/equalsTo.js"></script>
     <script type="application/javascript" src="client/app/directives/ntThumb.js"></script>
+    <script type="application/javascript" src="client/app/directives/ntBtnImage.js"></script>
 
     <script type="application/javascript" src="client/app/ui.bootstrap/ui-bootstrap-tabs-0.13.4.js"></script>
 {% endblock body %}

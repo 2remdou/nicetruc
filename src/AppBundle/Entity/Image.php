@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -43,7 +44,6 @@ class Image
     /**
      *
      * @Vich\UploadableField(mapping="voiture_image", fileNameProperty="imageName")
-     *
      * @var File
      * @Expose()
      * @SerializedName("imageFile")
@@ -90,14 +90,11 @@ class Image
     }
 
     /**
-     * @param File|\Symfony\Component\HttpFoundation\FileBag $image
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      */
-    public function setImageFile(FileBag $image = null)
+    public function setImageFile(File $image = null)
     {
-        //$im = new File($image->getPath());
-//        $name = sha1(uniqid(mt_rand(), true));
         $this->imageFile = $image;
-
     }
 
     /**

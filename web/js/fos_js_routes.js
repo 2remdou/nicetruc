@@ -1,0 +1,1 @@
+fos.Router.setData({"base_url":"","routes":{"nicetruc_image":{"tokens":[["text","\/api\/images"]],"defaults":[],"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});

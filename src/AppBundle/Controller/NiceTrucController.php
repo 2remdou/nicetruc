@@ -3,8 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
+use AppBundle\MessageResponse\MessageResponse;
+use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Controller\Annotations\RequestParam;
+use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,14 +86,32 @@ class NiceTrucController extends FOSRestController
     }
 
     /**
-     * @Route("/images/",name="nicetruc_image")
+     * @RequestParam(name="idVoiture", nullable=false, strict=true, description="Identifiant de la voiture")
+     * @Route("/api/images/{idVoiture}",name="nicetruc_image", options={"expose"=true})
      * @Rest\View()
      */
-    public function postImageAction(Request $request){
-        $files = $request->files;
+    public function postImageAction($idVoiture,Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+        $voiture = $em->getRepository('AppBundle:Voiture')->findOneBy(array('id'=>$idVoiture));
+
+        if(!$voiture){
+
+            $message->config("L'image ne correspont à aucune voiture",'danger',404);
+            return $message->getView();
+        }
+
+        $file = $request->files->get('file');
         $image = new Image();
-        $image->setImageFile($files);
-        return $files;
+        $image->setImageFile($file);
+        $image->setVoiture($voiture);
+        $em->persist($image);
+        $em->flush();
+
+        $message->config("Image".$file->getClientOriginalName()." uploader avec succes",'success',200);
+
+        return $message->getView();
     }
 
 }

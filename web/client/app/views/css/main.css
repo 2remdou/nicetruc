@@ -79,3 +79,6 @@ ul{
 .mouse-pointer{
     cursor: pointer;
 }
+input[type=file]{
+    display: none;
+}

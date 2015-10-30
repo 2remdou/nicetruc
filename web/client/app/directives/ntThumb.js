@@ -16,7 +16,7 @@ app.directive('ngThumb', ['$window', function($window) {
 
     return {
         restrict: 'A',
-        template: '<canvas/>',
+        template: '<canvas class="thumbnail"></canvas>',
         link: function(scope, element, attributes) {
             if (!helper.support) return;
 
