@@ -6,7 +6,10 @@ app.controller('MainController',['$scope','TokenHandler','$state','VoitureServic
 {
     usSpinnerService.spin('nt-spinner');
 
-    $scope.voitures = VoitureService.listVedette().$object;
+    VoitureService.listVedette().then(function(response){
+        console.log(response);
+        $scope.voitures=response;
+    });
 
     $scope.logout=function(){
         TokenHandler.clearCredentials();

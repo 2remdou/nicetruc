@@ -141,7 +141,7 @@ class NiceTrucController extends FOSRestController
         }
 
 
-        return $view->setData($voitures)->setStatusCode('200');
+        return $view->setData(array('voitures'=>$voitures))->setStatusCode('200');
     }
 
 }
