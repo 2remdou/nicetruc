@@ -9,6 +9,10 @@ app.service('VoitureService',function($rootScope,Restangular){
     this.list = function(){
         $rootScope.$broadcast('voiture.list');
         return _voitureService.getList();
+    };
+
+    this.get = function(id){
+        return _voitureService.one(id).get();
     }
 
     this.create = function(voiture){

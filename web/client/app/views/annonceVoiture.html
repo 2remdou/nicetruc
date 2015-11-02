@@ -1,5 +1,5 @@
 
-<div class="col-md-offset-0 col-md-12 col-xs-offset-0 col-xs-12" id="annonce">
+<div class="col-md-offset-0 col-md-12 col-xs-offset-0 col-xs-12">
         <div class="col-md-12 col-xs-12  mg-top-20">
             <form class="form-horizontal">
                 <div class="col-md-12 col-xs-12  mg-top-20">
@@ -105,64 +105,6 @@
                     </div>
 
                 </div>
-                <!--images-->
-                <div class="col-md-12 col-xs-12  mg-top-20">
-                    <input type="file" nv-file-select uploader="uploader" id="selectImage" />
-                    <button class="btn btn-primary" nt-btn-image cible="selectImage">Ajout image</button>
-                    <button ng-click="uploadTest(uploader)">Upload</button>
-                    <ul>
-                        <li ng-repeat="item in uploader.queue">
-                            <div class="col-sm-4 col-md-2" ng-show="uploader.isHTML5">
-                                <button type="button" class="close" data-dismiss="alert" ng-click="item.remove()">×</button>
-                                <div ng-thumb="{ file: item._file, height: 100 }"></div>
-                            </div>
-                        </li>
-                    </ul>
-<!--
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th width="50%">Name</th>
-                            <th ng-show="uploader.isHTML5">Size</th>
-                            <th ng-show="uploader.isHTML5">Progress</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="item in uploader.queue">
-                            <td>
-                                <strong>// item.file.name //</strong>
-                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                            </td>
-                            <td ng-show="uploader.isHTML5" nowrap>// item.file.size/1024/1024|number:2 // MB</td>
-                            <td ng-show="uploader.isHTML5">
-                                <div class="progress" style="margin-bottom: 0;">
-                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                            </td>
-                            <td nowrap>
-                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                    <span class="glyphicon glyphicon-upload"></span> Upload
-                                </button>
-                                <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-                                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                                </button>
-                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                    <span class="glyphicon glyphicon-trash"></span> Remove
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
--->
-                </div>
-
                 <div class="col-md-12 col-xs-12 text-center">
                     <button class="btn btn-primary btn-lg btn-ta" ng-click="create(voiture)">
                         <span class="spinner">

@@ -82,3 +82,16 @@ ul{
 input[type=file]{
     display: none;
 }
+
+.wrapper {
+    background: #000000;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.6;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+    filter: alpha(opacity=60);
+    height: 100%;
+}

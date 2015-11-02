@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -47,6 +48,10 @@ class Image
      * @var File
      * @Expose()
      * @SerializedName("imageFile")
+     * @Assert\Image(
+     *      maxSize="3Mi",
+     *      maxSizeMessage="La taille ne peux exceder 3M"
+     * )
      */
     private $imageFile;
 

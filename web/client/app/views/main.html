@@ -44,7 +44,7 @@
     </div>
     <!-- /.container -->
 </nav>
-
+<span us-spinner spinner-key="nt-spinner"></span>
 <section ng-show="showMessage" class="col-md-8 col-md-offset-2">
     <div ng-repeat="message in messages" class="alert alert-dismissible alert-// message.typeAlert //">
         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -53,6 +53,6 @@
 </section>
 
 </div>
-<div ui-view="content"></div>
+<div ui-view="content" nt-wrapper></div>
 
 

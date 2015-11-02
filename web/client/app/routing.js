@@ -113,6 +113,15 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
+       .state('nicetruc.imageAnnonceVoiture',{
+           url:'imageAnnonce/:voitureId',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/imageAnnonceVoiture.html',
+                   controller: 'ImageAnnonceVoitureController'
+               }
+           }
+       })
        .state('nicetruc.voitures',{
            url:'voitures',
            views:{

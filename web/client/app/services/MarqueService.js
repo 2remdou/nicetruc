@@ -7,9 +7,8 @@ app.service('MarqueService',function($rootScope,Restangular){
     var _marqueService = Restangular.all('marques/');
 
     this.list = function(){
-        $rootScope.$broadcast('marque.list');
         return _marqueService.getList();
-    }
+    };
 
     this.create = function(marque){
         _marqueService.post(marque).then(function(){

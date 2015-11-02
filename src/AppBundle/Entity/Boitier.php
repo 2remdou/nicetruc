@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\SerializedName;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\BoitierRepository")
+ * @ExclusionPolicy("all")
  */
 class Boitier
 {

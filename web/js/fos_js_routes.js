@@ -1,1 +1,1 @@
-fos.Router.setData({"base_url":"","routes":{"nicetruc_image":{"tokens":[["text","\/api\/images"]],"defaults":[],"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});
+fos.Router.setData({"base_url":"","routes":{"nicetruc_image":{"tokens":[["text","\/image"],["variable","\/","[^\/]++","id"],["text","\/api\/voiture"]],"defaults":[],"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});

@@ -86,18 +86,16 @@ class NiceTrucController extends FOSRestController
     }
 
     /**
-     * @RequestParam(name="idVoiture", nullable=false, strict=true, description="Identifiant de la voiture")
-     * @Route("/api/images/{idVoiture}",name="nicetruc_image", options={"expose"=true})
+     * @Route("/api/voiture/{id}/image",name="nicetruc_image", options={"expose"=true})
      * @Rest\View()
      */
-    public function postImageAction($idVoiture,Request $request){
+    public function postImageAction($id,Request $request){
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
 
-        $voiture = $em->getRepository('AppBundle:Voiture')->findOneBy(array('id'=>$idVoiture));
+        $voiture = $em->getRepository('AppBundle:Voiture')->find($id);
 
         if(!$voiture){
-
             $message->config("L'image ne correspont à aucune voiture",'danger',404);
             return $message->getView();
         }
@@ -109,7 +107,7 @@ class NiceTrucController extends FOSRestController
         $em->persist($image);
         $em->flush();
 
-        $message->config("Image".$file->getClientOriginalName()." uploader avec succes",'success',200);
+        $message->config("Image ".$file->getClientOriginalName()." uploader avec succes",'success',200);
 
         return $message->getView();
     }

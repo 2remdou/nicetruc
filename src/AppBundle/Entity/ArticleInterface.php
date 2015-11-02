@@ -5,7 +5,7 @@
  * Date: 18/09/2015
  * Time: 12:39
  */
-namespace AppBundle\Model;
+namespace AppBundle\Entity;
 
 interface ArticleInterface
 {

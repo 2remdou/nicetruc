@@ -6,8 +6,8 @@ var app = angular.module('app',[
     'ui.bootstrap.tabs',
     'restangular',
     'angularFileUpload',
-    'ngFileUpload',
-    'ngCookies'
+    'ngCookies',
+    'angularSpinner'
 ]);
 
 var successRequest = function(response,scope){

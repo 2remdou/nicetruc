@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\SerializedName;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ModeleMarqueRepository")
+ * @ExclusionPolicy("all")
  */
 class ModeleMarque
 {
@@ -22,6 +23,8 @@ class ModeleMarque
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose()
+     * @SerializedName("id")
      */
     private $id;
 
@@ -43,7 +46,6 @@ class ModeleMarque
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="modeleMarque")
-     * @Expose()
      * @SerializedName("voitures")
      */
     private $voitures;
