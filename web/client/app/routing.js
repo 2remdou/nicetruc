@@ -131,6 +131,15 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
+       .state('nicetruc.showVoiture',{
+           url:'showVoiture/:voitureId',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/showVoiture.html',
+                   controller: 'ShowVoitureController'
+               }
+           }
+       })
 
 
    ;

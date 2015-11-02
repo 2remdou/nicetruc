@@ -104,6 +104,8 @@ class Voiture extends Article
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
+     * @Expose()
+     * @SerializedName("user")
      */
     protected  $user;
 
@@ -120,6 +122,24 @@ class Voiture extends Article
      * @SerializedName("images")
      */
     protected $images;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="isVedette", type="boolean",nullable=true)
+     * @Expose()
+     * @SerializedName("isVedette")
+     */
+
+    protected $isVedette;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image")
+     * @ORM\JoinColumn(nullable=true)
+     * @Expose()
+     * @SerializedName("imagePrincipal")
+     */
+    protected $imagePrincipal;
 
 
 

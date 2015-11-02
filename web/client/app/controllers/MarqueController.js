@@ -1,7 +1,10 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MarqueController',['$scope','MarqueService',function($scope,MarqueService){
+app.controller('MarqueController',['$scope','MarqueService',
+    function($scope,MarqueService){
+
+      //  usSpinnerService.spin('nt-spinner');
     $scope.marques = MarqueService.list().$object;
     $scope.marque = {};
 

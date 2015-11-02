@@ -164,23 +164,4 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
         scope.$emit('showMessage',response.data);
     });
 
-
-/*
-    Restangular.addRequestInterceptor(function(element, operation, what, url){
-        $rootScope.$broadcast('enable-wrapper');
-    });
-*/
-
-    Restangular.addFullRequestInterceptor(function(){
-        $rootScope.$broadcast('enable-wrapper');
-    });
-/*
-    Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred){
-        $rootScope.$broadcast('disable-wrapper');
-    });
-*/
-
-
-
-
 }]);

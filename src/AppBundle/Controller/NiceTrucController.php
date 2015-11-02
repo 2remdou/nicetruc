@@ -17,6 +17,10 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use SRIO\RestUploadBundle\Upload\UploadHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+
 
 class NiceTrucController extends FOSRestController
 {
@@ -110,6 +114,34 @@ class NiceTrucController extends FOSRestController
         $message->config("Image ".$file->getClientOriginalName()." uploader avec succes",'success',200);
 
         return $message->getView();
+    }
+    /**
+     * Reetourne les voitures en vedette
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Reetourn les voitures en vedette",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("/api/voitures/vedette",name="nicetruc_voitureVedette", options={"expose"=true})
+     * @Rest\View()
+     * @Method({"GET"})
+     */
+    public function getVoitureVedetteAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('isVedette'=>true));
+        $view = View::create();
+
+        if(!$voitures){
+            $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array(),array('datePublication' => 'DESC'),8);
+        }
+
+
+        return $view->setData($voitures)->setStatusCode('200');
     }
 
 }

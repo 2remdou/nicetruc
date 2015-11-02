@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -131,5 +132,15 @@ class Image
     public function getVoiture()
     {
         return $this->voiture;
+    }
+
+    /**
+     * @return string
+     * @VirtualProperty
+     * @SerializedName("webPath")
+     */
+
+    public function getWebPath(){
+        return 'client/app/images/voitures/'.$this->getImageName();
     }
 }

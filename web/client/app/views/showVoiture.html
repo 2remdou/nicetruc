@@ -1,0 +1,133 @@
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="row">
+                    <div class="pd-20">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Information Annonceur</div>
+                            <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Nom:</label>
+                                            <div class="col-xs-7 controls">// voiture.user.nomUser //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Prenom:</label>
+                                            <div class="col-xs-7 controls">// voiture.user.prenomUser //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Email:</label>
+                                            <div class="col-xs-7 controls">// voiture.user.email //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Telephone:</label>
+                                            <div class="col-xs-7 controls">// voiture.user.telephone //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Information Annonce</div>
+                            <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Marque:</label>
+                                            <div class="col-xs-7 controls">// voiture.modeleMarque.marque.libelleMarque //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Modele:</label>
+                                            <div class="col-xs-7 controls">// voiture.modeleMarque.modele.libelleModele //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Carburant:</label>
+                                            <div class="col-xs-7 controls">// voiture.carburant.libelleCarburant //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Boitier:</label>
+                                            <div class="col-xs-7 controls">// voiture.boitier.libelleBoitier //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Kilométrage:</label>
+                                            <div class="col-xs-7 controls">// voiture.kmParcouru //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Année :</label>
+                                            <div class="col-xs-7 controls">// voiture.anneeModele //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Prix de vente :</label>
+                                            <div class="col-xs-7 controls">// voiture.prix //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Nombre Portes :</label>
+                                            <div class="col-xs-7 controls">// voiture.nbrePorte //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <label class="col-xs-5 control-label">Nombre Sieges :</label>
+                                            <div class="col-xs-7 controls">// voiture.nbreSiege //</div>
+                                            <!-- col-sm-10 -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="control-label">Description</label>
+                                    <div class="well col-sm-12">
+                                        <p>//voiture.description//</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Images</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-3" ng-repeat="image in voiture.images">
+                                        <div class="thumbnail">
+                                            <img src="//image.webPath//" alt="//image.imageName//">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+</div>

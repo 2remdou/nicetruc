@@ -1,8 +1,9 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','VoitureService','$stateParams','$rootScope','$q','usSpinnerService',
-    function($scope,FileUploader,VoitureService,$stateParams,$rootScope,$q,usSpinnerService){
+app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','VoitureService','$stateParams','$rootScope',
+    '$q','usSpinnerService','$state',
+    function($scope,FileUploader,VoitureService,$stateParams,$rootScope,$q,usSpinnerService,$state){
 
         if(!$rootScope.hasAuthorized()){
             $state.go('nicetruc.login');
@@ -18,28 +19,16 @@ app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','Voiture
         });
 
         $scope.uploadImage = function(uploader){
+            usSpinnerService.spin('nt-spinner');
             uploader.uploadAll();
         };
 
         uploader.onCompleteAll = function() {
-            console.info('onCompleteAll');
+            usSpinnerService.stop('nt-spinner');
+            var response={};
+            response.data = [{texte:"Telechargement effectué avec succès",'typeAlert':'success'}];
+            successRequest(response,$scope);
+            $state.go('nicetruc.editVoiture',{voitureId:$stateParams.voitureId});
         };
-        uploader.onCompleteItem = function(fileItem, response, status, headers) {
-            console.info('onCompleteItem', fileItem, response, status, headers);
-        };
-        uploader.onErrorItem = function(fileItem, response, status, headers) {
-            console.info('onErrorItem', fileItem, response, status, headers);
-        };
-
-
-        $scope.start = function(){
-            console.log("start");
-            usSpinnerService.spin('nt-spinner')
-        };
-
-        $scope.stop = function(){
-            usSpinnerService.stop('nt-spinner')
-        };
-
 
     }]);

@@ -7,9 +7,12 @@ app.service('VoitureService',function($rootScope,Restangular){
     var _voitureService = Restangular.all('voitures/');
 
     this.list = function(){
-        $rootScope.$broadcast('voiture.list');
         return _voitureService.getList();
     };
+
+    this.listVedette = function(){
+        return _voitureService.one('vedette').getList();
+    }
 
     this.get = function(id){
         return _voitureService.one(id).get();

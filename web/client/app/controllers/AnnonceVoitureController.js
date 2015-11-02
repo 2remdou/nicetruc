@@ -3,9 +3,9 @@
  */
 app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleService',
     'CarburantService','BoitierService','ModeleMarqueService','VoitureService','$rootScope',
-    '$state',
+    '$state','usSpinnerService',
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
-        ,VoitureService,$rootScope,$state){
+        ,VoitureService,$rootScope,$state,usSpinnerService){
 
         if(!$rootScope.hasAuthorized()){
             $state.go('nicetruc.login');
@@ -48,6 +48,7 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
 
 
         $scope.create = function(voiture){
+            usSpinnerService.spin('nt-spinner');
             voiture.modeleMarque=$scope.modeleMarque;
             voiture.user = $rootScope.user.id;
             voiture.categorie = 1; //voiture
@@ -58,7 +59,7 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
                 voiture={};
                 response.data = [{texte:"Votre annonce a été ajouté avec succes",'typeAlert':'success'}];
                 successRequest(response,$scope);
-
+                usSpinnerService.stop('nt-spinner');
                 $state.go('nicetruc.imageAnnonceVoiture',{voitureId:idVoiture});
             });
 
