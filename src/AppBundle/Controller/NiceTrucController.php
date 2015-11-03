@@ -134,14 +134,14 @@ class NiceTrucController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
 
         $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('isVedette'=>true));
-        $view = View::create();
 
         if(!$voitures){
-            $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array(),array('datePublication' => 'DESC'),8);
+            $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array(),array(),8);
         }
 
+        $view = $this->view()->setData($voitures);
 
-        return $view->setData(array('voitures'=>$voitures))->setStatusCode('200');
+        return $this->handleView($view);
     }
 
 }

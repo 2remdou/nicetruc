@@ -9,6 +9,15 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/',
            views:{
                'nav':{
+                   templateUrl: 'client/app/views/index.html',
+                   controller: 'IndexController'
+               }
+           }
+       })
+       .state('nicetruc.main',{
+           url: 'main',
+           views:{
+               'content':{
                    templateUrl: 'client/app/views/main.html',
                    controller: 'MainController'
                }

@@ -31,4 +31,8 @@ app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','Voiture
             $state.go('nicetruc.editVoiture',{voitureId:$stateParams.voitureId});
         };
 
+        $scope.changeRadio = function(imagePrincipale){
+            imagePrincipale=!imagePrincipale;
+        }
+
     }]);
