@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 
 /**
@@ -115,5 +116,21 @@ class Marque
     public function getModeleMarques()
     {
         return $this->modeleMarques;
+    }
+
+    /**
+     * @return array
+     * @VirtualProperty
+     * @SerializedName("modeles")
+     */
+    public function getModele(){
+        $modele = array();
+        foreach($this->modeleMarques as $modeleMarque){
+            if($modeleMarque->getMarque()->getId() === $this->getId()){
+                $modele = array_merge($modele,array($modeleMarque->getModele()));
+            }
+        }
+
+        return $modele;
     }
 }

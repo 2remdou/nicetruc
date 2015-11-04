@@ -90,10 +90,11 @@ class NiceTrucController extends FOSRestController
     }
 
     /**
+     * @RequestParam(name="isImagePrincipale", description="Test si c'est l'image principale")
      * @Route("/api/voiture/{id}/image",name="nicetruc_image", options={"expose"=true})
      * @Rest\View()
      */
-    public function postImageAction($id,Request $request){
+    public function postImageAction($id,Request $request,ParamFetcher $paramFetcher){
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
 
@@ -107,6 +108,10 @@ class NiceTrucController extends FOSRestController
         $file = $request->files->get('file');
         $image = new Image();
         $image->setImageFile($file);
+
+        if($paramFetcher->get('isImagePrincipale')){
+           $voiture->setImagePrincipale($image);
+        }
         $image->setVoiture($voiture);
         $em->persist($image);
         $em->flush();
@@ -114,6 +119,7 @@ class NiceTrucController extends FOSRestController
         $message->config("Image ".$file->getClientOriginalName()." uploader avec succes",'success',200);
 
         return $message->getView();
+        //return View::create()->setData($paramFetcher->all())->setStatusCode(200);
     }
     /**
      * Reetourne les voitures en vedette
@@ -139,9 +145,10 @@ class NiceTrucController extends FOSRestController
             $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array(),array(),8);
         }
 
-        $view = $this->view()->setData($voitures);
 
-        return $this->handleView($view);
+        $view = View::create(array('data'=>$voitures) ,200);
+
+        return $view;
     }
 
 }

@@ -95,3 +95,8 @@ input[type=file]{
     filter: alpha(opacity=60);
     height: 100%;
 }
+
+.vedette
+{
+    cursor: pointer;
+}

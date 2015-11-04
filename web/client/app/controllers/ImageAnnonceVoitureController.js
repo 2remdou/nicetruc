@@ -28,11 +28,30 @@ app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','Voiture
             var response={};
             response.data = [{texte:"Telechargement effectué avec succès",'typeAlert':'success'}];
             successRequest(response,$scope);
-            $state.go('nicetruc.editVoiture',{voitureId:$stateParams.voitureId});
+            $state.go('nicetruc.showVoiture',{voitureId:$stateParams.voitureId});
         };
 
-        $scope.changeRadio = function(imagePrincipale){
-            imagePrincipale=!imagePrincipale;
-        }
+        uploader.onBeforeUploadItem = function(item) {
+            item.formData.push({isImagePrincipale: item.isImagePrincipale});
+        };
+
+        $scope.selectImagePrincipale = function(item){
+            item.isImagePrincipale=true;
+            angular.forEach($scope.uploader.queue,function(value){
+                if(!_.isEqual(item,value)){
+                    value.isImagePrincipale=false;
+                }
+            });
+
+        };
+
+        uploader.onAfterAddingFile = function(item){
+            if($scope.uploader.queue.length===1){
+                item.isImagePrincipale=true;
+            }
+            else{
+                item.isImagePrincipale=false;
+            }
+        };
 
     }]);

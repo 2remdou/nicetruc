@@ -1,14 +1,14 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerService','$rootScope','VoitureService',
-    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService){
+app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerService','$rootScope','VoitureService','$state',
+    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state){
 
         if(!$rootScope.hasAuthorized()){
             $state.go('nicetruc.login');
             return;
         }
-        usSpinnerService.spin('nt-spinner');
+            usSpinnerService.spin('nt-spinner');
         VoitureService.get($stateParams.voitureId).then(function(response){
             $scope.voiture = response;
             usSpinnerService.stop('nt-spinner');
@@ -42,5 +42,8 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
             }
         };
 
+        $scope.editVoiture = function(voitureId){
+            $state.go('nicetruc.editVoiture',{voitureId:voitureId});
+        };
 
     }]);

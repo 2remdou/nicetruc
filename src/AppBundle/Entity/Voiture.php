@@ -137,9 +137,9 @@ class Voiture extends Article
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image")
      * @ORM\JoinColumn(nullable=true)
      * @Expose()
-     * @SerializedName("imagePrincipal")
+     * @SerializedName("imagePrincipale")
      */
-    protected $imagePrincipal;
+    protected $imagePrincipale;
 
 
 
@@ -453,5 +453,53 @@ class Voiture extends Article
      */
     public function prePersist(){
         $this->setDatePublication(new \DateTime());
+    }
+
+    /**
+     * Set isVedette
+     *
+     * @param boolean $isVedette
+     * @return Voiture
+     */
+    public function setIsVedette($isVedette)
+    {
+        $this->isVedette = $isVedette;
+
+        return $this;
+    }
+
+    /**
+     * Get isVedette
+     *
+     * @return boolean 
+     */
+    public function getIsVedette()
+    {
+        return $this->isVedette;
+    }
+
+    /**
+     * Set imagePrincipale
+     *
+     * @param \AppBundle\Entity\Image $imagePrincipale
+     * @return Voiture
+     */
+    public function setImagePrincipale(\AppBundle\Entity\Image $imagePrincipale = null)
+    {
+        $imagePrincipale->setVoiture($this);
+
+        $this->imagePrincipale = $imagePrincipale;
+
+        return $this;
+    }
+
+    /**
+     * Get imagePrincipale
+     *
+     * @return \AppBundle\Entity\Image 
+     */
+    public function getImagePrincipale()
+    {
+        return $this->imagePrincipale;
     }
 }

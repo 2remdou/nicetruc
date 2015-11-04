@@ -149,6 +149,15 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
+       .state('nicetruc.editVoiture',{
+           url:'editVoiture/:voitureId',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/editVoiture.html',
+                   controller: 'EditVoitureController'
+               }
+           }
+       })
 
 
    ;

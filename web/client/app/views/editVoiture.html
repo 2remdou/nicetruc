@@ -1,0 +1,133 @@
+
+<div class="col-md-offset-0 col-md-12 col-xs-offset-0 col-xs-12">
+        <div class="col-md-12 col-xs-12  mg-top-20">
+            <form class="form-horizontal">
+                <div class="col-md-12 col-xs-12  mg-top-20">
+
+                    <div class="col-md-6 col-xs-12  mg-top-20">
+                        <!--marque-->
+                        <div class="form-group">
+                            <label for="Marque" class="text-primary control-label col-md-4">Marque :</label>
+                            <div class="col-md-7">
+                                <select class="form-control" tabindex="0" id="marque" ng-model="voiture.marque"
+                                        ng-options="marque.libelleMarque
+                                            for marque in marques track by marque.id"
+                                        ng-change="selectMarque(voiture.marque)">
+                                </select>
+                            </div>
+                        </div>
+                        <!--modele-->
+                        <div class="form-group">
+                            <label for="Marque" class="text-primary control-label col-md-4">Modele :</label>
+                            <div class="col-md-7">
+                                <select class="form-control" tabindex="1" id="modele" ng-model="voiture.modele"
+                                        ng-options="modele.libelleModele
+                                            for modele in modeles track by modele.id"
+                                        ng-change="selectModele(voiture.modele)">
+                                </select>
+                            </div>
+                        </div>
+                        <!--carburant-->
+                        <div class="form-group">
+                            <label for="carburant" class="text-primary control-label col-md-4">Carburant :</label>
+                            <div class="col-md-7">
+                                <select class="form-control" tabindex="0" id="carburant" ng-model="voiture.carburant"
+                                        ng-options="carburant.libelleCarburant
+                                            for carburant in carburants track by carburant.id">
+                                </select>
+                            </div>
+                        </div>
+                        <!--Boitier-->
+                        <div class="form-group">
+                            <label for="boitier" class="text-primary control-label col-md-4">Boitier :</label>
+                            <div class="col-md-7">
+                                <select class="form-control" tabindex="0" id="boitier" ng-model="voiture.boitier"
+                                        ng-options="boitier.libelleBoitier
+                                            for boitier in boitiers track by boitier.id">
+                                </select>
+                            </div>
+                        </div>
+                        <!--kmParcouru-->
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="kmParcouru" class="text-primary control-label">Kilométrage :</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input id="kmParcouru" name="kmParcouru" ng-model="voiture.kmParcouru" tabindex="2" placeholder="Kilométrage *" type="number" class="form-control" min="0" max="999999">
+                            </div>
+                        </div>
+                </div>
+                    <div class="col-md-6 col-xs-12  mg-top-20">
+                        <!--anneeModele-->
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="anneeModele" class="text-primary control-label">Année du modèle :</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input id="anneeModele" name="anneeModele" ng-model="voiture.anneeModele" tabindex="3" placeholder="Année du modèle :" type="number" class="form-control" min="1900" max="//date//">
+                            </div>
+                        </div>
+                        <!--Prix-->
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="prix" class="text-primary control-label">Prix de vente :</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input id="prix" name="prix" ng-model="voiture.prix" tabindex="4" placeholder="Prix de vente :" type="number" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <!--nbrePorte-->
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="nbrePorte" class="text-primary control-label">Nombre de portes:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input id="nbrePorte" name="nbrePorte" ng-model="voiture.nbrePorte" tabindex="5" placeholder="Nombre de portes :" type="number" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <!--nbreSiege-->
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label for="nbreSiege" class="text-primary control-label">Nombre de sieges:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input id="nbreSiege" name="nbreSiege" ng-model="voiture.nbreSiege" tabindex="6" placeholder="Nombre de sieges :" type="number" class="form-control" min="0">
+                            </div>
+                        </div>
+                        <!--description-->
+                        <div class="form-group">
+                            <label for="description" class="text-primary control-label col-md-4">Description :</label>
+                            <div class="col-md-7">
+                                <textarea class="form-control" cols="20" id="description" ng-model="voiture.description"  maxlength="1600" minlength="20" name="description" placeholder="Description de votre annonce *" rows="4"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Images</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6 col-md-3" ng-repeat="image in voiture.images">
+                                    <div class="thumbnail">
+                                        <input type="radio" name="imagePrincipale"  ng-click="selectImagePrincipale(item)" ng-checked="item.isImagePrincipale"/>
+                                        <span ng-show="item.isImagePrincipale">Principale</span>
+                                        <button type="button" class="close" data-dismiss="alert" ng-click="item.remove()">×</button>
+                                        <img src="//image.webPath//" alt="//image.imageName//">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xs-12 text-center">
+                    <button class="btn btn-primary btn-lg btn-ta" ng-click="create(voiture)">
+                        <span class="spinner">
+                            <i class="icon-spin icon-spinner"></i>
+                        </span>&nbsp;Ajouter mon annonce
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+</div>

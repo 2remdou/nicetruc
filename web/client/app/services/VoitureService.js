@@ -11,7 +11,7 @@ app.service('VoitureService',function($rootScope,Restangular){
     };
 
     this.listVedette = function(){
-        return _voitureService.one('vedette').getList();
+        return _voitureService.one('vedette').get();
     }
 
     this.get = function(id){
