@@ -7,7 +7,8 @@ var app = angular.module('app',[
     'restangular',
     'angularFileUpload',
     'ngCookies',
-    'angularSpinner'
+    'angularSpinner',
+    'ngDialog'
 ]);
 
 var successRequest = function(response,scope){

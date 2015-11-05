@@ -90,9 +90,20 @@ class NiceTrucController extends FOSRestController
     }
 
     /**
+     * ajoute une image à une voiture
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "ajoute une image à une voiture",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
      * @RequestParam(name="isImagePrincipale", description="Test si c'est l'image principale")
      * @Route("/api/voiture/{id}/image",name="nicetruc_image", options={"expose"=true})
      * @Rest\View()
+     * @Method({"POST"})
      */
     public function postImageAction($id,Request $request,ParamFetcher $paramFetcher){
         $em = $this->getDoctrine()->getManager();
@@ -121,8 +132,46 @@ class NiceTrucController extends FOSRestController
         return $message->getView();
         //return View::create()->setData($paramFetcher->all())->setStatusCode(200);
     }
+
     /**
-     * Reetourne les voitures en vedette
+     * supprime une image d'une voiture
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "supprime une image d'une voiture",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("/api/images/{id}",name="nicetruc_image_delete", options={"expose"=true})
+     * @Rest\View()
+     * @Method({"DELETE"})
+     */
+    public function deleteImageAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+        $image = $em->getRepository('AppBundle:Image')->find($id);
+
+        if(!$image){
+            $message->config("Cette n'existe pas",'danger',404);
+            return $message->getView();
+        }
+
+        if($image->getVoiture()->getImagePrincipale()===$image){
+            $image->getVoiture()->setImagePrincipale(null);
+        }
+        $em->remove($image);
+        $em->flush();
+
+        $message->config("Image supprimée avec succes",'success',200);
+
+        return $message->getView();
+    }
+
+    /**
+     * Retourne les voitures en vedette
      *
      * @ApiDoc(
      *   resource = true,

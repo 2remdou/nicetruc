@@ -3,14 +3,19 @@
  */
 app.controller('EditVoitureController',['$scope','MarqueService','ModeleService',
     'CarburantService','BoitierService','ModeleMarqueService','VoitureService','$rootScope',
-    '$state','usSpinnerService','$stateParams','filterFilter',
+    '$state','usSpinnerService','$stateParams','FileUploader','ngDialog',
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
-        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,filterFilter){
+        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ngDialog){
 
         if(!$rootScope.hasAuthorized()){
             $state.go('nicetruc.login');
             return;
         }
+
+        uploader=$scope.uploader = new FileUploader({
+            url : Routing.generate('nicetruc_image',{id:$stateParams.voitureId})
+        });
+
         usSpinnerService.spin('nt-spinner');
 
         $scope.modeles = [];
@@ -87,6 +92,13 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
                 $state.go('nicetruc.imageAnnonceVoiture',{voitureId:idVoiture});
             });
 
+        };
+
+        $scope.removeImage = function(voitureId){
+            var options = {
+                template: 'client/app/views/boiteConfirmation.html'
+            };
+            ngDialog.open(options);
         };
 
 
