@@ -1,4 +1,10 @@
 
+<script type="text/ng-template" id="boxConfirmation">
+    <h1> Home Page </h1>
+    <h1> Navigate to the about page </h1>
+    <button ui-sref="about"> ABOUT PAGE </button>
+</script>
+
 <div class="col-md-offset-0 col-md-12 col-xs-offset-0 col-xs-12">
         <div class="col-md-12 col-xs-12  mg-top-20">
             <form class="form-horizontal">
@@ -113,7 +119,7 @@
                                     <div class="thumbnail">
                                         <input type="radio" name="imagePrincipale"  ng-click="selectImagePrincipale(item)" ng-checked="item.isImagePrincipale"/>
                                         <span ng-show="item.isImagePrincipale">Principale</span>
-                                        <button type="button" class="close" data-dismiss="alert" nt-confirmation>×</button>
+                                        <button type="button" class="close" data-dismiss="alert" ng-click="removeImage(image.id)">×</button>
                                         <img src="//image.webPath//" alt="//image.imageName//">
                                     </div>
                                 </div>
