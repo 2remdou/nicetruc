@@ -8,7 +8,8 @@ var app = angular.module('app',[
     'angularFileUpload',
     'ngCookies',
     'angularSpinner',
-    'ngDialog'
+    'ngDialog',
+    'ui.bootstrap'
 ]);
 
 var successRequest = function(response,scope){

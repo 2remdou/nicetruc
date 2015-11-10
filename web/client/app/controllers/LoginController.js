@@ -1,10 +1,11 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope','TokenHandler',
-    function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope,TokenHandler){
+app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope','TokenHandler','usSpinnerService',
+    function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope,TokenHandler,usSpinnerService){
 
     $scope.login = function(user){
+        usSpinnerService.spin('nt-spinner');
         TokenHandler.clearCredentials();
         var email = $scope.user.email;
         var password = $scope.user.password;
@@ -29,9 +30,11 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
 
                     $cookies.putObject('user',$rootScope.user);
 
+                    usSpinnerService.stop('nt-spinner');
                     $state.go('nicetruc');
 
                 },function(response){ //error checkLogin
+                    usSpinnerService.stop('nt-spinner');
                     if(response.status==403){
                         response.data = [{texte:'Adresse email ou mot de passe incorrect','typeAlert':'danger'}];
                     }
@@ -45,6 +48,7 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
                 console.log(error);
             });
         },function(response){ //error getSalt
+                usSpinnerService.stop('nt-spinner');
                 if(response.status==500){
                     response.data = [{texte:'Ooops,Erreur etonnante lors de la connexion','typeAlert':'danger'}];
                 }
