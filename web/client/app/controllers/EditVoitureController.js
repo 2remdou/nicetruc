@@ -95,12 +95,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         };
 
         $scope.removeImage = function(imageId){
-            console.log(imageId);
-            var options = {
-                template: 'boxConfirmation',
-                className: 'ngDialog-custom-width width200'
-            };
-            ngDialog.open(options);
+
         };
 
 

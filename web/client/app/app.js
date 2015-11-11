@@ -9,6 +9,7 @@ var app = angular.module('app',[
     'ngCookies',
     'angularSpinner',
     'ngDialog',
+    'ngAnimate',
     'ui.bootstrap'
 ]);
 
