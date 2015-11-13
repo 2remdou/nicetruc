@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\SerializedName;
 
 class Article implements ArticleInterface
 {
@@ -13,12 +14,14 @@ class Article implements ArticleInterface
      * @var string
      * @ORM\Column(name="description", type="text",nullable=true)
      * @ORM\JoinColumn(nullable=true)
+     * @SerializedName("description")
      */
     protected  $description;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="datePublication", type="datetime")
+     * @SerializedName("datePublication")
      */
     protected  $datePublication;
 

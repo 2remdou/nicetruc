@@ -171,7 +171,7 @@ class UserRestController extends FOSRestController
         $user->setNomUser($paramFetcher->get('nomUser'));
         $user->setPrenomUser($paramFetcher->get('prenomUser'));
         $user->setEnabled(true);
-        $user->addRole('ROLE_USER');
+        $user->addRole('ROLE_API');
 
 
         $errors = $this->get('validator')->validate($user, array('Registration'));

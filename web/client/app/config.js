@@ -48,13 +48,17 @@ app.config(function($interpolateProvider) {
                  element.marque = idMarque;
                  element.modele = idModele;
              }
-             else if(what === 'voitures/'){
+             else if(what.search('voitures')!==-1){
                  delete element.marque;
                  delete element.modele;
+                 delete element.images;
+                 delete  element.id;
 
                  element.modeleMarque = extractId(element.modeleMarque);
                  element.boitier = extractId(element.boitier);
                  element.carburant = extractId(element.carburant);
+                 element.imagePrincipale=extractId(element.imagePrincipale);
+                 element.user = extractId(element.user);
              }
              else if(what === 'users'){
                  if(element.hasOwnProperty('quartier')){
@@ -130,6 +134,17 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
             return false;
         }
         return true;
+    };
+
+    $rootScope.isAdmin = function(){
+        if($rootScope.isAuthenticated()){
+            angular.forEach($rootScope.user.roles,function(role){
+               if(role.search('ADMIN')){
+                   return true;
+               }
+            });
+        }
+        return false;
     };
 
     $rootScope.$on('showMessage',function(event,messages){

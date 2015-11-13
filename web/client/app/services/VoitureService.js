@@ -12,7 +12,11 @@ app.service('VoitureService',function($rootScope,Restangular){
 
     this.listVedette = function(){
         return _voitureService.one('vedette').get();
-    }
+    };
+
+    this.listByUser= function(userId){
+        return _voitureService.one('users',userId).get();
+    };
 
     this.get = function(id){
         return _voitureService.one(id).get();
@@ -23,9 +27,7 @@ app.service('VoitureService',function($rootScope,Restangular){
     };
 
     this.update = function(voiture){
-        voiture.put().then(function(){
-           $rootScope.$broadcast('voiture.update');
-        });
+        return voiture.put();
     };
 
     this.delete = function(voiture){

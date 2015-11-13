@@ -22,15 +22,16 @@
                         <!--<li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>-->
                         <li><a ui-sref="nicetruc.profil">Profil</a></li>
                         <li><a ui-sref="nicetruc.annonces">Ajouter une annonce</a></li>
-                        <li><a ui-sref="nicetruc.voitures">voiture</a></li>
-                        <li><a ui-sref="nicetruc.marques">Ajouter une marque</a></li>
-                        <li><a ui-sref="nicetruc.modeles">Ajouter un modele</a></li>
+                        <li><a ui-sref="nicetruc.voitureByUser">Mes annonce</a></li>
+                        <li><a ui-sref="nicetruc.voitures">Recherche</a></li>
+                        <li ng-show="isAdmin()"><a ui-sref="nicetruc.marques">Ajouter une marque</a></li>
+                        <li ng-show="isAdmin()"><a ui-sref="nicetruc.modeles">Ajouter un modele</a></li>
                         <!--{% if is_granted('ROLE_SUPER_ADMIN') %}-->
-                        <li><a ui-sref="nicetruc.villes">Ville</a></li>
-                        <li><a ui-sref="nicetruc.quartiers">Quartier</a></li>
-                        <li><a ui-sref="nicetruc.categories">Categorie</a></li>
-                        <li><a ui-sref="nicetruc.carburants">Carburant</a></li>
-                        <li><a ui-sref="nicetruc.boitiers">Boitier</a></li>
+                        <li ng-show="isAdmin()"><a ui-sref="nicetruc.villes">Ville</a></li>
+                        <li ng-show="isAdmin()"><a ui-sref="nicetruc.quartiers">Quartier</a></li>
+                        <li ng-show="isAdmin()"><a ui-sref="nicetruc.categories">Categorie</a></li>
+                        <li ng-show="isAdmin()"><a ui-sref="nicetruc.carburants">Carburant</a></li>
+                        <li ng-show="isAdmin()"><a ui-sref="nicetruc.boitiers">Boitier</a></li>
                         <!--{% endif %}-->
                         <li ng-click="logout()" class="mouse-pointer">Deconnexion</li>
                         <!--<li><a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>-->

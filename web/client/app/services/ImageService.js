@@ -24,8 +24,7 @@ app.service('ImageService',function($rootScope,Restangular){
     };
 
     this.delete = function(image){
-        image.remove().then(function(){
-            $rootScope.$broadcast('image.delete');
-        })
+        Restangular.restangularizeElement(null,image,_imageService.route);
+        return  image.remove();
     }
 });

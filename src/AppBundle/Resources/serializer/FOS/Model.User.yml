@@ -11,3 +11,5 @@ FOS\UserBundle\Model\User:
             expose: true
         quartiers:
             expose: true
+        roles:
+            expose: true

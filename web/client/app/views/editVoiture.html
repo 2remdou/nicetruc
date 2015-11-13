@@ -115,15 +115,16 @@
                         <button class="btn btn-primary" nt-btn-image cible="selectImage">Ajout image</button>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-sm-4 col-md-2 wrapper" ng-repeat="image in voiture.images">
+                                <div class="col-sm-4 col-md-2" ng-repeat="image in voiture.images">
                                     <div class="thumbnail">
                                         <input type="radio" name="imagePrincipale"
-                                               ng-click="selectImagePrincipale(item)"
-                                               ng-checked="item.isImagePrincipale"
+                                               ng-click="selectImagePrincipale(image)"
+                                               ng-checked="image.isImagePrincipale"
                                                data-toggle="tooltip" data-placement="top" title="Image principale"/>
-                                        <span ng-show="item.isImagePrincipale">Principale</span>
-                                        <button type="button" class="close" data-dismiss="alert" ng-click="removeImage(image.id)"
-                                                data-toggle="tooltip" data-placement="top" title="Supprimer l'image">×</button>
+                                        <span ng-show="image.isImagePrincipale">Principale</span>
+                                        <button type="button" class="close" data-dismiss="alert" ng-click="removeImage(image)"
+                                                data-toggle="tooltip" data-placement="top" title="Supprimer l'image"
+                                                nt-remove>×</button>
                                         <img src="//image.webPath//" alt="//image.imageName//">
                                     </div>
                                 </div>
@@ -152,10 +153,10 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-xs-12 text-center">
-                    <button class="btn btn-primary btn-lg btn-ta" ng-click="create(voiture)">
+                    <button class="btn btn-primary btn-lg btn-ta" ng-click="update(voiture)">
                         <span class="spinner">
                             <i class="icon-spin icon-spinner"></i>
-                        </span>&nbsp;Ajouter mon annonce
+                        </span>&nbsp;Valider l'Annonce
                     </button>
                 </div>
 

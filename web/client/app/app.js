@@ -17,6 +17,10 @@ var successRequest = function(response,scope){
     scope.$emit('showMessage',response.data);
 };
 
+var log = function(message){
+  console.log(message);
+};
+
 var errorRequest = function(response,scope){
 /*
     if(response.status==400){
@@ -32,8 +36,10 @@ var errorRequest = function(response,scope){
 }
 
 var extractId = function(object){
-    if(object.hasOwnProperty('id')){
-        return object.id;
+    if(typeof object !== "undefined"){
+        if(object.hasOwnProperty('id')){
+            return object.id;
+        }
     }
     return null;
 }

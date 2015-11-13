@@ -100,7 +100,7 @@ class NiceTrucController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @RequestParam(name="isImagePrincipale", description="Test si c'est l'image principale")
+     * @RequestParam(name="isImagePrincipale", nullable=true, description="Test si c'est l'image principale")
      * @Route("/api/voiture/{id}/image",name="nicetruc_image", options={"expose"=true})
      * @Rest\View()
      * @Method({"POST"})
@@ -155,7 +155,7 @@ class NiceTrucController extends FOSRestController
         $image = $em->getRepository('AppBundle:Image')->find($id);
 
         if(!$image){
-            $message->config("Cette n'existe pas",'danger',404);
+            $message->config("Cette image n'existe pas",'danger',404);
             return $message->getView();
         }
 
@@ -194,6 +194,40 @@ class NiceTrucController extends FOSRestController
             $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array(),array(),8);
         }
 
+
+        $view = View::create(array('data'=>$voitures) ,200);
+
+        return $view;
+    }
+
+    /**
+     * Retourne les voitures par user
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Reetourn les voitures par user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("/api/voitures/users/{userId}",name="nicetruc_voiturebyuser", options={"expose"=true})
+     * @Rest\View()
+     * @Method({"GET"})
+     */
+
+    public function getVoitureByUserAction($userId){
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+        $user = $em->getRepository('AppBundle:User')->findBy(array('id'=>$userId));
+
+        if(!$user){
+            $message->config("Utilisateur introuvable",'danger',404);
+            return $message->getView();
+        }
+
+        $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('user'=>$user));
 
         $view = View::create(array('data'=>$voitures) ,200);
 

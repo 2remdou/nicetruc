@@ -158,6 +158,15 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
+       .state('nicetruc.voitureByUser',{
+           url:'listVoiture',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/voitureByUser.html',
+                   controller: 'VoitureByUserController'
+               }
+           }
+       })
 
 
    ;

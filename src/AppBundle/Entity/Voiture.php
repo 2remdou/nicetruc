@@ -486,8 +486,10 @@ class Voiture extends Article
      */
     public function setImagePrincipale(\AppBundle\Entity\Image $imagePrincipale = null)
     {
-        $imagePrincipale->setVoiture($this);
-
+        if($imagePrincipale !== null){
+            $imagePrincipale->setVoiture($this);
+            $this->imagePrincipale = $imagePrincipale;
+        }
         $this->imagePrincipale = $imagePrincipale;
 
         return $this;
