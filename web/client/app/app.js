@@ -8,7 +8,6 @@ var app = angular.module('app',[
     'angularFileUpload',
     'ngCookies',
     'angularSpinner',
-    'ngDialog',
     'ngAnimate',
     'ui.bootstrap'
 ]);
