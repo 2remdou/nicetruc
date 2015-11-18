@@ -6,6 +6,7 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
     {
         usSpinnerService.spin('nt-spinner');
 
+
         VoitureService.listVedette().then(function(response){
             angular.forEach(response.data,function(voiture){
                 if(!voiture.imagePrincipale){

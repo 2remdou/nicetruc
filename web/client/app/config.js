@@ -8,15 +8,13 @@ app.config(function($interpolateProvider) {
 });
 
 
-    app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHandlerProvider','usSpinnerConfigProvider',
-    function(RestangularProvider,$injector, TokenHandlerProvider, AuthHandlerProvider,usSpinnerConfigProvider) {
+    app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHandlerProvider','usSpinnerConfigProvider','$locationProvider',
+    function(RestangularProvider,$injector, TokenHandlerProvider, AuthHandlerProvider,usSpinnerConfigProvider,$locationProvider) {
 
     var TokenHandler = $injector.instantiate(TokenHandlerProvider.$get);
     var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);
 
-
-
-    //RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
+    RestangularProvider.setBaseUrl(window.location.origin+'/api');
 
     RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
