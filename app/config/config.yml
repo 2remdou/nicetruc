@@ -49,7 +49,8 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ AppBundle]
+    write_to:       "%kernel.root_dir%/../web/client/compiled"
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
