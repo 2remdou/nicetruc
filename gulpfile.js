@@ -2,7 +2,8 @@
  * Created by mdoutoure on 18/11/2015.
  */
 var gulp = require('gulp'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    del = require('del');
 
 gulp.task('scripts', function() {
     return gulp.src([
@@ -25,7 +26,11 @@ gulp.task('scripts', function() {
         'web/client/app/**/*.js'
     ])
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('web/bundles/'));
+        .pipe(gulp.dest('web/bundles/compiled/'));
+});
+
+gulp.task('clean', function() {
+    return del(['web/bundles/compiled/']);
 });
 
 gulp.task('watch', function() {
@@ -36,3 +41,4 @@ gulp.task('watch', function() {
         ],
         ['scripts']);
 });
+
