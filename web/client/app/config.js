@@ -15,7 +15,6 @@ app.config(function($interpolateProvider) {
     var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);
 
     RestangularProvider.setBaseUrl(window.location.origin+'/api');
-
     RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
          if(operation === 'put' || operation=== 'post'){
