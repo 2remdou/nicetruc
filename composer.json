@@ -44,7 +44,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
             "npm install bower",
-            "./node_modules/.bin/bower install"
+            "npm install gulp",
+            "./node_modules/.bin/bower install",
+            "./node_modules/.bin/gulp scripts"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -55,7 +57,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
             "npm install bower",
-            "./node_modules/.bin/bower install"
+            "npm install gulp",
+            "./node_modules/.bin/bower install",
+            "./node_modules/.bin/gulp scripts"
         ]
     },
     "config": {
