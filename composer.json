@@ -46,8 +46,9 @@
             "npm install bower",
             "npm install gulp",
             "npm install gulp-concat",
+            "npm install del",
             "./node_modules/.bin/bower install",
-            "./node_modules/.bin/gulp scripts"
+            "./node_modules/.bin/gulp scripts",
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -60,6 +61,7 @@
             "npm install bower",
             "npm install gulp",
             "npm install gulp-concat",
+            "npm install del",
             "./node_modules/.bin/bower install",
             "./node_modules/.bin/gulp scripts"
         ]
