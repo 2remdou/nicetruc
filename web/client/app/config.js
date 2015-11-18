@@ -16,7 +16,7 @@ app.config(function($interpolateProvider) {
 
 
 
-    RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
+    //RestangularProvider.setBaseUrl('http://127.0.0.1:8000/app_dev.php/api');
 
     RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
