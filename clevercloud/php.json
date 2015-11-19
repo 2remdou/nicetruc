@@ -1,5 +1,9 @@
 {
     "deploy": {
         "webroot": "/web"
+    },
+    "hooks": {
+        "postDeploy": "nictruc.sh"
     }
+
 }
