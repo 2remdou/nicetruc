@@ -23,7 +23,7 @@ app.controller('VoitureByUserController',['$scope','usSpinnerService','VoitureSe
 
             angular.forEach(response.data,function(voiture){
                 if(!voiture.imagePrincipale){
-                    voiture.imagePrincipale = {webPath: "client/app/images/voitures/defaultVoiture.png",imageName: "defaultVoiture.jpg"};
+                    voiture.imagePrincipale = {webPath: "client/app/images/defaultVoiture.png",imageName: "defaultVoiture.jpg"};
                 }
             });
 

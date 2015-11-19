@@ -17,7 +17,8 @@ app.config(function($interpolateProvider) {
     RestangularProvider.setBaseUrl(window.location.origin+'/api');
     RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
-         if(operation === 'put' || operation=== 'post'){
+
+        if(operation === 'put' || operation=== 'post'){
              if(standardRoute.indexOf(what) !==-1){
                  delete element.id;
                  delete element.visible;
@@ -28,7 +29,7 @@ app.config(function($interpolateProvider) {
                      delete element.modeleMarques;
                  }
              }
-             else if(what === 'quartiers/'){
+            if(what === 'quartiers/'){
                  var id=element.ville.id;
                  delete  element.ville;
                  delete  element.id;
@@ -45,7 +46,7 @@ app.config(function($interpolateProvider) {
                  element.marque = idMarque;
                  element.modele = idModele;
              }
-             else if(what.search('voitures')!==-1){
+             else if(url.search('voitures')!==-1){
                  delete element.marque;
                  delete element.modele;
                  delete element.images;
