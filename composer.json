@@ -49,6 +49,7 @@
             "npm install del",
             "./node_modules/.bin/bower install",
             "./node_modules/.bin/gulp scripts",
+            "php ./app/console doctrine:schema:create",
             "php ./app/console doctrine:schema:update --force"
         ],
         "post-update-cmd": [
@@ -65,6 +66,7 @@
             "npm install del",
             "./node_modules/.bin/bower install",
             "./node_modules/.bin/gulp scripts",
+            "php ./app/console doctrine:schema:create",
             "php ./app/console doctrine:schema:update --force"
 
         ]
