@@ -6,7 +6,7 @@
  * Time: 13:48
  */
 
-$container->setParameter('database_host', $_SERVER['MYSQL_ADDON_URI']);
+$container->setParameter('database_host', $_SERVER['MYSQL_ADDON_HOST']);
 $container->setParameter('database_port', $_SERVER['MYSQL_ADDON_PORT']);
 $container->setParameter('database_name', $_SERVER['MYSQL_ADDON_DB']);
 $container->setParameter('database_user', $_SERVER['MYSQL_ADDON_USER']);
