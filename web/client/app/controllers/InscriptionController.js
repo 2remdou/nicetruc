@@ -1,8 +1,8 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies',
-                                function($scope,InscriptionService,usSpinnerService,$cookies){
+app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies','$rootScope',
+                                function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope){
 
 
     $scope.create = function(user){

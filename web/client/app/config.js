@@ -128,21 +128,23 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
     // verification de l'autorisation
     $rootScope.hasAuthorized = function(){
         if(!$rootScope.isAuthenticated()){
-
             return false;
         }
         return true;
     };
 
     $rootScope.isAdmin = function(){
+        var b;
         if($rootScope.isAuthenticated()){
             angular.forEach($rootScope.user.roles,function(role){
-               if(role.search('ADMIN')){
-                   return true;
-               }
+               if(role==='ROLE_ADMIN'){
+                   b= true;
+              }
             });
+        }else{
+            b=false;
         }
-        return false;
+        return b;
     };
 
     $rootScope.$on('showMessage',function(event,messages){

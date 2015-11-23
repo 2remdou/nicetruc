@@ -39,7 +39,7 @@ gulp.task('watch', function() {
         'web/js/fos_js_routes.js',
         'web/client/app/**/*.js'
         ],
-        ['clean'],
+        //['clean'],
         ['scripts']
     );
 });

@@ -8,7 +8,6 @@ app.controller('ProfilController',['$scope','VilleService','QuartierService','$r
     $scope.quartiers = [];
 
     UserService.get($rootScope.user.id).then(function(response){
-        log(response.user);
         if(!response) return;
         $scope.user = Restangular.restangularizeElement(response.parentResource,response.user,response.route);
 
