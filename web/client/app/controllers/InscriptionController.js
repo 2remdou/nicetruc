@@ -1,8 +1,8 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies','$rootScope',
-                                function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope){
+app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies','$rootScope','$state',
+                                function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope,$state){
 
 
     $scope.create = function(user){
@@ -16,7 +16,7 @@ app.controller('InscriptionController',['$scope','InscriptionService','usSpinner
                 usSpinnerService.stop('nt-spinner');
                 $state.go('nicetruc');
             },function(response){
-                errorRequest(response,$scope);
+                successRequest(response,$scope);
                 usSpinnerService.stop('nt-spinner');
             });
     }
