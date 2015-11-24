@@ -1,14 +1,15 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MarqueController',['$scope','MarqueService',
-    function($scope,MarqueService){
+app.controller('MarqueController',['$scope','MarqueService','usSpinnerService',
+    function($scope,MarqueService,usSpinnerService){
 
       //  usSpinnerService.spin('nt-spinner');
     $scope.marques = MarqueService.list().$object;
     $scope.marque = {};
 
     $scope.create = function(marque){
+        usSpinnerService.spin('nt-spinner');
         MarqueService.create(marque);
         $scope.marque = {};
     };
@@ -19,31 +20,40 @@ app.controller('MarqueController',['$scope','MarqueService',
     };
 
     $scope.valideUpdate = function(marque){
+        usSpinnerService.spin('nt-spinner');
         marque.visible = !marque.visible;
         MarqueService.update(marque);
 
     };
 
     $scope.delete = function(marque){
-      MarqueService.delete(marque);
+        usSpinnerService.spin('nt-spinner');
+        MarqueService.delete(marque);
     };
 
 
     $scope.$on('marque.create',function(){
+        displayAlert('Marque ajoutée avec succès','success',$scope);
        refreshList();
     });
 
     $scope.$on('marque.update',function(){
-       refreshList();
+        displayAlert('Marque modifiée avec succès','success',$scope);
+        refreshList();
     });
 
     $scope.$on('marque.delete',function(){
-       refreshList();
+        displayAlert('Marque supprimée avec succès','success',$scope);
+        refreshList();
     });
 
 
 
     var refreshList = function(){
-        $scope.marques = MarqueService.list().$object;
+        MarqueService.list().then(function(response){
+            $scope.marques = response;
+            usSpinnerService.stop('nt-spinner');
+
+        });
     }
 }]);

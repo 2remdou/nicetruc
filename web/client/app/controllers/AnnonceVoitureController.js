@@ -50,9 +50,9 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
         $scope.create = function(voiture){
             usSpinnerService.spin('nt-spinner');
             voiture.modeleMarque=$scope.modeleMarque;
-            voiture.user = $rootScope.user.id;
-            voiture.categorie = 1; //voiture
 
+            voiture.user = $rootScope.user;
+            voiture.categorie = 1; //voiture
             VoitureService.create(voiture).then(function(response){
 
                 var idVoiture = response.id;

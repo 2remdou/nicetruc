@@ -1,11 +1,13 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('CategorieController',['$scope','CategorieService',function($scope,CategorieService){
+app.controller('CategorieController',['$scope','CategorieService','usSpinnerService',
+                function($scope,CategorieService,usSpinnerService){
     $scope.categories = CategorieService.list().$object;
     $scope.categorie = {};
 
     $scope.create = function(categorie){
+        usSpinnerService.spin('nt-spinner');
         CategorieService.create(categorie);
         $scope.categorie = {};
     };
@@ -16,31 +18,40 @@ app.controller('CategorieController',['$scope','CategorieService',function($scop
     };
 
     $scope.valideUpdate = function(categorie){
+        usSpinnerService.spin('nt-spinner');
         categorie.visible = !categorie.visible;
         CategorieService.update(categorie);
 
     };
 
     $scope.delete = function(categorie){
+        usSpinnerService.spin('nt-spinner');
       CategorieService.delete(categorie);
     };
 
 
     $scope.$on('categorie.create',function(){
+        displayAlert('Categorie ajoutée avec succès','success',$scope);
        refreshList();
     });
 
     $scope.$on('categorie.update',function(){
+        displayAlert('Categorie modifiée avec succès','success',$scope);
        refreshList();
     });
 
     $scope.$on('categorie.delete',function(){
+        displayAlert('Categorie supprimée avec succès','success',$scope);
        refreshList();
     });
 
 
 
     var refreshList = function(){
-        $scope.categories = CategorieService.list().$object;
+        CategorieService.list().then(function(response){
+            $scope.categories = response;
+            usSpinnerService.stop('nt-spinner');
+        });
+
     }
 }]);

@@ -20,8 +20,9 @@ app.config(function($interpolateProvider) {
 
         if(operation === 'put' || operation=== 'post'){
              if(standardRoute.indexOf(what) !==-1){
-                 delete element.id;
-                 delete element.visible;
+                 ['id','visible'].forEach(function(property){
+                     deleteProperty(element,property);
+                 });
                  if(element.hasOwnProperty('voitures')){
                      delete element.voitures;
                  }
@@ -31,27 +32,29 @@ app.config(function($interpolateProvider) {
              }
             if(what === 'quartiers/'){
                  var id=element.ville.id;
-                 delete  element.ville;
-                 delete  element.id;
-                 delete  element.visible;
+                ['ville','id','visible'].forEach(function(property){
+                    deleteProperty(element,property);
+                });
                  element.ville = id;
              }
-             else if(what === 'modelemarques/'){
+             else if(url.search('modelemarques')!==-1){
                  var idMarque=element.marque.id;
                  var idModele=element.modele.id;
-                 delete  element.marque;
-                 delete  element.modele;
-                 delete  element.id;
-                 delete  element.visible;
+
+                ['marque','modele','id','visible'].forEach(function(property){
+                    deleteProperty(element,property);
+                });
                  element.marque = idMarque;
                  element.modele = idModele;
              }
-             else if(url.search('voitures')!==-1){
-                 delete element.marque;
-                 delete element.modele;
-                 delete element.images;
-                 delete  element.id;
+            else if(url.search('marques')!==-1){
+                deleteProperty(element,'modeles');
+            }
+            else if(url.search('voitures')!==-1){
 
+                ['marque','modele','id','image'].forEach(function(property){
+                    deleteProperty(element,property);
+                });
                  element.modeleMarque = extractId(element.modeleMarque);
                  element.boitier = extractId(element.boitier);
                  element.carburant = extractId(element.carburant);

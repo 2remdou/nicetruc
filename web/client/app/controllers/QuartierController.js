@@ -1,12 +1,14 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('QuartierController',['$scope','VilleService','QuartierService','$window',function($scope,VilleService,QuartierService,$window){
+app.controller('QuartierController',['$scope','VilleService','QuartierService','usSpinnerService',
+    function($scope,VilleService,QuartierService,usSpinnerService){
     $scope.villes = VilleService.list().$object;
     $scope.quartiers = QuartierService.list().$object;
     $scope.quartier = {};
 
     $scope.create = function(quartier){
+        usSpinnerService.spin('nt-spinner');
         QuartierService.create(quartier);
         $scope.quartier = {};
         $scope.ville = {};
@@ -18,31 +20,41 @@ app.controller('QuartierController',['$scope','VilleService','QuartierService','
     };
 
     $scope.valideUpdate = function(quartier){
+        usSpinnerService.spin('nt-spinner');
         quartier.visible = !quartier.visible;
         QuartierService.update(quartier);
 
     };
 
     $scope.delete = function(quartier){
+        usSpinnerService.spin('nt-spinner');
         QuartierService.delete(quartier);
     };
 
 
     $scope.$on('quartier.create',function(){
-       refreshList();
+        displayAlert('Quartier ajouté avec succès','success',$scope);
+        refreshList();
     });
 
     $scope.$on('quartier.update',function(){
-       refreshList();
+        displayAlert('Quartier modifié avec succès','success',$scope);
+        refreshList();
     });
 
     $scope.$on('quartier.delete',function(){
-       refreshList();
+        displayAlert('Quartier supprimé avec succès','success',$scope);
+        refreshList();
     });
 
 
 
     var refreshList = function(){
-        $scope.quartiers = QuartierService.list().$object;
+        QuartierService.list().then(function(response){
+            $scope.quartiers = response;
+            usSpinnerService.stop('nt-spinner');
+        });
+
+
     }
 }]);

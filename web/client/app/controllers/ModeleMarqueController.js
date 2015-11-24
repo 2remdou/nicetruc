@@ -1,14 +1,15 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService','ModeleMarqueService','$q',function($scope,MarqueService,ModeleService,ModeleMarqueService,$q){
+app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService','ModeleMarqueService','$q','usSpinnerService',
+    function($scope,MarqueService,ModeleService,ModeleMarqueService,$q,usSpinnerService){
     $scope.modeleMarques = ModeleMarqueService.list().$object;
     $scope.modeles = ModeleService.list().$object;
     $scope.marques = MarqueService.list().$object;
     $scope.modele = {};
 
     $scope.create = function(modeleMarque,modele){
-
+        usSpinnerService.spin('nt-spinner');
         //verifier si le meme libelle existe
         var exist = getModeleByLibelle(modele);
         //creer le modele si n'existe pas
@@ -34,12 +35,11 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
     };
 
     $scope.valideUpdate = function(modeleMarque){
+        usSpinnerService.spin('nt-spinner');
         modeleMarque.visible = !modeleMarque.visible;
         modele=getModeleById(modeleMarque.modele);
         if(modele == undefined){
-            $rootScope.$on('nicetruc.error',function(){
-               return 'Ce modele est invalide';
-            });
+            displayAlert('Ce modele est invalide','danger',$scope);
         }
         else{
             var oldModele=modeleMarque.modele;
@@ -56,26 +56,35 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
     };
 
     $scope.delete = function(modeleMarque){
+        usSpinnerService.spin('nt-spinner');
         ModeleMarqueService.delete(modeleMarque);
     };
 
 
     $scope.$on('modeleMarque.create',function(){
-       refreshList();
+        displayAlert('Modele ajouté avec succès','success',$scope);
+        refreshList();
     });
 
     $scope.$on('modeleMarque.update',function(){
-       refreshList();
+        displayAlert('Modele modifié avec succès','success',$scope);
+        refreshList();
     });
 
     $scope.$on('modeleMarque.delete',function(){
-       refreshList();
+        displayAlert('Modele supprimé avec succès','success',$scope);
+        refreshList();
     });
 
 
 
     var refreshList = function(){
-        $scope.modeleMarques = ModeleMarqueService.list().$object;
+         ModeleMarqueService.list().then(function(response){
+            $scope.modeleMarques = response;
+            usSpinnerService.stop('nt-spinner');
+        });
+
+
     };
 
     var nettoyage = function(){
