@@ -163,6 +163,7 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
         $rootScope.showMessage = false;
         $rootScope.messages = {};
     });
+/*
 
     Restangular.setErrorInterceptor(function(response, deferred, responseHandler){
 
@@ -182,4 +183,5 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
         scope.$emit('showMessage',response.data);
     });
 
+*/
 }]);

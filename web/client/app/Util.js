@@ -28,7 +28,7 @@ var displayAlert = function(message,typeAlert,scope){
          }
          scope.$emit('showMessage',response.data);
          */
-    }
+    };
 
     var extractId = function(object){
         if(typeof object !== "undefined"){

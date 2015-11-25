@@ -1,11 +1,12 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies','$rootScope',
-                                function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope){
+app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies','$rootScope','$state','TokenHandler',
+                                function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope,$state,TokenHandler){
 
 
     $scope.create = function(user){
+        TokenHandler.clearCredentials();
         usSpinnerService.spin('nt-spinner');
             InscriptionService.create(user).then(function(response){
                 successRequest(response,$scope);
@@ -16,7 +17,7 @@ app.controller('InscriptionController',['$scope','InscriptionService','usSpinner
                 usSpinnerService.stop('nt-spinner');
                 $state.go('nicetruc');
             },function(response){
-                errorRequest(response,$scope);
+                successRequest(response,$scope);
                 usSpinnerService.stop('nt-spinner');
             });
     }
