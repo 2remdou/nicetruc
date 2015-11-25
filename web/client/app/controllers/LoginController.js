@@ -35,12 +35,7 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
 
                 },function(response){ //error checkLogin
                     usSpinnerService.stop('nt-spinner');
-                    if(response.status==403){
-                        displayAlert('Adresse email ou mot de passe incorrect','danger',$scope);
-                    }
-                    else if(response.status==500){
-                        displayAlert('Ooops,Erreur etonnante lors de la connexion','danger',$scope);
-                    }
+                    displayAlert('Adresse email ou mot de passe incorrect','danger',$scope);
                 });
 
             }, function (error) { //error cipher
@@ -48,7 +43,7 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
             });
         },function(response){ //error getSalt
                 usSpinnerService.stop('nt-spinner');
-                displayAlert('Ooops,Erreur etonnante lors de la connexion','danger',$scope);
+                displayAlert('Adresse email ou mot de passe incorrect','danger',$scope);
             });
     }
 }]);
