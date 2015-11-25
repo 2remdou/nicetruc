@@ -154,6 +154,12 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
             $state.go('nicetruc.showVoiture',{voitureId:$stateParams.voitureId});
         };
 
+        $scope.isAuthorized = function(){
+            log("ddd");
+            if(!$rootScope.isAuthenticated()) return false;
+            return $scope.voiture.user.id === $rootScope.user.id;
+        }
+
 
 
     }]);
