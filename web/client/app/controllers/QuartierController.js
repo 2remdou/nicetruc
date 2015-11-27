@@ -3,8 +3,13 @@
  */
 app.controller('QuartierController',['$scope','VilleService','QuartierService','usSpinnerService',
     function($scope,VilleService,QuartierService,usSpinnerService){
-    $scope.villes = VilleService.list().$object;
+
+    usSpinnerService.spin('nt-spinner');
     $scope.quartiers = QuartierService.list().$object;
+    VilleService.list().then(function(response){
+        $scope.villes = response;
+        usSpinnerService.stop('nt-spinner');
+    });
     $scope.quartier = {};
 
     $scope.create = function(quartier){

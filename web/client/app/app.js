@@ -10,5 +10,6 @@ var app = angular.module('app',[
     'ngCookies',
     'angularSpinner',
     'ngAnimate',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'permission'
 ]);

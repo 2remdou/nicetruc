@@ -2,10 +2,29 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('UserService',['$rootScope','Restangular',function($rootScope,Restangular){
+app.service('UserService',['$rootScope','Restangular','$cookies',
+    function($rootScope,Restangular,$cookies){
 
+    that = this;
     var _userService = Restangular.all('users');
     var scope = $rootScope.$new();
+
+    this.isAuthenticated = function(){
+        return typeof $rootScope.user != "undefined";
+    };
+
+    this.getRole = function(){
+       if(that.isAuthenticated()) return $rootScope.user.roles[0];
+        return  'ANONYMOUS';
+    };
+
+    this.hasRole = function(roleName){
+        return that.getRole() === roleName ;
+    };
+
+    this.isAdmin = function(){
+        return that.getRole() === 'ROLE_ADMIN';
+    };
 
     this.list = function(){
         $rootScope.$broadcast('user.list');
@@ -14,7 +33,7 @@ app.service('UserService',['$rootScope','Restangular',function($rootScope,Restan
 
     this.get = function(id){
         return Restangular.one('users',id).get();
-    }
+    };
 
     this.create = function(user){
         _userService.post(user).then(function(){

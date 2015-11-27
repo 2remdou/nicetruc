@@ -115,40 +115,40 @@ app.config(function($interpolateProvider) {
 
     }]);
 
-app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
-        function($rootScope,AuthHandler,$timeout,Restangular){
+app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','UserService','$state',
+        function($rootScope,AuthHandler,$timeout,Restangular,Permission,UserService,$state){
 
+            var scope = $rootScope.$new();
     // initialisation user
     if(typeof $rootScope.user == 'undefined'){
         $rootScope.user = AuthHandler.getUser();
-    }
+    };
 
     // verification de l'authentification
     $rootScope.isAuthenticated = function(){
-        return typeof AuthHandler.getUser() != 'undefined';
+        return UserService.isAuthenticated();
     };
 
-    // verification de l'autorisation
-    $rootScope.hasAuthorized = function(){
-        if(!$rootScope.isAuthenticated()){
-            return false;
-        }
-        return true;
-    };
+
 
     $rootScope.isAdmin = function(){
-        var b;
-        if($rootScope.isAuthenticated()){
-            angular.forEach($rootScope.user.roles,function(role){
-               if(role==='ROLE_ADMIN'){
-                   b= true;
-              }
-            });
-        }else{
-            b=false;
-        }
-        return b;
+        return UserService.isAdmin();
     };
+
+    Permission.defineManyRoles(['ANONYMOUS','ROLE_API','ROLE_ADMIN'], function (stateParams, roleName) {
+        return UserService.hasRole(roleName);
+    });
+
+    $rootScope.$on('$stateChangePermissionDenied',function(){
+        if(UserService.isAuthenticated()){
+            displayAlert("Vous n'avez pas les autorisations neccessaires pour acceder à cette ressource",'info',scope);
+            $state.go('nicetruc');
+        }
+        else{
+            displayAlert("Veuillez vous identifier, pour avoir accès à cette ressource",'info',scope);
+            $state.go('nicetruc.login');
+        }
+    });
 
     $rootScope.$on('showMessage',function(event,messages){
         $timeout(function(){
@@ -163,25 +163,4 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular',
         $rootScope.showMessage = false;
         $rootScope.messages = {};
     });
-/*
-
-    Restangular.setErrorInterceptor(function(response, deferred, responseHandler){
-
-        scope=$rootScope.$new();
-
-        if(response.status==400 || response.status==500){
-            response.data = [{texte:"Ooops, il est ou l'administrateur ??? Erreur vraiment etonnante",'typeAlert':'danger'}];
-        }
-        else if(response.status==404){
-            if(response.data.hasOwnProperty('data')){
-                response.data = response.data.data;
-            }
-        }
-        else if(response.status==403){
-            response.data = [{texte:"Vous n'avez les autorisations neccessaires pour y acceder",'typeAlert':'danger'}];
-        }
-        scope.$emit('showMessage',response.data);
-    });
-
-*/
 }]);

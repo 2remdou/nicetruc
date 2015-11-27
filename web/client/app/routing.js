@@ -3,7 +3,11 @@
  */
 app.config(function($stateProvider, $urlRouterProvider){
 
-    $urlRouterProvider.otherwise("/");
+    //$urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise( function($injector) {
+        var $state = $injector.get("$state");
+        $state.go('nicetruc');
+    });
    $stateProvider
        .state('nicetruc',{
            url:'/',
@@ -57,6 +61,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                    templateUrl: 'client/app/views/ville.html',
                    controller: 'VilleController'
                }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_ADMIN']
+               }
            }
        })
        .state('nicetruc.quartiers',{
@@ -65,6 +74,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                'content':{
                    templateUrl: 'client/app/views/quartier.html',
                    controller: 'QuartierController'
+               }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_ADMIN']
                }
            }
        })
@@ -75,6 +89,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                    templateUrl: 'client/app/views/categorie.html',
                    controller: 'CategorieController'
                }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_ADMIN']
+               }
            }
        })
        .state('nicetruc.carburants',{
@@ -83,6 +102,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                'content':{
                    templateUrl: 'client/app/views/carburant.html',
                    controller: 'CarburantController'
+               }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_ADMIN']
                }
            }
        })
@@ -93,6 +117,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                    templateUrl: 'client/app/views/boitier.html',
                    controller: 'BoitierController'
                }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_ADMIN']
+               }
            }
        })
        .state('nicetruc.marques',{
@@ -101,6 +130,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                'content':{
                    templateUrl: 'client/app/views/marque.html',
                    controller: 'MarqueController'
+               }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_ADMIN']
                }
            }
        })
@@ -111,6 +145,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                    templateUrl: 'client/app/views/modele.html',
                    controller: 'ModeleMarqueController'
                }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_ADMIN']
+               }
            }
        })
        .state('nicetruc.annonces',{
@@ -120,6 +159,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                    templateUrl: 'client/app/views/annonceVoiture.html',
                    controller: 'AnnonceVoitureController'
                }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_API','ROLE_ADMIN']
+               }
            }
        })
        .state('nicetruc.imageAnnonceVoiture',{
@@ -128,6 +172,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                'content':{
                    templateUrl: 'client/app/views/imageAnnonceVoiture.html',
                    controller: 'ImageAnnonceVoitureController'
+               }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_API','ROLE_ADMIN']
                }
            }
        })
@@ -155,6 +204,11 @@ app.config(function($stateProvider, $urlRouterProvider){
                'content':{
                    templateUrl: 'client/app/views/editVoiture.html',
                    controller: 'EditVoitureController'
+               }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_API','ROLE_ADMIN']
                }
            }
        })

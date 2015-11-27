@@ -2,7 +2,13 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('VilleController',['$scope','VilleService','usSpinnerService',function($scope,VilleService,usSpinnerService){
-    $scope.villes = VilleService.list().$object;
+
+
+    usSpinnerService.spin('nt-spinner');
+    VilleService.list().then(function(response){
+        $scope.villes = response;
+        usSpinnerService.stop('nt-spinner');
+    });
     $scope.ville = {};
 
     $scope.create = function(ville){

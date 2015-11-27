@@ -3,7 +3,12 @@
  */
 app.controller('CarburantController',['$scope','CarburantService','usSpinnerService',
     function($scope,CarburantService,usSpinnerService){
-    $scope.carburants = CarburantService.list().$object;
+
+    usSpinnerService.spin('nt-spinner');
+    CarburantService.list().then(function(response){
+        $scope.carburants = response;
+        usSpinnerService.stop('nt-spinner');
+    });
     $scope.carburant = {};
 
     $scope.create = function(carburant){

@@ -4,10 +4,6 @@
 app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerService','$rootScope','VoitureService','$state',
     function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state){
 
-        if(!$rootScope.hasAuthorized()){
-            $state.go('nicetruc.login');
-            return;
-        }
             usSpinnerService.spin('nt-spinner');
         VoitureService.get($stateParams.voitureId).then(function(response){
             $scope.voiture = response;
@@ -44,6 +40,10 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
 
         $scope.editVoiture = function(voitureId){
             $state.go('nicetruc.editVoiture',{voitureId:voitureId});
+        };
+
+        $scope.isAuthorizedEdit = function(userId){
+            return $rootScope.user.id === userId;
         };
 
     }]);

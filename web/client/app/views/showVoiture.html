@@ -1,6 +1,6 @@
 <div class="col-sm-8 col-sm-offset-2">
     <div class="row">
-        <button class="btn btn-primary" ng-click="editVoiture(voiture.id)" ng-show="isAuthorized()">Modifier</button>
+        <button class="btn btn-primary" ng-click="editVoiture(voiture.id)" ng-show="isAuthorizedEdit(voiture.user.id)">Modifier</button>
         <div class="pd-20">
                         <div class="panel panel-default">
                             <div class="panel-heading">Information Annonceur</div>

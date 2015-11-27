@@ -3,7 +3,13 @@
  */
 app.controller('CategorieController',['$scope','CategorieService','usSpinnerService',
                 function($scope,CategorieService,usSpinnerService){
-    $scope.categories = CategorieService.list().$object;
+
+
+     usSpinnerService.spin('nt-spinner');
+    CategorieService.list().then(function(response){
+        $scope.categories = response;
+         usSpinnerService.stop('nt-spinner');
+    });
     $scope.categorie = {};
 
     $scope.create = function(categorie){

@@ -4,11 +4,6 @@
 app.controller('VoitureByUserController',['$scope','usSpinnerService','VoitureService','$rootScope','$state',
     function($scope,usSpinnerService,VoitureService,$rootScope,$state){
 
-        if(!$rootScope.hasAuthorized()){
-            $state.go('nicetruc.login');
-            return;
-        }
-
         usSpinnerService.spin('nt-spinner');
 
         VoitureService.listByUser($rootScope.user.id).then(function(response){

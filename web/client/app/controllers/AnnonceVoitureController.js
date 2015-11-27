@@ -7,11 +7,6 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
         ,VoitureService,$rootScope,$state,usSpinnerService){
 
-        if(!$rootScope.hasAuthorized()){
-            $state.go('nicetruc.login');
-            return;
-        }
-
         $scope.marques = MarqueService.list().$object;
         $scope.modeleMarques = ModeleMarqueService.list().$object;
         $scope.carburants = CarburantService.list().$object;
@@ -41,7 +36,7 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
             });
             if(!$scope.modeleMarque){
                 message = [{texte:"Ce modele de voiture est invalide",'typeAlert':'danger'}];
-                scope.$emit('showMessage',message);
+            scope.$emit('showMessage',message);
                 return;
             }
         };

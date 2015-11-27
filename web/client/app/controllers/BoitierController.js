@@ -3,7 +3,11 @@
  */
 app.controller('BoitierController',['$scope','BoitierService','usSpinnerService',
     function($scope,BoitierService,usSpinnerService){
-    $scope.boitiers = BoitierService.list().$object;
+        usSpinnerService.spin('nt-spinner');
+    BoitierService.list().then(function(response){
+        $scope.boitiers = response;
+        usSpinnerService.stop('nt-spinner');
+    });
     $scope.boitier = {};
 
     $scope.create = function(boitier){
