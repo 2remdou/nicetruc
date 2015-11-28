@@ -3,9 +3,15 @@
  */
 app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService','ModeleMarqueService','$q','usSpinnerService',
     function($scope,MarqueService,ModeleService,ModeleMarqueService,$q,usSpinnerService){
+    
+    usSpinnerService.spin('nt-spinner');   
     $scope.modeleMarques = ModeleMarqueService.list().$object;
     $scope.modeles = ModeleService.list().$object;
-    $scope.marques = MarqueService.list().$object;
+
+    MarqueService.list().then(function(response){
+        $scope.marques = response;
+        usSpinnerService.stop('nt-spinner');
+    });
     $scope.modele = {};
 
     $scope.create = function(modeleMarque,modele){

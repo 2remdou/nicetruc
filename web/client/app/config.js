@@ -129,8 +129,6 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','User
         return UserService.isAuthenticated();
     };
 
-
-
     $rootScope.isAdmin = function(){
         return UserService.isAdmin();
     };

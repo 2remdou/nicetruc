@@ -4,8 +4,11 @@
 app.controller('MarqueController',['$scope','MarqueService','usSpinnerService',
     function($scope,MarqueService,usSpinnerService){
 
-      //  usSpinnerService.spin('nt-spinner');
-    $scope.marques = MarqueService.list().$object;
+    usSpinnerService.spin('nt-spinner');
+    MarqueService.list().then(function(response){
+        $scope.marques = response;
+        usSpinnerService.stop('nt-spinner');
+    });
     $scope.marque = {};
 
     $scope.create = function(marque){

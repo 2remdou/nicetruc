@@ -57,3 +57,8 @@ services:
 
     nicetruc.namer.voiture:
         class: AppBundle\Naming\Namer
+
+    nicetruc.listener.marquer:
+        class: AppBundle\EventListener\MarqueListener
+        tags:
+            - { name: kernel.event_listener, event: app.marque.pre_create, method: onPreCreateMarque}
