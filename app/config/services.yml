@@ -59,6 +59,40 @@ services:
         class: AppBundle\Naming\Namer
 
     nicetruc.listener.marquer:
-        class: AppBundle\EventListener\MarqueListener
+        class: AppBundle\EventListener\CheckAuthorizationListener
+        arguments: ["@security.authorization_checker", "@security.token_storage"]
         tags:
-            - { name: kernel.event_listener, event: app.marque.pre_create, method: onPreCreateMarque}
+            - { name: kernel.event_listener, event: app.marque.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.marque.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.marque.pre_delete, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.ville.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.ville.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.ville.pre_delete, method: onCheckAuthorization}
+
+            - { name: kernel.event_listener, event: app.quartier.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.quartier.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.quartier.pre_delete, method: onCheckAuthorization}
+
+            - { name: kernel.event_listener, event: app.categorie.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.categorie.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.categorie.pre_delete, method: onCheckAuthorization}
+
+            - { name: kernel.event_listener, event: app.boitier.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.boitier.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.boitier.pre_delete, method: onCheckAuthorization}
+
+            - { name: kernel.event_listener, event: app.carburant.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.carburant.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.carburant.pre_delete, method: onCheckAuthorization}
+
+            - { name: kernel.event_listener, event: app.modele.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.modele.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.modele.pre_delete, method: onCheckAuthorization}
+
+            - { name: kernel.event_listener, event: app.modelemarque.pre_create, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.modelemarque.pre_update, method: onCheckAuthorization}
+            - { name: kernel.event_listener, event: app.modelemarque.pre_delete, method: onCheckAuthorization}
+
+            - { name: kernel.event_listener, event: app.voiture.pre_create, method: onCheckVoitureOwner}
+            - { name: kernel.event_listener, event: app.voiture.pre_update, method: onCheckVoitureOwner}
+            - { name: kernel.event_listener, event: app.voiture.pre_delete, method: onCheckVoitureOwner}

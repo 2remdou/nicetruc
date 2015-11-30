@@ -7,11 +7,6 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
         ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ImageService){
 
-        if(!$rootScope.hasAuthorized()){
-            $state.go('nicetruc.login');
-            return;
-        }
-
         $scope.marques= MarqueService.list().$object;
         $scope.modeleMarques = ModeleMarqueService.list().$object;
         $scope.carburants= CarburantService.list().$object;

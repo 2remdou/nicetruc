@@ -115,8 +115,8 @@ app.config(function($interpolateProvider) {
 
     }]);
 
-app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','UserService','$state',
-        function($rootScope,AuthHandler,$timeout,Restangular,Permission,UserService,$state){
+app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','UserService','$state','usSpinnerService',
+        function($rootScope,AuthHandler,$timeout,Restangular,Permission,UserService,$state,usSpinnerService){
 
             var scope = $rootScope.$new();
     // initialisation user
@@ -160,5 +160,14 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','User
     $rootScope.$on('hideMessage',function(event){
         $rootScope.showMessage = false;
         $rootScope.messages = {};
+    });
+
+    Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+        if(response.status === 403) {
+            displayAlert("Vous ne disposez des autorisations neccessaires pour effectuer cette action",'danger',scope);
+            usSpinnerService.stop('nt-spinner');
+            return false;
+        }
+        return true;
     });
 }]);
