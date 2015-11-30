@@ -24,6 +24,11 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         VoitureService.get($stateParams.voitureId).then(function(responseVoiture){
             $scope.voiture = responseVoiture;
 
+            if(responseVoiture.user.id !== $rootScope.user.id){
+                displayAlert("Vous ne disposez des autorisations neccessaires pour modifier cette annonce",'danger',$scope);
+                $state.go('nicetruc.showVoiture',{voitureId:$stateParams.voitureId});
+            }
+
             //definition de l'image principale
             angular.forEach($scope.voiture.images,function(value){
                if(_.isEqual($scope.voiture.imagePrincipale,value)){
