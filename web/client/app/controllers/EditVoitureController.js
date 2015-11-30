@@ -23,7 +23,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         $scope.modeles = [];
         VoitureService.get($stateParams.voitureId).then(function(responseVoiture){
             $scope.voiture = responseVoiture;
-            
+
             if(responseVoiture.user.id !== $rootScope.user.id){
                 displayAlert("Vous ne disposez des autorisations neccessaires pour modifier cette annonce",'danger',$scope);
                 $state.go('nicetruc.showVoiture',{voitureId:$stateParams.voitureId});
