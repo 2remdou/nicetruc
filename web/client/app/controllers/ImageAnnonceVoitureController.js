@@ -5,11 +5,6 @@ app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','Voiture
     '$q','usSpinnerService','$state',
     function($scope,FileUploader,VoitureService,$stateParams,$rootScope,$q,usSpinnerService,$state){
 
-        if(!$rootScope.hasAuthorized()){
-            $state.go('nicetruc.login');
-            return;
-        }
-
         VoitureService.get($stateParams.voitureId).then(function(response){
             $scope.voiture = response;
         });

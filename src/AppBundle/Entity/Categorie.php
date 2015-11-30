@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Categorie
@@ -34,6 +35,7 @@ class Categorie
      * @ORM\Column(name="libelleCategorie", type="string", length=255)
      * @Expose()
      * @SerializedName("libelleCategorie")
+     * @Assert\NotBlank()
      */
     private $libelleCategorie;
 

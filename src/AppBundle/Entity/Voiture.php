@@ -7,6 +7,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
 use AppBundle\Entity\Article;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -35,6 +36,7 @@ class Voiture extends Article
      * @ORM\Column(name="prix", type="integer")
      * @Expose()
      * @SerializedName("prix")
+     * @Assert\GreaterThan(value = 0)
      */
     private $prix;
 
@@ -44,17 +46,19 @@ class Voiture extends Article
      * @ORM\Column(name="kmParcouru", type="float")
      * @Expose()
      * @SerializedName("kmParcouru")
+     * @Assert\GreaterThan(value = 0)
      */
     private $kmParcouru;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="anneeModele", type="integer")
+     * @ORM\Column(name="anneeAcquisition", type="integer")
      * @Expose()
-     * @SerializedName("anneeModele")
+     * @SerializedName("anneeAcquisition")
+     * @Assert\GreaterThan(value = 1900)
      */
-    private $anneeModele;
+    private $anneeAcquisition;
 
 
     /**
@@ -63,6 +67,7 @@ class Voiture extends Article
      * @ORM\Column(name="nbrePorte", type="integer")
      * @Expose()
      * @SerializedName("nbrePorte")
+     * @Assert\GreaterThan(value = 0)
      */
     private $nbrePorte;
 
@@ -73,6 +78,7 @@ class Voiture extends Article
      * @ORM\Column(name="nbreSiege", type="integer")
      * @Expose()
      * @SerializedName("nbreSiege")
+     * @Assert\GreaterThan(value = 0)
      */
     private $nbreSiege;
 
@@ -205,21 +211,21 @@ class Voiture extends Article
      * @param \Date $anneeModele
      * @return Voiture
      */
-    public function setAnneeModele($anneeModele)
+    public function setAnneeAcquisition($anneeAcquisition)
     {
-        $this->anneeModele = $anneeModele;
+        $this->anneeAcquisition = $anneeAcquisition;
 
         return $this;
     }
 
     /**
-     * Get anneeModele
+     * Get anneeAcquisition
      *
      * @return \Date
      */
-    public function getAnneeModele()
+    public function getAnneeAcquisition()
     {
-        return $this->anneeModele;
+        return $this->anneeAcquisition;
     }
 
     /**
@@ -504,4 +510,5 @@ class Voiture extends Article
     {
         return $this->imagePrincipale;
     }
+
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -33,8 +34,19 @@ class Modele
      * @ORM\Column(name="libelleModele", type="string", length=255)
      * @Expose()
      * @SerializedName("libelleModele")
+     * @Assert\NotBlank()
      */
     private $libelleModele;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anneeModele", type="integer")
+     * @Expose()
+     * @SerializedName("anneeModele")
+     * @Assert\GreaterThan(value = 1900)
+     */
+    private $anneeModele;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")
@@ -117,5 +129,28 @@ class Modele
     public function getModeleMarques()
     {
         return $this->modeleMarques;
+    }
+
+    /**
+     * Set anneeModele
+     *
+     * @param integer $anneeModele
+     * @return Modele
+     */
+    public function setAnneeModele($anneeModele)
+    {
+        $this->anneeModele = $anneeModele;
+
+        return $this;
+    }
+
+    /**
+     * Get anneeModele
+     *
+     * @return integer 
+     */
+    public function getAnneeModele()
+    {
+        return $this->anneeModele;
     }
 }

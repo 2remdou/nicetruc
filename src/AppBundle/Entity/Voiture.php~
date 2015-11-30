@@ -7,6 +7,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
 use AppBundle\Entity\Article;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -35,6 +36,7 @@ class Voiture extends Article
      * @ORM\Column(name="prix", type="integer")
      * @Expose()
      * @SerializedName("prix")
+     * @Assert\GreaterThan(value = 0)
      */
     private $prix;
 
@@ -44,17 +46,19 @@ class Voiture extends Article
      * @ORM\Column(name="kmParcouru", type="float")
      * @Expose()
      * @SerializedName("kmParcouru")
+     * @Assert\GreaterThan(value = 0)
      */
     private $kmParcouru;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="anneeModele", type="integer")
+     * @ORM\Column(name="anneeAcquisition", type="integer")
      * @Expose()
-     * @SerializedName("anneeModele")
+     * @SerializedName("anneeAcquisition")
+     * @Assert\GreaterThan(value = 1900)
      */
-    private $anneeModele;
+    private $anneeAcquisition;
 
 
     /**
@@ -63,6 +67,7 @@ class Voiture extends Article
      * @ORM\Column(name="nbrePorte", type="integer")
      * @Expose()
      * @SerializedName("nbrePorte")
+     * @Assert\GreaterThan(value = 0)
      */
     private $nbrePorte;
 
@@ -73,6 +78,7 @@ class Voiture extends Article
      * @ORM\Column(name="nbreSiege", type="integer")
      * @Expose()
      * @SerializedName("nbreSiege")
+     * @Assert\GreaterThan(value = 0)
      */
     private $nbreSiege;
 
@@ -137,9 +143,9 @@ class Voiture extends Article
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image")
      * @ORM\JoinColumn(nullable=true)
      * @Expose()
-     * @SerializedName("imagePrincipal")
+     * @SerializedName("imagePrincipale")
      */
-    protected $imagePrincipal;
+    protected $imagePrincipale;
 
 
 
@@ -205,21 +211,21 @@ class Voiture extends Article
      * @param \Date $anneeModele
      * @return Voiture
      */
-    public function setAnneeModele($anneeModele)
+    public function setAnneeAcquisition($anneeAcquisition)
     {
-        $this->anneeModele = $anneeModele;
+        $this->anneeAcquisition = $anneeAcquisition;
 
         return $this;
     }
 
     /**
-     * Get anneeModele
+     * Get anneeAcquisition
      *
      * @return \Date
      */
-    public function getAnneeModele()
+    public function getAnneeAcquisition()
     {
-        return $this->anneeModele;
+        return $this->anneeAcquisition;
     }
 
     /**
@@ -453,5 +459,55 @@ class Voiture extends Article
      */
     public function prePersist(){
         $this->setDatePublication(new \DateTime());
+    }
+
+    /**
+     * Set isVedette
+     *
+     * @param boolean $isVedette
+     * @return Voiture
+     */
+    public function setIsVedette($isVedette)
+    {
+        $this->isVedette = $isVedette;
+
+        return $this;
+    }
+
+    /**
+     * Get isVedette
+     *
+     * @return boolean 
+     */
+    public function getIsVedette()
+    {
+        return $this->isVedette;
+    }
+
+    /**
+     * Set imagePrincipale
+     *
+     * @param \AppBundle\Entity\Image $imagePrincipale
+     * @return Voiture
+     */
+    public function setImagePrincipale(\AppBundle\Entity\Image $imagePrincipale = null)
+    {
+        if($imagePrincipale !== null){
+            $imagePrincipale->setVoiture($this);
+            $this->imagePrincipale = $imagePrincipale;
+        }
+        $this->imagePrincipale = $imagePrincipale;
+
+        return $this;
+    }
+
+    /**
+     * Get imagePrincipale
+     *
+     * @return \AppBundle\Entity\Image 
+     */
+    public function getImagePrincipale()
+    {
+        return $this->imagePrincipale;
     }
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -22,6 +23,8 @@ class Modele
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose()
+     * @SerializedName("id")
      */
     private $id;
 
@@ -29,13 +32,27 @@ class Modele
      * @var string
      *
      * @ORM\Column(name="libelleModele", type="string", length=255)
+     * @Expose()
+     * @SerializedName("libelleModele")
+     * @Assert\NotBlank()
      */
     private $libelleModele;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="anneeModele", type="integer")
+     * @Expose()
+     * @SerializedName("anneeModele")
+     * @Assert\GreaterThan(value = 1900)
+     */
+    private $anneeModele;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")
      * @Expose()
      * @SerializedName("modeleMarques")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $modeleMarques;
 
@@ -72,5 +89,45 @@ class Modele
     public function getLibelleModele()
     {
         return $this->libelleModele;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->modeleMarques = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add modeleMarques
+     *
+     * @param \AppBundle\Entity\modeleMarque $modeleMarques
+     * @return Modele
+     */
+    public function addModeleMarque(\AppBundle\Entity\modeleMarque $modeleMarques)
+    {
+        $this->modeleMarques[] = $modeleMarques;
+
+        return $this;
+    }
+
+    /**
+     * Remove modeleMarques
+     *
+     * @param \AppBundle\Entity\modeleMarque $modeleMarques
+     */
+    public function removeModeleMarque(\AppBundle\Entity\modeleMarque $modeleMarques)
+    {
+        $this->modeleMarques->removeElement($modeleMarques);
+    }
+
+    /**
+     * Get modeleMarques
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModeleMarques()
+    {
+        return $this->modeleMarques;
     }
 }

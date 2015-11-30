@@ -31,7 +31,7 @@ var displayAlert = function(message,typeAlert,scope){
     };
 
     var extractId = function(object){
-        if(typeof object !== "undefined"){
+        if(typeof object != "undefined"){
             if(object.hasOwnProperty('id')){
                 return object.id;
             }
