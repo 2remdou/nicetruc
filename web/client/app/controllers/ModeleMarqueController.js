@@ -14,7 +14,9 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
     });
     $scope.modele = {};
 
-    $scope.create = function(modeleMarque,modele){
+    $scope.create = function(modeleMarque,modele,formIsValid){
+        $scope.formSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         //verifier si le meme libelle existe
         var exist = getModeleByLibelle(modele);
@@ -40,7 +42,9 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
 
     };
 
-    $scope.valideUpdate = function(modeleMarque){
+    $scope.valideUpdate = function(modeleMarque,formIsValid){
+        $scope.upformSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         modeleMarque.visible = !modeleMarque.visible;
         modele=getModeleById(modeleMarque.modele);
@@ -58,6 +62,7 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
             });
 
         }
+        $scope.upformSubmit=false;
 
     };
 
@@ -94,6 +99,7 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
     };
 
     var nettoyage = function(){
+        $scope.formSubmit=false;
         $scope.modeleMarque = {};
         $scope.marque = {};
         $scope.modele = {};

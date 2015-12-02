@@ -77,7 +77,9 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         };
 
 
-        $scope.update = function(voiture){
+        $scope.update = function(voiture,formIsValid){
+            $scope.formSubmit = true;
+            if(!formIsValid) return;
             usSpinnerService.stop('nt-spinner');
             usSpinnerService.spin('nt-spinner');
             voiture.modeleMarque= typeof $scope.modeleMarque=="undefined"? voiture.modeleMarque:$scope.modeleMarque;
@@ -109,7 +111,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
                 successRequest(response,$scope);
                 usSpinnerService.stop('nt-spinner');
             });
-
+            $scope.formSubmit = false;
         };
 
         $scope.selectImagePrincipale = function(image){
@@ -155,11 +157,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         };
 
         $scope.isAuthorized = function(){
-            log("ddd");
             if(!$rootScope.isAuthenticated()) return false;
             return $scope.voiture.user.id === $rootScope.user.id;
         }
-
-
-
     }]);

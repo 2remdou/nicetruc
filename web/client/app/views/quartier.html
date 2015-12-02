@@ -4,26 +4,29 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h4>Parametrage Quartier</h4>
-                    <form id="login-form" method="post" role="form" name="formVille" class="form-login">
+                    <form id="login-form" method="post" role="form" name="form" class="form-login" novalidate>
                         <div class="col-sm-5">
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : form.libelle.$invalid  && formSubmit }">
                                 <label for="libelleQuartier">Nom du quartier</label>
-                                <input type="text" name="libelleQuartier" id="libelleQuartier" tabindex="1" class="form-control" placeholder="Nom du quartier" ng-model="quartier.libelleQuartier">
+                                <input type="text" name="libelle" id="libelleQuartier" tabindex="1" class="form-control"
+                                       placeholder="Nom du quartier" ng-model="quartier.libelleQuartier" required>
+                                <p ng-show="form.libelle.$invalid && formSubmit" class="help-block">Le libelle est obligatoire.</p>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{ 'has-error' : form.ville.$invalid  && formSubmit }">
                                 <label for="ville" class="control-label">Selectionner la ville</label>
-                                <select class="form-control" tabindex="2" id="ville" ng-model="quartier.ville"
+                                <select class="form-control" tabindex="2" id="ville" ng-model="quartier.ville" name="ville"
                                         ng-options="ville.libelleVille
-                                            for ville in villes track by ville.id">
+                                            for ville in villes track by ville.id" required>
                                 </select>
+                                <p ng-show="form.ville.$invalid && formSubmit" class="help-block">Selectionner une marque.</p>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <label for=""></label>
                             <div class="form-group">
-                                <button class="form-control btn btn-info" ng-click="create(quartier)"> Enregistrer</button>
+                                <button class="form-control btn btn-info" ng-click="create(quartier,form.$valid)"> Enregistrer</button>
                             </div>
                         </div>
                     </form>
@@ -31,37 +34,43 @@
                         <div class="panel-heading">Liste Quartiers</div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nom Quartier</th>
-                                        <th>Ville</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="quartier in quartiers">
-                                        <th scope="row">//$index+1//</th>
-                                        <td>
-                                            <span ng-hide="quartier.visible">//quartier.libelleQuartier//</span>
-                                            <input type="text" ng-show="quartier.visible" ng-model="quartier.libelleQuartier"></td>
-                                        <td>
-                                            <span ng-hide="quartier.visible">//quartier.ville.libelleVille//</span>
-                                            <select class="form-control" ng-show="quartier.visible" ng-model="quartier.ville"
-                                                    ng-options="ville.libelleVille
-                                            for ville in villes track by ville.id">
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <button ng-hide="quartier.visible" ng-click="update(quartier)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
-                                            <button ng-show="quartier.visible" ng-click="valideUpdate(quartier)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button>
-                                        </td>
-                                        <td>
-                                            <button ng-click="delete(quartier)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <form novalidate name="upForm">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nom Quartier</th>
+                                            <th>Ville</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="quartier in quartiers">
+                                            <th scope="row">//$index+1//</th>
+                                            <td ng-class="{ 'danger' : upForm.libelle.$invalid  && upformSubmit }">
+                                                <span ng-hide="quartier.visible">//quartier.libelleQuartier//</span>
+
+                                                    <input type="text" ng-show="quartier.visible" ng-model="quartier.libelleQuartier" name="libelle" required>
+                                                    <p ng-show="upForm.libelle.$invalid && upformSubmit" class="help-block">Le libelle est obligatoire.</p>
+                                            </td>
+                                            <td ng-class="{ 'danger' : upForm.ville.$invalid  && upformSubmit }">
+                                                <span ng-hide="quartier.visible">//quartier.ville.libelleVille//</span>
+                                                <select class="form-control" ng-show="quartier.visible" ng-model="quartier.ville"
+                                                        ng-options="ville.libelleVille
+                                                for ville in villes track by ville.id" required name="ville">
+                                                </select>
+                                                <p ng-show="upForm.ville.$invalid && upformSubmit" class="help-block">Selectionner une ville.</p>
+                                            </td>
+                                            <td>
+                                                <button ng-hide="quartier.visible" ng-click="update(quartier)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
+                                                <button ng-show="quartier.visible" ng-click="valideUpdate(quartier,upForm.$valid)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button>
+                                            </td>
+                                            <td>
+                                                <button ng-click="delete(quartier)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>

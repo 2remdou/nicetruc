@@ -12,7 +12,7 @@ app.service('BoitierService',function($rootScope,Restangular){
     }
 
     this.create = function(boitier){
-        _boitierService.post(boitier).then(function(){
+        return _boitierService.post(boitier).then(function(){
             $rootScope.$broadcast('boitier.create');
         });
     };

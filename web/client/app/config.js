@@ -118,6 +118,7 @@ app.config(function($interpolateProvider) {
 app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','UserService','$state','usSpinnerService',
         function($rootScope,AuthHandler,$timeout,Restangular,Permission,UserService,$state,usSpinnerService){
 
+            $rootScope.currentYear = new Date().getFullYear();
             var scope = $rootScope.$new();
     // initialisation user
     if(typeof $rootScope.user == 'undefined'){

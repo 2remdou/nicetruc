@@ -4,16 +4,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h4>Parametrage des Categories</h4>
-                    <form id="login-form" method="post" role="form" name="formCategorie">
-                        <div class="form-group">
+                    <form id="login-form" role="form" name="form" novalidate>
+                        <div class="form-group" ng-class="{ 'has-error' : form.libelle.$invalid  && formSubmit }">
                             <div class="col-sm-12">
                                 <label for="libelleCategorie">Nom de la categorie</label>
                             </div>
                             <div class="col-sm-8">
-                                <input type="text" name="libelleCategorie" id="libelleCategorie" tabindex="1" class="form-control" placeholder="Nom de la categorie" ng-model="categorie.libelleCategorie">
+                                <input type="text" name="libelle" id="libelleCategorie" tabindex="1" class="form-control"
+                                       placeholder="Nom de la categorie" ng-model="categorie.libelleCategorie" required>
+                                <p ng-show="form.libelle.$invalid && formSubmit" class="help-block">Le libelle est obligatoire.</p>
                             </div>
                             <div class="col-sm-4">
-                                <button class="form-control btn btn-info" ng-click="create(categorie)"> Enregistrer</button>
+                                <button class="form-control btn btn-info" ng-click="create(categorie,form.$valid)"> Enregistrer</button>
                             </div>
                         </div>
                     </form>
@@ -31,8 +33,13 @@
                                     <tbody>
                                     <tr ng-repeat="categorie in categories">
                                         <th scope="row">//$index+1//</th>
-                                        <td><span ng-hide="categorie.visible">//categorie.libelleCategorie//</span> <input type="text" ng-show="categorie.visible" ng-model="categorie.libelleCategorie"></td>
-                                        <td><button ng-hide="categorie.visible" ng-click="update(categorie)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button><button ng-show="categorie.visible" ng-click="valideUpdate(categorie)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button></td>
+                                        <td ng-class="{ 'danger' : upForm.libelle.$invalid  && upformSubmit }">
+                                            <span ng-hide="categorie.visible">//categorie.libelleCategorie//</span>
+                                            <form novalidate name="upForm">
+                                                <input type="text" ng-show="categorie.visible" ng-model="categorie.libelleCategorie" name="libelle" required>
+                                            </form>
+                                        </td>
+                                        <td><button ng-hide="categorie.visible" ng-click="update(categorie)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button><button ng-show="categorie.visible" ng-click="valideUpdate(categorie,upForm.$valid)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button></td>
                                         <td><button ng-click="delete(categorie)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button></td>
                                     </tr>
                                     </tbody>

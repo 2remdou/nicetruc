@@ -1,65 +1,90 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="row">
                 <div class="col-lg-12">
                     <h4>Parametrage des Modele</h4>
-                    <form id="login-form" method="post" role="form" name="formMarque" class="form-login">
-                        <div class="col-sm-5">
-                            <div class="form-group">
+                    <form id="login-form" role="form" name="form" novalidate class="form-login">
+                        <div class="col-sm-4">
+                            <div class="form-group" ng-class="{ 'has-error' : form.libelle.$invalid  && formSubmit }">
                                 <label for="libelleModele">Nom du modele</label>
-                                <input type="text" name="libelleModele" id="libelleModele" tabindex="1" class="form-control" placeholder="Nom du modele" ng-model="modele.libelleModele">
+                                <input type="text" name="libelle" id="libelleModele" tabindex="1" class="form-control"
+                                       placeholder="Nom du modele" ng-model="modele.libelleModele" required>
+                                <p ng-show="form.libelle.$invalid && formSubmit" class="help-block">Le libelle est obligatoire.</p>
                             </div>
                         </div>
-                        <div class="col-sm-5">
-                            <div class="form-group">
+                        <div class="col-sm-4">
+                            <div class="form-group" ng-class="{ 'has-error' : form.marque.$invalid  && formSubmit }">
                                 <label for="marque" class="control-label">Selectionner une marque</label>
-                                <select class="form-control" tabindex="2" id="marque" ng-model="modeleMarque.marque"
+                                <select class="form-control" tabindex="2" id="marque" ng-model="modeleMarque.marque" name="marque"
                                         ng-options="marque.libelleMarque
-                                            for marque in marques track by marque.id">
+                                            for marque in marques track by marque.id" required>
                                 </select>
+                                <p ng-show="form.marque.$invalid && formSubmit" class="help-block">Selectionner une marque.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group" ng-class="{ 'has-error' : form.libelle.$invalid  && formSubmit }">
+                                <label for="anneeModele">Annee modele</label>
+                                <input type="text" name="anneeModele" id="anneeModele" tabindex="3" class="form-control"
+                                       type="number" class="form-control" min="1900" max="//currentYear//"
+                                       placeholder="Annee modele" ng-model="modeleMarque.anneeModele" required>
+                                <p ng-show="form.anneeModele.$invalid && formSubmit" class="help-block">L'annee est obligatoire.</p>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <label for=""></label>
                             <div class="form-group">
-                                <button class="form-control btn btn-info" ng-click="create(modeleMarque,modele)"> Enregistrer</button>
+                                <button class="form-control btn btn-info" ng-click="create(modeleMarque,modele,form.$valid)"> Enregistrer</button>
                             </div>
                         </div>
                     </form>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nom Modele</th>
-                            <th>Marque</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="modeleMarque in modeleMarques">
-                            <th scope="row">//$index+1//</th>
-                            <td>
-                                <span ng-hide="modeleMarque.visible">//modeleMarque.modele.libelleModele//</span>
-                                <input type="text" ng-show="modeleMarque.visible" ng-model="modeleMarque.modele.libelleModele"></td>
-                            <td>
-                                <span ng-hide="modeleMarque.visible">//modeleMarque.marque.libelleMarque//</span>
-                                <select class="form-control" ng-show="modeleMarque.visible" ng-model="modeleMarque.marque"
-                                        ng-options="marque.libelleMarque
-                                            for marque in marques track by marque.id">
-                                </select>
-                            </td>
-                            <td>
-                                <button ng-hide="modeleMarque.visible" ng-click="update(modeleMarque)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
-                                <button ng-show="modeleMarque.visible" ng-click="valideUpdate(modeleMarque)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button>
-                            </td>
-                            <td>
-                                <button ng-click="delete(modeleMarque)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <form novalidate name="upForm">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom Modele</th>
+                                <th>Marque</th>
+                                <th>Annee Modele</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="modeleMarque in modeleMarques">
+                                <th scope="row">//$index+1//</th>
+                                <td ng-class="{ 'danger' : upForm.libelle.$invalid  && upformSubmit }">
+                                    <span ng-hide="modeleMarque.visible">//modeleMarque.modele.libelleModele//</span>
+                                    <input type="text" ng-show="modeleMarque.visible" name="libelle" ng-model="modeleMarque.modele.libelleModele" required>
+                                    <p ng-show="upForm.libelle.$invalid && upformSubmit" class="help-block">Le libelle est obligatoire.</p>
+                                </td>
+                                <td ng-class="{ 'danger' : upForm.marque.$invalid  && upformSubmit }">
+                                    <span ng-hide="modeleMarque.visible">//modeleMarque.marque.libelleMarque//</span>
+                                    <select class="form-control" ng-show="modeleMarque.visible" ng-model="modeleMarque.marque"
+                                            ng-options="marque.libelleMarque
+                                                for marque in marques track by marque.id" required name="marque">
+                                    </select>
+                                    <p ng-show="upForm.marque.$invalid && upformSubmit" class="help-block">Selectionner une marque.</p>
+                                </td>
+                                <td ng-class="{ 'danger' : upForm.anneeModele.$invalid  && upformSubmit }">
+                                    <span ng-hide="modeleMarque.visible">//modeleMarque.anneeModele//</span>
+                                    <input type="text" ng-show="modeleMarque.visible" name="anneeModele" ng-model="modeleMarque.anneeModele" required>
+                                    <p ng-show="upForm.anneeModele.$invalid && upformSubmit" class="help-block">L'année est obligatoire.</p>
+                                </td>
+
+                                <td>
+                                    <button ng-hide="modeleMarque.visible" ng-click="update(modeleMarque)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
+                                    <button ng-show="modeleMarque.visible" ng-click="valideUpdate(modeleMarque,upForm.$valid)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button>
+                                </td>
+                                <td>
+                                    <button ng-click="delete(modeleMarque)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
                         </div>
                     </div>
 

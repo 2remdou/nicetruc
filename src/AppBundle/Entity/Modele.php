@@ -38,15 +38,6 @@ class Modele
      */
     private $libelleModele;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="anneeModele", type="integer")
-     * @Expose()
-     * @SerializedName("anneeModele")
-     * @Assert\GreaterThan(value = 1900)
-     */
-    private $anneeModele;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")
@@ -131,26 +122,5 @@ class Modele
         return $this->modeleMarques;
     }
 
-    /**
-     * Set anneeModele
-     *
-     * @param integer $anneeModele
-     * @return Modele
-     */
-    public function setAnneeModele($anneeModele)
-    {
-        $this->anneeModele = $anneeModele;
 
-        return $this;
-    }
-
-    /**
-     * Get anneeModele
-     *
-     * @return integer 
-     */
-    public function getAnneeModele()
-    {
-        return $this->anneeModele;
-    }
 }

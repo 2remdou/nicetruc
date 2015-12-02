@@ -11,9 +11,12 @@ app.controller('VilleController',['$scope','VilleService','usSpinnerService',fun
     });
     $scope.ville = {};
 
-    $scope.create = function(ville){
+    $scope.create = function(ville,formIsValid){
+        $scope.formSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         VilleService.create(ville);
+        $scope.formSubmit=false;
         $scope.ville = {};
     };
 
@@ -22,10 +25,13 @@ app.controller('VilleController',['$scope','VilleService','usSpinnerService',fun
 
     };
 
-    $scope.valideUpdate = function(ville){
+    $scope.valideUpdate = function(ville,formIsValid){
+        $scope.upformSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         ville.visible = !ville.visible;
         VilleService.update(ville);
+        $scope.upformSubmit=false;
 
     };
 

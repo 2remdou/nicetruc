@@ -12,9 +12,12 @@ app.controller('QuartierController',['$scope','VilleService','QuartierService','
     });
     $scope.quartier = {};
 
-    $scope.create = function(quartier){
+    $scope.create = function(quartier,formIsValid){
+        $scope.formSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         QuartierService.create(quartier);
+        $scope.formSubmit=false;
         $scope.quartier = {};
         $scope.ville = {};
     };
@@ -24,10 +27,13 @@ app.controller('QuartierController',['$scope','VilleService','QuartierService','
 
     };
 
-    $scope.valideUpdate = function(quartier){
+    $scope.valideUpdate = function(quartier,formIsValid){
+        $scope.upformSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         quartier.visible = !quartier.visible;
         QuartierService.update(quartier);
+        $scope.upformSubmit=false;
 
     };
 

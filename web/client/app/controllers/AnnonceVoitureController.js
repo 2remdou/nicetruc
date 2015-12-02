@@ -7,10 +7,12 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
         ,VoitureService,$rootScope,$state,usSpinnerService){
 
+        $scope.formSubmit = false;
         $scope.marques = MarqueService.list().$object;
         $scope.modeleMarques = ModeleMarqueService.list().$object;
         $scope.carburants = CarburantService.list().$object;
         $scope.boitiers = BoitierService.list().$object;
+
 
 
         $scope.selectMarque = function(marque){
@@ -42,26 +44,25 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
         };
 
 
-        $scope.create = function(voiture){
+        $scope.create = function(voiture,formIsValid){
+            $scope.formSubmit = true;
+            if(!formIsValid) return;
             usSpinnerService.spin('nt-spinner');
             voiture.modeleMarque=$scope.modeleMarque;
 
             voiture.user = $rootScope.user;
             voiture.categorie = 1; //voiture
-            VoitureService.create(voiture).then(function(response){
+            VoitureService.create(angular.copy(voiture)).then(function(response){
 
                 var idVoiture = response.id;
-                voiture={};
-                response.data = [{texte:"Votre annonce a été ajouté avec succes",'typeAlert':'success'}];
-                successRequest(response,$scope);
+                displayAlert("Votre annonce a été ajouté avec succes",'success',$scope);
                 usSpinnerService.stop('nt-spinner');
                 $state.go('nicetruc.imageAnnonceVoiture',{voitureId:idVoiture});
             },function(error){
-                var response={};
-                response.data = [{texte:"Erreur lors de la publication de l'annonce",'typeAlert':'danger'}];
-                successRequest(response,$scope);
+                displayAlert("Erreur lors de la publication de l'annonce",'danger',$scope);
                 usSpinnerService.stop('nt-spinner');
             });
+            $scope.formSubmit = false;
 
         };
 

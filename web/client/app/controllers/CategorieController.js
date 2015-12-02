@@ -12,9 +12,12 @@ app.controller('CategorieController',['$scope','CategorieService','usSpinnerServ
     });
     $scope.categorie = {};
 
-    $scope.create = function(categorie){
+    $scope.create = function(categorie,formIsValid){
+        $scope.formSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         CategorieService.create(categorie);
+        $scope.formSubmit=false;
         $scope.categorie = {};
     };
 
@@ -23,10 +26,13 @@ app.controller('CategorieController',['$scope','CategorieService','usSpinnerServ
 
     };
 
-    $scope.valideUpdate = function(categorie){
+    $scope.valideUpdate = function(categorie,formIsValid){
+        $scope.upformSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         categorie.visible = !categorie.visible;
         CategorieService.update(categorie);
+        $scope.upformSubmit=false;
 
     };
 

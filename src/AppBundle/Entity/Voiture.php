@@ -43,7 +43,7 @@ class Voiture extends Article
     /**
      * @var float
      *
-     * @ORM\Column(name="kmParcouru", type="float")
+     * @ORM\Column(name="kmParcouru", type="float", nullable=true)
      * @Expose()
      * @SerializedName("kmParcouru")
      * @Assert\GreaterThan(value = 0)
@@ -53,7 +53,7 @@ class Voiture extends Article
     /**
      * @var integer
      *
-     * @ORM\Column(name="anneeAcquisition", type="integer")
+     * @ORM\Column(name="anneeAcquisition", type="integer", nullable=true)
      * @Expose()
      * @SerializedName("anneeAcquisition")
      * @Assert\GreaterThan(value = 1900)
@@ -64,7 +64,7 @@ class Voiture extends Article
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbrePorte", type="integer")
+     * @ORM\Column(name="nbrePorte", type="integer", nullable=true)
      * @Expose()
      * @SerializedName("nbrePorte")
      * @Assert\GreaterThan(value = 0)
@@ -75,7 +75,7 @@ class Voiture extends Article
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbreSiege", type="integer")
+     * @ORM\Column(name="nbreSiege", type="integer", nullable=true)
      * @Expose()
      * @SerializedName("nbreSiege")
      * @Assert\GreaterThan(value = 0)

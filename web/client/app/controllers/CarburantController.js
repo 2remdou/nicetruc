@@ -11,9 +11,12 @@ app.controller('CarburantController',['$scope','CarburantService','usSpinnerServ
     });
     $scope.carburant = {};
 
-    $scope.create = function(carburant){
+    $scope.create = function(carburant,formIsValid){
+        $scope.formSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         CarburantService.create(carburant);
+        $scope.formSubmit=false;
         $scope.carburant = {};
     };
 
@@ -22,10 +25,13 @@ app.controller('CarburantController',['$scope','CarburantService','usSpinnerServ
 
     };
 
-    $scope.valideUpdate = function(carburant){
+    $scope.valideUpdate = function(carburant,formIsValid){
+        $scope.upformSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         carburant.visible = !carburant.visible;
         CarburantService.update(carburant);
+        $scope.upformSubmit=false;
 
     };
 

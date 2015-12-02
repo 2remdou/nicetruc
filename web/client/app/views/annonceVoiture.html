@@ -1,50 +1,54 @@
 
 <div class="col-md-offset-0 col-md-12 col-xs-offset-0 col-xs-12">
         <div class="col-md-12 col-xs-12  mg-top-20">
-            <form class="form-horizontal">
+            <form class="form-horizontal" name="formAnnonceVoiture" novalidate>
                 <div class="col-md-12 col-xs-12  mg-top-20">
 
                     <div class="col-md-6 col-xs-12  mg-top-20">
                         <!--marque-->
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formAnnonceVoiture.marque.$invalid  && formSubmit }">
                             <label for="Marque" class="text-primary control-label col-md-4">Marque :</label>
                             <div class="col-md-7">
-                                <select class="form-control" tabindex="0" id="marque" ng-model="voiture.marque"
+                                <select class="form-control" tabindex="0" id="marque" ng-model="voiture.marque" name="marque"
                                         ng-options="marque.libelleMarque
                                             for marque in marques track by marque.id"
-                                        ng-change="selectMarque(voiture.marque)">
+                                        ng-change="selectMarque(voiture.marque)" required>
                                 </select>
+                                <p ng-show="formAnnonceVoiture.marque.$invalid  && formSubmit" class="help-block">Selectionner une marque.</p>
                             </div>
                         </div>
                         <!--modele-->
-                        <div class="form-group">
-                            <label for="Marque" class="text-primary control-label col-md-4">Modele :</label>
+                        <div class="form-group" ng-class="{ 'has-error' : formAnnonceVoiture.modele.$invalid  && formSubmit }">
+                            <label for="modele" class="text-primary control-label col-md-4">Modele :</label>
                             <div class="col-md-7">
-                                <select class="form-control" tabindex="1" id="modele" ng-model="voiture.modele"
+                                <select class="form-control" tabindex="1" id="modele" ng-model="voiture.modele" name="modele"
                                         ng-options="modele.libelleModele
                                             for modele in modeles track by modele.id"
-                                        ng-change="selectModele(voiture.modele)">
+                                        ng-change="selectModele(voiture.modele)" required>
                                 </select>
+                                <p ng-show="formAnnonceVoiture.modele.$invalid  && formSubmit" class="help-block">Selectionner un modele.</p>
                             </div>
                         </div>
                         <!--carburant-->
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formAnnonceVoiture.carburant.$invalid  && formSubmit }">
                             <label for="carburant" class="text-primary control-label col-md-4">Carburant :</label>
                             <div class="col-md-7">
-                                <select class="form-control" tabindex="0" id="carburant" ng-model="voiture.carburant"
+                                <select class="form-control" tabindex="0" id="carburant" ng-model="voiture.carburant" name="carburant"
                                         ng-options="carburant.libelleCarburant
-                                            for carburant in carburants track by carburant.id">
+                                            for carburant in carburants track by carburant.id" required>
                                 </select>
+                                <p ng-show="formAnnonceVoiture.carburant.$invalid  && formSubmit" class="help-block">Selectionner un carburant.</p>
                             </div>
                         </div>
                         <!--Boitier-->
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formAnnonceVoiture.boitier.$invalid  && formSubmit }">
                             <label for="boitier" class="text-primary control-label col-md-4">Boitier :</label>
                             <div class="col-md-7">
-                                <select class="form-control" tabindex="0" id="boitier" ng-model="voiture.boitier"
+                                <select class="form-control" tabindex="0" id="boitier" ng-model="voiture.boitier" name="boitier"
                                         ng-options="boitier.libelleBoitier
-                                            for boitier in boitiers track by boitier.id">
+                                            for boitier in boitiers track by boitier.id" required>
                                 </select>
+                                <p ng-show="formAnnonceVoiture.boitier.$invalid  && formSubmit" class="help-block">Selectionner un boitier.</p>
                             </div>
                         </div>
                         <!--kmParcouru-->
@@ -64,16 +68,19 @@
                                 <label for="anneeAcquisition" class="text-primary control-label">Année Acquisition :</label>
                             </div>
                             <div class="col-md-7">
-                                <input id="anneeAcquisition" name="anneeModele" ng-model="voiture.anneeAcquisition" tabindex="3" placeholder="Année Acquisition :" type="number" class="form-control" min="1900" max="//date//">
+                                <input id="anneeAcquisition" name="anneeModele" ng-model="voiture.anneeAcquisition" tabindex="3"
+                                       placeholder="Année Acquisition :" type="number" class="form-control" min="1900" max="//currentYear//">
                             </div>
                         </div>
                         <!--Prix-->
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : formAnnonceVoiture.prix.$invalid  && formSubmit }">
                             <div class="col-md-4">
                                 <label for="prix" class="text-primary control-label">Prix de vente :</label>
                             </div>
                             <div class="col-md-7">
-                                <input id="prix" name="prix" ng-model="voiture.prix" tabindex="4" placeholder="Prix de vente :" type="number" class="form-control" min="0">
+                                <input id="prix" name="prix" ng-model="voiture.prix" tabindex="4" placeholder="Prix de vente :"
+                                       type="number" class="form-control" min="0" ng-minlength="0" required>
+                                <p ng-show="formAnnonceVoiture.prix.$invalid  && formSubmit" class="help-block">Le prix est obligatoire.</p>
                             </div>
                         </div>
                         <!--nbrePorte-->
@@ -106,7 +113,7 @@
 
                 </div>
                 <div class="col-md-12 col-xs-12 text-center">
-                    <button class="btn btn-primary btn-lg btn-ta" ng-click="create(voiture)">
+                    <button class="btn btn-primary btn-lg btn-ta" ng-click="create(voiture,formAnnonceVoiture.$valid)">
                         <span class="spinner">
                             <i class="icon-spin icon-spinner"></i>
                         </span>&nbsp;Ajouter mon annonce

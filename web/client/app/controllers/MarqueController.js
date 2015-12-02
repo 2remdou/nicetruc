@@ -11,9 +11,12 @@ app.controller('MarqueController',['$scope','MarqueService','usSpinnerService',
     });
     $scope.marque = {};
 
-    $scope.create = function(marque){
+    $scope.create = function(marque,formIsValid){
+        $scope.formSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         MarqueService.create(marque);
+        $scope.formSubmit=false;
         $scope.marque = {};
     };
 
@@ -22,10 +25,13 @@ app.controller('MarqueController',['$scope','MarqueService','usSpinnerService',
 
     };
 
-    $scope.valideUpdate = function(marque){
+    $scope.valideUpdate = function(marque,formIsValid){
+        $scope.upformSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         marque.visible = !marque.visible;
         MarqueService.update(marque);
+        $scope.upformSubmit=false;
 
     };
 

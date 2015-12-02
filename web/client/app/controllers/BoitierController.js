@@ -10,9 +10,12 @@ app.controller('BoitierController',['$scope','BoitierService','usSpinnerService'
     });
     $scope.boitier = {};
 
-    $scope.create = function(boitier){
+    $scope.create = function(boitier,formIsValid){
+        $scope.formSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
-        BoitierService.create(boitier);
+        BoitierService.create(angular.copy(boitier));
+        $scope.formSubmit=false;
         $scope.boitier = {};
     };
 
@@ -21,10 +24,13 @@ app.controller('BoitierController',['$scope','BoitierService','usSpinnerService'
 
     };
 
-    $scope.valideUpdate = function(boitier){
+    $scope.valideUpdate = function(boitier,formIsValid){
+        $scope.upformSubmit=true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         boitier.visible = !boitier.visible;
         BoitierService.update(boitier);
+        $scope.upformSubmit=false;
 
     };
 
