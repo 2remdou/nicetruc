@@ -4,7 +4,9 @@
 app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope','TokenHandler','usSpinnerService',
     function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope,TokenHandler,usSpinnerService){
 
-    $scope.login = function(user){
+    $scope.login = function(user,formIsValid){
+        $scope.formSubmit = true;
+        if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
         TokenHandler.clearCredentials();
         var email = $scope.user.email;
@@ -34,16 +36,21 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
                     $state.go('nicetruc');
 
                 },function(response){ //error checkLogin
+                        TokenHandler.clearCredentials();
                     usSpinnerService.stop('nt-spinner');
                     displayAlert('Adresse email ou mot de passe incorrect','danger',$scope);
                 });
 
             }, function (error) { //error cipher
+
                 console.log(error);
             });
         },function(response){ //error getSalt
+                TokenHandler.clearCredentials();
                 usSpinnerService.stop('nt-spinner');
                 displayAlert('Adresse email ou mot de passe incorrect','danger',$scope);
             });
+
+        $scope.formSubmit = false;
     }
 }]);

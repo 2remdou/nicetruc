@@ -4,14 +4,17 @@
             <div class="row header">
                 <h1>Connexion</h1>
             </div>
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" name="form" novalidate>
 
-                <div class="form-group">
-                    <input type="text" class="form-control" id="email" placeholder="Login ou email" ng-model="user.email">
+                <div class="form-group" ng-class="{ 'has-error' : form.email.$invalid  && formSubmit }">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Adresse email" ng-model="user.email" required>
+                    <p ng-show="form.email.$invalid  && formSubmit" class="help-block">Adresse email obligatoire.</p>
                 </div>
-                <div class="form-group">
-                    <input type="password" hide-show-password="" class="form-control" id="inputPassword1" placeholder="Mot de passe" ng-model="user.password">
+                <div class="form-group" ng-class="{ 'has-error' : form.password.$invalid  && formSubmit }">
+                    <input type="password" hide-show-password="" class="form-control" id="password"
+                           placeholder="Mot de passe" ng-model="user.password" name="password" required>
                     <span class="show-pass form-control-feedback icon-eye"></span>
+                    <p ng-show="form.password.$invalid  && formSubmit" class="help-block">Mot de passe obligatoire.</p>
                 </div>
                 <div class="row form-group" style="text-align:center">
 
@@ -29,7 +32,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" id="login" class="btn btn-embossed btn-dark-green btn-primary" ng-click="login(user)">Se connecter</button>
+                    <button type="submit" id="login" class="btn btn-embossed btn-dark-green btn-primary" ng-click="login(user,form.$valid)">Se connecter</button>
                 </div>
                 <div style="text-align:center">
 

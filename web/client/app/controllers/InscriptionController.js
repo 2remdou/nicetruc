@@ -5,7 +5,9 @@ app.controller('InscriptionController',['$scope','InscriptionService','usSpinner
                                 function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope,$state,TokenHandler){
 
 
-    $scope.create = function(user){
+    $scope.create = function(user,formIsValid){
+        $scope.formSubmit = true;
+        if(!formIsValid) return;
         TokenHandler.clearCredentials();
         usSpinnerService.spin('nt-spinner');
             InscriptionService.create(user).then(function(response){
@@ -20,5 +22,6 @@ app.controller('InscriptionController',['$scope','InscriptionService','usSpinner
                 successRequest(response,$scope);
                 usSpinnerService.stop('nt-spinner');
             });
+        $scope.formSubmit = false;
     }
 }]);

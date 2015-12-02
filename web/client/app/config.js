@@ -167,7 +167,6 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','User
         if(response.status === 403) {
             displayAlert("Vous ne disposez des autorisations neccessaires pour effectuer cette action",'danger',scope);
             usSpinnerService.stop('nt-spinner');
-            return false;
         }
         return true;
     });
