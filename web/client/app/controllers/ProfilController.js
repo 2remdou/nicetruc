@@ -2,8 +2,9 @@
  * Created by touremamadou on 13/09/2015.
  */
 
-app.controller('ProfilController',['$scope','VilleService','QuartierService','$rootScope','UserService','Restangular','$state',
-                        function($scope,VilleService,QuartierService,$rootScope,UserService,Restangular,$state){
+app.controller('ProfilController',['$scope','VilleService','QuartierService','$rootScope','UserService',
+                    'Restangular','$state','usSpinnerService','TokenHandler',
+                        function($scope,VilleService,QuartierService,$rootScope,UserService,Restangular,$state,usSpinnerService,TokenHandler){
     $scope.villes = VilleService.list().$object;
     $scope.quartiers = [];
 
@@ -25,17 +26,25 @@ app.controller('ProfilController',['$scope','VilleService','QuartierService','$r
         $scope.quartiers = ville.quartiers;
     };
 
-    $scope.saveInfo = function(user){
+    $scope.saveInfo = function(user,formIsValid){
+        $scope.formSubmit = true;
+        if(!formIsValid) return;
+        usSpinnerService.spin('nt-spinner');
         user.put().then(function(response){
             successRequest(response,$scope);
-
+            usSpinnerService.stop('nt-spinner');
             $state.go('nicetruc');
         },function(response){
-            errorRequest(response,$scope);
+            usSpinnerService.stop('nt-spinner');
+            successRequest(response,$scope);
         });
+        $scope.formSubmit = false;
     };
 
-    $scope.changePassword = function(user){
+    $scope.changePassword = function(user,formIsValid){
+        $scope.passFormSubmit = true;
+        if(!formIsValid) return;
+        usSpinnerService.spin('nt-spinner');
         var newPass = UserService.changePassword(user);
 
         newPass.id=user.id;
@@ -44,12 +53,17 @@ app.controller('ProfilController',['$scope','VilleService','QuartierService','$r
         newPass.confirmationPassword = user.confirmationPassword;
 
         newPass.put().then(function(response){
+            TokenHandler.clearCredentials();
             successRequest(response,$scope)
+            usSpinnerService.stop('nt-spinner');
             $state.go('nicetruc');
 
         },function(response){
-            errorRequest(response,$scope);
+            var message = response.data.data[0];
+            displayAlert(message.texte,message.typeAlert,$scope);
+            usSpinnerService.stop('nt-spinner');
         });
+        $scope.passFormSubmit = false;
     }
 
 

@@ -1,7 +1,8 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope','TokenHandler','usSpinnerService',
+app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope',
+                'TokenHandler','usSpinnerService',
     function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope,TokenHandler,usSpinnerService){
 
     $scope.login = function(user,formIsValid){

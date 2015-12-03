@@ -71,24 +71,27 @@
                 <div class="row">
                     <div class="pd-20">
 
-                        <form method="POST">
+                        <form novalidate name="form">
                             <div class="panel panel-default">
                                 <div class="panel-heading">Information Personnelle</div>
                                 <div class="panel-body">
-                                    <div class="form-group">
-                                        <input type="text" name="nomUser" ng-model="user.nomUser" id="nomUser" tabindex="0" class="form-control" placeholder="Nom" value="">
+                                    <div class="form-group" ng-class="{ 'has-error' : form.nomUser.$invalid  && formSubmit }">
+                                        <input type="text" name="nomUser" ng-model="user.nomUser" id="nomUser" tabindex="0"
+                                               class="form-control" placeholder="Nom" value="" required>
+                                        <p ng-show="form.nomUser.$invalid  && formSubmit" class="help-block">Le nom est obligatoire.</p>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <input type="text" name="prenomUser" ng-model="user.prenomUser" id="prenomUser" tabindex="1" class="form-control" placeholder="Prenom" value="">
+                                        <input type="text" name="prenomUser" ng-model="user.prenomUser" id="prenomUser" tabindex="1"
+                                               class="form-control" placeholder="Prenom" value="">
                                     </div>
 
-                                    <div class="form-group">
-                                        <input type="email" name="email" ng-model="user.email" id="email" tabindex="2" class="form-control" placeholder="Adresse email" value="">
-                                        <span ng-show="formInscription.email.$dirty && formInscription.email.$invalid">
-                                            Cette adresse est invalide.
-                                        </span>
+                                    <div class="form-group" ng-class="{ 'has-error' : form.email.$invalid  && formSubmit }">
+                                        <input type="email" name="email" ng-model="user.email" id="email" tabindex="2"
+                                               class="form-control" placeholder="Adresse email" value="" required>
+                                        <p ng-show="form.email.$error.required  && formSubmit" class="help-block">L'adresse email est obligatoire.</p>
+                                        <p ng-show="form.email.$error.email  && formSubmit" class="help-block">Le format l'email est incorrect.</p>
                                     </div>
 
                                 </div>
@@ -99,7 +102,8 @@
                                 <div class="panel-heading">Adresse</div>
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <input type="text" name="telephone" ng-model="user.telephone" id="telephone"  class="form-control" placeholder="Telephone" value="">
+                                        <input type="text" name="telephone" ng-model="user.telephone" id="telephone"
+                                               class="form-control" placeholder="Telephone" value="">
                                     </div>
 
                                     <div class="form-group">
@@ -132,28 +136,34 @@
                                 </div>
                             </div>
                             <div>
-                                <button class="btn btn-info" ng-click="saveInfo(user)">Enregistrer</button>
+                                <button class="btn btn-info" ng-click="saveInfo(user,form.$valid)">Enregistrer</button>
                             </div>
                             <br>
                         </form>
-                        <form method="POST">
+                        <form name="passForm" novalidate>
                             <div class="panel panel-default">
                                 <div class="panel-heading">Mot de passe actuel</div>
                                 <div class="panel-body">
-                                    <div class="form-group">
-                                        <input type="password" name="passwordActuel" ng-model="user.passwordActuel" class="form-control" placeholder="Mot de passe Actuel" value="">
+                                    <div class="form-group" ng-class="{ 'has-error' : passForm.passwordActuel.$invalid  && passFormSubmit }">
+                                        <input type="password" name="passwordActuel" ng-model="user.passwordActuel" class="form-control"
+                                               placeholder="Mot de passe Actuel" value="" required>
+                                        <p ng-show="passForm.passwordActuel.$invalid  && passFormSubmit" class="help-block">Le mot de passe est obligatoire.</p>
+                                    </div>
+
+                                    <div class="form-group" ng-class="{ 'has-error' : passForm.password.$invalid  && passFormSubmit }">
+                                        <input type="password" name="password" ng-model="user.password" class="form-control"
+                                               placeholder="Nouveau Mot de passe" value="" required>
+                                        <p ng-show="passForm.password.$invalid  && passFormSubmit" class="help-block">Le mot de passe est obligatoire.</p>
+                                    </div>
+
+                                    <div class="form-group" ng-class="{ 'has-error' : passForm.confirmationPassword.$invalid  && passFormSubmit }">
+                                        <input type="password" name="confirmationPassword" ng-model="user.confirmationPassword"
+                                               class="form-control" placeholder="Confirmation Mot de passe" value="" required>
+                                        <p ng-show="passForm.confirmationPassword.$invalid  && passFormSubmit" class="help-block">La confirmation est obligatoire.</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" name="password" ng-model="user.password" class="form-control" placeholder="Nouveau Mot de passe" value="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="password" name="confirmationPassword" ng-model="user.confirmationPassword" class="form-control" placeholder="Confirmation Mot de passe" value="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button class="btn btn-info" ng-click="changePassword(user)">Changer mot de passe</button>
+                                        <button class="btn btn-info" ng-click="changePassword(user,passForm.$valid)">Changer mot de passe</button>
                                     </div>
                                 </div>
                             </div>
