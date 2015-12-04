@@ -43,7 +43,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="prenomUser", type="string", length=255)
+     * @ORM\Column(name="prenomUser", type="string", length=255, nullable=true)
      * @Expose()
      * @SerializedName("prenomUser")
      */

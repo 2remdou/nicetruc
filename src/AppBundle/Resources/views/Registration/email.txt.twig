@@ -1,12 +1,37 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% block subject %}
-{% autoescape false %}
-{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
-{% endautoescape %}
-{% endblock %}
-{% block body_text %}
-{% autoescape false %}
-{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
-{% endautoescape %}
-{% endblock %}
-{% block body_html %}{% endblock %}
+    {% block subject %}
+        {% autoescape false %}
+        {{ 'registration.email.subject'|trans({'%username%': user.nomUser, '%confirmationUrl%': confirmationUrl}) }}
+        {% endautoescape %}
+    {% endblock %}
+
+    {% block body_html %}
+            <table style="border:none;padding:0 18px;margin:50px auto;width:500px">
+                <tbody>
+                    <tr width="100%" height="57">
+                        <td valign="top" align="left" style="border-top-left-radius:4px;border-top-right-radius:4px;background:#0079bf;padding:12px 18px;text-align:center">
+                            <h1>Nicetruc</h1>
+                        </td>
+
+                    <tr width="100%">
+                        <td valign="top" align="left" style="border-bottom-left-radius:4px;border-bottom-right-radius:4px;background:#fff;padding:18px">
+                            <h1 style="font-size:20px;margin:0;color:#333">Bonjour {{ user.nomUser|capitalize }},</h1>
+
+                            <p style="font:15px/1.25em 'Helvetica Neue',Arial,Helvetica;color:#333">
+                                Nous sommes prêts à activer votre compte, il nous suffit juste de verifier que cette adresse est bien la vôtre.
+                            </p>
+
+                            <p style="font:15px/1.25em 'Helvetica Neue',Arial,Helvetica;color:#333">
+                                <a href="{{ confirmationUrl }}" style="border-radius:3px;background:#3aa54c;color:#fff;display:block;font-weight:700;font-size:16px;line-height:1.25em;margin:24px auto 24px;padding:10px 18px;text-decoration:none;width:180px;text-align:center" target="_blank">Verifier mon adresse</a>
+                            </p>
+
+                            <p style="font:15px/1.25em 'Helvetica Neue',Arial,Helvetica;color:#939393;margin-bottom:0">
+                                Si vous n'avez pas créé <span class="il">compte</span> Nicetruc, il vous suffit de supprimer cet e-mail et tout sera comme avant.
+                            </p>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+    {% endblock body_html %}

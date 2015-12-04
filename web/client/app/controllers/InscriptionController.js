@@ -1,8 +1,9 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies','$rootScope','$state','TokenHandler',
-                                function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope,$state,TokenHandler){
+app.controller('InscriptionController',['$scope','InscriptionService','usSpinnerService','$cookies',
+                                    '$rootScope','$state','TokenHandler','Digest',
+                                function($scope,InscriptionService,usSpinnerService,$cookies,$rootScope,$state,TokenHandler,Digest){
 
 
     $scope.create = function(user,formIsValid){
@@ -11,13 +12,17 @@ app.controller('InscriptionController',['$scope','InscriptionService','usSpinner
         TokenHandler.clearCredentials();
         usSpinnerService.spin('nt-spinner');
             InscriptionService.create(user).then(function(response){
-                successRequest(response,$scope);
-                $cookies.put('email',response.user.email);
-
                 $rootScope.user = response.user;
+                Digest.cipher(user.password,$rootScope.user.salt).then(function(secret){
+                    $cookies.put('email',response.user.email);
+                    $cookies.put('secret', secret);
+                    $cookies.putObject('user',$rootScope.user);
 
-                usSpinnerService.stop('nt-spinner');
-                $state.go('nicetruc');
+                    successRequest(response,$scope);
+
+                    usSpinnerService.stop('nt-spinner');
+                    $state.go('nicetruc');
+                });
             },function(response){
                 successRequest(response,$scope);
                 usSpinnerService.stop('nt-spinner');

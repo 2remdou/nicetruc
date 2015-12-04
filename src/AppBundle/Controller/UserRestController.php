@@ -12,11 +12,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\NicetrucEvents;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\UserBundle\Event\UserEvent;
+use FOS\UserBundle\FOSUserEvents;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -152,9 +156,11 @@ class UserRestController extends FOSRestController
      * @Method({"POST"})
      * @return View
      */
-    public function postUserAction(ParamFetcher $paramFetcher){
+    public function postUserAction(ParamFetcher $paramFetcher,Request $request){
 
         $view = View::create();
+
+        $dispatcher = $this->get('event_dispatcher');
 
         if($paramFetcher->get('password') !== $paramFetcher->get('confirmationPassword')){
             $view->setStatusCode(400)->setData(array(
@@ -170,13 +176,16 @@ class UserRestController extends FOSRestController
         $user->setPlainPassword($paramFetcher->get('password'));
         $user->setNomUser($paramFetcher->get('nomUser'));
         $user->setPrenomUser($paramFetcher->get('prenomUser'));
-        $user->setEnabled(true);
+//        $user->setEnabled(true);
         $user->addRole('ROLE_API');
 
 
         $errors = $this->get('validator')->validate($user, array('Registration'));
 
         if (count($errors) == 0) {
+            $event = new UserEvent($user,$request);
+            $dispatcher->dispatch(NicetrucEvents::REGISTRATION_SUCCESS, $event);
+
             $userManager->updateUser($user);
             $view->setData(array(
                'data'=> array(

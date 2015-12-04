@@ -34,6 +34,15 @@ class NiceTrucController extends FOSRestController
     }
 
     /**
+     * @Route("/test", name="test")
+     */
+    public function testAction()
+    {
+        // replace this example code with whatever you need
+        return $this->render('AppBundle::test.html.twig');
+    }
+
+    /**
      * @Route("/villes",name="nicetruc_ville")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      */

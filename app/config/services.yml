@@ -96,3 +96,9 @@ services:
             - { name: kernel.event_listener, event: app.voiture.pre_create, method: onCheckVoitureOwner}
             - { name: kernel.event_listener, event: app.voiture.pre_update, method: onCheckVoitureOwner}
             - { name: kernel.event_listener, event: app.voiture.pre_delete, method: onCheckVoitureOwner}
+
+    nicetruc.listener.email_confirmation:
+        class: AppBundle\EventListener\EmailConfirmationListener
+        arguments: ["@fos_user.mailer.twig_swift", "@fos_user.util.token_generator", "@router", "@session"]
+        tags:
+            - { name: kernel.event_subscriber }

@@ -102,10 +102,17 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: nicetruc@gmail.com
+        sender_name: Equipe nicetruc
     registration:
         form:
             type: nicetruc_user_registration
             name: nicetruc_user_registration_form
+        confirmation:
+            enabled: true
     profile:
         form:
             type: nicetruc_user_profile
