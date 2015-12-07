@@ -11,5 +11,6 @@ var app = angular.module('app',[
     'angularSpinner',
     'ngAnimate',
     'ui.bootstrap',
-    'permission'
+    'permission',
+    'ui-notification'
 ]);

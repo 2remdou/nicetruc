@@ -22,6 +22,7 @@ gulp.task('scripts', function() {
         'web/client/bower_components/angular-spinner/angular-spinner.min.js',
         'web/client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
         'web/client/bower_components/angular-permission/dist/angular-permission.js',
+        'web/client/bower_components/angular-ui-notification/dist/angular-ui-notification.min.js',
         'web/bundles/fosjsrouting/js/router.js',
         'web/js/fos_js_routes.js',
         'web/client/app/**/*.js'

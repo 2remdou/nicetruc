@@ -8,8 +8,10 @@ app.config(function($interpolateProvider) {
 });
 
 
-    app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHandlerProvider','usSpinnerConfigProvider','$locationProvider',
-    function(RestangularProvider,$injector, TokenHandlerProvider, AuthHandlerProvider,usSpinnerConfigProvider,$locationProvider) {
+    app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHandlerProvider','usSpinnerConfigProvider',
+        '$locationProvider','NotificationProvider',
+    function(RestangularProvider,$injector, TokenHandlerProvider, AuthHandlerProvider,usSpinnerConfigProvider,
+             $locationProvider,NotificationProvider) {
 
     var TokenHandler = $injector.instantiate(TokenHandlerProvider.$get);
     var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);
@@ -88,7 +90,7 @@ app.config(function($interpolateProvider) {
     });
 
 
-        var opts = {
+    var opts = {
             lines: 13 // The number of lines to draw
             , length: 28 // The length of each line
             , width: 14 // The line thickness
@@ -113,10 +115,24 @@ app.config(function($interpolateProvider) {
 
     usSpinnerConfigProvider.setDefaults(opts);
 
+    var optNotication={
+        delay: 10000,
+        startTop: 20,
+        startRight: 10,
+        verticalSpacing: 20,
+        horizontalSpacing: 20,
+        positionX: 'left',
+        positionY: 'bottom',
+        replaceMessage: true
+    }
+        NotificationProvider.setOptions(optNotication);
+
     }]);
 
-app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','UserService','$state','usSpinnerService',
-        function($rootScope,AuthHandler,$timeout,Restangular,Permission,UserService,$state,usSpinnerService){
+app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','UserService',
+        '$state','usSpinnerService','Notification','$window',
+        function($rootScope,AuthHandler,$timeout,Restangular,Permission,UserService,$state,
+                 usSpinnerService,Notification,$window){
 
             $rootScope.currentYear = new Date().getFullYear();
             var scope = $rootScope.$new();
@@ -150,12 +166,36 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','User
     });
 
     $rootScope.$on('showMessage',function(event,messages){
-        $timeout(function(){
+        angular.forEach(messages,function(message){
+            if(message.typeAlert==='danger'){
+                Notification.error(message.texte);
+            }
+            else if(message.typeAlert==='success'){
+                var opt ={
+                    message : message.texte,
+                    delay: 10000,
+                    startTop: 20,
+                    startRight: 10,
+                    verticalSpacing: 20,
+                    horizontalSpacing: 20,
+                    positionX: 'left',
+                    positionY: 'top'
+                }
+                Notification.success(opt);
+            }
+            else if(message.typeAlert==='info'){
+                Notification.info(message.texte);
+            }
+            else if(message.typeAlert==='warning'){
+                Notification.warning(message.texte);
+            }
+        });
+        /*$timeout(function(){
             $rootScope.showMessage = false;
             $rootScope.messages = {};
         },10000);
         $rootScope.showMessage = true;
-        $rootScope.messages = messages;
+        $rootScope.messages = messages;*/
     });
 
     $rootScope.$on('hideMessage',function(event){
