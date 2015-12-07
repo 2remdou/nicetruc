@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form class="form-horizontal" role="form" name="form" novalidate>
+                <div class="row header" class="center-block">
+                    <h4 class="text-center">Mot de passe oublié</h4>
+                 </div>
+
+                <div class="form-group" ng-class="{ 'has-error' : form.email.$invalid  && formSubmit }">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Adresse email" ng-model="email" required>
+                    <p ng-show="form.email.$invalid  && formSubmit" class="help-block">Adresse email obligatoire.</p>
+                </div>
+                
+                <div>
+                    <button type="submit" id="login" class="btn btn-embossed btn-dark-green btn-primary center-block" ng-click="resetting(email,form.$valid)">M'envoyer les instructions par email</button>
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+</div>

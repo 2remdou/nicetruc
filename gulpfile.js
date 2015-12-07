@@ -7,9 +7,9 @@ var gulp = require('gulp'),
 
 gulp.task('scripts', function() {
     return gulp.src([
+        'web/client/bower_components/jquery/dist/jquery.min.js',
         'web/client/bower_components/angular/angular.min.js',
         'web/client/bower_components/angular-animate/angular-animate.js',
-        'web/client/bower_components/jquery/dist/jquery.min.js',
         'web/client/bower_components/bootstrap/dist/js/bootstrap.min.js',
         'web/client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
         'web/client/bower_components/lodash/lodash.min.js',

@@ -10,5 +10,12 @@ app.controller('IndexController',['$scope','TokenHandler','$state','$rootScope',
         $state.go('nicetruc');
     };
 
+    $scope.isEnabled = function(){
+    	if($rootScope.user){
+    		return $rootScope.user.enabled;
+    	}
+    	return true;
+    };
+
     //$state.go('nicetruc.main');
 }]);

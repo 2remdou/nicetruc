@@ -114,15 +114,15 @@ app.config(function($interpolateProvider) {
         }; //loading(spinner)
 
     usSpinnerConfigProvider.setDefaults(opts);
-
+    
     var optNotication={
         delay: 10000,
-        startTop: 20,
-        startRight: 10,
+        startTop: 50,
+        startRight: 20,
         verticalSpacing: 20,
         horizontalSpacing: 20,
-        positionX: 'left',
-        positionY: 'bottom',
+        positionX: 'center',
+        positionY: 'top',
         replaceMessage: true
     }
         NotificationProvider.setOptions(optNotication);
@@ -167,27 +167,18 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','User
 
     $rootScope.$on('showMessage',function(event,messages){
         angular.forEach(messages,function(message){
+            var opt= {'message': message.texte}
             if(message.typeAlert==='danger'){
-                Notification.error(message.texte);
+                Notification.error(opt);
             }
             else if(message.typeAlert==='success'){
-                var opt ={
-                    message : message.texte,
-                    delay: 10000,
-                    startTop: 20,
-                    startRight: 10,
-                    verticalSpacing: 20,
-                    horizontalSpacing: 20,
-                    positionX: 'left',
-                    positionY: 'top'
-                }
                 Notification.success(opt);
             }
             else if(message.typeAlert==='info'){
-                Notification.info(message.texte);
+                Notification.info(opt);
             }
             else if(message.typeAlert==='warning'){
-                Notification.warning(message.texte);
+                Notification.warning(opt);
             }
         });
         /*$timeout(function(){

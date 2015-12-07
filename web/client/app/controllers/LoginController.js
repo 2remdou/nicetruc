@@ -27,10 +27,8 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
                 $cookies.put('secret', $scope.secret);
 
                 LoginService.checkLogin().then(function(response){
-                    successRequest(response,$scope);
-
                     $rootScope.user = response.user;
-
+                    successRequest(response,$scope);
                     $cookies.putObject('user',$rootScope.user);
 
                     usSpinnerService.stop('nt-spinner');
@@ -53,5 +51,15 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
             });
 
         $scope.formSubmit = false;
-    }
+    };
+
+    $scope.goToInscription = function(){
+        $state.go('nicetruc.inscription');
+    };
+
+    $scope.goToPasswordForgotten = function(){
+        $state.go('nicetruc.resetting');
+    };
+
+
 }]);

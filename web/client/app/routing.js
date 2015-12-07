@@ -36,6 +36,15 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
+       .state('nicetruc.resetting',{
+           url: 'resetting',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/resetting.html',
+                   controller: 'ResettingController'
+               }
+           }
+       })
        .state('nicetruc.inscription',{
            url: 'inscription',
            views:{
