@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use FOS\UserBundle\Model\UserInterface;
 
 class UserRestController extends FOSRestController
 {
@@ -333,22 +334,23 @@ class UserRestController extends FOSRestController
 
     }
     /**
-     * reset password user
+     * send email for reset password user
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = "reset le password d'un  user",
+     *   description = "send email for reset le password d'un  user",
      *   statusCodes = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the user is not found"
      *   }
      * )
      * @RequestParam(name="email", nullable=false, strict=true, description="email user")
-     * @Route("/api/users/resetMail", name="nicetruc_reset_mail_password")
-     * @Method({"PUT"})
+     * @Route("/api/users/resetting/send-mail", name="nicetruc_reset_send_mail_password")
+     * @Method({"POST"})
      * @return View
      */
-    public function resetPasswordAction(ParamFetcher $paramFetcher){
+    public function resetSendMailAction(ParamFetcher $paramFetcher){
+
         if($paramFetcher->get('email')){
             $username = $paramFetcher->get('email');
         }
@@ -360,11 +362,11 @@ class UserRestController extends FOSRestController
         if (null === $user) {
             return $this->configError($view,"Cette adresse email n'existe pas",'danger',404);
         }
-
+/*
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->configError($view,"Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.",'info',404);
+            return $this->configError($view,"Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.",'danger',404);
         }
-
+*/
         if (null === $user->getConfirmationToken()) {
             /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
             $tokenGenerator = $this->get('fos_user.util.token_generator');
@@ -377,6 +379,105 @@ class UserRestController extends FOSRestController
 
         return $this->getObfuscatedEmail($user);
     }
+    /**
+     * check if token is ok
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "check if token is ok",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("/api/users/resetting/check-token/{token}", name="nicetruc_reset_check_token_password")
+     * @Method({"POST"})
+     * @return View
+     */
+    public function checkTokenAction(Request $request, $token)
+    {
+
+
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $view = View::create();
+
+        $user = $userManager->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('Au utilisateur n\'existe avec cette valeur de token "%s"', $token));
+        }
+
+        $event = new GetResponseUserEvent($user, $request);
+
+        $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $this->configError($view,"La demande de réinitialisation du nouveau mot de passe a depassée la limite des 24 heures.",'danger',404);
+        }
+
+        return $view->setStatusCode(200);
+    }
+
+    /**
+     * reset password user
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "reset le password d'un  user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @RequestParam(name="password", nullable=false, strict=true, description="password user")
+     * @Route("/api/users/resetting/reset/{token}", name="nicetruc_reset_password")
+     * @Method({"POST"})
+     * @return View
+     */
+
+    public function resetAction(ParamFetcher $paramFetcher, $token)
+    {
+        
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $view = View::create();
+
+        $user = $userManager->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('Au utilisateur n\'existe avec cette valeur de token "%s"', $token));
+        }
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::RESETTING_RESET_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $this->configError($view,"La demande de réinitialisation du nouveau mot de passe a depassée la limite des 24 heures.",'danger',404);
+        }
+
+        if($paramFetcher->get('password')){
+            $user->setPlainPassword($paramFetcher->get('password'));
+            $event = new UserEvent($user,$request);
+            $dispatcher->dispatch(NicetrucEvents::RESETTING_RESET_SUCCESS, $event);
+
+            $userManager->updateUser($user);
+
+            $view->setData($user);
+
+            return $this->configError($view,'Mot de passe modifié avec succès','success',200);
+        }
+
+        return $this->configError($view,'Veuillez fournir le nouveau mot de passe','danger',500);
+
+    }
+
 
 
     /**
@@ -410,6 +511,24 @@ class UserRestController extends FOSRestController
             ->setStatusCode($status);
 
         return $view;
+    }
+    /**
+     * Get the truncated email displayed when requesting the resetting.
+     *
+     * The default implementation only keeps the part following @ in the address.
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $user
+     *
+     * @return string
+     */
+    protected function getObfuscatedEmail(UserInterface $user)
+    {
+        $email = $user->getEmail();
+        if (false !== $pos = strpos($email, '@')) {
+            $email = '...' . substr($email, $pos);
+        }
+
+        return $email;
     }
 
 

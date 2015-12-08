@@ -58,4 +58,12 @@ app.service('UserService',['$rootScope','Restangular','$cookies',
     this.changePassword = function(){
         return _userService.one('change');
     };
+
+    this.resetMail = function(email){
+        return _userService.one('resetting').post('send-mail',{email:email});
+    };
+
+    this.resetCheckToken = function(token){
+        return _userService.one('resetting').one('check-token',token);
+    }
 }]);

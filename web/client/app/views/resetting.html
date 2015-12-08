@@ -3,16 +3,18 @@
         <div class="col-md-4 col-md-offset-4">
             <form class="form-horizontal" role="form" name="form" novalidate>
                 <div class="row header" class="center-block">
-                    <h4 class="text-center">Mot de passe oublié</h4>
+                    <h4 class="text-center">Nouveau mot de passe</h4>
                  </div>
 
-                <div class="form-group" ng-class="{ 'has-error' : form.email.$invalid  && formSubmit }">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Adresse email" ng-model="email" required>
-                    <p ng-show="form.email.$invalid  && formSubmit" class="help-block">Adresse email obligatoire.</p>
+                <div class="form-group" ng-class="{ 'has-error' : form.password.$invalid  && formSubmit }">
+                    <input type="password" hide-show-password="" class="form-control" id="password"
+                           placeholder="Mot de passe" ng-model="password" name="password" required>
+                    <span class="show-pass form-control-feedback icon-eye"></span>
+                    <p ng-show="form.password.$invalid  && formSubmit" class="help-block">Mot de passe obligatoire.</p>
                 </div>
                 
                 <div>
-                    <button type="submit" id="login" class="btn btn-embossed btn-dark-green btn-primary center-block" ng-click="resetting(email,form.$valid)">M'envoyer les instructions par email</button>
+                    <button type="submit" id="login" class="btn btn-embossed btn-dark-green btn-primary center-block" ng-click="resetting(password,form.$valid)">Réinitialiser</button>
                 </div>
 
                 

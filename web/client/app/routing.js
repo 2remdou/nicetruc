@@ -36,8 +36,26 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
+       .state('nicetruc.resetSendMail',{
+           url: 'resetSendMail',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/resetSendMail.html',
+                   controller: 'ResetSendMailController'
+               }
+           }
+       })
+       .state('nicetruc.resetCheckToken',{
+           url: 'resetCheckToken/:token',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/resetCheckToken.html',
+                   controller: 'ResetCheckTokenController'
+               }
+           }
+       })
        .state('nicetruc.resetting',{
-           url: 'resetting',
+           url: 'resetting/:token',
            views:{
                'content':{
                    templateUrl: 'client/app/views/resetting.html',
