@@ -332,6 +332,51 @@ class UserRestController extends FOSRestController
         }
 
     }
+    /**
+     * reset password user
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "reset le password d'un  user",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @RequestParam(name="email", nullable=false, strict=true, description="email user")
+     * @Route("/api/users/resetMail", name="nicetruc_reset_mail_password")
+     * @Method({"PUT"})
+     * @return View
+     */
+    public function resetPasswordAction(ParamFetcher $paramFetcher){
+        if($paramFetcher->get('email')){
+            $username = $paramFetcher->get('email');
+        }
+        $view = View::create();
+
+        /** @var $user UserInterface */
+        $user = $this->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
+
+        if (null === $user) {
+            return $this->configError($view,"Cette adresse email n'existe pas",'danger',404);
+        }
+
+        if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
+            return $this->configError($view,"Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.",'info',404);
+        }
+
+        if (null === $user->getConfirmationToken()) {
+            /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+            $tokenGenerator = $this->get('fos_user.util.token_generator');
+            $user->setConfirmationToken($tokenGenerator->generateToken());
+        }
+
+        $this->get('fos_user.mailer')->sendResettingEmailMessage($user);
+        $user->setPasswordRequestedAt(new \DateTime());
+        $this->get('fos_user.user_manager')->updateUser($user);
+
+        return $this->getObfuscatedEmail($user);
+    }
 
 
     /**
