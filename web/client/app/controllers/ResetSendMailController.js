@@ -1,10 +1,10 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('ResettingController',['$scope','usSpinnerService','UserService',
+app.controller('ResetSendMailController',['$scope','usSpinnerService','UserService',
     function($scope,usSpinnerService,UserService){
 
-    $scope.resetting = function(email,formIsValid){
+    $scope.sendMail = function(email,formIsValid){
         $scope.formSubmit = true;
         if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');

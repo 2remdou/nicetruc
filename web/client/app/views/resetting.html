@@ -8,13 +8,22 @@
 
                 <div class="form-group" ng-class="{ 'has-error' : form.password.$invalid  && formSubmit }">
                     <input type="password" hide-show-password="" class="form-control" id="password"
-                           placeholder="Mot de passe" ng-model="password" name="password" required>
+                           placeholder="Mot de passe" ng-model="user.password" name="password" required>
                     <span class="show-pass form-control-feedback icon-eye"></span>
                     <p ng-show="form.password.$invalid  && formSubmit" class="help-block">Mot de passe obligatoire.</p>
                 </div>
-                
+
+                <div class="form-group" ng-class="{ 'has-error' : form.confirmationPassword.$invalid  && formSubmit }">
+                    <input type="password" name="confirmationPassword" ng-model="user.confirmationPassword" id="confirmationPassword"
+                           tabindex="4" class="form-control" placeholder="Confirmation Mot de passe" value=""
+                           equals-to="form.password" required>
+                    <p ng-show="form.confirmationPassword.$invalid  && formSubmit" class="help-block">La confirmation est obligatoire.</p>
+                    <p ng-show="form.confirmationPassword.$invalid  && formSubmit" class="help-block">Le deux mots de passe doivent être identiques</p>
+                </div>
+
+
                 <div>
-                    <button type="submit" id="login" class="btn btn-embossed btn-dark-green btn-primary center-block" ng-click="resetting(password,form.$valid)">Réinitialiser</button>
+                    <button type="submit" id="login" class="btn btn-embossed btn-dark-green btn-primary center-block" ng-click="resetting(user,form.$valid)">Réinitialiser</button>
                 </div>
 
                 

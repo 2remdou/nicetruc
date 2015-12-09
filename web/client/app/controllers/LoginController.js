@@ -58,7 +58,7 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
     };
 
     $scope.goToPasswordForgotten = function(){
-        $state.go('nicetruc.resetting');
+        $state.go('nicetruc.resetSendMail');
     };
 
 

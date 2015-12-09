@@ -64,6 +64,10 @@ app.service('UserService',['$rootScope','Restangular','$cookies',
     };
 
     this.resetCheckToken = function(token){
-        return _userService.one('resetting').one('check-token',token);
+        return _userService.one('resetting').post('check-token',{token:token});
+    };
+
+    this.resetting = function(token,password){
+        return _userService.one('resetting').post('reset',{token:token,password:password});
     }
 }]);

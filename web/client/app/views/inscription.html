@@ -31,8 +31,10 @@
 
                         <div class="form-group" ng-class="{ 'has-error' : form.confirmationPassword.$invalid  && formSubmit }">
                             <input type="password" name="confirmationPassword" ng-model="user.confirmationPassword" id="confirmationPassword"
-                                   tabindex="4" class="form-control" placeholder="Confirmation Mot de passe" value="" required>
-                            <p ng-show="form.password.$invalid  && formSubmit" class="help-block">La confirmation est obligatoire.</p>
+                                   tabindex="4" class="form-control" placeholder="Confirmation Mot de passe" value=""
+                                   equals-to="form.password" required>
+                            <p ng-show="form.confirmationPassword.$error.required  && formSubmit" class="help-block">La confirmation est obligatoire.</p>
+                            <p ng-show="form.confirmationPassword.$invalid  && formSubmit" class="help-block">Le deux mots de passe doivent être identiques</p>
                         </div>
 <!--
                         {% if is_granted("ROLE_SUPER_ADMIN") %}

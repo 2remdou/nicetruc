@@ -379,6 +379,7 @@ class UserRestController extends FOSRestController
 
         return $this->getObfuscatedEmail($user);
     }
+
     /**
      * check if token is ok
      *
@@ -390,20 +391,26 @@ class UserRestController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("/api/users/resetting/check-token/{token}", name="nicetruc_reset_check_token_password")
+     * @RequestParam(name="token", nullable=false, strict=true, description="token user")
+     * @Route("/api/users/resetting/check-token", name="nicetruc_reset_check_token_password")
      * @Method({"POST"})
      * @return View
      */
-    public function checkTokenAction(Request $request, $token)
+    public function checkTokenAction(Request $request,ParamFetcher $paramFetcher)
     {
+        $view = View::create();
 
+        if(!$paramFetcher->get('token')){
+            return $this->configError($view,"Le token est invalide",'danger',404);
+        }
+        $token = $paramFetcher->get('token');
 
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
-        $view = View::create();
+
 
         $user = $userManager->findUserByConfirmationToken($token);
 
