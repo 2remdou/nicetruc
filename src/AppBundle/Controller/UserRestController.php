@@ -25,6 +25,8 @@ use Symfony\Component\Validator\ConstraintViolationList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use FOS\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use FOS\UserBundle\Event\GetResponseUserEvent;
 
 class UserRestController extends FOSRestController
 {
@@ -202,6 +204,57 @@ class UserRestController extends FOSRestController
         }
 
     }
+
+    /**
+     * confirmation user email
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = confirmation user email",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("/api/users/confirm/{token}", name="nicetruc_confirm_email")
+     * @Method({"GET"})
+     * @return View
+     */
+
+    public function enableEmailAction(Request $request, $token)
+    {
+        $view = View::create();
+
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByConfirmationToken($token);
+
+        
+
+        if (null === $user) {
+            return $this->configError($view,'Aucun utilisateur n\'existe avec cette valeur de token '.$token,'danger',404);
+        }
+
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $user->setConfirmationToken(null);
+        $user->setEnabled(true);
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
+
+        $userManager->updateUser($user);
+
+
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
+
+        $view->setData($user);
+        return $this->configError($view,'Votre compte a été activé','success',200);
+    }
+
+    
 
     /**
      * edit un  user
@@ -415,7 +468,7 @@ class UserRestController extends FOSRestController
         $user = $userManager->findUserByConfirmationToken($token);
 
         if (null === $user) {
-            throw new NotFoundHttpException(sprintf('Au utilisateur n\'existe avec cette valeur de token "%s"', $token));
+            return $this->configError($view,'Au utilisateur n\'existe avec cette valeur de token '.$token,'danger',404);
         }
 
         $event = new GetResponseUserEvent($user, $request);
@@ -441,25 +494,30 @@ class UserRestController extends FOSRestController
      *   }
      * )
      * @RequestParam(name="password", nullable=false, strict=true, description="password user")
-     * @Route("/api/users/resetting/reset/{token}", name="nicetruc_reset_password")
+     * @RequestParam(name="token", nullable=false, strict=true, description="token user")
+     * @Route("/api/users/resetting/reset", name="nicetruc_reset_password")
      * @Method({"POST"})
      * @return View
      */
 
-    public function resetAction(ParamFetcher $paramFetcher, $token)
+    public function resetAction(ParamFetcher $paramFetcher,Request $request)
     {
+        $view = View::create();
+
+        if(!$paramFetcher->get('token')){
+            return $this->configError($view,"Le token est invalide",'danger',404);
+        }
+        $token = $paramFetcher->get('token');
         
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
-        $view = View::create();
-
         $user = $userManager->findUserByConfirmationToken($token);
 
         if (null === $user) {
-            throw new NotFoundHttpException(sprintf('Au utilisateur n\'existe avec cette valeur de token "%s"', $token));
+            return $this->configError($view,'Au utilisateur n\'existe avec cette valeur de token '.$token,'danger',404);
         }
 
         $event = new GetResponseUserEvent($user, $request);

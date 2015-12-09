@@ -69,5 +69,9 @@ app.service('UserService',['$rootScope','Restangular','$cookies',
 
     this.resetting = function(token,password){
         return _userService.one('resetting').post('reset',{token:token,password:password});
-    }
+    };
+
+    this.enableEmail = function(token){
+        return _userService.one('confirm',token);
+    };
 }]);

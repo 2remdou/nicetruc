@@ -9,9 +9,11 @@ app.config(function($interpolateProvider) {
 
 
     app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHandlerProvider','usSpinnerConfigProvider',
-        '$locationProvider','NotificationProvider',
+        '$locationProvider','NotificationProvider','$locationProvider',
     function(RestangularProvider,$injector, TokenHandlerProvider, AuthHandlerProvider,usSpinnerConfigProvider,
-             $locationProvider,NotificationProvider) {
+             $locationProvider,NotificationProvider,$locationProvider) {
+
+    $locationProvider.html5Mode(true); // pour enlever le hastag(#) dans l'url
 
     var TokenHandler = $injector.instantiate(TokenHandlerProvider.$get);
     var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);

@@ -72,6 +72,15 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
+       .state('nicetruc.enableEmail',{
+           url: 'enableEmail/:token',
+           views:{
+               'content':{
+                   templateUrl: 'client/app/views/enableEmail.html',
+                   controller: 'EnableEmailController'
+               }
+           }
+       })
        .state('nicetruc.profil',{
            url: 'profil',
            views:{

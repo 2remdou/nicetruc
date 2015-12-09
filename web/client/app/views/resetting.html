@@ -3,12 +3,12 @@
         <div class="col-md-4 col-md-offset-4">
             <form class="form-horizontal" role="form" name="form" novalidate>
                 <div class="row header" class="center-block">
-                    <h4 class="text-center">Nouveau mot de passe</h4>
+                    <h4 class="text-center">Réinitialisation mot de passe</h4>
                  </div>
 
                 <div class="form-group" ng-class="{ 'has-error' : form.password.$invalid  && formSubmit }">
                     <input type="password" hide-show-password="" class="form-control" id="password"
-                           placeholder="Mot de passe" ng-model="user.password" name="password" required>
+                           placeholder="Nouveau Mot de passe" ng-model="user.password" name="password" required>
                     <span class="show-pass form-control-feedback icon-eye"></span>
                     <p ng-show="form.password.$invalid  && formSubmit" class="help-block">Mot de passe obligatoire.</p>
                 </div>

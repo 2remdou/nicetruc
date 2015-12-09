@@ -10,8 +10,11 @@ app.controller('ResettingController',['$scope','usSpinnerService','UserService',
         usSpinnerService.spin('nt-spinner');
 
         UserService.resetting($stateParams.token,$scope.user.password).then(function(response) {
-            log(response);
+            angular.forEach(response.data, function(message){
+                displayAlert(message.texte,message.typeAlert,$scope);
+            });
             usSpinnerService.stop('nt-spinner');
+            $state.go('nicetruc.login');
         },function(response){
             log(response);
         });
