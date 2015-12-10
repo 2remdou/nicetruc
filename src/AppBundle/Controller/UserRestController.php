@@ -27,6 +27,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class UserRestController extends FOSRestController
 {
@@ -216,14 +217,20 @@ class UserRestController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("/api/users/confirm/{token}", name="nicetruc_confirm_email")
-     * @Method({"GET"})
+     * @RequestParam(name="token", nullable=false, strict=true, description="token user")
+     * @Route("/api/users/registration/confirm", name="nicetruc_confirm_email")
+     * @Method({"POST"})
      * @return View
      */
 
-    public function enableEmailAction(Request $request, $token)
+    public function confirmAction(Request $request,ParamFetcher $paramFetcher)
     {
         $view = View::create();
+
+        if(!$paramFetcher->get('token')){
+            return $this->configError($view,"Le token est invalide",'danger',404);
+        }
+        $token = $paramFetcher->get('token');
 
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
@@ -247,11 +254,9 @@ class UserRestController extends FOSRestController
 
         $userManager->updateUser($user);
 
-
-        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
-
-        $view->setData($user);
-        return $this->configError($view,'Votre compte a été activé','success',200);
+        $view->setData($user)
+             ->setStatusCode(200);
+        return $view;
     }
 
     
@@ -568,6 +573,7 @@ class UserRestController extends FOSRestController
     }
 
     protected function configError(View $view,$message,$typeMessage,$status){
+        
         $view->setData(array(
             'data'=> array(
                 array('texte' => $message,'typeAlert'=>$typeMessage)

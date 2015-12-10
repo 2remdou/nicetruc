@@ -1,9 +1,9 @@
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id='nav'>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div ng-hide="isEnabled()" class="alert alert-dismissible alert-info">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <p class="text-center">Acceder à votre boite email, pour activer votre compte</p>
-</div>
+    </div>
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -13,7 +13,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="nicetruc.main">NiceTruc</a>
+            <a class="navbar-brand" ui-sref="nicetruc">NiceTruc</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -49,7 +49,7 @@
     </div>
     <!-- /.container -->
 </nav>
-<span us-spinner spinner-key="nt-spinner"></span>
+
 
 <section ng-show="showMessage" class="col-md-8 col-md-offset-2">
     <div ng-repeat="message in messages" class="alert alert-dismissible alert-// message.typeAlert //">
@@ -65,7 +65,8 @@
     </div>
 </section>-->
 
+<!--
 <div ui-view="content">
 </div>
-
+-->
 

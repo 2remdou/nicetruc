@@ -35,6 +35,15 @@ app.service('UserService',['$rootScope','Restangular','$cookies',
         return Restangular.one('users',id).get();
     };
 
+    this.refresh = function(user){
+        $rootScope.user=user;       
+        $cookies.remove('email');
+        $cookies.put('email', user.email);   
+        $cookies.remove('user');      
+        $cookies.putObject('user',user);
+
+    };
+
     this.create = function(user){
         _userService.post(user).then(function(){
             $rootScope.$broadcast('user.create');
@@ -72,6 +81,6 @@ app.service('UserService',['$rootScope','Restangular','$cookies',
     };
 
     this.enableEmail = function(token){
-        return _userService.one('confirm',token);
+        return _userService.one('registration').post('confirm',{token:token});
     };
 }]);

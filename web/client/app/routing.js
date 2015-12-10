@@ -13,12 +13,16 @@ app.config(function($stateProvider, $urlRouterProvider){
            url:'/',
            views:{
                'nav':{
-                   templateUrl: 'client/app/views/index.html',
-                   controller: 'IndexController'
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
+               'content':{
+                   templateUrl: 'client/app/views/main.html',
+                   controller: 'MainController'
                }
            }
        })
-       .state('nicetruc.main',{
+       .state('main',{
            url: 'main',
            views:{
                'content':{
@@ -27,72 +31,104 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.login',{
-           url: 'login',
+       .state('login',{
+           url: '/login',
            views:{
-               'content':{
-                   templateUrl: 'client/app/views/login.html',
-                   controller: 'LoginController'
-               }
+            'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
+             'content':{
+                 templateUrl: 'client/app/views/login.html',
+                 controller: 'LoginController'
+             }
            }
        })
-       .state('nicetruc.resetSendMail',{
-           url: 'resetSendMail',
+       .state('resetSendMail',{
+           url: '/resetSendMail',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/resetSendMail.html',
                    controller: 'ResetSendMailController'
                }
            }
        })
-       .state('nicetruc.resetCheckToken',{
-           url: 'resetCheckToken/:token',
+       .state('resetCheckToken',{
+           url: '/resetCheckToken/:token',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/resetCheckToken.html',
                    controller: 'ResetCheckTokenController'
                }
            }
        })
-       .state('nicetruc.resetting',{
-           url: 'resetting/:token',
+       .state('resetting',{
+           url: '/resetting/:token',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/resetting.html',
                    controller: 'ResettingController'
                }
            }
        })
-       .state('nicetruc.inscription',{
-           url: 'inscription',
+       .state('inscription',{
+           url: '/inscription',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/inscription.html',
                    controller: 'InscriptionController'
                }
            }
        })
-       .state('nicetruc.enableEmail',{
-           url: 'enableEmail/:token',
+       .state('enableEmail',{
+           url: '/enableEmail/:token',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/enableEmail.html',
                    controller: 'EnableEmailController'
                }
            }
        })
-       .state('nicetruc.profil',{
-           url: 'profil',
+       .state('profil',{
+           url: '/profil',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/profile.html',
                    controller: 'ProfilController'
                }
            }
        })
-       .state('nicetruc.villes',{
-           url:'villes',
+       .state('villes',{
+           url:'/villes',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/ville.html',
                    controller: 'VilleController'
@@ -104,9 +140,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.quartiers',{
-           url:'quartiers',
+       .state('quartiers',{
+           url:'/quartiers',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/quartier.html',
                    controller: 'QuartierController'
@@ -118,9 +158,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.categories',{
-           url:'categories',
+       .state('categories',{
+           url:'/categories',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/categorie.html',
                    controller: 'CategorieController'
@@ -132,9 +176,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.carburants',{
-           url:'carburants',
+       .state('carburants',{
+           url:'/carburants',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/carburant.html',
                    controller: 'CarburantController'
@@ -146,9 +194,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.boitiers',{
-           url:'boitiers',
+       .state('boitiers',{
+           url:'/boitiers',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/boitier.html',
                    controller: 'BoitierController'
@@ -160,9 +212,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.marques',{
-           url:'marques',
+       .state('marques',{
+           url:'/marques',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/marque.html',
                    controller: 'MarqueController'
@@ -174,9 +230,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.modeles',{
-           url:'modeles',
+       .state('modeles',{
+           url:'/modeles',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/modele.html',
                    controller: 'ModeleMarqueController'
@@ -188,9 +248,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.annonces',{
-           url:'annonces',
+       .state('annonces',{
+           url:'/annonces',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/annonceVoiture.html',
                    controller: 'AnnonceVoitureController'
@@ -202,9 +266,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.imageAnnonceVoiture',{
-           url:'imageAnnonce/:voitureId',
+       .state('imageAnnonceVoiture',{
+           url:'/imageAnnonce/:voitureId',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/imageAnnonceVoiture.html',
                    controller: 'ImageAnnonceVoitureController'
@@ -216,27 +284,39 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.voitures',{
-           url:'voitures',
+       .state('voitures',{
+           url:'/voitures',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/searchVoiture.html',
                    controller: 'SearchVoitureController'
                }
            }
        })
-       .state('nicetruc.showVoiture',{
-           url:'showVoiture/:voitureId',
+       .state('showVoiture',{
+           url:'/showVoiture/:voitureId',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/showVoiture.html',
                    controller: 'ShowVoitureController'
                }
            }
        })
-       .state('nicetruc.editVoiture',{
-           url:'editVoiture/:voitureId',
+       .state('editVoiture',{
+           url:'/editVoiture/:voitureId',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/editVoiture.html',
                    controller: 'EditVoitureController'
@@ -248,9 +328,13 @@ app.config(function($stateProvider, $urlRouterProvider){
                }
            }
        })
-       .state('nicetruc.voitureByUser',{
-           url:'listVoiture',
+       .state('voitureByUser',{
+           url:'/listVoiture',
            views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
                'content':{
                    templateUrl: 'client/app/views/voitureByUser.html',
                    controller: 'VoitureByUserController'

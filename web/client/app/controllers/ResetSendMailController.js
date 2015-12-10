@@ -16,6 +16,7 @@ app.controller('ResetSendMailController',['$scope','usSpinnerService','UserServi
             angular.forEach(response.data.data, function(message){
                 displayAlert(message.texte,message.typeAlert,$scope);
             });
+            usSpinnerService.stop('nt-spinner');
         });
         
         $scope.formSubmit = false;
