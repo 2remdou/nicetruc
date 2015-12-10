@@ -210,7 +210,7 @@ class UserRestController extends FOSRestController
      *
      * @ApiDoc(
      *   resource = true,
-     *   description = confirmation user email",
+     *   description = "confirmation user email",
      *   statusCodes = {
      *     200 = "Returned when successful",
      *     404 = "Returned when the user is not found"
