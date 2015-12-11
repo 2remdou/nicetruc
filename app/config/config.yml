@@ -84,10 +84,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer.transport%"
-    host:      "%mailer.host%"
-    username:  "%mailer.user%"
-    password:  "%mailer.password%"
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
     spool:     { type: memory }
 
 jms_serializer:
