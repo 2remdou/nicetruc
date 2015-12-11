@@ -10,7 +10,7 @@ app.controller('ResetSendMailController',['$scope','usSpinnerService','UserServi
         usSpinnerService.spin('nt-spinner');
 
         UserService.resetMail(email).then(function(response) {
-            displayAlert('Nous avons les instructions de réinitialisation dans votre boite mail','info',$scope);
+            displayAlert('Nous avons envoyé les instructions de réinitialisation dans votre boite mail','info',$scope);
             usSpinnerService.stop('nt-spinner');
         },function(response){
             angular.forEach(response.data.data, function(message){
