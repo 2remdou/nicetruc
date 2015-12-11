@@ -25,3 +25,9 @@ monolog:
             level: debug
         console:
             type:  console
+        swift:
+            type:       swift_mailer
+            from_email: "nicetruc@gmail.com"
+            to_email:   "2remdou@gmail.com"
+            subject:    An Error Occurred!
+            level:      debug
