@@ -20,6 +20,6 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
         });
 
         $scope.showVoiture = function(voitureId){
-            $state.go('nicetruc.showVoiture',{voitureId:voitureId});
+            $state.go('showVoiture',{voitureId:voitureId});
         };
     }]);

@@ -39,7 +39,7 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
         };
 
         $scope.editVoiture = function(voitureId){
-            $state.go('nicetruc.editVoiture',{voitureId:voitureId});
+            $state.go('editVoiture',{voitureId:voitureId});
         };
 
         $scope.isAuthorizedEdit = function(userId){

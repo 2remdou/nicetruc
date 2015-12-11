@@ -54,11 +54,11 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
     };
 
     $scope.goToInscription = function(){
-        $state.go('nicetruc.inscription');
+        $state.go('inscription');
     };
 
     $scope.goToPasswordForgotten = function(){
-        $state.go('nicetruc.resetSendMail');
+        $state.go('resetSendMail');
     };
 
 

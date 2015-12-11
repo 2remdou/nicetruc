@@ -23,7 +23,7 @@ app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','Voiture
             var response={};
             response.data = [{texte:"Telechargement effectué avec succès",'typeAlert':'success'}];
             successRequest(response,$scope);
-            $state.go('nicetruc.showVoiture',{voitureId:$stateParams.voitureId});
+            $state.go('showVoiture',{voitureId:$stateParams.voitureId});
         };
 
         uploader.onBeforeUploadItem = function(item) {

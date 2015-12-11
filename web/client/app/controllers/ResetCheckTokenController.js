@@ -9,7 +9,7 @@ app.controller('ResetCheckTokenController',['$scope','usSpinnerService','UserSer
 
         UserService.resetCheckToken($stateParams.token).then(function(response){
             usSpinnerService.stop('nt-spinner');
-            $state.go('nicetruc.resetting',{token:$stateParams.token});
+            $state.go('resetting',{token:$stateParams.token});
         },function(response){
             angular.forEach(response.data.data, function(error){
             	displayAlert(error.texte,error.typeAlert,$scope);

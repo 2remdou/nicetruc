@@ -26,7 +26,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
 
             if(responseVoiture.user.id !== $rootScope.user.id){
                 displayAlert("Vous ne disposez des autorisations neccessaires pour modifier cette annonce",'danger',$scope);
-                $state.go('nicetruc.showVoiture',{voitureId:$stateParams.voitureId});
+                $state.go('showVoiture',{voitureId:$stateParams.voitureId});
             }
 
             //definition de l'image principale
@@ -103,7 +103,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
                     response.data = [{texte:"Votre annonce a été modifié",'typeAlert':'success'}];
                     successRequest(response,$scope);
                     usSpinnerService.stop('nt-spinner');
-                    $state.go('nicetruc.showVoiture',{voitureId:idVoiture});
+                    $state.go('showVoiture',{voitureId:idVoiture});
                 }
             },function(error){
                 var response={};
@@ -153,7 +153,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
             var response={};
             response.data = [{texte:"Votre annonce a été modifié",'typeAlert':'success'}];
             successRequest(response,$scope);
-            $state.go('nicetruc.showVoiture',{voitureId:$stateParams.voitureId});
+            $state.go('showVoiture',{voitureId:$stateParams.voitureId});
         };
 
         $scope.isAuthorized = function(){

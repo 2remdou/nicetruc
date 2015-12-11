@@ -14,7 +14,7 @@ app.controller('ResettingController',['$scope','usSpinnerService','UserService',
                 displayAlert(message.texte,message.typeAlert,$scope);
             });
             usSpinnerService.stop('nt-spinner');
-            $state.go('nicetruc.login');
+            $state.go('login');
         },function(response){
             log(response);
             usSpinnerService.stop('nt-spinner');

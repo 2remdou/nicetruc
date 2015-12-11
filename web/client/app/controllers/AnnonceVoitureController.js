@@ -57,7 +57,7 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
                 var idVoiture = response.id;
                 displayAlert("Votre annonce a été ajouté avec succes",'success',$scope);
                 usSpinnerService.stop('nt-spinner');
-                $state.go('nicetruc.imageAnnonceVoiture',{voitureId:idVoiture});
+                $state.go('imageAnnonceVoiture',{voitureId:idVoiture});
             },function(error){
                 displayAlert("Erreur lors de la publication de l'annonce",'danger',$scope);
                 usSpinnerService.stop('nt-spinner');
