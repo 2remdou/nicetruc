@@ -37,8 +37,7 @@ app.controller('AnnonceVoitureController',['$scope','MarqueService','ModeleServi
                 }
             });
             if(!$scope.modeleMarque){
-                message = [{texte:"Ce modele de voiture est invalide",'typeAlert':'danger'}];
-            scope.$emit('showMessage',message);
+                displayAlert("Ce modele de voiture est invalide",'danger',$scope);
                 return;
             }
         };

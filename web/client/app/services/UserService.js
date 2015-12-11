@@ -44,6 +44,15 @@ app.service('UserService',['$rootScope','Restangular','$cookies',
 
     };
 
+    this.getSalt = function(email){
+        return _userService.one('').post('salt',{email:email});
+    };
+
+    this.checkLogin = function(){
+        return _userService.one('checkLogin').get();
+    }
+
+
     this.create = function(user){
         _userService.post(user).then(function(){
             $rootScope.$broadcast('user.create');

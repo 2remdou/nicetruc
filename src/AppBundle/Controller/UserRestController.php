@@ -42,11 +42,20 @@ class UserRestController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("/api/salt/l/{locale}/h/{hote}/d/{domaine}", name="nicetruc_salt", requirements={"email" = "\w+"})
+     * @RequestParam(name="email", nullable=false, strict=true, description="salt user")
+     * @Route("/api/users/salt", name="nicetruc_salt")
+     * @Method({"POST"})
      * @return View
      */
-    public function getSaltAction($locale,$hote,$domaine){
-        $email = $locale.'@'.$hote.'.'.$domaine;
+    public function getSaltAction(ParamFetcher $paramFetcher){
+
+        $view = View::create();
+
+        if(!$paramFetcher->get('email')){
+            return $this->configError($view,"Adresse email invalide",'danger',404);
+        }
+        $email = $paramFetcher->get('email');
+
         $userManager = $this->container->get('fos_user.user_manager');
 
         $user = $userManager->findUserByUsernameOrEmail($email);
@@ -68,7 +77,7 @@ class UserRestController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-      * @Route("/api/checkLogin", name="nicetruc_checklogin")
+      * @Route("/api/users/checkLogin", name="nicetruc_checklogin")
      * @return View
      */
     public function checkLoginAction(){

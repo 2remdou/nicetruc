@@ -2,8 +2,9 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$window','$state','$rootScope',
-                'TokenHandler','usSpinnerService',
-    function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope,TokenHandler,usSpinnerService){
+                'TokenHandler','usSpinnerService','UserService',
+    function($scope,LoginService,$cookies,Digest,$window,$state,$rootScope,
+        TokenHandler,usSpinnerService,UserService){
 
     $scope.login = function(user,formIsValid){
         $scope.formSubmit = true;
@@ -13,7 +14,7 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
         var email = $scope.user.email;
         var password = $scope.user.password;
 
-        LoginService.getSalt(email)
+        UserService.getSalt(email)
             .then(function(response){
             var salt = response.salt;
 
@@ -26,11 +27,9 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
                 $cookies.put('email', email);
                 $cookies.put('secret', $scope.secret);
 
-                LoginService.checkLogin().then(function(response){
-                    $rootScope.user = response.user;
+                UserService.checkLogin().then(function(response){
+                    UserService.refresh(response.user);
                     successRequest(response,$scope);
-                    $cookies.putObject('user',$rootScope.user);
-
                     usSpinnerService.stop('nt-spinner');
                     $state.go('nicetruc');
 

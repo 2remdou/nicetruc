@@ -9,7 +9,7 @@ app.controller('EnableEmailController',['$scope','usSpinnerService','UserService
 
         UserService.enableEmail($stateParams.token).then(function(user){
             usSpinnerService.stop('nt-spinner');
-            displayAlert('Votre compte a été avec succès','success',$scope);
+            displayAlert('Votre compte a été activé avec succès','success',$scope);
             if($cookies.get('secret')){
                 UserService.refresh(user);
                 $state.go('nicetruc');
