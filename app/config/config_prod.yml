@@ -35,5 +35,5 @@ monolog:
             type:       swift_mailer
             from_email: "nicetruc@gmail.com"
             to_email:   "2remdou@gmail.com"
-            subject:    An Error Occurred!
+            subject:    Error critique nicetruc!
             level:      debug
