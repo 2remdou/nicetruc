@@ -2,6 +2,7 @@
 /app/cache/*
 !app/cache/.gitkeep
 /app/config/parameters.yml
+/web/client/app/parameters.js
 /app/logs/*
 !app/logs/.gitkeep
 /app/phpunit.xml
@@ -16,4 +17,3 @@ web/client/compiled/
 /web/client/app/images/voitures
 /src/AppBundle/Resources/public/js/bower_components/
 /node_modules
-/web/client/app/parameters.js
