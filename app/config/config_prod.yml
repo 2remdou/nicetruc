@@ -17,17 +17,23 @@ monolog:
     handlers:
         main:
             type:         fingers_crossed
-            action_level: error
-            handler:      nested
-        nested:
+            action_level: critical
+            handler:      grouped
+        grouped:
+            type:    group
+            members: [streamed, buffered]
+        streamed:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+        buffered:
+            type:    buffer
+            handler: swift
         console:
             type:  console
         swift:
             type:       swift_mailer
             from_email: '%maileruser%'
             to_email:   '%mailer2re%'
-            subject:    An Error Occurred!
+            subject:    Error critique nicetruc! 
             level:      debug
