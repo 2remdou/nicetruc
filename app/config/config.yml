@@ -170,6 +170,7 @@ knp_gaufrette:
         nicetruc_storage_s3:
             aws_s3:
                 service_id: nicetruc.aws_s3.client
+                # service_id: aws
                 bucket_name: '%aws_s3_bucket_name%'
                 options:
                     create: true
