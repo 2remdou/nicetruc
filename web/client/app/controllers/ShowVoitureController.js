@@ -43,6 +43,7 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
         };
 
         $scope.isAuthorizedEdit = function(userId){
+            if(!$rootScope.user) return false;
             return $rootScope.user.id === userId;
         };
 

@@ -25,6 +25,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new \Aws\Symfony\AwsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

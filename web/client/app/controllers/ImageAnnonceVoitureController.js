@@ -5,6 +5,9 @@ app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','Voiture
     '$q','usSpinnerService','$state',
     function($scope,FileUploader,VoitureService,$stateParams,$rootScope,$q,usSpinnerService,$state){
 
+        var errorItems=[];
+        var successItems=[];
+
         VoitureService.get($stateParams.voitureId).then(function(response){
             $scope.voiture = response;
         });
@@ -14,16 +17,28 @@ app.controller('ImageAnnonceVoitureController',['$scope','FileUploader','Voiture
         });
 
         $scope.uploadImage = function(uploader){
+            errorItems=[];
+            success=[];
             usSpinnerService.spin('nt-spinner');
             uploader.uploadAll();
         };
 
+        uploader.onCompleteItem = function(item, response, status, headers){
+            if(item.isError){
+                errorItems.push(item);
+            }
+            else{
+                successItems.push(item);
+            }
+        };
+
         uploader.onCompleteAll = function() {
+            if(errorItems.length === 0){
+                displayAlert("Telechargement effectué avec succès",'success',$scope);
+                $state.go('showVoiture',{voitureId:$stateParams.voitureId});
+            }
+
             usSpinnerService.stop('nt-spinner');
-            var response={};
-            response.data = [{texte:"Telechargement effectué avec succès",'typeAlert':'success'}];
-            successRequest(response,$scope);
-            $state.go('showVoiture',{voitureId:$stateParams.voitureId});
         };
 
         uploader.onBeforeUploadItem = function(item) {

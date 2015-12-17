@@ -33,9 +33,17 @@ class NiceTrucController extends FOSRestController
         return $this->render('AppBundle::index.html.twig');
     }
     /**
-     * @Route("/{url}", name="every_url", options={"expose"=true})
+     * @Route("/{url}", name="url_1p", options={"expose"=true})
      */
-    public function everyUrlAction(Request $request)
+    public function index1pAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('AppBundle::index.html.twig');
+    }
+/**
+     * @Route("/{p1}/{p2}", name="url_2p", options={"expose"=true})
+     */
+    public function index2pAction(Request $request)
     {
         // replace this example code with whatever you need
         return $this->render('AppBundle::index.html.twig');

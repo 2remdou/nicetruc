@@ -26,7 +26,10 @@
         "vich/uploader-bundle": "^0.14.0",
         "srio/rest-upload-bundle": "^2.0",
         "nelmio/api-doc-bundle": "^2.9",
-        "friendsofsymfony/jsrouting-bundle": "^1.5"
+        "friendsofsymfony/jsrouting-bundle": "^1.5",
+        "knplabs/knp-gaufrette-bundle": "0.2.*",
+        "aws/aws-sdk-php": "^3.11",
+        "aws/aws-sdk-php-symfony": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

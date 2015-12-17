@@ -19,6 +19,7 @@ app.config(function($interpolateProvider) {
     var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);
 
     RestangularProvider.setBaseUrl(window.location.origin+'/api');
+
     RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
 
@@ -163,7 +164,7 @@ app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','User
         }
         else{
             displayAlert("Veuillez vous identifier, pour avoir accès à cette ressource",'info',scope);
-            $state.go('nicetruc.login');
+            $state.go('login');
         }
     });
 

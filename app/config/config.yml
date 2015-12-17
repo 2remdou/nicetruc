@@ -105,7 +105,7 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
-        address: nicetruc@gmail.com
+        address: '%maileruser%'
         sender_name: Equipe nicetruc
     registration:
         form:
@@ -149,25 +149,43 @@ fos_rest:
 
 vich_uploader:
     db_driver: orm
+    storage:   gaufrette
+
     mappings:
         voiture_image:
-            uri_prefix: /client/app/images/voitures
-            upload_destination: %kernel.root_dir%/../web/client/app/images/voitures
+            # uri_prefix: /client/app/images/voitures
+            uri_prefix: '%aws_s3_base_url%'
+            # upload_destination: %kernel.root_dir%/../web/client/app/images/voitures
+            upload_destination: nicetruc_storage_s3
             namer: nicetruc.namer.voiture
 
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
 
-#knp_gaufrette:
-#    adapters:
-#        local_uploads_voiture:
-#            local:
-#                directory: %kernel.root_dir%/../web/client/app/images/voitures
-#    filesystems:
-#        uploads:
-#            adapter: local_uploads_voiture
-#
+knp_gaufrette:
+    stream_wrapper: ~
+
+    adapters:
+        nicetruc_storage_s3:
+            aws_s3:
+                service_id: nicetruc.aws_s3.client
+                bucket_name: '%aws_s3_bucket_name%'
+                options:
+                    create: true
+    filesystems:
+        nicetruc_storage_s3:
+            adapter: nicetruc_storage_s3
+            alias: nicetruc_storage_s3_filesystem
+
+aws:
+    version: latest
+    region: '%aws_s3_region%'
+    credentials:
+        key: '%aws_s3_key%'
+        secret: '%aws_s3_secret_key%'
+    S3:
+        version: '2006-03-01'
 #srio_rest_upload:
 #    storages:
 #        default:
