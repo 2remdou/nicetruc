@@ -18,10 +18,9 @@ app.controller('VoitureByUserController',['$scope','usSpinnerService','VoitureSe
 
             angular.forEach(response.data,function(voiture){
                 if(!voiture.imagePrincipale){
-                    voiture.imagePrincipale = {webPath: "client/app/images/defaultVoiture.png",imageName: "defaultVoiture.jpg"};
+                    voiture.imagePrincipale = {downloadUrl: voiture.defaultPathImagePrincipale,imageName: "defaultVoiture.jpg"};
                 }
             });
-
             usSpinnerService.stop('nt-spinner');
         });
 

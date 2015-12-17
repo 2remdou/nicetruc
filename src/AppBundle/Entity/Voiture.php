@@ -147,6 +147,13 @@ class Voiture extends Article
      */
     protected $imagePrincipale;
 
+    /**
+     * @var string
+     * @Expose()
+     * @SerializedName("defaultPathImagePrincipale")
+     */
+    private $defaultPathImagePrincipale;
+
 
 
     /**
@@ -496,6 +503,7 @@ class Voiture extends Article
             $imagePrincipale->setVoiture($this);
             $this->imagePrincipale = $imagePrincipale;
         }
+
         $this->imagePrincipale = $imagePrincipale;
 
         return $this;
@@ -510,5 +518,17 @@ class Voiture extends Article
     {
         return $this->imagePrincipale;
     }
+
+    public function getDefaultPathImagePrincipale(){
+        return $this->defaultPathImagePrincipale;
+    }
+
+    public function setDefaultPathImagePrincipale($defaultPathImagePrincipale)
+    {
+        $this->defaultPathImagePrincipale = $defaultPathImagePrincipale;
+
+        return $this;
+    }
+
 
 }

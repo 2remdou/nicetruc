@@ -115,3 +115,9 @@ services:
         arguments: ["@fos_user.mailer.twig_swift", "@fos_user.util.token_generator", "@router", "@session"]
         tags:
             - { name: kernel.event_subscriber }
+
+    nicetruc.listener.image_serializer:
+        class: AppBundle\EventListener\ImageSerializerSubscriber
+        arguments: ['@service_container','%aws_s3_base_url%']
+        tags:
+            - { name: jms_serializer.event_subscriber }

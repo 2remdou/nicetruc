@@ -57,6 +57,13 @@ class Image
     private $imageFile;
 
     /**
+     * @var string
+     * @Expose()
+     * @SerializedName("downloadUrl")
+     */
+    private $downloadUrl;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture")
      */
     private $voiture;
@@ -135,13 +142,15 @@ class Image
         return $this->voiture;
     }
 
-    /**
-     * @return string
-     * @VirtualProperty
-     * @SerializedName("webPath")
-     */
 
-    public function getWebPath(){
-        return 'client/app/images/voitures/'.$this->getImageName();
+    public function getDownloadUrl(){
+        return $this->downloadUrl;
+    }
+
+    public function setDownloadUrl($downloadUrl)
+    {
+        $this->downloadUrl = $downloadUrl;
+
+        return $this;
     }
 }
