@@ -16,3 +16,4 @@ web/client/compiled/
 /web/client/app/images/voitures
 /src/AppBundle/Resources/public/js/bower_components/
 /node_modules
+/web/client/app/parameters.js

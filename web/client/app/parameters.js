@@ -1,3 +1,3 @@
 var getEnv = function(){
-	return 'dev';	
+	return 'prod';	
 };
