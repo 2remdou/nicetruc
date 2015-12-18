@@ -105,7 +105,7 @@ fos_user:
     service:
         mailer: fos_user.mailer.twig_swift
     from_email:
-        address: '%maileruser%'
+        address: "%maileruser%"
         sender_name: Equipe nicetruc
     registration:
         form:
