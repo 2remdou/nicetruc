@@ -171,7 +171,7 @@ knp_gaufrette:
             aws_s3:
                 service_id: nicetruc.aws_s3.client
                 # service_id: aws
-                bucket_name: '%aws_s3_bucket_name%'
+                bucket_name: '%awss3bucketname%'
                 options:
                     create: true
     filesystems:
@@ -181,10 +181,10 @@ knp_gaufrette:
 
 aws:
     version: latest
-    region: '%aws_s3_region%'
+    region: '%awss3region%'
     credentials:
-        key: '%aws_s3_key%'
-        secret: '%aws_s3_secret_key%'
+        key: '%awss3key%'
+        secret: '%awss3secretkey%'
     S3:
         version: '2006-03-01'
 #srio_rest_upload:

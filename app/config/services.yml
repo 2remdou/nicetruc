@@ -12,9 +12,9 @@ services:
         arguments:
             -
                 credentials:                
-                        key: %aws_s3_key%
-                        secret: %aws_s3_secret_key%
-                region: %aws_s3_region%
+                        key: %awss3key%
+                        secret: %awss3secretkey%
+                region: %awss3region%
                 version: latest
 
     nicetruc.user.class:
@@ -118,6 +118,6 @@ services:
 
     nicetruc.listener.image_serializer:
         class: AppBundle\EventListener\ImageSerializerSubscriber
-        arguments: ['@service_container','%aws_s3_base_url%']
+        arguments: ['@service_container','%awss3baseurl%']
         tags:
             - { name: jms_serializer.event_subscriber }
