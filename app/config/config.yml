@@ -154,7 +154,7 @@ vich_uploader:
     mappings:
         voiture_image:
             # uri_prefix: /client/app/images/voitures
-            uri_prefix: '%aws_s3_base_url%'
+            uri_prefix: '%awss3baseurl%'
             # upload_destination: %kernel.root_dir%/../web/client/app/images/voitures
             upload_destination: nicetruc_storage_s3
             namer: nicetruc.namer.voiture
