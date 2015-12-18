@@ -32,7 +32,7 @@ class ImageSerializerSubscriber implements EventSubscriberInterface
     {
 
         $object = $event->getObject();
-        $env=$this->container->get( 'kernel' )->getEnvironment();
+        $env=$this->container->get('kernel')->getEnvironment();
         if($object instanceof Image){        
             if($env === 'prod'){
                 $object->setDownloadUrl($this->getS3Url().'/'.$object->getImageName());
