@@ -3,9 +3,21 @@
  */
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    del = require('del');
+    del = require('del'),
+    uglify = require('gulp-uglify');
 
-gulp.task('scripts', function() {
+gulp.task('minify', function() {
+    return gulp.src([
+        'web/client/app/*.js',
+        'web/client/app/controllers/*.js',
+        'web/client/app/directives/*.js',
+        'web/client/app/services/*.js',
+    ])
+        .pipe(uglify())
+        .pipe(gulp.dest('web/bundles/compiled/minify'));
+});
+
+gulp.task('concat',function () {
     return gulp.src([
         'web/client/bower_components/jquery/dist/jquery.min.js',
         'web/client/bower_components/angular/angular.min.js',
@@ -30,6 +42,8 @@ gulp.task('scripts', function() {
         .pipe(concat('all.js'))
         .pipe(gulp.dest('web/bundles/compiled/'));
 });
+        // 
+
 
 gulp.task('clean', function() {
     return del(['web/bundles/compiled/']);

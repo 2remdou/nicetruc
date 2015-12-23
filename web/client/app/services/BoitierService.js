@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('BoitierService',function($rootScope,Restangular){
+app.service('BoitierService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _boitierService = Restangular.all('boitiers/');
 
@@ -28,4 +28,4 @@ app.service('BoitierService',function($rootScope,Restangular){
             $rootScope.$broadcast('boitier.delete');
         })
     }
-});
+}]);

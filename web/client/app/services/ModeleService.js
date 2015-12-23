@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('ModeleService',function($rootScope,Restangular,$q){
+app.service('ModeleService',['$rootScope','Restangular','$q',function($rootScope,Restangular,$q){
 
     var _modeleService = Restangular.all('modeles/');
 
@@ -34,4 +34,4 @@ app.service('ModeleService',function($rootScope,Restangular,$q){
             $rootScope.$broadcast('modele.delete');
         })
     }
-});
+}]);

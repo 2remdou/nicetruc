@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('VilleService',function($rootScope,Restangular){
+app.service('VilleService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _villeService = Restangular.all('villes/');
 
@@ -31,4 +31,4 @@ app.service('VilleService',function($rootScope,Restangular){
             $rootScope.$broadcast('ville.delete');
         })
     }
-});
+}]);

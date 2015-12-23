@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('CategorieService',function($rootScope,Restangular){
+app.service('CategorieService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _categorieService = Restangular.all('categories/');
 
@@ -32,4 +32,4 @@ app.service('CategorieService',function($rootScope,Restangular){
             $rootScope.$broadcast('categorie.delete');
         })
     }
-});
+}]);

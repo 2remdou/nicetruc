@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('LoginService',function($rootScope,Restangular,$http){
+app.service('LoginService',['$rootScope','Restangular','$http',function($rootScope,Restangular,$http){
 
    // var _loginService = Restangular.all('account/');
 
@@ -21,4 +21,4 @@ app.service('LoginService',function($rootScope,Restangular,$http){
         return Restangular.one('checkLogin').get();
     }
 
-});
+}]);

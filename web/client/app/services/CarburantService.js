@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('CarburantService',function($rootScope,Restangular){
+app.service('CarburantService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _carburantService = Restangular.all('carburants/');
 
@@ -28,4 +28,4 @@ app.service('CarburantService',function($rootScope,Restangular){
             $rootScope.$broadcast('carburant.delete');
         })
     }
-});
+}]);

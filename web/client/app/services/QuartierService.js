@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('QuartierService',function($rootScope,Restangular){
+app.service('QuartierService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _quartierService = Restangular.all('quartiers/');
 
@@ -28,4 +28,4 @@ app.service('QuartierService',function($rootScope,Restangular){
             $rootScope.$broadcast('quartier.delete');
         });
     }
-});
+}]);

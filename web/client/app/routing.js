@@ -1,7 +1,7 @@
 /**
  * Created by mdoutoure on 20/08/2015.
  */
-app.config(function($stateProvider, $urlRouterProvider){
+app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider){
 
     //$urlRouterProvider.otherwise("/");
     $urlRouterProvider.otherwise( function($injector) {
@@ -344,4 +344,4 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 
    ;
-});
+}]);

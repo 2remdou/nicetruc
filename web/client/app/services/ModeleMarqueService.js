@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('ModeleMarqueService',function($rootScope,Restangular){
+app.service('ModeleMarqueService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _modelemarqueService = Restangular.all('modelemarques/');
 
@@ -32,4 +32,4 @@ app.service('ModeleMarqueService',function($rootScope,Restangular){
     this.getId= function(marque,modele){
        return _modelemarqueService.one('marques',marque).one('modeles',modele).get();
     }
-});
+}]);

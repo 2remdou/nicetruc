@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('MarqueService',function($rootScope,Restangular){
+app.service('MarqueService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _marqueService = Restangular.all('marques/');
 
@@ -27,4 +27,4 @@ app.service('MarqueService',function($rootScope,Restangular){
             $rootScope.$broadcast('marque.delete');
         })
     }
-});
+}]);

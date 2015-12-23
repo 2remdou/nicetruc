@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('ImageService',function($rootScope,Restangular){
+app.service('ImageService',['$rootScope','Restangular',function($rootScope,Restangular){
 
     var _imageService = Restangular.all('images/');
 
@@ -27,4 +27,4 @@ app.service('ImageService',function($rootScope,Restangular){
         Restangular.restangularizeElement(null,image,_imageService.route);
         return  image.remove();
     }
-});
+}]);
