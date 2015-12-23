@@ -6,18 +6,7 @@ var gulp = require('gulp'),
     del = require('del'),
     uglify = require('gulp-uglify');
 
-gulp.task('minify', function() {
-    return gulp.src([
-        'web/client/app/*.js',
-        'web/client/app/controllers/*.js',
-        'web/client/app/directives/*.js',
-        'web/client/app/services/*.js',
-    ])
-        .pipe(uglify())
-        .pipe(gulp.dest('web/bundles/compiled/minify'));
-});
-
-gulp.task('concat',function () {
+gulp.task('scripts',function () {
     return gulp.src([
         'web/client/bower_components/jquery/dist/jquery.min.js',
         'web/client/bower_components/angular/angular.min.js',
