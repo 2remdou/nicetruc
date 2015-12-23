@@ -37,3 +37,19 @@ monolog:
             to_email:   "%maileruser%"
             subject:    Error critique nicetruc! 
             level:      debug
+
+vich_uploader:
+    db_driver: orm
+    storage:   gaufrette
+
+    mappings:
+        voiture_image:
+            # uri_prefix: /client/app/images/voitures
+            uri_prefix: '%awss3baseurl%'
+            # upload_destination: %kernel.root_dir%/../web/client/app/images/voitures
+            upload_destination: nicetruc_storage_s3
+            namer: nicetruc.namer.voiture
+
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true

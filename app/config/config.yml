@@ -147,34 +147,24 @@ fos_rest:
     allowed_methods_listener: true
     format_listener: true
 
-vich_uploader:
-    db_driver: orm
-    storage:   gaufrette
 
-    mappings:
-        voiture_image:
-            # uri_prefix: /client/app/images/voitures
-            uri_prefix: '%awss3baseurl%'
-            # upload_destination: %kernel.root_dir%/../web/client/app/images/voitures
-            upload_destination: nicetruc_storage_s3
-            namer: nicetruc.namer.voiture
-
-            inject_on_load:     true
-            delete_on_update:   true
-            delete_on_remove:   true
 
 knp_gaufrette:
     stream_wrapper: ~
 
     adapters:
+        nicetruc_storage_local:
+            local:
+                directory: %kernel.root_dir%/../web/client/app/images/voitures                     
         nicetruc_storage_s3:
             aws_s3:
                 service_id: nicetruc.aws_s3.client
-                # service_id: aws
                 bucket_name: '%awss3bucketname%'
                 options:
                     create: true
     filesystems:
+        nicetruc_storage_local:
+            adapter: nicetruc_storage_local
         nicetruc_storage_s3:
             adapter: nicetruc_storage_s3
             alias: nicetruc_storage_s3_filesystem

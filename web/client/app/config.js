@@ -58,7 +58,7 @@ app.config(function($interpolateProvider) {
             }
             else if(url.search('voitures')!==-1){
 
-                ['marque','modele','id','images'].forEach(function(property){
+                ['marque','modele','id','images','defaultPathImagePrincipale'].forEach(function(property){
                     deleteProperty(element,property);
                 });
                  element.modeleMarque = extractId(element.modeleMarque);
