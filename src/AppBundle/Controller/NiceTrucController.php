@@ -259,4 +259,41 @@ class NiceTrucController extends FOSRestController
         return $view;
     }
 
+    /**
+     * Retourne les marques,modeles,boitiers,carburant
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Retourne les marques,modeles,boitiers,carburant",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("/api/parameters",name="nicetruc_parameters", options={"expose"=true})
+     * @Rest\View()
+     * @Method({"GET"})
+     */
+    public function getAllParametersAction(){
+        $em = $this->getDoctrine()->getManager();
+
+        $marques = $em->getRepository('AppBundle:Voiture')->findBy(array('isVedette'=>true));
+        // $marques = $em->getRepository('AppBundle:Marque')->findAll();
+        // $boitiers = $em->getRepository('AppBundle:Boitier')->findAll();
+        // $carburants = $em->getRepository('AppBundle:Carburant')->findAll();
+
+        
+        $view = View::create();
+
+        $view->setData(array(
+            'marques'=>$marques,
+            // 'boitiers'=>$boitiers,
+            // 'carburants'=>$carburants,
+            ))
+            ->setStatusCode(200);
+
+        return null;
+    }
+
+
 }

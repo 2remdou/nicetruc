@@ -1,10 +1,17 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state',
-    function($scope,VoitureService,usSpinnerService,$state)
+app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state','Restangular',
+    function($scope,VoitureService,usSpinnerService,$state,Restangular)
     {
         usSpinnerService.spin('nt-spinner');
+
+        Restangular.all('parameters').getList().then(function(response){
+            log(response);
+        },function(error){
+            log(error);
+        });
+        $scope.advancedSearchText = 'Recherche avancée';
 
 
         VoitureService.listVedette().then(function(response){
@@ -22,4 +29,14 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
         $scope.showVoiture = function(voitureId){
             $state.go('showVoiture',{voitureId:voitureId});
         };
+
+        $scope.advanced = function(){
+            $scope.advancedSearch = ! $scope.advancedSearch;
+            if($scope.advancedSearch) {
+                $scope.advancedSearchText = 'Reduire';
+            }
+            else {
+                $scope.advancedSearchText = 'Recherche avancée';
+            }
+        }
     }]);
