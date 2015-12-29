@@ -53,3 +53,12 @@ vich_uploader:
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
+
+aws:
+    version: latest
+    region: '%awss3region%'
+    credentials:
+        key: '%awss3key%'
+        secret: '%awss3secretkey%'
+    S3:
+        version: '2006-03-01'

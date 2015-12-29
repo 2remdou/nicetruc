@@ -169,14 +169,7 @@ knp_gaufrette:
             adapter: nicetruc_storage_s3
             alias: nicetruc_storage_s3_filesystem
 
-aws:
-    version: latest
-    region: '%awss3region%'
-    credentials:
-        key: '%awss3key%'
-        secret: '%awss3secretkey%'
-    S3:
-        version: '2006-03-01'
+
 #srio_rest_upload:
 #    storages:
 #        default:

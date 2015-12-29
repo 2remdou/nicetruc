@@ -40,14 +40,7 @@ class NiceTrucController extends FOSRestController
         // replace this example code with whatever you need
         return $this->render('AppBundle::index.html.twig');
     }
-/**
-     * @Route("/{p1}/{p2}", name="url_2p", options={"expose"=true})
-     */
-    public function index2pAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('AppBundle::index.html.twig');
-    }
+
 
     /**
      * @Route("/test", name="test")
@@ -277,22 +270,26 @@ class NiceTrucController extends FOSRestController
     public function getAllParametersAction(){
         $em = $this->getDoctrine()->getManager();
 
-        $marques = $em->getRepository('AppBundle:Voiture')->findBy(array('isVedette'=>true));
-        // $marques = $em->getRepository('AppBundle:Marque')->findAll();
-        // $boitiers = $em->getRepository('AppBundle:Boitier')->findAll();
-        // $carburants = $em->getRepository('AppBundle:Carburant')->findAll();
+         $marques = $em->getRepository('AppBundle:Marque')->findAll();
+         $boitiers = $em->getRepository('AppBundle:Boitier')->findAll();
+         $carburants = $em->getRepository('AppBundle:Carburant')->findAll();
+//         $modeles = $em->getRepository('AppBundle:Modele')->findAll();
 
         
         $view = View::create();
 
-        $view->setData(array(
+        $data = array('data' => array(
             'marques'=>$marques,
-            // 'boitiers'=>$boitiers,
-            // 'carburants'=>$carburants,
-            ))
+            'boitiers'=>$boitiers,
+            'carburants'=>$carburants,
+//            'modeles'=>$modeles
+            )
+
+        );
+        $view->setData($data)
             ->setStatusCode(200);
 
-        return null;
+        return $view;
     }
 
 

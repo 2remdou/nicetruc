@@ -6,10 +6,12 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
     {
         usSpinnerService.spin('nt-spinner');
 
-        Restangular.all('parameters').getList().then(function(response){
-            log(response);
-        },function(error){
-            log(error);
+        Restangular.all('parameters').customGET().then(function(response){
+            var data = response.data;
+            $scope.marques = data.marques;
+            //$scope.modeles = data.modeles;
+            $scope.boitiers = data.boitiers;
+            $scope.carburants = data.carburants;
         });
         $scope.advancedSearchText = 'Recherche avancée';
 
@@ -38,5 +40,10 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
             else {
                 $scope.advancedSearchText = 'Recherche avancée';
             }
-        }
+        };
+
+        $scope.selectMarque = function(marque){
+            if(!marque) return;
+            $scope.modeles=marque.modeles;
+        };
     }]);
