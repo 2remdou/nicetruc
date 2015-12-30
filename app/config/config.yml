@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: api.yml }
-    # - { resource: fos_elastica.yml }
+    - { resource: fos_elastica.yml }
     - { resource: parameters.php }
 
 # Put parameters here that don't need to change on each machine where the app is deployed

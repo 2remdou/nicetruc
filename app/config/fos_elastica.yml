@@ -3,7 +3,6 @@ fos_elastica:
         default: { host: '%elastichost%', port: '%elasticport%' }
     indexes:
         nicetruc:
-            index_name: app_%kernel.environment%
             settings:
                 index:
                     analysis:
