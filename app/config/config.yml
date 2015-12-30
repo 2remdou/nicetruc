@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: api.yml }
+    # - { resource: fos_elastica.yml }
     - { resource: parameters.php }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -168,7 +169,14 @@ knp_gaufrette:
         nicetruc_storage_s3:
             adapter: nicetruc_storage_s3
             alias: nicetruc_storage_s3_filesystem
-
+aws:
+    version: latest
+    region: '%awss3region%'
+    credentials:
+        key: '%awss3key%'
+        secret: '%awss3secretkey%'
+    S3:
+        version: '2006-03-01'
 
 #srio_rest_upload:
 #    storages:
