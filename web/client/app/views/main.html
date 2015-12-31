@@ -8,7 +8,7 @@
             <form class="form-horizontal" role="form" name="form" novalidate>
                 <!--mot cle-->
                 <div class="form-group" ng-hide="advancedSearch">
-                      <input type="text" class="form-control" placeholder="Mot clé">
+                      <input type="text" class="form-control" placeholder="Mot clé" ng-model="search.key">
                 </div>
                 <!--marque-->
                 <div class="form-group" ng-show="advancedSearch">
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <p class="text-right cursorPointer" ng-click="advanced()">//advancedSearchText//</p>
-                <button type="button" class="btn btn-primary btn-block">Rechercher</button>
+                <button type="button" ng-click="search(search)" class="btn btn-primary btn-block">Rechercher</button>
             </form>
         </div>
 

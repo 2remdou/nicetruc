@@ -46,4 +46,26 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
             if(!marque) return;
             $scope.modeles=marque.modeles;
         };
+
+        $scope.search = function(search){
+            usSpinnerService.spin('nt-spinner');
+            if(!$scope.advancedSearch){
+                key = search.key;
+                Restangular.all('search').customGET(key).then(function(response){
+                    angular.forEach(response.data.voitures,function(voiture){
+                        if(!voiture.imagePrincipale){
+                            voiture.imagePrincipale = {downloadUrl: voiture.defaultPathImagePrincipale,imageName: "defaultVoiture.jpg"};
+                        }
+                    });
+                    $scope.voitures=response.data.voitures;
+                    usSpinnerService.stop('nt-spinner');
+                },function(error){
+                    if(error.status === 404){
+                        displayAlert('Aucune voiture ne correspond à votre recherche','info',$scope);
+                    }
+                    $scope.voitures=[];
+                    usSpinnerService.stop('nt-spinner');
+                })
+            }
+        }
     }]);
