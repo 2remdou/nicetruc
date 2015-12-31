@@ -67,5 +67,8 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
                     usSpinnerService.stop('nt-spinner');
                 })
             }
+            else{
+                
+            }
         }
     }]);
