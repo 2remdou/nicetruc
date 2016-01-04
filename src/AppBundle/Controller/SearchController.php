@@ -19,6 +19,7 @@ use SRIO\RestUploadBundle\Upload\UploadHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use AppBundle\ElasticaBundle\Model\AdvancedSearch;
 
 
 
@@ -73,23 +74,19 @@ class SearchController extends FOSRestController
      *     404 = "Returned when the data is not found"
      *   }
      * )
-     * @RequestParam(name="marque", nullable=true, description="la marque")
-     * @RequestParam(name="modele", nullable=true, strict=true, description="Le modele")
-     * @RequestParam(name="boitier", nullable=true, strict=true, description="Le boitier")
-     * @RequestParam(name="carburant", nullable=true, strict=true, description="Le carburant")
-     * @RequestParam(name="prixMin", nullable=true, strict=true, description="le prix minimal")
-     * @RequestParam(name="prixMax", nullable=true, strict=true, description="le prix maximal")
-     * @RequestParam(name="kmMin", nullable=true, strict=true, description="Km minimal")
-     * @RequestParam(name="kmMax", nullable=true, strict=true, description="Km maximal")
-     * @Route("/api/search/advanced",name="nicetruc_advanced", options={"expose"=true})
+         * @Route("/api/search/advanced",name="nicetruc_advanced", options={"expose"=true})
      * @Rest\View()
-     * @Method({"GET"})
+     * @Method({"POST"})
      */
 
-    public function searchAdvancedAction(ParamFetcher $paramFetcher){
+    public function searchAdvancedAction(Request $request){
         $elasticManager = $this->get('fos_elastica.manager');
+
+        $advancedSearch = new AdvancedSearch();
+
+        $advancedSearch->handleRequest($request);
             
-        $voitures = $elasticManager->getRepository('AppBundle:Voiture')->searchAdvanced($keySearch);
+        $voitures = $elasticManager->getRepository('AppBundle:Voiture')->searchAdvanced($advancedSearch);
         
         $view = View::create();
 

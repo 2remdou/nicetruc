@@ -38,9 +38,13 @@ fos_elastica:
                         prix: 
                             type: integer
                         kmParcouru: ~
+                        boitier.id: ~
                         boitier.libelleBoitier: { analyzer: custom_analyzer }
+                        carburant.id: ~
                         carburant.libelleCarburant: { analyzer: custom_analyzer }
+                        modeleMarque.marque.id: ~
                         modeleMarque.marque.libelleMarque: { analyzer: custom_analyzer }
+                        modeleMarque.modele.id: ~
                         modeleMarque.modele.libelleModele: { analyzer: custom_analyzer }
                     persistence:
                         driver: orm

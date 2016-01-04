@@ -34,5 +34,15 @@ app.service('VoitureService',['$rootScope','Restangular',function($rootScope,Res
         voiture.remove().then(function(){
             $rootScope.$broadcast('voiture.delete');
         })
+    };
+
+    this.defineImagePrincipale  = function(voitures){
+        angular.forEach(voitures,function(voiture){
+            if(!voiture.imagePrincipale){
+                voiture.imagePrincipale = {downloadUrl: voiture.defaultPathImagePrincipale,imageName: "defaultVoiture.jpg"};
+            }
+        });
+        return voitures;
     }
+
 }]);

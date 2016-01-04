@@ -1,8 +1,8 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state','Restangular',
-    function($scope,VoitureService,usSpinnerService,$state,Restangular)
+app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state','Restangular','VoitureService',
+    function($scope,VoitureService,usSpinnerService,$state,Restangular,VoitureService)
     {
         usSpinnerService.spin('nt-spinner');
 
@@ -47,17 +47,12 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
             $scope.modeles=marque.modeles;
         };
 
-        $scope.search = function(search){
+        $scope.searchVoiture = function(search){
             usSpinnerService.spin('nt-spinner');
             if(!$scope.advancedSearch){
                 key = search.key;
                 Restangular.all('search').customGET(key).then(function(response){
-                    angular.forEach(response.data.voitures,function(voiture){
-                        if(!voiture.imagePrincipale){
-                            voiture.imagePrincipale = {downloadUrl: voiture.defaultPathImagePrincipale,imageName: "defaultVoiture.jpg"};
-                        }
-                    });
-                    $scope.voitures=response.data.voitures;
+                    $scope.voitures=VoitureService.defineImagePrincipale(response.data.voitures);
                     usSpinnerService.stop('nt-spinner');
                 },function(error){
                     if(error.status === 404){
@@ -68,7 +63,17 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
                 })
             }
             else{
-                
+                Restangular.all('search/advanced').post(angular.copy(search)).then(function(response){
+                    $scope.voitures=VoitureService.defineImagePrincipale(response.data.voitures);
+                    usSpinnerService.stop('nt-spinner');
+
+                },function(error){
+                    if(error.status === 404){
+                        displayAlert('Aucune voiture ne correspond à votre recherche','info',$scope);
+                    }
+                    $scope.voitures=[];
+                    usSpinnerService.stop('nt-spinner');
+                 });
             }
         }
     }]);
