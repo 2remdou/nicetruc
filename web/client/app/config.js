@@ -72,6 +72,13 @@ app.config(function($interpolateProvider) {
                      element.quartier = extractId(element.quartier);
                  }
              }
+             else if(what === 'search/advanced'){
+
+                element.marque = extractId(element.marque);
+                element.modele = extractId(element.modele);
+                element.boitier = extractId(element.boitier);
+                element.carburant = extractId(element.carburant);
+             }
          }
          return element;
      });
