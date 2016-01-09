@@ -34,31 +34,29 @@ class VoitureRepository extends Repository
 
 	public function searchAdvanced(AdvancedSearch $advancedSearch){
 
-		$match = new \Elastica\Query\MatchAll();
-
-/*		if(!$advancedSearch->innerObjectIsDefine()){
+		if(!$advancedSearch->innerObjectIsDefine()){
 			$match = new \Elastica\Query\MatchAll();
 		}
 		else{
 
-			$boolQuery = new \Elastica\Query\Bool();
+			$match = new \Elastica\Query\Bool();
 
 			if($advancedSearch->getMarque()){
-				$boolQuery->addMust(new \Elastica\Query\Match('modeleMarque.marque.id',$advancedSearch->getMarque()));
+				$match->addMust(new \Elastica\Query\Match('modeleMarque.marque.id',$advancedSearch->getMarque()));
 			}
 
 			if($advancedSearch->getModele()){
-				$boolQuery->addMust(new \Elastica\Query\Match('modeleMarque.modele.id',$advancedSearch->getModele()));
+				$match->addMust(new \Elastica\Query\Match('modeleMarque.modele.id',$advancedSearch->getModele()));
 			}
 
 			if($advancedSearch->getBoitier()){
-				$boolQuery->addMust(new \Elastica\Query\Match('boitier.id',$advancedSearch->getBoitier()));
+				$match->addMust(new \Elastica\Query\Match('boitier.id',$advancedSearch->getBoitier()));
 			}
 
 			if($advancedSearch->getCarburant()){
-				$boolQuery->addMust(new \Elastica\Query\Match('carburant.id',$advancedSearch->getCarburant()));
+				$match->addMust(new \Elastica\Query\Match('carburant.id',$advancedSearch->getCarburant()));
 			}
-		}*/
+		}
 
 
 		$boolFilter = new \Elastica\Filter\Bool();
@@ -69,17 +67,15 @@ class VoitureRepository extends Repository
 		if($advancedSearch->getPrixMax()){
 			$boolFilter->addMust(new \Elastica\Filter\Range('prix',array('lte'=>$advancedSearch->getPrixMax())));
 		}
+		if($advancedSearch->getKmMin()){
+			$boolFilter->addMust(new \Elastica\Filter\Range('kmParcouru',array('gte'=>intval($advancedSearch->getKmMin()))));
+		}
+		if($advancedSearch->getKmMax()){
+			$boolFilter->addMust(new \Elastica\Filter\Range('kmParcouru',array('lte'=>$advancedSearch->getKmMax())));
+		}
 
 		$filtered = new \Elastica\Query\Filtered($match,$boolFilter);
 
-
-/*		if($match){
-			$filtered = new \Elastica\Query\Filtered($match,$boolFilter);
-		}
-		else{
-			$filtered = new \Elastica\Query\Filtered($boolQuery,$boolFilter);
-		}
-*/
 
 		$query = \Elastica\Query::create($filtered);
 

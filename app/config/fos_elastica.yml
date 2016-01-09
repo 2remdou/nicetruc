@@ -36,8 +36,10 @@ fos_elastica:
                 voiture:
                     mappings:
                         id: ~
-                        prix: ~
-                        kmParcouru: ~
+                        prix: 
+                            type: integer
+                        kmParcouru: 
+                            type: integer
                         boitier.id: ~
                         boitier.libelleBoitier: { analyzer: custom_analyzer }
                         carburant.id: ~
