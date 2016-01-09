@@ -53,7 +53,8 @@
             "npm install del",
             "./node_modules/.bin/bower install",
             "./node_modules/.bin/gulp scripts",
-            "php ./app/console doctrine:schema:update --force"
+            "php ./app/console doctrine:schema:update --force",
+            "php ./app/console fos:elastica:populate"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -69,7 +70,8 @@
             "npm install del",
             "./node_modules/.bin/bower install",
             "./node_modules/.bin/gulp scripts",
-            "php ./app/console doctrine:schema:update --force"
+            "php ./app/console doctrine:schema:update --force",
+            "php ./app/console fos:elastica:populate"
 
         ]
     },
