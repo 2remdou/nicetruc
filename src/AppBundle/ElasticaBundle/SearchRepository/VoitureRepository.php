@@ -12,8 +12,6 @@ class VoitureRepository extends Repository
 		if($key){	
 			$bool = new \Elastica\Query\Bool();
 
-			$bool->addShould(new \Elastica\Query\Match('prix',$key));
-			$bool->addShould(new \Elastica\Query\Match('kmParcouru',$key));
 			$bool->addShould(new \Elastica\Query\Match('boitier.libelleBoitier',$key));
 			$bool->addShould(new \Elastica\Query\Match('carburant.libelleCarburant',$key));
 			$bool->addShould(new \Elastica\Query\Match('modeleMarque.modele.libelleModele',$key));
