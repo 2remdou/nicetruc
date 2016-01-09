@@ -1,6 +1,7 @@
 fos_elastica:
     clients:
-        default: { host: '%elastichost%', port: '%elasticport%' }
+        default:
+            url: '%elasticurl%'
     indexes:
         nicetruc:
             settings:
