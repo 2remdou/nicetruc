@@ -15,7 +15,5 @@ parameters:
         mailer_user:       ~
         mailer_password:   ~
 
-        elasticurl : localhost:9200
-
         # A secret key that's used to generate certain security-related tokens
         secret:            ThisTokenIsNotSoSecretChangeIt
