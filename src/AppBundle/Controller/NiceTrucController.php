@@ -30,7 +30,10 @@ class NiceTrucController extends FOSRestController
     public function indexAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('AppBundle::index.html.twig');
+        $env=$this->get('kernel')->getEnvironment();
+        return $this->render('AppBundle::index.html.twig',array(
+            'env' => $env,
+        ));
     }
     /**
      * @Route("/{url}", name="url_1p", options={"expose"=true})
