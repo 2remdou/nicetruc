@@ -40,7 +40,6 @@ class Marque
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="marque")
-     * @Expose()
      * @SerializedName("modeleMarques")
      * @ORM\JoinColumn(nullable=true)
      */

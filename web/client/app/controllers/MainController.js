@@ -1,18 +1,22 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state','Restangular','VoitureService',
-    function($scope,VoitureService,usSpinnerService,$state,Restangular,VoitureService)
+app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state','Restangular','VoitureService','MarqueService',
+    function($scope,VoitureService,usSpinnerService,$state,Restangular,VoitureService,MarqueService)
     {
         usSpinnerService.spin('nt-spinner');
 
         Restangular.all('parameters').customGET().then(function(response){
             var data = response.data;
-            $scope.marques = data.marques;
-            //$scope.modeles = data.modeles;
+
+            MarqueService.list().then(function(response){
+                $scope.marques = response;
+            });
             $scope.boitiers = data.boitiers;
             $scope.carburants = data.carburants;
         });
+
+        
         $scope.advancedSearchText = 'Recherche avancée';
 
 
