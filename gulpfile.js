@@ -3,9 +3,10 @@
  */
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    del = require('del');
+    del = require('del'),
+    concatCss = require('gulp-concat-css');
 
-gulp.task('scripts',function () {
+gulp.task('concatJs',function () {
     return gulp.src([
         //'web/client/bower_components/jquery/dist/jquery.min.js',
         //'web/client/bower_components/angular/angular.min.js',
@@ -32,9 +33,23 @@ gulp.task('scripts',function () {
 });
         // 
 
-
+gulp.task('concatCss',function(){
+   return gulp.src([
+    'web/client/bower_components/angular-ui-notification/dist/angular-ui-notification.min.css',
+       'web/client/app/views/css/main.css',
+       'web/client/app/views/css/inscription.css',
+       'web/client/app/views/css/search.css',
+       'web/client/app/views/css/annonce.css'
+   ])
+       .pipe(concatCss('all.css'))
+       .pipe(gulp.dest('web/bundles/compiled/'));
+});
 gulp.task('clean', function() {
     return del(['web/bundles/compiled/']);
+});
+
+gulp.task('default', ['clean'], function() {
+    gulp.start('concatJs', 'concatCss');
 });
 
 gulp.task('watch', function() {
@@ -44,7 +59,7 @@ gulp.task('watch', function() {
         'web/client/app/**/*.js'
         ],
         //['clean'],
-        ['scripts']
+        ['default']
     );
 });
 

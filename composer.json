@@ -51,8 +51,9 @@
             "npm install gulp",
             "npm install gulp-concat",
             "npm install del",
+            "npm install gulp-concat-css",
             "./node_modules/.bin/bower install",
-            "./node_modules/.bin/gulp scripts",
+            "./node_modules/.bin/gulp",
             "php ./app/console doctrine:schema:update --force",
             "php ./app/console fos:elastica:populate"
         ],
@@ -68,8 +69,9 @@
             "npm install gulp",
             "npm install gulp-concat",
             "npm install del",
+            "npm install gulp-concat-css",
             "./node_modules/.bin/bower install",
-            "./node_modules/.bin/gulp scripts",
+            "./node_modules/.bin/gulp",
             "php ./app/console doctrine:schema:update --force",
             "php ./app/console fos:elastica:populate"
 
