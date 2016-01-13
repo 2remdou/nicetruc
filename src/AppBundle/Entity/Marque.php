@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\MarqueRepository")
+ * @ExclusionPolicy("all")
  */
 class Marque
 {
@@ -40,7 +41,6 @@ class Marque
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="marque")
-     * @SerializedName("modeleMarques")
      * @ORM\JoinColumn(nullable=true)
      */
     private $modeleMarques;

@@ -2,16 +2,13 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state','Restangular','VoitureService','MarqueService',
-    function($scope,VoitureService,usSpinnerService,$state,Restangular,VoitureService,MarqueService)
+    function($scope,VoitureService,usSpinnerService,$state,Restangular,VoitureService)
     {
         usSpinnerService.spin('nt-spinner');
 
         Restangular.all('parameters').customGET().then(function(response){
             var data = response.data;
-
-            MarqueService.list().then(function(response){
-                $scope.marques = response;
-            });
+            $scope.marques = data.marques;
             $scope.boitiers = data.boitiers;
             $scope.carburants = data.carburants;
         });
@@ -54,7 +51,13 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService','$
         $scope.searchVoiture = function(search){
             usSpinnerService.spin('nt-spinner');
             if(!$scope.advancedSearch){
-                key = search.key;
+                if(search){
+                    key = search.key;
+                }
+                else{
+                    key='';
+                }
+
                 Restangular.all('search').customGET(key).then(function(response){
                     $scope.voitures=VoitureService.defineImagePrincipale(response.data.voitures);
                     usSpinnerService.stop('nt-spinner');

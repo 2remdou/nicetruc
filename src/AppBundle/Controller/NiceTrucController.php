@@ -280,7 +280,7 @@ class NiceTrucController extends FOSRestController
         $view = View::create();
 
         $data = array('data' => array(
-            //'marques'=>$marques,
+            'marques'=>$marques,
             'boitiers'=>$boitiers,
             'carburants'=>$carburants,
 //            'modeles'=>$modeles
