@@ -11,5 +11,6 @@ var app = angular.module('app',[
     'ngAnimate',
     'ui.bootstrap',
     'permission',
-    'ui-notification'
+    'ui-notification',
+    'angular-jwt'
 ]);

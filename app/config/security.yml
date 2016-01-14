@@ -16,12 +16,16 @@ security:
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
-        wsse_secured:
+        api:
             pattern:   ^/api/
             stateless: true
-            wsse:      true
+            lexik_jwt: ~
             anonymous : true
-            wsse:      { lifetime: 30 }
+            form_login:
+                check_path:               /api/users/login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false

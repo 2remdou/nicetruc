@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+
+{% block body %}
+
+    <div ui-view="nav">
+    </div>  
+    <span us-spinner spinner-key="nt-spinner"></span>
+    <div ui-view="content">
+    </div>
+
+    <script type="application/javascript" src="client/app/cryptoJS/sha1.js"></script>
+    <script type="application/javascript" src="client/app/cryptoJS/sha512.js"></script>
+    <script type="application/javascript" src="client/app/cryptoJS/md5.js"></script>
+    <script type="application/javascript" src="client/app/cryptoJS/enc-base64-min.js"></script>
+    
+    <script type="application/javascript" src="bundles/compiled/all.js"></script>
+
+{% endblock body %}

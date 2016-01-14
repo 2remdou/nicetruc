@@ -41,7 +41,8 @@ class Modele
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")s
+     * @SerializedName("modeleMarques")
      * @ORM\JoinColumn(nullable=true)
      */
     private $modeleMarques;

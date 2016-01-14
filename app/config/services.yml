@@ -47,6 +47,12 @@ services:
         tags:
             - { name: form.type, alias: nicetruc_ville }
 
+    nicetruc.jwt.authentication.success.listener:
+        class: AppBundle\EventListener\JWTAuthenticationSuccessListener
+        arguments: [@jms_serializer]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }        
+    
     nicetruc.login.success.handler:
         class: AppBundle\Handler\LoginSuccessHandler
         arguments: [@security.token_storage,@security.authorization_checker,@router]
@@ -54,9 +60,7 @@ services:
     nicetruc.login.failure.handler:
         class: AppBundle\Handler\LoginFailureHandler
         arguments: [@router]
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
     wsse.security.authentication.provider:
         class: AppBundle\Security\Authentication\Provider\WsseProvider

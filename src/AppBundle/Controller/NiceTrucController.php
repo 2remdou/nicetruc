@@ -31,17 +31,27 @@ class NiceTrucController extends FOSRestController
     {
         // replace this example code with whatever you need
         $env=$this->get('kernel')->getEnvironment();
-        return $this->render('AppBundle::index.html.twig',array(
-            'env' => $env,
-        ));
+
+        if($env === 'prod')
+            $template='AppBundle::index_prod.html.twig';
+        else
+            $template='AppBundle::index_dev.html.twig';
+
+        return $this->render($template);
     }
     /**
      * @Route("/{url}", name="url_1p", options={"expose"=true})
      */
     public function index1pAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('AppBundle::index.html.twig');
+        $env=$this->get('kernel')->getEnvironment();
+
+        if($env === 'prod')
+            $template='AppBundle::index_prod.html.twig';
+        else
+            $template='AppBundle::index_dev.html.twig';
+
+       return $this->render($template);
     }
 
 

@@ -8,16 +8,19 @@ app.config(function($interpolateProvider) {
 });
 
 
-    app.config(['RestangularProvider','$injector', 'TokenHandlerProvider', 'AuthHandlerProvider','usSpinnerConfigProvider',
-        '$locationProvider','NotificationProvider','$locationProvider',
-    function(RestangularProvider,$injector, TokenHandlerProvider, AuthHandlerProvider,usSpinnerConfigProvider,
-             $locationProvider,NotificationProvider,$locationProvider) 
+    app.config(['RestangularProvider','$injector','usSpinnerConfigProvider',
+        '$locationProvider','NotificationProvider','$locationProvider','$httpProvider', 'jwtInterceptorProvider',
+    function(RestangularProvider,$injector,usSpinnerConfigProvider,
+             $locationProvider,NotificationProvider,$locationProvider,$httpProvider, jwtInterceptorProvider) 
     {
 
     $locationProvider.html5Mode(true); // pour enlever le hastag(#) dans l'url
 
-    var TokenHandler = $injector.instantiate(TokenHandlerProvider.$get);
-    var AuthHandler = $injector.instantiate(AuthHandlerProvider.$get);
+    jwtInterceptorProvider.tokenGetter = function(){
+        return localStorage.getItem('token');
+    };
+
+    $httpProvider.interceptors.push('jwtInterceptor');
 
     RestangularProvider.setBaseUrl(window.location.origin+'/api');
 
@@ -82,24 +85,6 @@ app.config(function($interpolateProvider) {
          }
          return element;
      });
-
-    RestangularProvider.addFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
-        if(typeof AuthHandler.email() != 'undefined'){
-            headers['X-WSSE'] =
-                TokenHandler.getCredentials(
-                    AuthHandler.email(),
-                    AuthHandler.secret()
-                );
-        }
-
-        return {
-            element: element,
-            headers: headers,
-            params: params,
-            httpConfig: httpConfig
-        };
-    });
-
 
     var opts = {
             lines: 13 // The number of lines to draw

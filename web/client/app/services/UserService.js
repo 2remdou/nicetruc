@@ -2,12 +2,16 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('UserService',['$rootScope','Restangular','$cookies',
-    function($rootScope,Restangular,$cookies){
+app.service('UserService',['$rootScope','Restangular','$cookies','AuthService',
+    function($rootScope,Restangular,$cookies,AuthService){
 
     that = this;
     var _userService = Restangular.all('users');
     var scope = $rootScope.$new();
+
+    this.login = function(user){
+        return _userService.one('').post('login_check',{_username:user.email,_password:user.password});
+    };
 
     this.isAuthenticated = function(){
         return typeof $rootScope.user != "undefined";
@@ -35,13 +39,8 @@ app.service('UserService',['$rootScope','Restangular','$cookies',
         return Restangular.one('users',id).get();
     };
 
-    this.refresh = function(user){
-        $rootScope.user=user;       
-        $cookies.remove('email');
-        $cookies.put('email', user.email);   
-        $cookies.remove('user');      
-        $cookies.putObject('user',user);
-
+    this.refresh = function(){
+        $rootScope.user=AuthService.getUser();
     };
 
     this.getSalt = function(email){

@@ -8,6 +8,9 @@ fos_user:
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+api_login_check:
+    path: /api/users/login_check
+
 app_ville:
 #    defaults:
 #        _sylius:
