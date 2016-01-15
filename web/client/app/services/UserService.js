@@ -5,7 +5,7 @@
 app.service('UserService',['$rootScope','Restangular','$cookies','AuthService',
     function($rootScope,Restangular,$cookies,AuthService){
 
-    that = this;
+    var that = this;
     var _userService = Restangular.all('users');
     var scope = $rootScope.$new();
 

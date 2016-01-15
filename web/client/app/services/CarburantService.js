@@ -2,9 +2,34 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('CarburantService',['$rootScope','Restangular',function($rootScope,Restangular){
+app.service('CarburantService',['$rootScope','Restangular','InfoParametersService',
+    function($rootScope,Restangular,InfoParametersService){
 
     var _carburantService = Restangular.all('carburants/');
+    var carburants=[];
+    var load=false;
+    that=this;
+
+
+    this.setLoad = function(load){
+        that.load=load;
+    };
+
+    this.isLoad = function(){
+        return that.load;
+    };
+
+    this.getCarburants = function(){
+        if(InfoParametersService.isLoad())
+            return that.carburants;
+        else{
+            InfoParametersService.loadParameters();
+        }
+    };
+
+    this.setCarburants = function(carburants){
+        that.carburants = carburants;
+    };
 
     this.list = function(){
         $rootScope.$broadcast('carburant.list');

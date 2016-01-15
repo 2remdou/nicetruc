@@ -288,20 +288,25 @@ class NiceTrucController extends FOSRestController
     public function getAllParametersAction(){
         $em = $this->getDoctrine()->getManager();
 
+        $voituresEnVedette = $em->getRepository('AppBundle:Voiture')->findBy(array('isVedette'=>true));
+
+        if(!$voituresEnVedette){
+            $voituresEnVedette = $em->getRepository('AppBundle:Voiture')->findBy(array(),array(),8);
+        }
+
+
          $marques = $em->getRepository('AppBundle:Marque')->findMarqueWithModele();
-         // $marques = array();
          $boitiers = $em->getRepository('AppBundle:Boitier')->findAll();
          $carburants = $em->getRepository('AppBundle:Carburant')->findAll();
-//         $modeles = $em->getRepository('AppBundle:Modele')->findAll();
 
         
         $view = View::create();
 
         $data = array('data' => array(
+            'voituresEnVedette' => $voituresEnVedette,
             'marques'=>$marques,
             'boitiers'=>$boitiers,
             'carburants'=>$carburants,
-//            'modeles'=>$modeles
             )
 
         );

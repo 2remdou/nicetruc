@@ -23,8 +23,7 @@
                             <div class="col-md-7">
                                 <select class="form-control" tabindex="1" id="modele" ng-model="voiture.modele" name="modele"
                                         ng-options="modele.libelleModele
-                                            for modele in modeles track by modele.id"
-                                        ng-change="selectModele(voiture.modele)" required>
+                                            for modele in modeles track by modele.id" required>
                                 </select>
                                 <p ng-show="formAnnonceVoiture.modele.$invalid  && formSubmit" class="help-block">Selectionner un modele.</p>
                             </div>

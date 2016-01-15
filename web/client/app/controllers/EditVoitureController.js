@@ -3,15 +3,16 @@
  */
 app.controller('EditVoitureController',['$scope','MarqueService','ModeleService',
     'CarburantService','BoitierService','ModeleMarqueService','VoitureService','$rootScope',
-    '$state','usSpinnerService','$stateParams','FileUploader','ImageService',
+    '$state','usSpinnerService','$stateParams','FileUploader','ImageService','InfoParametersService',
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
-        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ImageService){
+        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ImageService,InfoParametersService){
 
-        $scope.marques= MarqueService.list().$object;
-        $scope.modeleMarques = ModeleMarqueService.list().$object;
-        $scope.carburants= CarburantService.list().$object;
-        $scope.boitiers = BoitierService.list().$object;
-
+        InfoParametersService.getMarqueBoitierCarburant().then(function(response){
+            var data = response.data;
+            $scope.marques = data.marques;
+            $scope.boitiers = data.boitiers;
+            $scope.carburants = data.carburants;
+        });
         var imagesASupprimer = []; //les images à supprimer
 
         uploader=$scope.uploader = new FileUploader({
@@ -49,33 +50,11 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
 
 
         $scope.selectMarque = function(marque){
-            $scope.marque=marque;
-            $scope.modeles=[];
-
-            angular.forEach($scope.modeleMarques,function(modeleMarque){
-                if(modeleMarque.marque.id===marque.id){
-                    $scope.modeles.push(modeleMarque.modele);
-                }
-            })
+            if(!marque) return;
+            $scope.modeles=marque.modeles;
         };
 
-        $scope.selectModele = function(modele){
-            if(!modele){
-                return;
-            }
-            $scope.modeleMarque = false;
-            angular.forEach($scope.modeleMarques,function(modeleMarque){
-                if(modeleMarque.marque.id===$scope.marque.id && modeleMarque.modele.id===modele.id){
-                    $scope.modeleMarque=modeleMarque;
-                }
-            });
-            if(!$scope.modeleMarque){
-                message = [{texte:"Ce modele de voiture est invalide",'typeAlert':'danger'}];
-                scope.$emit('showMessage',message);
-                return;
-            }
-        };
-
+        
 
         $scope.update = function(voiture,formIsValid){
             $scope.formSubmit = true;

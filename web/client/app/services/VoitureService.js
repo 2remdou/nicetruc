@@ -2,16 +2,37 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('VoitureService',['$rootScope','Restangular',function($rootScope,Restangular){
+app.service('VoitureService',['$rootScope','Restangular','InfoParametersService',
+    function($rootScope,Restangular,InfoParametersService){
 
     var _voitureService = Restangular.all('voitures/');
+    var voituresEnVedette=[];
+    var that = this;
 
     this.list = function(){
         return _voitureService.getList();
     };
 
+    this.setVoituresEnVedette = function(voituresEnVedette){
+        that.voituresEnVedette = voituresEnVedette;
+        
+    };
+
+    this.getVoituresEnVedette = function(){
+        if(InfoParametersService.isLoad())
+            return that.voituresEnVedette;
+        else{
+            InfoParametersService.loadParameters();
+        }
+    };
+
     this.listVedette = function(){
-        return _voitureService.one('vedette').get();
+
+        if(InfoParametersService.isLoad())
+            return that.voituresEnVedette;
+        else{
+            InfoParametersService.loadParameters();
+        }
     };
 
     this.listByUser= function(userId){

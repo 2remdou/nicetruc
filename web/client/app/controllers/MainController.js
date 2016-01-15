@@ -1,34 +1,37 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MainController',['$scope','VoitureService','usSpinnerService','$state','Restangular','VoitureService','MarqueService',
-    function($scope,VoitureService,usSpinnerService,$state,Restangular,VoitureService)
+app.controller('MainController',['$scope','VoitureService','usSpinnerService',
+    '$state','Restangular','VoitureService','MarqueService','BoitierService',
+    'CarburantService',
+    function($scope,VoitureService,usSpinnerService,$state,Restangular,
+        VoitureService,MarqueService,BoitierService,CarburantService)
     {
         usSpinnerService.spin('nt-spinner');
 
-        Restangular.all('parameters').customGET().then(function(response){
-            var data = response.data;
-            $scope.marques = data.marques;
-            $scope.boitiers = data.boitiers;
-            $scope.carburants = data.carburants;
+        $scope.$emit('parameters.started.load');
+        
+        var loadParameters = function(){
+            $scope.marques = MarqueService.getMarques();
+            $scope.boitiers = BoitierService.getBoitiers();
+            $scope.carburants = CarburantService.getCarburants();
+            $scope.voituresEnVedette = VoitureService.getVoituresEnVedette();
+            usSpinnerService.stop('nt-spinner');
+
+        };
+        
+        $scope.$on('parameters.completed.load',function(){
+            loadParameters();
         });
 
-        
+        $scope.$on('parameters.already.load',function(){
+            loadParameters();
+        });
+
+
         $scope.advancedSearchText = 'Recherche avancée';
 
-
-        VoitureService.listVedette().then(function(response){
-            angular.forEach(response.data,function(voiture){
-                if(!voiture.imagePrincipale){
-                    voiture.imagePrincipale = {downloadUrl: voiture.defaultPathImagePrincipale,imageName: "defaultVoiture.jpg"};
-                }
-            });
-            $scope.voitures=response.data;
-            usSpinnerService.stop('nt-spinner');
-        },function(){
-            usSpinnerService.stop('nt-spinner');
-        });
-
+        
         $scope.showVoiture = function(voitureId){
             $state.go('showVoiture',{voitureId:voitureId});
         };

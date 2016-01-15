@@ -2,12 +2,36 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('MarqueService',['$rootScope','Restangular',function($rootScope,Restangular){
+app.service('MarqueService',['$rootScope','Restangular','InfoParametersService',
+    function($rootScope,Restangular,InfoParametersService){
 
     var _marqueService = Restangular.all('marques/');
+    var marques=[];
+    var load=false;
+    that=this;
 
     this.list = function(){
         return _marqueService.getList();
+    };
+
+    this.setLoad = function(load){
+        that.load=load;
+    };
+
+    this.isLoad = function(){
+        return that.load;
+    };
+
+    this.getMarques = function(){
+        if(InfoParametersService.isLoad())
+            return that.marques;
+        else{
+            InfoParametersService.loadParameters();
+        }
+    };
+
+    this.setMarques = function(marques){
+        that.marques = marques;
     };
 
     this.create = function(marque){
