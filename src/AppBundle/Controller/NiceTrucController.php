@@ -40,6 +40,19 @@ class NiceTrucController extends FOSRestController
         return $this->render($template);
     }
     /**
+     * @Route("/test", name="test")
+     */
+    public function testAction()
+    {
+        // replace this example code with whatever you need
+        $em = $this->getDoctrine()->getManager();
+
+        $marques = $em->getRepository('AppBundle:Marque')->findMarqueWithModele();
+       // dump($marques);
+        return $this->render('AppBundle::test.html.twig');
+    }
+
+    /**
      * @Route("/{url}", name="url_1p", options={"expose"=true})
      */
     public function index1pAction(Request $request)
@@ -55,14 +68,6 @@ class NiceTrucController extends FOSRestController
     }
 
 
-    /**
-     * @Route("/test", name="test")
-     */
-    public function testAction()
-    {
-        // replace this example code with whatever you need
-        return $this->render('AppBundle::test.html.twig');
-    }
 
     /**
      * @Route("/villes",name="nicetruc_ville")
@@ -283,7 +288,7 @@ class NiceTrucController extends FOSRestController
     public function getAllParametersAction(){
         $em = $this->getDoctrine()->getManager();
 
-         $marques = $em->getRepository('AppBundle:Marque')->findAll();
+         $marques = $em->getRepository('AppBundle:Marque')->findMarqueWithModele();
          // $marques = array();
          $boitiers = $em->getRepository('AppBundle:Boitier')->findAll();
          $carburants = $em->getRepository('AppBundle:Carburant')->findAll();

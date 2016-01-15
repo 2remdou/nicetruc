@@ -118,19 +118,4 @@ class Marque
         return $this->modeleMarques;
     }
 
-    /**
-     * @return array
-     * @VirtualProperty
-     * @SerializedName("modeles")
-     */
-    public function getModele(){
-        $modele = array();
-        foreach($this->modeleMarques as $modeleMarque){
-            if($modeleMarque->getMarque()->getId() === $this->getId()){
-                $modele = array_merge($modele,array($modeleMarque->getModele()));
-            }
-        }
-
-        return $modele;
-    }
 }

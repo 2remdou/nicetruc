@@ -12,4 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class MarqueRepository extends EntityRepository
 {
+    public function findMarqueWithModele(){
+        $resultatMarques = $this->createQueryBuilder('a')
+            ->join('a.modeleMarques','b')
+            ->addSelect('b')
+            ->join('b.modele','c')
+            ->addSelect('c')
+            ->getQuery()
+            ->getArrayResult();
+        foreach($resultatMarques as $key=> $marque){
+            $modeles=array();
+            foreach($marque['modeleMarques'] as $modeleMarque){
+                $modeles[]=$modeleMarque['modele'];
+            }
+            $resultatMarques[$key]['modeles']=$modeles;
+        }
+        return $resultatMarques;
+
+    }
 }
