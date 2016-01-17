@@ -12,5 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class VoitureRepository extends EntityRepository
 {
+    public function customFind($id){
+        $resultat = $this->createQueryBuilder('v')
+            ->join('v.modeleMarque','modeleMarque')
+            ->addSelect('modeleMarque')
+            ->join('v.boitier','boitier')
+            ->addSelect('boitier')
+            ->join('v.carburant','carburant')
+            ->addSelect('carburant')
+            ->join('v.user','user')
+            ->addSelect('user')
+            ->join('v.images','image')
+            ->addSelect('image')
+            ->leftJoin('v.imagePrincipale','imagePrincipale')
+            ->addSelect('imagePrincipale')
+            ->where('voiture.id=:id')
+            ->setParameter('id',$id)
+            ->getQuery()
+            ->getArrayResult();
 
+        return $resultat;
+    }
 }

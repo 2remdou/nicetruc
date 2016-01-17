@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
  */
-class Voiture extends Article
+class Voiture
 {
     /**
      * @var integer
@@ -532,4 +532,64 @@ class Voiture extends Article
     }
 
 
+    /**
+     * @var string
+     * @SerializedName("description")
+     * @Expose()
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     * @SerializedName("datePublication")
+     * @Expose()
+     */
+    private $datePublication;
+
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Voiture
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set datePublication
+     *
+     * @param \DateTime $datePublication
+     * @return Voiture
+     */
+    public function setDatePublication($datePublication)
+    {
+        $this->datePublication = $datePublication;
+
+        return $this;
+    }
+
+    /**
+     * Get datePublication
+     *
+     * @return \DateTime 
+     */
+    public function getDatePublication()
+    {
+        return $this->datePublication;
+    }
 }

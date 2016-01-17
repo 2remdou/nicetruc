@@ -3,29 +3,21 @@
  */
 app.controller('MainController',['$scope','VoitureService','usSpinnerService',
     '$state','Restangular','VoitureService','MarqueService','BoitierService',
-    'CarburantService',
+    'CarburantService','$rootScope',
     function($scope,VoitureService,usSpinnerService,$state,Restangular,
-        VoitureService,MarqueService,BoitierService,CarburantService)
+        VoitureService,MarqueService,BoitierService,CarburantService,$rootScope)
     {
         usSpinnerService.spin('nt-spinner');
 
         $scope.$emit('parameters.started.load');
-        
-        var loadParameters = function(){
-            $scope.marques = MarqueService.getMarques();
-            $scope.boitiers = BoitierService.getBoitiers();
-            $scope.carburants = CarburantService.getCarburants();
-            $scope.voituresEnVedette = VoitureService.getVoituresEnVedette();
+
+        $rootScope.$on('parameters.completed.load',function(event,data){
+            $scope.marques = $rootScope.marques;
+            $scope.boitiers = $rootScope.boitiers;
+            $scope.carburants = $rootScope.carburants;
+            $scope.voituresEnVedette = $rootScope.voituresEnVedette;
             usSpinnerService.stop('nt-spinner');
 
-        };
-        
-        $scope.$on('parameters.completed.load',function(){
-            loadParameters();
-        });
-
-        $scope.$on('parameters.already.load',function(){
-            loadParameters();
         });
 
 

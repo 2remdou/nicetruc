@@ -12,9 +12,6 @@ api_login_check:
     path: /api/users/login_check
 
 app_ville:
-#    defaults:
-#        _sylius:
-#            flash: ~
     resource: app.ville
     type: sylius.api
     prefix: /api
@@ -24,10 +21,6 @@ app_quartier:
     type: sylius.api
     prefix: /api
 
-#app_user:
-#    resource: app.user
-#    type: sylius.api
-#    prefix: /api
 
 app_categorie:
     resource: app.categorie
@@ -79,6 +72,15 @@ app_modelesmarques:
                 marque: [idMarque]
                 modele: [idModele]
 
+app_custom_voiture_show:
+    path: api/voitures/{id}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.voiture:showAction
+        _sylius:
+            repository:
+                method: customFind
+                arguments: [$id]
 app_voiture:
     resource: app.voiture
     type: sylius.api

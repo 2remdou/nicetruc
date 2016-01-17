@@ -7,12 +7,18 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
         ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ImageService,InfoParametersService){
 
-        InfoParametersService.getMarqueBoitierCarburant().then(function(response){
-            var data = response.data;
-            $scope.marques = data.marques;
-            $scope.boitiers = data.boitiers;
-            $scope.carburants = data.carburants;
+        $scope.$emit('parameters.started.load');
+
+
+        $scope.$on('parameters.completed.load',function(){
+            $scope.marques = $rootScope.marques;
+            $scope.modeles = $rootScope.modeles;
+            $scope.boitiers = $rootScope.boitiers;
+            $scope.carburants = $rootScope.carburants;
+            $scope.voituresEnVedette = $rootScope.voituresEnVedette;
+            usSpinnerService.stop('nt-spinner');
         });
+
         var imagesASupprimer = []; //les images à supprimer
 
         uploader=$scope.uploader = new FileUploader({
@@ -21,7 +27,6 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
 
         usSpinnerService.spin('nt-spinner');
 
-        $scope.modeles = [];
         VoitureService.get($stateParams.voitureId).then(function(responseVoiture){
             $scope.voiture = responseVoiture;
 
@@ -41,7 +46,6 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
             });
 
             $scope.voiture.marque = $scope.voiture.modeleMarque.marque;
-            $scope.modeles=$scope.voiture.modeleMarque.marque.modeles;
             $scope.voiture.modele = $scope.voiture.modeleMarque.modele;
 
             usSpinnerService.stop('nt-spinner');

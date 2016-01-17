@@ -11,23 +11,13 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
 
         $scope.$emit('parameters.started.load');
 
-        var loadParameters = function(){
-            log(MarqueService.getMarques());
-            $scope.marques = MarqueService.getMarques();
-            $scope.boitiers = BoitierService.getBoitiers();
-            $scope.carburants = CarburantService.getCarburants();
-            $scope.voituresEnVedette = VoitureService.getVoituresEnVedette();
-            usSpinnerService.stop('nt-spinner');
 
-        }
-        
         $scope.$on('parameters.completed.load',function(){
-            loadParameters();
-        });
-
-        $scope.$on('parameters.already.load',function(){
-            loadParameters();
-            log('parameters.already.load');
+            $scope.marques = $rootScope.marques;
+            $scope.boitiers = $rootScope.boitiers;
+            $scope.carburants = $rootScope.carburants;
+            $scope.voituresEnVedette = $rootScope.voituresEnVedette;
+            usSpinnerService.stop('nt-spinner');
         });
 
 
