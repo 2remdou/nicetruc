@@ -64,7 +64,7 @@ class Image
     private $downloadUrl;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture",inversedBy="images")
      */
     private $voiture;
 

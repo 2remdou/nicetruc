@@ -14,17 +14,17 @@ app.config(function($interpolateProvider) {
              $locationProvider,NotificationProvider,$locationProvider,$httpProvider, jwtInterceptorProvider) 
     {
 
-    $locationProvider.html5Mode(true); // pour enlever le hastag(#) dans l'url
+        $locationProvider.html5Mode(true); // pour enlever le hastag(#) dans l'url
 
-    jwtInterceptorProvider.tokenGetter = function(){
-        return localStorage.getItem('token');
-    };
+        jwtInterceptorProvider.tokenGetter = function(){
+            return localStorage.getItem('token');
+        };
 
-    $httpProvider.interceptors.push('jwtInterceptor');
+        $httpProvider.interceptors.push('jwtInterceptor');
 
-    RestangularProvider.setBaseUrl(window.location.origin+'/api');
+        RestangularProvider.setBaseUrl(window.location.origin+'/api');
 
-    RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
+        RestangularProvider.addRequestInterceptor(function(element, operation, what, url) {
          var standardRoute = ['villes/','categories/','marques/','boitiers/','carburants/','modeles/'];
 
         if(operation === 'put' || operation=== 'post'){

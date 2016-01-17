@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
@@ -11,14 +12,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * Voiture
- *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\VoitureRepository")
- * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("all")
+ * @ORM\HasLifecycleCallbacks()
+ * @Entity(repositoryClass="VoitureRepository")
  */
-class Voiture
+
+class Voiture extends Article
 {
     /**
      * @var integer
@@ -109,7 +109,7 @@ class Voiture
     private $carburant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",inversedBy="voitures")
      * @ORM\JoinColumn(nullable=false)
      * @Expose()
      * @SerializedName("user")
@@ -117,7 +117,7 @@ class Voiture
     protected  $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie",inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie",inversedBy="voitures")
      * @ORM\JoinColumn(nullable=false)
      */
     protected  $categorie;
@@ -531,65 +531,4 @@ class Voiture
         return $this;
     }
 
-
-    /**
-     * @var string
-     * @SerializedName("description")
-     * @Expose()
-     */
-    private $description;
-
-    /**
-     * @var \DateTime
-     * @SerializedName("datePublication")
-     * @Expose()
-     */
-    private $datePublication;
-
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Voiture
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set datePublication
-     *
-     * @param \DateTime $datePublication
-     * @return Voiture
-     */
-    public function setDatePublication($datePublication)
-    {
-        $this->datePublication = $datePublication;
-
-        return $this;
-    }
-
-    /**
-     * Get datePublication
-     *
-     * @return \DateTime 
-     */
-    public function getDatePublication()
-    {
-        return $this->datePublication;
-    }
 }

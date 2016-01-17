@@ -3,9 +3,9 @@
  */
 app.controller('EditVoitureController',['$scope','MarqueService','ModeleService',
     'CarburantService','BoitierService','ModeleMarqueService','VoitureService','$rootScope',
-    '$state','usSpinnerService','$stateParams','FileUploader','ImageService','InfoParametersService',
+    '$state','usSpinnerService','$stateParams','FileUploader','ImageService','Restangular',
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
-        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ImageService,InfoParametersService){
+        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ImageService,Restangular){
 
         $scope.$emit('parameters.started.load');
 
@@ -30,7 +30,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         VoitureService.get($stateParams.voitureId).then(function(responseVoiture){
             $scope.voiture = responseVoiture;
 
-            if(responseVoiture.user.id !== $rootScope.user.id){
+            if($scope.voiture.user.id !== $rootScope.user.id){
                 displayAlert("Vous ne disposez des autorisations neccessaires pour modifier cette annonce",'danger',$scope);
                 $state.go('showVoiture',{voitureId:$stateParams.voitureId});
             }

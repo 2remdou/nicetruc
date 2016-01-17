@@ -30,4 +30,8 @@ class MarqueRepository extends EntityRepository
         return $resultatMarques;
 
     }
+
+    public function customFind($id){
+
+    }
 }

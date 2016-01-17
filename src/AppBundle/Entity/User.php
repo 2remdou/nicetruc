@@ -76,7 +76,7 @@ class User extends BaseUser
     private $quartier;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="users")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="user")
      */
     private $voitures;
 

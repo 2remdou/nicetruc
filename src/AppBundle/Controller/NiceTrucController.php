@@ -47,8 +47,8 @@ class NiceTrucController extends FOSRestController
         // replace this example code with whatever you need
         $em = $this->getDoctrine()->getManager();
 
-        $marques = $em->getRepository('AppBundle:Marque')->findMarqueWithModele();
-       // dump($marques);
+        $marques = $em->getRepository('AppBundle:Voiture');
+        dump(get_class($marques));
         return $this->render('AppBundle::test.html.twig');
     }
 
@@ -206,69 +206,7 @@ class NiceTrucController extends FOSRestController
         return $message->getView();
     }
 
-    /**
-     * Retourne les voitures en vedette
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   description = "Reetourn les voitures en vedette",
-     *   statusCodes = {
-     *     200 = "Returned when successful",
-     *     404 = "Returned when the user is not found"
-     *   }
-     * )
-     * @Route("/api/voitures/vedette",name="nicetruc_voitureVedette", options={"expose"=true})
-     * @Rest\View()
-     * @Method({"GET"})
-     */
-    public function getVoitureVedetteAction(){
-        $em = $this->getDoctrine()->getManager();
 
-        $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('isVedette'=>true));
-
-        if(!$voitures){
-            $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array(),array(),8);
-        }
-
-
-        $view = View::create(array('data'=>$voitures) ,200);
-
-        return $view;
-    }
-
-    /**
-     * Retourne les voitures par user
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   description = "Reetourn les voitures par user",
-     *   statusCodes = {
-     *     200 = "Returned when successful",
-     *     404 = "Returned when the user is not found"
-     *   }
-     * )
-     * @Route("/api/voitures/users/{userId}",name="nicetruc_voiturebyuser", options={"expose"=true})
-     * @Rest\View()
-     * @Method({"GET"})
-     */
-
-    public function getVoitureByUserAction($userId){
-        $em = $this->getDoctrine()->getManager();
-        $message = new MessageResponse(View::create());
-
-        $user = $em->getRepository('AppBundle:User')->findBy(array('id'=>$userId));
-
-        if(!$user){
-            $message->config("Utilisateur introuvable",'danger',404);
-            return $message->getView();
-        }
-
-        $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('user'=>$user));
-
-        $view = View::create(array('data'=>$voitures) ,200);
-
-        return $view;
-    }
 
     /**
      * Retourne les marques,modeles,boitiers,carburant
@@ -317,6 +255,7 @@ class NiceTrucController extends FOSRestController
 
         return $view;
     }
+
 
 
 
