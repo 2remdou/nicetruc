@@ -31,7 +31,6 @@ class NiceTrucController extends FOSRestController
     {
         // replace this example code with whatever you need
         $env=$this->get('kernel')->getEnvironment();
-        $env='prod';
         if($env === 'dev')
             $template='AppBundle::index_dev.html.twig';
         else
