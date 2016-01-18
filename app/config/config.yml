@@ -179,10 +179,10 @@ aws:
         version: '2006-03-01'
         
 lexik_jwt_authentication:
-    private_key_path: %jwt_private_key_path%
-    public_key_path:  %jwt_public_key_path%
+    private_key_path: %jwtprivatekeypath%
+    public_key_path:  %jwtpublickeypath%
     pass_phrase:      %jwtkeypassphrase%
-    token_ttl:        %jwt_token_ttl%
+    token_ttl:        %jwttokenttl%
 #srio_rest_upload:
 #    storages:
 #        default:
