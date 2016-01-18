@@ -19,5 +19,4 @@ parameters:
         secret:            ThisTokenIsNotSoSecretChangeIt
         jwt_private_key_path: %kernel.root_dir%/var/jwt/private.pem   # ssh private key path
         jwtpublickeypath:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
-        jwtkeypassphrase:  ''                              # ssh key pass phrase
         jwttokenttl:        86400
