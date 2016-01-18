@@ -31,11 +31,11 @@ class NiceTrucController extends FOSRestController
     {
         // replace this example code with whatever you need
         $env=$this->get('kernel')->getEnvironment();
-
-        if($env === 'prod')
-            $template='AppBundle::index_prod.html.twig';
-        else
+        $env='prod';
+        if($env === 'dev')
             $template='AppBundle::index_dev.html.twig';
+        else
+            $template='AppBundle::index_prod.html.twig';
 
         return $this->render($template);
     }
@@ -44,11 +44,14 @@ class NiceTrucController extends FOSRestController
      */
     public function testAction()
     {
-        // replace this example code with whatever you need
-        $em = $this->getDoctrine()->getManager();
+        $env=$this->get('kernel')->getEnvironment();
 
-        $marques = $em->getRepository('AppBundle:Voiture');
-        dump(get_class($marques));
+        if($env === 'prod')
+            $template='AppBundle::index_prod.html.twig';
+        else
+            $template='AppBundle::index_dev.html.twig';
+        dump($env);
+        // return $this->render($template);
         return $this->render('AppBundle::test.html.twig');
     }
 
@@ -57,14 +60,7 @@ class NiceTrucController extends FOSRestController
      */
     public function index1pAction(Request $request)
     {
-        $env=$this->get('kernel')->getEnvironment();
-
-        if($env === 'prod')
-            $template='AppBundle::index_prod.html.twig';
-        else
-            $template='AppBundle::index_dev.html.twig';
-
-       return $this->render($template);
+       return $this->indexAction($request);
     }
 
 

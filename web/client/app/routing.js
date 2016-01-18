@@ -339,6 +339,11 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/voitureByUser.html',
                    controller: 'VoitureByUserController'
                }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_API','ROLE_ADMIN']
+               }
            }
        })
 
