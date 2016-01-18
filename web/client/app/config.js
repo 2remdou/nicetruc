@@ -64,7 +64,7 @@ app.config(function($interpolateProvider) {
                 ['marque','modele','id','images','defaultPathImagePrincipale'].forEach(function(property){
                     deleteProperty(element,property);
                 });
-                 element.modeleMarque = extractId(element.modeleMarque);
+                 //element.modeleMarque = extractId(element.modeleMarque);
                  element.boitier = extractId(element.boitier);
                  element.carburant = extractId(element.carburant);
                  element.imagePrincipale=extractId(element.imagePrincipale);

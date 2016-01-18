@@ -7,6 +7,7 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
     function($scope,VoitureService,$rootScope,$state,usSpinnerService,
         MarqueService,BoitierService,CarburantService){
 
+        usSpinnerService.spin('nt-spinner');
         $scope.formSubmit = false;
 
         $scope.$emit('parameters.started.load');
@@ -27,10 +28,11 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
         };
 
         $scope.create = function(voiture,formIsValid){
+            log(voiture);
             $scope.formSubmit = true;
             if(!formIsValid) return;
             usSpinnerService.spin('nt-spinner');
-            voiture.modeleMarque=$scope.modeleMarque;
+            voiture.modeleMarque=voiture.modele.modeleMarque;
 
             voiture.user = $rootScope.user;
             voiture.categorie = 1; //voiture

@@ -23,7 +23,10 @@ class MarqueRepository extends EntityRepository
         foreach($resultatMarques as $key=> $marque){
             $modeles=array();
             foreach($marque['modeleMarques'] as $modeleMarque){
-                $modeles[]=$modeleMarque['modele'];
+                $modele=$modeleMarque['modele'];
+                $modele['modeleMarque']=$modeleMarque['id'];;
+                $modeles[]=$modele;
+                // $modeles[]=$modeleMarque['modele'];
             }
             $resultatMarques[$key]['modeles']=$modeles;
         }
@@ -31,7 +34,5 @@ class MarqueRepository extends EntityRepository
 
     }
 
-    public function customFind($id){
 
-    }
 }

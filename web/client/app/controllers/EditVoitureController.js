@@ -3,16 +3,16 @@
  */
 app.controller('EditVoitureController',['$scope','MarqueService','ModeleService',
     'CarburantService','BoitierService','ModeleMarqueService','VoitureService','$rootScope',
-    '$state','usSpinnerService','$stateParams','FileUploader','ImageService','Restangular',
+    '$state','usSpinnerService','$stateParams','FileUploader','ImageService','Restangular','filterFilter',
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
-        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,FileUploader,ImageService,Restangular){
+        ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,
+        FileUploader,ImageService,Restangular,filterFilter){
 
         $scope.$emit('parameters.started.load');
 
 
         $scope.$on('parameters.completed.load',function(){
             $scope.marques = $rootScope.marques;
-            $scope.modeles = $rootScope.modeles;
             $scope.boitiers = $rootScope.boitiers;
             $scope.carburants = $rootScope.carburants;
             $scope.voituresEnVedette = $rootScope.voituresEnVedette;
@@ -29,7 +29,10 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
 
         VoitureService.get($stateParams.voitureId).then(function(responseVoiture){
             $scope.voiture = responseVoiture;
-
+            //log($scope.voiture);
+            $scope.modeles = filterFilter($rootScope.marques,{id:$scope.voiture.modeleMarque.marque.id});
+            // $scope.modeles = MarqueService.getModeleByMarque($scope.voiture.modeleMarque.marque.id);
+            log($scope.modeles);
             if($scope.voiture.user.id !== $rootScope.user.id){
                 displayAlert("Vous ne disposez des autorisations neccessaires pour modifier cette annonce",'danger',$scope);
                 $state.go('showVoiture',{voitureId:$stateParams.voitureId});
@@ -61,15 +64,18 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         
 
         $scope.update = function(voiture,formIsValid){
+            log(voiture);
             $scope.formSubmit = true;
             if(!formIsValid) return;
             usSpinnerService.stop('nt-spinner');
             usSpinnerService.spin('nt-spinner');
-            voiture.modeleMarque= typeof $scope.modeleMarque=="undefined"? voiture.modeleMarque:$scope.modeleMarque;
+            voiture.modeleMarque= voiture.modele.modeleMarque;
             voiture.categorie = 1; //voiture
 
             voiture.route=""; // enlever l'id de la voiture dans l'url pour eviter (/api/voitures/11/11)
             VoitureService.update(voiture).then(function(){
+
+
 
                 var idVoiture = $stateParams.voitureId;
 

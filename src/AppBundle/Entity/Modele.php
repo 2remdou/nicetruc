@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -42,7 +43,6 @@ class Modele
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")s
-     * @SerializedName("modeleMarques")
      * @ORM\JoinColumn(nullable=true)
      */
     private $modeleMarques;

@@ -34,6 +34,19 @@ app.service('MarqueService',['$rootScope','Restangular','InfoParametersService',
         that.marques = marques;
     };
 
+    this.getModeleByMarque = function(id){
+        if($rootScope.marques){
+            angular.forEach($rootScope.marques, function(marque){
+                if(marque.id==id){
+                    log(id+"et"+marque.id);
+                    log(marque);
+                    return marque.modeles;
+                }
+            });
+            return;
+        }
+    };
+
     this.create = function(marque){
         _marqueService.post(marque).then(function(){
             $rootScope.$broadcast('marque.create');

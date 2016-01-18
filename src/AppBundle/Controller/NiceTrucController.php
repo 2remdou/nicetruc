@@ -63,7 +63,6 @@ class NiceTrucController extends FOSRestController
     }
 
 
-
     /**
      * @Route("/villes",name="nicetruc_ville")
      * @Security("has_role('ROLE_SUPER_ADMIN')")

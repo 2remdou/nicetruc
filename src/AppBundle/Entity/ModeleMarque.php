@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -34,6 +35,7 @@ class ModeleMarque
      * @ORM\JoinColumn(nullable=false)
      * @SerializedName("marque")
      * @Expose()
+     * @MaxDepth(1)
      */
     private $marque;
 
@@ -42,13 +44,14 @@ class ModeleMarque
      * @ORM\JoinColumn(nullable=false)
      * @SerializedName("modele")
      * @Expose()
+     * @MaxDepth(1)
      */
     private $modele;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="anneeModele", type="integer")
+     * @ORM\Column(name="anneeModele", type="integer", nullable=true)
      * @Expose()
      * @SerializedName("anneeModele")
      * @Assert\GreaterThan(value = 1900)
