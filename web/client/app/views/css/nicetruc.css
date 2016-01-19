@@ -1,0 +1,27 @@
+ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.userMenu{
+    display: block;
+    float: right;
+    font-size: 15px;
+    line-height: 30px;
+    padding: 20px 20px 20px 0;
+    text-decoration: none;
+    transition: opacity 0.2s ease-out 0s;
+    -webkit-transition: opacity 0.21s 
+}
+.userMenu>li{
+    padding-left: 10px;
+}
+li {
+    display: inline;
+}
+
+.vedette
+{
+    cursor: pointer;
+}
