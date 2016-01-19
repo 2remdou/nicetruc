@@ -9,6 +9,10 @@
     <div ui-view="content">
     </div>
 
+    <a href="#top" class="back-top text-center" onclick="$('body,html').animate({scrollTop:0},500); return false">
+        <i class="fa fa-angle-double-up"></i>
+    </a>
+    
     <script type="application/javascript" src="client/app/cryptoJS/sha1.js"></script>
     <script type="application/javascript" src="client/app/cryptoJS/sha512.js"></script>
     <script type="application/javascript" src="client/app/cryptoJS/md5.js"></script>
