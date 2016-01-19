@@ -36,14 +36,10 @@ app.service('MarqueService',['$rootScope','Restangular','InfoParametersService',
 
     this.getModeleByMarque = function(id){
         if($rootScope.marques){
-            angular.forEach($rootScope.marques, function(marque){
-                if(marque.id==id){
-                    log(id+"et"+marque.id);
-                    log(marque);
-                    return marque.modeles;
-                }
-            });
-            return;
+            return $rootScope.marques.filter(function(marque){
+                return marque.id == id;
+            })[0].modeles
+                ;
         }
     };
 

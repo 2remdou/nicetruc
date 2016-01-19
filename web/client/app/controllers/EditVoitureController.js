@@ -3,15 +3,15 @@
  */
 app.controller('EditVoitureController',['$scope','MarqueService','ModeleService',
     'CarburantService','BoitierService','ModeleMarqueService','VoitureService','$rootScope',
-    '$state','usSpinnerService','$stateParams','FileUploader','ImageService','Restangular','filterFilter',
+    '$state','usSpinnerService','$stateParams','FileUploader','ImageService',
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
         ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,
-        FileUploader,ImageService,Restangular,filterFilter){
+        FileUploader,ImageService){
 
         $scope.$emit('parameters.started.load');
 
 
-        $scope.$on('parameters.completed.load',function(){
+        $rootScope.$on('parameters.completed.load',function(){
             $scope.marques = $rootScope.marques;
             $scope.boitiers = $rootScope.boitiers;
             $scope.carburants = $rootScope.carburants;
@@ -29,10 +29,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
 
         VoitureService.get($stateParams.voitureId).then(function(responseVoiture){
             $scope.voiture = responseVoiture;
-            //log($scope.voiture);
-            $scope.modeles = filterFilter($rootScope.marques,{id:$scope.voiture.modeleMarque.marque.id});
-            // $scope.modeles = MarqueService.getModeleByMarque($scope.voiture.modeleMarque.marque.id);
-            log($scope.modeles);
+            $scope.modeles = MarqueService.getModeleByMarque($scope.voiture.modeleMarque.marque.id);
             if($scope.voiture.user.id !== $rootScope.user.id){
                 displayAlert("Vous ne disposez des autorisations neccessaires pour modifier cette annonce",'danger',$scope);
                 $state.go('showVoiture',{voitureId:$stateParams.voitureId});
@@ -64,7 +61,6 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
         
 
         $scope.update = function(voiture,formIsValid){
-            log(voiture);
             $scope.formSubmit = true;
             if(!formIsValid) return;
             usSpinnerService.stop('nt-spinner');

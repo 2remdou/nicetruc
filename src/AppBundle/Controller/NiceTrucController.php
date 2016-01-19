@@ -43,13 +43,13 @@ class NiceTrucController extends FOSRestController
      */
     public function testAction()
     {
-        $env=$this->get('kernel')->getEnvironment();
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
 
-        if($env === 'prod')
-            $template='AppBundle::index_prod.html.twig';
-        else
-            $template='AppBundle::index_dev.html.twig';
-        dump($env);
+
+        $modeleMarques = $em->getRepository('AppBundle:ModeleMarque')->findAll();
+
+        dump($modeleMarques);
         // return $this->render($template);
         return $this->render('AppBundle::test.html.twig');
     }

@@ -13,7 +13,7 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
         $scope.$emit('parameters.started.load');
 
 
-        $scope.$on('parameters.completed.load',function(){
+        $rootScope.$on('parameters.completed.load',function(){
             $scope.marques = $rootScope.marques;
             $scope.boitiers = $rootScope.boitiers;
             $scope.carburants = $rootScope.carburants;
@@ -28,7 +28,6 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
         };
 
         $scope.create = function(voiture,formIsValid){
-            log(voiture);
             $scope.formSubmit = true;
             if(!formIsValid) return;
             usSpinnerService.spin('nt-spinner');

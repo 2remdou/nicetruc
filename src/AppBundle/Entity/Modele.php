@@ -42,7 +42,7 @@ class Modele
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")s
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\modeleMarque",mappedBy="modele")
      * @ORM\JoinColumn(nullable=true)
      */
     private $modeleMarques;

@@ -5,7 +5,7 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
     function($scope,MarqueService,ModeleService,ModeleMarqueService,$q,usSpinnerService){
     
     usSpinnerService.spin('nt-spinner');   
-    $scope.modeleMarques = ModeleMarqueService.list().$object;
+    //$scope.modeleMarques = ModeleMarqueService.list().$object;
     $scope.modeles = ModeleService.list().$object;
 
     MarqueService.list().then(function(response){
