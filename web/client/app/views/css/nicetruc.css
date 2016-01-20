@@ -1,3 +1,9 @@
+a{
+    color: black;
+}
+.white{
+    color: white!important;
+}
 ul, ol {
     list-style: none;
     margin: 0;
@@ -6,10 +12,8 @@ ul, ol {
 
 .userMenu{
     display: block;
-    float: right;
     font-size: 15px;
-    line-height: 30px;
-    padding: 20px 20px 20px 0;
+    padding-top: 20px;
     text-decoration: none;
     transition: opacity 0.2s ease-out 0s;
     -webkit-transition: opacity 0.21s 
@@ -21,7 +25,11 @@ li {
     display: inline;
 }
 
-.vedette
+.list-li > li{
+    display: list-item;
+}
+
+.mouse-pointer
 {
-    cursor: pointer;
+    cursor: pointer!important;
 }

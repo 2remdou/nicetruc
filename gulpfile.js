@@ -39,23 +39,23 @@ gulp.task('concatJs',function () {
         .pipe(concat('all.js'))
         .pipe(gulp.dest('web/bundles/compiled/'));
 });
-        // 
+//
 
 gulp.task('concatCss',function(){
-   return gulp.src([
+    return gulp.src([
         'web/client/bower_components/bootstrap/dist/css/bootstrap.min.css',
+        'web/client/app/views/css/font-awesome.min.css',
         'web/client/bower_components/bxslider/bx_styles/bx_styles.css',
         'web/client/bower_components/angular-ui-notification/dist/angular-ui-notification.min.css',
         'web/client/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
-       'web/client/app/views/css/nicetruc.css',
-       // 'web/client/app/views/css/inscription.css',
-       // 'web/client/app/views/css/search.css',
-       // 'web/client/app/views/css/annonce.css',
-       // 'web/client/app/views/css/font-awesome.min.css',
-       'web/client/app/views/css/style.css'
-   ])
-       .pipe(concatCss('all.css'))
-       .pipe(gulp.dest('web/client/app/views/css'));
+        'web/client/app/views/css/nicetruc.css',
+        'web/client/app/views/css/style.css',
+        // 'web/client/app/views/css/inscription.css',
+        // 'web/client/app/views/css/search.css',
+        // 'web/client/app/views/css/annonce.css'
+    ])
+        .pipe(concatCss('all.css'))
+        .pipe(gulp.dest('web/client/app/views/css'));
 });
 gulp.task('clean', function() {
     return del(['web/bundles/compiled/']);
@@ -67,12 +67,12 @@ gulp.task('default', function() {
 
 gulp.task('watch', function() {
     gulp.watch([
-        'web/bundles/fosjsrouting/js/router.js',
-        'web/js/fos_js_routes.js',
-        'web/client/app/**/*.js'
+            'web/bundles/fosjsrouting/js/router.js',
+            'web/js/fos_js_routes.js',
+            'web/client/app/**/*.js',
+            'web/client/app/views/css/*.css',
         ],
         //['clean'],
         ['default']
     );
 });
-

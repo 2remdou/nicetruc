@@ -92,8 +92,9 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                },
                'content':{
                    templateUrl: 'client/app/views/inscription.html',
-                   controller: 'InscriptionController'
+                   controller: 'InscriptionController',
                }
+
            }
        })
        .state('enableEmail',{
