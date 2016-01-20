@@ -8332,8 +8332,8 @@ button.close {
 
 @font-face {
   font-family: 'FontAwesome';
-  src: url("../../../../client/app/views/fonts/fontawesome-webfont.eot?v=4.4.0");
-  src: url("../../../../client/app/views/fonts/fontawesome-webfont.eot?#iefix&v=4.4.0") format('embedded-opentype'),url("../../../../client/app/views/fonts/fontawesome-webfont.woff2?v=4.4.0") format('woff2'),url("../../../../client/app/views/fonts/fontawesome-webfont.woff?v=4.4.0") format('woff'),url("../../../../client/app/views/fonts/fontawesome-webfont.ttf?v=4.4.0") format('truetype'),url("../../../../client/app/views/fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format('svg');
+  src: url("../../../app/views/css/fonts/fontawesome-webfont.eot?v=4.4.0");
+  src: url("../../../app/views/css/fonts/fontawesome-webfont.eot?#iefix&v=4.4.0") format('embedded-opentype'),url("../../../app/views/css/fonts/fontawesome-webfont.woff2?v=4.4.0") format('woff2'),url("../../../app/views/css/fonts/fontawesome-webfont.woff?v=4.4.0") format('woff'),url("../../../app/views/css/fonts/fontawesome-webfont.ttf?v=4.4.0") format('truetype'),url("../../../app/views/css/fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular") format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -11192,45 +11192,6 @@ button.close {
   font-size: 9px;
   font-weight: 400;
 }
-a {
-  color: black;
-}
-
-.white {
-  color: white!important;
-}
-
-ul,
-ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.userMenu {
-  display: block;
-  font-size: 15px;
-  padding-top: 20px;
-  text-decoration: none;
-  transition: opacity 0.2s ease-out 0s;
-  -webkit-transition: opacity 0.21s;
-}
-
-.userMenu>li {
-  padding-left: 10px;
-}
-
-li {
-  display: inline;
-}
-
-.list-li > li {
-  display: list-item;
-}
-
-.mouse-pointer {
-  cursor: pointer!important;
-}
 .img-thumbnail {
   border-radius: 0;
 }
@@ -11561,33 +11522,33 @@ select {
 
 @font-face {
   font-family: 'open_sanscondensed_light';
-  src: url("../../../../client/app/views/fonts/OpenSans-CondLight-webfont.eot");
-  src: url("../../../../client/app/views/fonts/OpenSans-CondLight-webfont.eot?#iefix") format('embedded-opentype'),
-         url("../../../../client/app/views/fonts/OpenSans-CondLight-webfont.woff") format('woff'),
-         url("../../../../client/app/views/fonts/OpenSans-CondLight-webfont.ttf") format('truetype'),
-         url("../../../../client/app/views/fonts/OpenSans-CondLight-webfont.svg#open_sanscondensed_light") format('svg');
+  src: url("../../../app/views/css/fonts/OpenSans-CondLight-webfont.eot");
+  src: url("../../../app/views/css/fonts/OpenSans-CondLight-webfont.eot?#iefix") format('embedded-opentype'),
+         url("../../../app/views/css/fonts/OpenSans-CondLight-webfont.woff") format('woff'),
+         url("../../../app/views/css/fonts/OpenSans-CondLight-webfont.ttf") format('truetype'),
+         url("../../../app/views/css/fonts/OpenSans-CondLight-webfont.svg#open_sanscondensed_light") format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'source_sans_proregular';
-  src: url("../../../../client/app/views/fonts/sourcesanspro-regular-webfont.eot");
-  src: url("../../../../client/app/views/fonts/sourcesanspro-regular-webfont.eot?#iefix") format('embedded-opentype'),
-         url("../../../../client/app/views/fonts/sourcesanspro-regular-webfont.woff") format('woff'),
-         url("../../../../client/app/views/fonts/sourcesanspro-regular-webfont.ttf") format('truetype'),
-         url("../../../../client/app/views/fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular") format('svg');
+  src: url("../../../app/views/css/fonts/sourcesanspro-regular-webfont.eot");
+  src: url("../../../app/views/css/fonts/sourcesanspro-regular-webfont.eot?#iefix") format('embedded-opentype'),
+         url("../../../app/views/css/fonts/sourcesanspro-regular-webfont.woff") format('woff'),
+         url("../../../app/views/css/fonts/sourcesanspro-regular-webfont.ttf") format('truetype'),
+         url("../../../app/views/css/fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular") format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'DroidSansRegular';
-  src: url("../../../../client/app/views/fonts/DroidSans-webfont.eot");
-  src: url("../../../../client/app/views/fonts/DroidSans-webfont.eot?#iefix") format('embedded-opentype'),
-         url("../../../../client/app/views/fonts/DroidSans-webfont.woff") format('woff'),
-         url("../../../../client/app/views/fonts/DroidSans-webfont.ttf") format('truetype'),
-         url("../../../../client/app/views/fonts/DroidSans-webfont.svg#DroidSansRegular") format('svg');
+  src: url("../../../app/views/css/fonts/DroidSans-webfont.eot");
+  src: url("../../../app/views/css/fonts/DroidSans-webfont.eot?#iefix") format('embedded-opentype'),
+         url("../../../app/views/css/fonts/DroidSans-webfont.woff") format('woff'),
+         url("../../../app/views/css/fonts/DroidSans-webfont.ttf") format('truetype'),
+         url("../../../app/views/css/fonts/DroidSans-webfont.svg#DroidSansRegular") format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -11700,7 +11661,8 @@ ul.cart-content b {
 
 .link-p {
   display: block;
-  min-height: 250px;
+  min-height: 200px;
+  max-height: 200px;
   height: auto;
   width: 100%;
   max-width: 100%;
@@ -11728,8 +11690,8 @@ ul.cart-content b {
 }
 
 .prod-caption h4 {
-  font-size: 16px;
-  height: 40px;
+  /*	font-size: 16px;
+	height: 40px;*/
   overflow: hidden;
 }
 
@@ -12101,4 +12063,84 @@ footer .copyright {
 
 .blog-detail .thumbnail img {
   width: 100%;
+}
+a {
+  color: black;
+}
+
+.white {
+  color: white!important;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.userMenu {
+  display: block;
+  font-size: 15px;
+  padding-top: 20px;
+  text-decoration: none;
+  transition: opacity 0.2s ease-out 0s;
+  -webkit-transition: opacity 0.21s;
+}
+
+.userMenu>li {
+  padding-left: 10px;
+}
+
+li {
+  display: inline;
+}
+
+.list-li > li {
+  display: list-item;
+}
+
+.mouse-pointer {
+  cursor: pointer!important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #3498DB;
+  border-color: #3498DB;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #3498DB;
+  border-color: #3498DB;
+}
+
+.navbar {
+  background: #384248;
+  margin-bottom: 0;
+  border-color: #384248;
+}
+
+.navbar {
+  background: #3498DB;
+  margin-bottom: 0;
+  border-color: #3498DB;
+}
+
+.navbar-inverse {
+  background-color: #3498DB;
+  border-color: #3498DB;
+}
+
+header .logo a span {
+  color: #3498DB;
+}
+
+.prod-caption {
+  position: relative;
+}
+
+.prod-caption>div {
+  position: relative;
 }

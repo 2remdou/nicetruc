@@ -8,18 +8,18 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
         var $state = $injector.get("$state");
         $state.go('nicetruc');
     });
+    var nav = {templateUrl: 'client/app/views/nav.html',controller: 'NavController'};
+    var advancedSearch = {templateUrl: 'client/app/views/advancedSearch.html',controller: 'AdvancedSearchController'};
    $stateProvider
        .state('nicetruc',{
            url:'/',
            views:{
-               'nav':{
-                   templateUrl: 'client/app/views/nav.html',
-                   controller: 'NavController'
-               },
+               'nav':nav,
                'content':{
                    templateUrl: 'client/app/views/main.html',
                    controller: 'MainController'
-               }
+               },
+               'advancedSearch':advancedSearch
            }
        })
        .state('main',{
@@ -38,7 +38,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-             'content':{
+             'body':{
                  templateUrl: 'client/app/views/login.html',
                  controller: 'LoginController'
              }
@@ -51,7 +51,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/resetSendMail.html',
                    controller: 'ResetSendMailController'
                }
@@ -64,7 +64,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/resetCheckToken.html',
                    controller: 'ResetCheckTokenController'
                }
@@ -77,7 +77,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/resetting.html',
                    controller: 'ResettingController'
                }
@@ -90,7 +90,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/inscription.html',
                    controller: 'InscriptionController',
                }
@@ -104,7 +104,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/enableEmail.html',
                    controller: 'EnableEmailController'
                }
@@ -117,7 +117,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/profile.html',
                    controller: 'ProfilController'
                }
@@ -130,7 +130,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/ville.html',
                    controller: 'VilleController'
                }
@@ -148,7 +148,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/quartier.html',
                    controller: 'QuartierController'
                }
@@ -166,7 +166,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/categorie.html',
                    controller: 'CategorieController'
                }
@@ -184,7 +184,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/carburant.html',
                    controller: 'CarburantController'
                }
@@ -202,7 +202,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/boitier.html',
                    controller: 'BoitierController'
                }
@@ -220,7 +220,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/marque.html',
                    controller: 'MarqueController'
                }
@@ -238,7 +238,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/modele.html',
                    controller: 'ModeleMarqueController'
                }
@@ -256,7 +256,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/annonceVoiture.html',
                    controller: 'AnnonceVoitureController'
                }
@@ -274,7 +274,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/imageAnnonceVoiture.html',
                    controller: 'ImageAnnonceVoitureController'
                }
@@ -292,7 +292,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/searchVoiture.html',
                    controller: 'SearchVoitureController'
                }
@@ -305,7 +305,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/showVoiture.html',
                    controller: 'ShowVoitureController'
                }
@@ -318,7 +318,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    templateUrl: 'client/app/views/nav.html',
                    controller: 'NavController'
                },
-               'content':{
+               'body':{
                    templateUrl: 'client/app/views/editVoiture.html',
                    controller: 'EditVoitureController'
                }
@@ -339,6 +339,10 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                'content':{
                    templateUrl: 'client/app/views/voitureByUser.html',
                    controller: 'VoitureByUserController'
+               },
+               'advancedSearch':{
+                   templateUrl: 'client/app/views/advancedSearch.html',
+                   controller: 'AdvancedSearchController'
                }
            },
            data: {
@@ -346,8 +350,23 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                    only: ['ROLE_API','ROLE_ADMIN']
                }
            }
+         })
+       .state('voituresEnVedette',{
+             url:'/voituresEnVedette',
+             views:{
+                 'nav':nav,
+                 'content':{
+                     templateUrl: 'client/app/views/voituresEnVedette.html',
+                     controller: 'VoituresEnVedetteController'
+                 },
+                 'advancedSearch':advancedSearch
+             }
+             // ,
+             // data: {
+             //     permissions: {
+             //         only: ['ROLE_API','ROLE_ADMIN']
+             //     }
+             // }
        })
 
-
-   ;
 }]);

@@ -33,3 +33,41 @@ li {
 {
     cursor: pointer!important;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #3498DB;
+    border-color: #3498DB;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #3498DB;
+    border-color: #3498DB;
+}
+.navbar {
+    background: #384248;
+    margin-bottom: 0;
+    border-color: #384248;
+}
+
+.navbar {
+    background: #3498DB;
+    margin-bottom: 0;
+    border-color: #3498DB;
+}
+
+.navbar-inverse {
+    background-color: #3498DB;
+    border-color: #3498DB;
+}
+
+header .logo a span {
+    color: #3498DB;
+}
+.prod-caption{
+    position: relative;
+}
+.prod-caption>div {
+    position: relative;
+}

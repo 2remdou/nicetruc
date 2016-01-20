@@ -7,8 +7,21 @@
     </div>
     <br>
     <span us-spinner spinner-key="nt-spinner"></span>
-    <div ui-view="content">
+    <div ui-view="body">
+        <div class="container-fluid">
+                <div class="col-md-2 col-lg-2 hidden-xs hidden-sm">
+                    <div ui-view="advancedSearch">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <div ui-view="content">
+                    </div>
+                </div>
+        </div>
     </div>
+    
+    
+    
 
     <a href="#top" class="back-top text-center" onclick="$('body,html').animate({scrollTop:0},500); return false">
         <i class="fa fa-angle-double-up"></i>

@@ -153,31 +153,31 @@ select{border:1px solid #ddd;padding:3px}
 .red{ color: red }
 @font-face {
     font-family: 'open_sanscondensed_light';
-    src: url('../../../client/app/views/fonts/OpenSans-CondLight-webfont.eot');
-    src: url('../../../client/app/views/fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../../client/app/views/fonts/OpenSans-CondLight-webfont.woff') format('woff'),
-         url('../../../client/app/views/fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
-         url('../../../client/app/views/fonts/OpenSans-CondLight-webfont.svg#open_sanscondensed_light') format('svg');
+    src: url('fonts/OpenSans-CondLight-webfont.eot');
+    src: url('fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-CondLight-webfont.woff') format('woff'),
+         url('fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-CondLight-webfont.svg#open_sanscondensed_light') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'source_sans_proregular';
-    src: url('../../../client/app/views/fonts/sourcesanspro-regular-webfont.eot');
-    src: url('../../../client/app/views/fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../../client/app/views/fonts/sourcesanspro-regular-webfont.woff') format('woff'),
-         url('../../../client/app/views/fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
-         url('../../../client/app/views/fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
+    src: url('fonts/sourcesanspro-regular-webfont.eot');
+    src: url('fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/sourcesanspro-regular-webfont.woff') format('woff'),
+         url('fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
+         url('fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'DroidSansRegular';
-    src: url('../../../client/app/views/fonts/DroidSans-webfont.eot');
-    src: url('../../../client/app/views/fonts/DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../../client/app/views/fonts/DroidSans-webfont.woff') format('woff'),
-         url('../../../client/app/views/fonts/DroidSans-webfont.ttf') format('truetype'),
-         url('../../../client/app/views/fonts/DroidSans-webfont.svg#DroidSansRegular') format('svg');
+    src: url('fonts/DroidSans-webfont.eot');
+    src: url('fonts/DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/DroidSans-webfont.woff') format('woff'),
+         url('fonts/DroidSans-webfont.ttf') format('truetype'),
+         url('fonts/DroidSans-webfont.svg#DroidSansRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -268,7 +268,8 @@ ul.cart-content b{
 }
 .link-p{
 	display: block;
-	min-height: 250px;
+	min-height: 200px;
+	max-height: 200px;
 	height: auto;
 	width: 100%;
 	max-width: 100%;
@@ -292,8 +293,8 @@ ul.cart-content b{
 	border-top: 1px solid #ddd;
 }
 .prod-caption h4{
-	font-size: 16px;
-	height: 40px;
+/*	font-size: 16px;
+	height: 40px;*/
 	overflow: hidden;
 }
 span.title{

@@ -1,0 +1,44 @@
+    <div class="col-lg-12 col-sm-12">
+        <span class="title">VOITURES EN VEDETTE</span>
+        <button type="submit" class="btn btn-md btn-success pull-right"> Valider</button>
+    </div>
+    <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voitures">
+        <div class="thumbnail">
+            <a href="detail.html" class="link-p">
+                <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
+            </a>
+            <div class="caption prod-caption">
+                <a ui-sref="showVoiture({voitureId:voiture.id})">
+                    <div>
+                        <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
+                    <div>
+                    <div> 
+                         //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
+                     </div>
+                    <p>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-primary">//voiture.prix// GNF</a>
+                            <a href="#" class="btn btn-warning">//voiture.kmParcouru// km</a>
+                        </div>
+                    </p>
+
+                </a>
+            </div>
+        </div>
+    </div>
+<!--     <div class="text-center">
+        <ul class="pagination catalogue-pagination">
+            <li class="disabled"><a>First</a></li>
+            <li class="disabled"><a>Prev</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Next</a></li>
+            <li><a href="#">Last</a></li>
+        </ul>
+    </div> -->
+
+
+
+
