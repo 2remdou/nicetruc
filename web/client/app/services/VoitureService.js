@@ -64,6 +64,21 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
             }
         });
         return voitures;
-    }
+    };
+
+    this.getIdVoituresEnVedette = function(voitures){
+        var liste=[];
+        angular.forEach(voitures,function(voiture){
+            if(voiture.isVedette){
+                liste.push(voiture);
+            }
+        });
+        return liste;
+    };
+
+    this.postVoitureEnVedette = function(voiture){
+
+        return _voitureService.customPUT({isVedette:voiture.isVedette},'vedette/'+voiture.id);
+    };
 
 }]);

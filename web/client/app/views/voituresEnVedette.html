@@ -1,12 +1,16 @@
     <div class="col-lg-12 col-sm-12">
         <div class="title" >
             <span>VOITURES EN VEDETTE</span>
-            <button type="submit" class="btn btn-md btn-success pull-right"> Valider</button>
+            <button class="btn btn-md btn-success pull-right" ng-click="valider()"> Valider</button>
         </div>
     </div>
     <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voitures">
-        <label for="vedette//voiture.id//">Vedette</label><input type="checkbox" id="vedette//voiture.id//" name="isVedette"
-               ng-click="selectImagePrincipale(image)"
+        <button type="button" class="btn btn-xs btn-success pull-right"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></button>
+        <button type="button" class="btn btn-xs btn-danger pull-right"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></button>
+        <span us-spinner="{radius:13, width:2, length: 7}" spinner-key="nt-spinVedette//voiture.id//"></span>
+        <label for="vedette//voiture.id//">Vedette </label> <input type="checkbox" id="vedette//voiture.id//" name="isVedette"
+               ng-click="defineVedette(voiture)"
+               ng-model="voiture.isVedette"
                ng-checked="voiture.isVedette"
                data-toggle="tooltip" data-placement="top" title="Voiture en vedette"/>
         <div class="thumbnail">

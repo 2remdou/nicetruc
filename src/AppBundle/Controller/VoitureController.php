@@ -157,4 +157,47 @@ class VoitureController extends FOSRestController
         return $view;
     }
 
+     /**
+     * Definir ou non une voiture en vedette
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Definir ou non une voiture en vedette",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @RequestParam(name="isVedette", nullable=false)
+     * @Route("api/voitures/vedette/{id}",name="nicetruc_voiture_en_vedette", options={"expose"=true})
+     * @Method({"PUT"})
+     */
+    public function putVoitureEnVedetteAction($id,ParamFetcher $paramFetcher){
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+
+        $voiture = $em->getRepository('AppBundle:Voiture')->find($id);
+
+        if(!$voiture){
+            $message->config("Voiture introuvable",'danger',404);
+            return $message->getView();
+        }
+
+        if($paramFetcher->get('isVedette')){
+           $voiture->setIsVedette(true);
+        }else{
+            $voiture->setIsVedette(false);
+        }
+
+        $em->persist($voiture);
+        $em->flush();
+
+        $view = $this
+            ->view()
+            ->setData('Modification vedette effectuée');
+
+        return $view;
+    }
+
 }
