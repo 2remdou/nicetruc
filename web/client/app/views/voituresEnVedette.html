@@ -1,8 +1,14 @@
     <div class="col-lg-12 col-sm-12">
-        <span class="title">VOITURES EN VEDETTE</span>
-        <button type="submit" class="btn btn-md btn-success pull-right"> Valider</button>
+        <div class="title" >
+            <span>VOITURES EN VEDETTE</span>
+            <button type="submit" class="btn btn-md btn-success pull-right"> Valider</button>
+        </div>
     </div>
     <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voitures">
+        <label for="vedette//voiture.id//">Vedette</label><input type="checkbox" id="vedette//voiture.id//" name="isVedette"
+               ng-click="selectImagePrincipale(image)"
+               ng-checked="voiture.isVedette"
+               data-toggle="tooltip" data-placement="top" title="Voiture en vedette"/>
         <div class="thumbnail">
             <a href="detail.html" class="link-p">
                 <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
@@ -11,7 +17,7 @@
                 <a ui-sref="showVoiture({voitureId:voiture.id})">
                     <div>
                         <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
-                    <div>
+                    </div>
                     <div> 
                          //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
                      </div>

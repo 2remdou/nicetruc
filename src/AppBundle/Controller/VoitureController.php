@@ -26,6 +26,40 @@ use AppBundle\ElasticaBundle\Model\AdvancedSearch;
 class VoitureController extends FOSRestController
 {
     /**
+     * Retourne la liste des voitures
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Retourne la liste des voitures",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("api/voitures",name="nicetruc_index_voiture", options={"expose"=true})
+     * @Method({"GET"})
+     */
+    public function getVoituresAction(){
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+
+        $voitures = $em->getRepository('AppBundle:Voiture')->findAll();
+
+        if(!$voitures){
+            $message->config("Voiture introuvable",'danger',404);
+            return $message->getView();
+        }
+
+        $view = $this
+            ->view()
+            ->setData(array("data"=>$voitures));
+
+
+        return $view;
+    }
+
+    /**
      * Retourne une voiture
      *
      * @ApiDoc(
@@ -39,7 +73,7 @@ class VoitureController extends FOSRestController
      * @Route("api/voitures/{id}",name="nicetruc_show_voiture", options={"expose"=true})
      * @Method({"GET"})
      */
-    public function getVoituresAction($id){
+    public function getVoitureAction($id){
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
 

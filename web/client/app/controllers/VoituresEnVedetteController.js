@@ -7,8 +7,7 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
         usSpinnerService.spin('nt-spinner');
 
         VoitureService.list().then(function(response){
-            log(response);
-           $scope.voitures = VoitureService.defineImagePrincipale(response);
+           $scope.voitures = VoitureService.defineImagePrincipale(response.data);
 
             usSpinnerService.stop('nt-spinner');
         });

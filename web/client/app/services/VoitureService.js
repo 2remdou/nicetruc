@@ -5,12 +5,12 @@
 app.service('VoitureService',['$rootScope','Restangular','InfoParametersService',
     function($rootScope,Restangular,InfoParametersService){
 
-    var _voitureService = Restangular.all('voitures/');
+    var _voitureService = Restangular.all('voitures');
     var voituresEnVedette=[];
     var that = this;
 
     this.list = function(){
-        return _voitureService.getList();
+        return _voitureService.customGET(""); //Response for getList SHOULD be an array and not an object or something else
     };
 
     this.setVoituresEnVedette = function(voituresEnVedette){
