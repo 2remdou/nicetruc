@@ -31,7 +31,8 @@
     "bxslider": "*",
     "bl-jquery-image-center": "~1.0.4",
     "bootstrap-touchspin": "~3.1.1",
-    "jquery-zoom": "~1.7.14"
+    "jquery-zoom": "~1.7.14",
+    "bxslider-4": "~4.2.5"
   },
   "resolutions": {
     "angular": "1.4.7"

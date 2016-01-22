@@ -40,4 +40,13 @@ class VoitureRepository extends EntityRepository
 
         return $resultat;
     }
+
+    public function countVedette(){
+        return $this->createQueryBuilder('v')
+            ->select('count(v)')
+            ->where('v.isVedette=:isVedette')
+            ->setParameter('isVedette',true)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

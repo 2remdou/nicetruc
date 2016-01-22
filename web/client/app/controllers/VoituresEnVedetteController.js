@@ -3,27 +3,40 @@
  */
 app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','VoitureService','$rootScope','$state',
     function($scope,usSpinnerService,VoitureService,$rootScope,$state){
-
+		var LIMIT_VEDETTE = 9;
         usSpinnerService.spin('nt-spinner');
         var listeVoituresEnVedette={forInsert:[],forDelete:[],oldVedette:[]};
+		$scope.totalSelect = 0;
         VoitureService.list().then(function(response){
            $scope.voitures = VoitureService.defineImagePrincipale(response.data);
            listeVoituresEnVedette.oldVedette = VoitureService.getIdVoituresEnVedette($scope.voitures);
+			$scope.totalSelect = listeVoituresEnVedette.oldVedette.length;
+			log($scope.totalSelect);
             usSpinnerService.stop('nt-spinner');
         });
 
         $scope.defineVedette = function(voiture)
         {
+
     		var idxForInsert = listeVoituresEnVedette.forInsert.indexOf(voiture);
     		var idxForOld = listeVoituresEnVedette.oldVedette.indexOf(voiture);
     		var idxForDelele = listeVoituresEnVedette.forDelete.indexOf(voiture);
 
         	if(voiture.isVedette){
+				$scope.totalSelect++;
+				log($scope.totalSelect);
+				if($scope.totalSelect > LIMIT_VEDETTE){
+					displayAlert('Vous ne pouvez pas depasser '+LIMIT_VEDETTE+' voitures en vedette','danger',$scope);
+					voiture.isVedette=false;
+					$scope.totalSelect = LIMIT_VEDETTE;
+					return;
+				}
         		if(idxForInsert == -1 && idxForOld ==-1){//existe pas dans les insertions et old
         			listeVoituresEnVedette.forInsert.push(voiture);
         		}
         	}
         	else{
+				$scope.totalSelect--;
         		if(idxForOld !== -1 && idxForDelele == -1){//etait deja en vedette et n'existe pas dans delete
         			listeVoituresEnVedette.forDelete.push(voiture);
         		}
@@ -33,12 +46,12 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
         		if(idxForDelele !== -1){//existe dans les deletes
         			listeVoituresEnVedette.forDelete.splice(idxForDelele,1);
         		}
-        	}     
-        	log(listeVoituresEnVedette);
+        	}
         };
 
         $scope.valider = function()
         {
+
         	liste = listeVoituresEnVedette.forInsert.concat(listeVoituresEnVedette.forDelete);
         	
         	angular.forEach(liste, function(voiture){
@@ -53,14 +66,22 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
         				var idxForDelele = listeVoituresEnVedette.forDelete.indexOf(voiture);
         				listeVoituresEnVedette.forDelete.splice(idxForDelele,1);
         			}
-        			log('fin');
-        			log(listeVoituresEnVedette);
+					voiture.isOk=true;
+					voiture.typeResultat="success";
+					voiture.typeIcon="ok";
         		},function(error){
-        			log(error);
+					usSpinnerService.stop('nt-spinVedette'+voiture.id);
+        			voiture.isOk=true;
+					voiture.typeResultat="danger"
+					voiture.typeIcon="remove"
         		});
         	});
         	
         }
+
+		$scope.$watch('totalSelect',function(newValue,oldValue){
+			$rootScope.$broadcast('vedette.limite.exceed');
+		});
 
 
     }]);

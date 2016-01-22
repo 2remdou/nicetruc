@@ -5,8 +5,7 @@
         </div>
     </div>
     <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voitures">
-        <button type="button" class="btn btn-xs btn-success pull-right"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></button>
-        <button type="button" class="btn btn-xs btn-danger pull-right"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></button>
+        <button ng-show="voiture.isOk" type="button" class="btn btn-xs btn-//voiture.typeResultat// pull-right"><i class="glyphicon glyphicon-//voiture.typeIcon//" aria-hidden="true"></i></button>
         <span us-spinner="{radius:13, width:2, length: 7}" spinner-key="nt-spinVedette//voiture.id//"></span>
         <label for="vedette//voiture.id//">Vedette </label> <input type="checkbox" id="vedette//voiture.id//" name="isVedette"
                ng-click="defineVedette(voiture)"

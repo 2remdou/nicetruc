@@ -8,10 +8,10 @@ use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\ElasticaBundle\Model\AdvancedSearch;
-
 
 
 class VoitureController extends FOSRestController
@@ -70,7 +69,7 @@ class VoitureController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("api/voitures/{id}",name="nicetruc_show_voiture", options={"expose"=true})
+     * @Route("api/voitures/{id}", requirements={"id" = "\d+"}, name="nicetruc_show_voiture", options={"expose"=true})
      * @Method({"GET"})
      */
     public function getVoitureAction($id){
@@ -104,7 +103,7 @@ class VoitureController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("/api/voitures/vedette",name="nicetruc_voitureVedette", options={"expose"=true})
+     * @Route("/api/voitures/voituresEnVedette",name="nicetruc_voitureVedette", options={"expose"=true})
      * @Rest\View()
      * @Method({"GET"})
      */
@@ -169,8 +168,9 @@ class VoitureController extends FOSRestController
      *   }
      * )
      * @RequestParam(name="isVedette", nullable=false)
-     * @Route("api/voitures/vedette/{id}",name="nicetruc_voiture_en_vedette", options={"expose"=true})
+     * @Route("api/voitures/vedette/{id}", requirements={"id" = "\d+"}, name="nicetruc_voiture_en_vedette", options={"expose"=true})
      * @Method({"PUT"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function putVoitureEnVedetteAction($id,ParamFetcher $paramFetcher){
         $em = $this->getDoctrine()->getManager();
@@ -184,7 +184,15 @@ class VoitureController extends FOSRestController
             return $message->getView();
         }
 
+        $nbreVedette = $em->getRepository('AppBundle:Voiture')->countVedette();
+
         if($paramFetcher->get('isVedette')){
+            if($nbreVedette > $this->getParameter('limiteVedette')){
+                return $this
+                    ->view()
+                    ->setData('Vous ne pouvez depasser '.$this->getParameter('limiteVedette').' vedettes')
+                    ->setStatusCode(423);
+            }
            $voiture->setIsVedette(true);
         }else{
             $voiture->setIsVedette(false);
@@ -195,7 +203,8 @@ class VoitureController extends FOSRestController
 
         $view = $this
             ->view()
-            ->setData('Modification vedette effectuée');
+            ->setData('Modification vedette effectuée ')
+            ->setStatusCode(200);
 
         return $view;
     }

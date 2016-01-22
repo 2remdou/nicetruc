@@ -20,3 +20,5 @@ parameters:
         jwt_private_key_path: %kernel.root_dir%/var/jwt/private.pem   # ssh private key path
         jwtpublickeypath:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
         jwttokenttl:        86400
+
+        limitevedette: 9

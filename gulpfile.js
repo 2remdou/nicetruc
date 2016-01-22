@@ -12,7 +12,6 @@ gulp.task('concatJs',function () {
         'web/client/bower_components/angular/angular.min.js',
         'web/client/bower_components/angular-animate/angular-animate.js',
         'web/client/bower_components/bootstrap/dist/js/bootstrap.min.js',
-        'web/client/bower_components/bxslider/jquery.bxSlider.min.js',
         'web/client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
         'web/client/bower_components/lodash/lodash.min.js',
         'web/client/bower_components/restangular/dist/restangular.min.js',
@@ -26,6 +25,7 @@ gulp.task('concatJs',function () {
         'web/client/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
         'web/client/bower_components/bl-jquery-image-center/js/jquery.blImageCenter.js',
         'web/client/bower_components/jquery-zoom/jquery.zoom.min.js',
+        'web/client/bower_components/bxslider-4/dist/jquery.bxSlider.min.js',
 
         'web/client/bower_components/bl-jquery-image-center/js/jquery.blImageCenter.js',
         'web/client/bower_components/angular-permission/dist/angular-permission.js',
@@ -45,9 +45,9 @@ gulp.task('concatCss',function(){
     return gulp.src([
         'web/client/bower_components/bootstrap/dist/css/bootstrap.min.css',
         'web/client/app/views/css/font-awesome.min.css',
-        'web/client/bower_components/bxslider/bx_styles/bx_styles.css',
         'web/client/bower_components/angular-ui-notification/dist/angular-ui-notification.min.css',
         'web/client/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+        'web/client/bower_components/bxslider-4/dist/jquery.bxslider.min.css',
         'web/client/app/views/css/font-awesome.min.css',
         'web/client/app/views/css/style.css',
         'web/client/app/views/css/nicetruc.css',

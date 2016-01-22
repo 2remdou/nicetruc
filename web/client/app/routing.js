@@ -360,13 +360,12 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                      controller: 'VoituresEnVedetteController'
                  },
                  'advancedSearch':advancedSearch
-             }
-             // ,
-             // data: {
-             //     permissions: {
-             //         only: ['ROLE_API','ROLE_ADMIN']
-             //     }
-             // }
+             },
+              data: {
+                  permissions: {
+                      only: ['ROLE_ADMIN']
+                  }
+              }
        })
 
 }]);

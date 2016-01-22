@@ -1,13 +1,43 @@
-        <div class="col-sm-3 col-lg-3 col-md-3" ng-repeat="voiture in voituresEnVedette">
-            <div class="vedette thumbnail" ng-click="showVoiture(voiture.id)">
+<!-- Slider -->
+<div class="col-lg-9 col-md-12">
+    <div class="slider">
+        <ul class="bxslider">
+            <li ng-repeat="voiture in voituresEnVedette">
+                <a href="index.html">
+                    <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- End Slider -->
+<!--
+<div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voituresEnVedette">
+        <div class="thumbnail">
+            <a href="detail.html" class="link-p">
                 <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
-                <div class="caption">
-                    <h5><strong>Marque:</strong>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h5>
-                    <h5><strong>Prix:</strong> //voiture.prix// GNF</h5>
-                    <h5><strong>Km Parc.:</strong> //voiture.kmParcouru//</h5>
-                </div>
+            </a>
+            <div class="caption prod-caption">
+                <a ui-sref="showVoiture({voitureId:voiture.id})">
+                    <div>
+                        <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
+                    </div>
+                    <div>
+                        //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
+                    </div>
+                    <p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">//voiture.prix// GNF</a>
+                        <a href="#" class="btn btn-warning">//voiture.kmParcouru// km</a>
+                    </div>
+                    </p>
+
+                </a>
             </div>
         </div>
+    </div>
+-->
+
 
 
 
