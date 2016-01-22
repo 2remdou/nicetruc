@@ -1,4 +1,4 @@
-/**
+    /**
  * Created by mdoutoure on 18/11/2015.
  */
 var gulp = require('gulp'),

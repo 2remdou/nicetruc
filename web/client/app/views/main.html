@@ -1,17 +1,7 @@
-<!-- Slider -->
 <div class="col-lg-9 col-md-12">
-    <div class="slider">
-        <ul class="bxslider">
-            <li ng-repeat="voiture in voituresEnVedette">
-                <a href="index.html">
-                    <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//"/>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <div nt-bx-slider voitures="voituresEnVedette" ng-transclude></div>
 </div>
-<!-- End Slider -->
-<!--
+
 <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voituresEnVedette">
         <div class="thumbnail">
             <a href="detail.html" class="link-p">
@@ -36,7 +26,7 @@
             </div>
         </div>
     </div>
--->
+
 
 
 
