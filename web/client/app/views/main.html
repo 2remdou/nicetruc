@@ -1,31 +1,27 @@
-<div class="col-lg-9 col-md-12">
-    <div nt-bx-slider voitures="voituresEnVedette" ng-transclude></div>
-</div>
-
 <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voituresEnVedette">
-        <div class="thumbnail">
-            <a href="detail.html" class="link-p">
-                <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
-            </a>
-            <div class="caption prod-caption">
-                <a ui-sref="showVoiture({voitureId:voiture.id})">
-                    <div>
-                        <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
-                    </div>
-                    <div>
-                        //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
-                    </div>
-                    <p>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-primary">//voiture.prix// GNF</a>
-                        <a href="#" class="btn btn-warning">//voiture.kmParcouru// km</a>
-                    </div>
-                    </p>
+    <div class="thumbnail">
+        <a ui-sref="showVoiture({voitureId:voiture.id})" class="link-p">
+            <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
+        </a>
+        <div class="caption prod-caption">
+            <a ui-sref="showVoiture({voitureId:voiture.id})">
+                <div>
+                    <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
+                </div>
+                <div>
+                    //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
+                </div>
+                <p>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary">//voiture.prix// GNF</a>
+                    <a href="#" class="btn btn-warning">//voiture.kmParcouru// km</a>
+                </div>
+                </p>
 
-                </a>
-            </div>
+            </a>
         </div>
     </div>
+</div>
 
 
 

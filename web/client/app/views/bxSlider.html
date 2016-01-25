@@ -1,12 +1,15 @@
+<div>
 	<div class="slider">
-	    <ul class="bxslider">
-	        <li ng-repeat="voiture in voitures">
-	            <a href="index.html">
-	                <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//"/>
-	            </a>
-	        </li>
-	    </ul>
+		<ul class="bxslider">
+			<li ng-repeat="voiture in voituresEnVedette">
+				<a ui-sref="showVoiture({voitureId:voiture.id})">
+					<img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//"/>
+				</a>
+			</li>
+		</ul>
 	</div>
+</div>
+
 
 
 
