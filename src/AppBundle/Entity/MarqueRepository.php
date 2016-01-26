@@ -2,7 +2,10 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
+//use Doctrine\ORM\EntityRepository;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * MarqueRepository
@@ -34,5 +37,13 @@ class MarqueRepository extends EntityRepository
 
     }
 
+    public function findMarques(){
+        $qb = $this->createQueryBuilder('m');
+
+        return $this->getPaginator($qb);
+    }
+
 
 }
+
+

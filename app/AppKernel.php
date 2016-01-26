@@ -29,7 +29,6 @@ class AppKernel extends Kernel
             new \Aws\Symfony\AwsBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
