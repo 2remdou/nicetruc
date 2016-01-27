@@ -38,12 +38,17 @@ class VoitureController extends FOSRestController
      * @Route("api/voitures",name="nicetruc_index_voiture", options={"expose"=true})
      * @Method({"GET"})
      */
-    public function getVoituresAction(){
+    public function getVoituresAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
 
+        $paginator  = $this->get('knp_paginator');
 
-        $voitures = $em->getRepository('AppBundle:Voiture')->findAll();
+        $voitures = $paginator->paginate(
+            $em->getRepository('AppBundle:Voiture')->findBy(array(),array('datePublication'=>'DESC')),
+            $request->query->getInt('page', 1),
+            $this->getParameter('maxpage')
+        );
 
         if(!$voitures){
             $message->config("Voiture introuvable",'danger',404);

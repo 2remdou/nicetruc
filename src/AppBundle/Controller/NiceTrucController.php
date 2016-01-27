@@ -46,10 +46,17 @@ class NiceTrucController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
 
+        $paginator  = $this->get('knp_paginator');
 
-        $modeleMarques = $em->getRepository('AppBundle:ModeleMarque')->findAll();
+        $marques = $paginator->paginate(
+            $em->getRepository('AppBundle:Marque')->findBy(array(),array('libelleMarque'=>'ASC')),
+            1,
+            $this->getParameter('maxpage')
+        );
 
-        dump($modeleMarques);
+
+        dump($marques);
+        // dump($marques['items']);
         // return $this->render($template);
         return $this->render('AppBundle::test.html.twig');
     }
@@ -73,10 +80,10 @@ class NiceTrucController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("api/marques",name="nicetruc_index_marque", options={"expose"=true})
+     * @Route("api/marques/page/{page}",name="nicetruc_index_marque", options={"expose"=true})
      * @Method({"GET"})
      */
-    public function getMarquesAction(Request $request){
+    public function getMarquesAction($page,Request $request){
 
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
@@ -84,8 +91,8 @@ class NiceTrucController extends FOSRestController
         $paginator  = $this->get('knp_paginator');
 
         $marques = $paginator->paginate(
-            $em->getRepository('AppBundle:Marque')->findPerPage(),
-            $request->query->getInt('page', 1),
+            $em->getRepository('AppBundle:Marque')->findBy(array(),array('libelleMarque'=>'ASC')),
+            $page,
             $this->getParameter('maxpage')
         );
 
@@ -99,6 +106,88 @@ class NiceTrucController extends FOSRestController
         $view = $this
             ->view()
             ->setData(array("data"=>$marques));
+
+
+        return $view;
+    }
+    /**
+     * Retourne la liste des modeles
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Retourne la liste des modeles",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("api/modeles/page/{page}",name="nicetruc_index_modele", options={"expose"=true})
+     * @Method({"GET"})
+     */
+    public function getModelesAction($page,Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+        $paginator  = $this->get('knp_paginator');
+
+        $modeles = $paginator->paginate(
+            $em->getRepository('AppBundle:Modele')->findBy(array(),array('libelleModele'=>'ASC')),
+            $page,
+            $this->getParameter('maxpage')
+        );
+
+
+
+        if(!$modeles){
+            $message->config("Aucun modele pour le moment",'danger',404);
+            return $message->getView();
+        }
+
+        $view = $this
+            ->view()
+            ->setData(array("data"=>$modeles));
+
+
+        return $view;
+    }
+    /**
+     * Retourne la liste des modeleMarques
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Retourne la liste des modeleMarques",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("api/modelemarques/page/{page}",name="nicetruc_index_modelemarque", options={"expose"=true})
+     * @Method({"GET"})
+     */
+    public function getModeleMarquesAction($page,Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+        $paginator  = $this->get('knp_paginator');
+
+        $modeleMarques = $paginator->paginate(
+            $em->getRepository('AppBundle:ModeleMarque')->findBy(array(),array('marque'=>'ASC')),
+            $page,
+            $this->getParameter('maxpage')
+        );
+
+
+
+        if(!$modeleMarques){
+            $message->config("Aucune donnee pour le moment",'danger',404);
+            return $message->getView();
+        }
+
+        $view = $this
+            ->view()
+            ->setData(array("data"=>$modeleMarques));
 
 
         return $view;

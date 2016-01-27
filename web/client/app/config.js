@@ -106,7 +106,7 @@ app.config(function($interpolateProvider) {
             , left: '50%' // Left position relative to parent
             , shadow: false // Whether to render a shadow
             , hwaccel: false // Whether to use hardware acceleration
-            , position: 'absolute' // Element positioning
+            , position: 'fixed' // Element positioning
         }; //loading(spinner)
 
     usSpinnerConfigProvider.setDefaults(opts);

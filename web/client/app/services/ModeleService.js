@@ -5,11 +5,16 @@
 app.service('ModeleService',['$rootScope','Restangular','$q',function($rootScope,Restangular,$q){
 
     var _modeleService = Restangular.all('modeles/');
+    var nextPage=1;
 
     this.list = function(){
         $rootScope.$broadcast('modele.list');
         return _modeleService.getList();
-    }
+    };
+
+    this.listWithPagination = function(){
+        return _modeleService.one('page',nextPage).get();
+    };
 
     this.create = function(modele){
         var deferred = $q.defer();
@@ -33,5 +38,13 @@ app.service('ModeleService',['$rootScope','Restangular','$q',function($rootScope
         modele.remove().then(function(){
             $rootScope.$broadcast('modele.delete');
         })
-    }
+    };
+
+    this.getNextPage = function(){
+        return  nextPage;
+    };
+
+    this.setNextPage = function($nextPage){
+        nextPage=parseInt($nextPage);
+    };
 }]);

@@ -1,14 +1,29 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('MarqueController',['$scope','MarqueService','usSpinnerService',
-    function($scope,MarqueService,usSpinnerService){
+app.controller('MarqueController',['$scope','MarqueService','usSpinnerService','Restangular',
+    function($scope,MarqueService,usSpinnerService,Restangular){
+    $scope.marques=[];
+    $scope.fin=false;
+    var listWithPagination = function(){
+        if($scope.fin)   
+            return;
 
-    usSpinnerService.spin('nt-spinner');
-    MarqueService.list().then(function(response){
-        $scope.marques = response;
-        usSpinnerService.stop('nt-spinner');
-    });
+        usSpinnerService.spin('nt-spinner');
+        $scope.isLoad = true;         
+        MarqueService.listWithPagination().then(function(response){
+            if(response.data.items.length === 0){              
+                $scope.fin=true;
+            }
+            MarqueService.setNextPage(parseInt(response.data.current_page_number)+1);
+            $scope.marques=$scope.marques.concat(Restangular.restangularizeCollection(null,response.data.items,response.parentResource.route));
+            usSpinnerService.stop('nt-spinner');
+            $scope.isLoad = false;
+        });
+        
+    };
+    
+    listWithPagination(MarqueService.getNextPage());
     $scope.marque = {};
 
     $scope.create = function(marque,formIsValid){
@@ -59,10 +74,11 @@ app.controller('MarqueController',['$scope','MarqueService','usSpinnerService',
 
 
     var refreshList = function(){
-        MarqueService.list().then(function(response){
-            $scope.marques = response;
-            usSpinnerService.stop('nt-spinner');
+        return;
+        // listWithPagination(MarqueService.getNextPage()-1);
+    };
 
-        });
-    }
+    $scope.Paging = function(){
+        listWithPagination(MarqueService.getNextPage());
+    };
 }]);

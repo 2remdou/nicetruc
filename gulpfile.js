@@ -25,6 +25,7 @@ gulp.task('concatJs',function () {
         'web/client/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
         'web/client/bower_components/bl-jquery-image-center/js/jquery.blImageCenter.js',
         'web/client/bower_components/jquery-zoom/jquery.zoom.min.js',
+        'web/client/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
 
         'web/client/bower_components/bl-jquery-image-center/js/jquery.blImageCenter.js',
         'web/client/bower_components/angular-permission/dist/angular-permission.js',

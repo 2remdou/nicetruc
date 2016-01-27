@@ -1,18 +1,37 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService','ModeleMarqueService','$q','usSpinnerService',
-    function($scope,MarqueService,ModeleService,ModeleMarqueService,$q,usSpinnerService){
+app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService',
+    'ModeleMarqueService','$q','usSpinnerService','Restangular','$rootScope',
+    function($scope,MarqueService,ModeleService,ModeleMarqueService,$q,usSpinnerService,
+        Restangular,$rootScope){
     
-    usSpinnerService.spin('nt-spinner');   
-    //$scope.modeleMarques = ModeleMarqueService.list().$object;
-    $scope.modeles = ModeleService.list().$object;
+    $scope.modeleMarques=[];
+    $scope.fin=false;
+    var listWithPagination = function(){
+        if($scope.fin)   
+            return;
 
-    MarqueService.list().then(function(response){
-        $scope.marques = response;
-        usSpinnerService.stop('nt-spinner');
+        usSpinnerService.spin('nt-spinner');
+        $scope.isLoad = true;         
+        ModeleMarqueService.listWithPagination().then(function(response){
+            if(response.data.items.length === 0){              
+                $scope.fin=true;
+            }
+            ModeleMarqueService.setNextPage(parseInt(response.data.current_page_number)+1);
+            $scope.modeleMarques=$scope.modeleMarques.concat(Restangular.restangularizeCollection(null,response.data.items,response.parentResource.route));
+            usSpinnerService.stop('nt-spinner');
+            $scope.isLoad = false;
+        });
+        
+    };
+
+    $scope.$emit('parameters.started.load');
+
+    $rootScope.$on('parameters.completed.load',function(event,data){
+        $scope.marques = $rootScope.marques;
+        $scope.modeles = $rootScope.modeles;
     });
-    $scope.modele = {};
 
     $scope.create = function(modeleMarque,modele,formIsValid){
         $scope.formSubmit=true;
@@ -122,6 +141,10 @@ app.controller('ModeleMarqueController',['$scope','MarqueService','ModeleService
             return modele.id === mod.id;
         });
 
-    }
+    };
+
+    $scope.Paging = function(){
+        listWithPagination(MarqueService.getNextPage());
+    };
 
 }]);

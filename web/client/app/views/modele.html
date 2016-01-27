@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" infinite-scroll="Paging()" infinite-scroll-disabled="isLoad">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="row">
@@ -24,12 +24,10 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <div class="form-group" ng-class="{ 'has-error' : form.libelle.$invalid  && formSubmit }">
                                 <label for="anneeModele">Annee modele</label>
                                 <input type="text" name="anneeModele" id="anneeModele" tabindex="3" class="form-control"
                                        type="number" class="form-control" min="1900" max="//currentYear//"
-                                       placeholder="Annee modele" ng-model="modeleMarque.anneeModele" required>
-                                <p ng-show="form.anneeModele.$invalid && formSubmit" class="help-block">L'annee est obligatoire.</p>
+                                       placeholder="Annee modele" ng-model="modeleMarque.anneeModele">
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -68,10 +66,9 @@
                                     </select>
                                     <p ng-show="upForm.marque.$invalid && upformSubmit" class="help-block">Selectionner une marque.</p>
                                 </td>
-                                <td ng-class="{ 'danger' : upForm.anneeModele.$invalid  && upformSubmit }">
+                                <td 
                                     <span ng-hide="modeleMarque.visible">//modeleMarque.anneeModele//</span>
-                                    <input type="text" ng-show="modeleMarque.visible" name="anneeModele" ng-model="modeleMarque.anneeModele" required>
-                                    <p ng-show="upForm.anneeModele.$invalid && upformSubmit" class="help-block">L'année est obligatoire.</p>
+                                    <input type="text" ng-show="modeleMarque.visible" name="anneeModele" ng-model="modeleMarque.anneeModele">
                                 </td>
 
                                 <td>

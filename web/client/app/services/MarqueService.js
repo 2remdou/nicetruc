@@ -6,12 +6,17 @@ app.service('MarqueService',['$rootScope','Restangular','InfoParametersService',
     function($rootScope,Restangular,InfoParametersService){
 
     var _marqueService = Restangular.all('marques/');
+    that=this;
     var marques=[];
     var load=false;
-    that=this;
+    var nextPage=1;
 
     this.list = function(){
         return _marqueService.getList();
+    };
+
+    this.listWithPagination = function(){
+        return _marqueService.one('page',nextPage).get();
     };
 
     this.setLoad = function(load){
@@ -59,5 +64,13 @@ app.service('MarqueService',['$rootScope','Restangular','InfoParametersService',
         marque.remove().then(function(){
             $rootScope.$broadcast('marque.delete');
         })
-    }
+    };
+
+    this.getNextPage = function(){
+        return  nextPage;
+    };
+
+    this.setNextPage = function($nextPage){
+        nextPage=parseInt($nextPage);
+    };
 }]);
