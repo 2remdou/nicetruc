@@ -62,7 +62,50 @@ class NiceTrucController extends FOSRestController
        return $this->indexAction($request);
     }
 
-    
+    /**
+     * Retourne la liste des marques
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Retourne la liste des marques",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("api/marques",name="nicetruc_index_marque", options={"expose"=true})
+     * @Method({"GET"})
+     */
+    public function getMarquesAction(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+        $paginator  = $this->get('knp_paginator');
+
+        $marques = $paginator->paginate(
+            $em->getRepository('AppBundle:Marque')->findPerPage(),
+            $request->query->getInt('page', 1),
+            $this->getParameter('maxpage')
+        );
+
+
+
+        if(!$marques){
+            $message->config("Aucune marque pour le moment",'danger',404);
+            return $message->getView();
+        }
+
+        $view = $this
+            ->view()
+            ->setData(array("data"=>$marques));
+
+
+        return $view;
+    }
+
+
+
     /**
      * ajoute une image à une voiture
      *

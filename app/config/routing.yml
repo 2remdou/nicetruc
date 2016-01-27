@@ -47,19 +47,6 @@ app_carburant:
     type: sylius.api
     prefix: /api
 
-nicetruc_marque_index:
-     path: /api/marques
-     methods: [GET]
-     defaults:
-         _controller: app.controller.marque:indexAction
-         _sylius:
-             repository:
-                  method: findMarques
-             paginate: 5
-             sortable: true
-             sorting:
-                 libelleMarque: desc
-
 app_marque:
     resource: app.marque
     type: sylius.api
