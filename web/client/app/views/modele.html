@@ -28,13 +28,10 @@
                                 <input type="text" name="anneeModele" id="anneeModele" tabindex="3" class="form-control"
                                        type="number" class="form-control" min="1900" max="//currentYear//"
                                        placeholder="Annee modele" ng-model="modeleMarque.anneeModele">
-                            </div>
                         </div>
                         <div class="col-sm-2">
-                            <label for=""></label>
-                            <div class="form-group">
-                                <button class="form-control btn btn-info" ng-click="create(modeleMarque,modele,form.$valid)"> Enregistrer</button>
-                            </div>
+                            <label for="anneeModele"></label>
+                                <button class="center-block btn-md btn-info" ng-click="create(modeleMarque,modele,form.$valid)"><i class="glyphicon glyphicon-save"></i>Valider</button>
                         </div>
                     </form>
                     <div class="panel panel-default">
@@ -51,7 +48,7 @@
                             </thead>
                             <tbody>
 
-                            <tr ng-repeat="modeleMarque in modeleMarques">
+                            <tr ng-repeat="modeleMarque in modeleMarques|orderBy:'marque.libelleMarque'">
                                 <th scope="row">//$index+1//</th>
                                 <td ng-class="{ 'danger' : upForm.libelle.$invalid  && upformSubmit }">
                                     <span ng-hide="modeleMarque.visible">//modeleMarque.modele.libelleModele//</span>
@@ -72,11 +69,11 @@
                                 </td>
 
                                 <td>
-                                    <button ng-hide="modeleMarque.visible" ng-click="update(modeleMarque)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
-                                    <button ng-show="modeleMarque.visible" ng-click="valideUpdate(modeleMarque,upForm.$valid)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> Valider</button>
+                                    <button ng-hide="modeleMarque.visible" ng-click="update(modeleMarque)" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> <span class="hidden-xs">Modifier</span></button>
+                                    <button ng-show="modeleMarque.visible" ng-click="valideUpdate(modeleMarque,upForm.$valid)" class="btn btn-info"><i class="glyphicon glyphicon-floppy-saved"></i> <span class="hidden-xs">>Valider</span></button>
                                 </td>
                                 <td>
-                                    <button ng-click="delete(modeleMarque)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button>
+                                    <button ng-click="delete(modeleMarque)" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> <span class="hidden-xs">Supprimer</span></button>
                                 </td>
                             </tr>
                             </tbody>

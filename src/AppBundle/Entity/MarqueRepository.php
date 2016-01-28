@@ -17,9 +17,9 @@ class MarqueRepository extends EntityRepository
 {
     public function findMarqueWithModele(){
         $resultatMarques = $this->createQueryBuilder('a')
-            ->join('a.modeleMarques','b')
+            ->leftJoin('a.modeleMarques','b')
             ->addSelect('b')
-            ->join('b.modele','c')
+            ->leftJoin('b.modele','c')
             ->addSelect('c')
             ->getQuery()
             ->getArrayResult();

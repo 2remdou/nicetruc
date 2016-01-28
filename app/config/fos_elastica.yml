@@ -37,7 +37,7 @@ fos_elastica:
                     mappings:
                         id: ~
                         prix: 
-                            type: integer
+                            type:  integer
                         kmParcouru: 
                             type: integer
                         boitier.id: ~

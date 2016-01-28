@@ -4,14 +4,13 @@
             <button class="btn btn-md btn-success pull-right" ng-click="valider()"> Valider</button>
         </div>
     </div>
-    <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voitures">
+    <div class="col-lg-4 col-sm-4 hero-feature text-center" ng-repeat="voiture in voitures track by $index" infinite-scroll="Paging()" infinite-scroll-disabled="isLoad">
         <button ng-show="voiture.isOk" type="button" class="btn btn-xs btn-//voiture.typeResultat// pull-right"><i class="glyphicon glyphicon-//voiture.typeIcon//" aria-hidden="true"></i></button>
-        <span us-spinner="{radius:13, width:2, length: 7}" spinner-key="nt-spinVedette//voiture.id//"></span>
         <label for="vedette//voiture.id//">Vedette </label> <input type="checkbox" id="vedette//voiture.id//" name="isVedette"
-               ng-click="defineVedette(voiture)"
-               ng-model="voiture.isVedette"
-               ng-checked="voiture.isVedette"
-               data-toggle="tooltip" data-placement="top" title="Voiture en vedette"/>
+                                                                   ng-click="defineVedette(voiture)"
+                                                                   ng-model="voiture.isVedette"
+                                                                   ng-checked="voiture.isVedette"
+                                                                   data-toggle="tooltip" data-placement="top" title="Voiture en vedette"/>
         <div class="thumbnail">
             <a href="detail.html" class="link-p">
                 <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
@@ -21,33 +20,20 @@
                     <div>
                         <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
                     </div>
-                    <div> 
-                         //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
-                     </div>
+                    <div>
+                        //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
+                    </div>
                     <p>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">//voiture.prix// GNF</a>
-                            <a href="#" class="btn btn-warning">//voiture.kmParcouru// km</a>
-                        </div>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">//voiture.prix|separateurMillier// GNF</a>
+                        <a href="#" class="btn btn-warning">//voiture.kmParcouru|separateurMillier// km</a>
+                    </div>
                     </p>
 
                 </a>
             </div>
         </div>
     </div>
-<!--     <div class="text-center">
-        <ul class="pagination catalogue-pagination">
-            <li class="disabled"><a>First</a></li>
-            <li class="disabled"><a>Prev</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">Next</a></li>
-            <li><a href="#">Last</a></li>
-        </ul>
-    </div> -->
-
 
 
 

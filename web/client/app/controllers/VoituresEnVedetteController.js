@@ -1,20 +1,35 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','VoitureService','$rootScope','$state',
-    function($scope,usSpinnerService,VoitureService,$rootScope,$state){
+app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','VoitureService','$rootScope','$timeout',
+    function($scope,usSpinnerService,VoitureService,$rootScope,$timeout){
 		var LIMIT_VEDETTE = 9;
-        usSpinnerService.spin('nt-spinner');
-        var listeVoituresEnVedette={forInsert:[],forDelete:[],oldVedette:[]};
-		$scope.totalSelect = 0;
-        VoitureService.list().then(function(response){
-           $scope.voitures = VoitureService.defineImagePrincipale(response.data);
-           listeVoituresEnVedette.oldVedette = VoitureService.getIdVoituresEnVedette($scope.voitures);
-			$scope.totalSelect = listeVoituresEnVedette.oldVedette.length;
-			log($scope.totalSelect);
-            usSpinnerService.stop('nt-spinner');
-        });
+		$scope.voitures=[];
+		var listeVoituresEnVedette={forInsert:[],forDelete:[],oldVedette:[]};
+		VoitureService.setNextPage(1);
+		$scope.fin=false;
 
+		var listWithPagination = function(){
+			if($scope.fin)
+				return;
+
+			usSpinnerService.spin('nt-spinner');
+			$scope.isLoad = true;
+			VoitureService.listWithPagination().then(function(response){
+				if(response.data.items.length === 0){
+					$scope.fin=true;
+				}
+				$scope.isLoad = false;
+				v = VoitureService.defineImagePrincipale(response.data.items);
+				$scope.voitures=$scope.voitures.concat(v);
+				VoitureService.setNextPage(parseInt(response.data.current_page_number)+1);
+				listeVoituresEnVedette.oldVedette = VoitureService.getIdVoituresEnVedette($scope.voitures);
+				$scope.totalSelect = listeVoituresEnVedette.oldVedette.length;
+				usSpinnerService.stop('nt-spinner');
+			});
+
+		};
+		listWithPagination();
         $scope.defineVedette = function(voiture)
         {
 
@@ -24,7 +39,6 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
 
         	if(voiture.isVedette){
 				$scope.totalSelect++;
-				log($scope.totalSelect);
 				if($scope.totalSelect > LIMIT_VEDETTE){
 					displayAlert('Vous ne pouvez pas depasser '+LIMIT_VEDETTE+' voitures en vedette','danger',$scope);
 					voiture.isVedette=false;
@@ -55,9 +69,9 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
         	liste = listeVoituresEnVedette.forInsert.concat(listeVoituresEnVedette.forDelete);
         	
         	angular.forEach(liste, function(voiture){
-        		usSpinnerService.spin('nt-spinVedette'+voiture.id);
+				usSpinnerService.spin('nt-spinner');
         		VoitureService.postVoitureEnVedette(angular.copy(voiture)).then(function(response){
-        			usSpinnerService.stop('nt-spinVedette'+voiture.id);
+        			usSpinnerService.stop('nt-spinner');
         			if(voiture.isVedette){
         				var idxForInsert = listeVoituresEnVedette.forInsert.indexOf(voiture);
         				listeVoituresEnVedette.forInsert.splice(idxForInsert,1);
@@ -70,7 +84,7 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
 					voiture.typeResultat="success";
 					voiture.typeIcon="ok";
         		},function(error){
-					usSpinnerService.stop('nt-spinVedette'+voiture.id);
+					usSpinnerService.stop('nt-spinner');
         			voiture.isOk=true;
 					voiture.typeResultat="danger"
 					voiture.typeIcon="remove"
@@ -83,5 +97,8 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
 			$rootScope.$broadcast('vedette.limite.exceed');
 		});
 
+		$scope.Paging = function(){
+			listWithPagination(VoitureService.getNextPage());
+		};
 
     }]);

@@ -23,7 +23,7 @@ app.service('ModeleMarqueService',['$rootScope','Restangular',function($rootScop
     };
 
     this.update = function(modelemarque){
-        modele.put().then(function(){
+        modelemarque.put().then(function(){
             $rootScope.$broadcast('modeleMarque.update');
         });
     };

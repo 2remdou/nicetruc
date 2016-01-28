@@ -35,10 +35,10 @@ class VoitureController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("api/voitures",name="nicetruc_index_voiture", options={"expose"=true})
+     * @Route("api/voitures/page/{page}",name="nicetruc_index_voiture", options={"expose"=true})
      * @Method({"GET"})
      */
-    public function getVoituresAction(Request $request){
+    public function getVoituresAction($page){
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
 
@@ -46,7 +46,7 @@ class VoitureController extends FOSRestController
 
         $voitures = $paginator->paginate(
             $em->getRepository('AppBundle:Voiture')->findBy(array(),array('datePublication'=>'DESC')),
-            $request->query->getInt('page', 1),
+            $page,
             $this->getParameter('maxpage')
         );
 
@@ -59,7 +59,7 @@ class VoitureController extends FOSRestController
             ->view()
             ->setData(array("data"=>$voitures));
 
-
+        sleep(5);
         return $view;
     }
 

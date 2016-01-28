@@ -54,7 +54,6 @@ class ModeleMarque
      * @ORM\Column(name="anneeModele", type="integer", nullable=true)
      * @Expose()
      * @SerializedName("anneeModele")
-     * @Assert\GreaterThan(value = 1900)
      */
     private $anneeModele;
 

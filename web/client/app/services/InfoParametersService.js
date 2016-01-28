@@ -22,7 +22,6 @@ app.service('InfoParametersService',['Restangular','$rootScope',
         if(!load){
             load=true;
             return _infoParametersService.customGET().then(function(response){
-
                 var data = response.data;
 
                 angular.forEach(data.voituresEnVedette,function(voiture){
@@ -31,10 +30,10 @@ app.service('InfoParametersService',['Restangular','$rootScope',
                     }
                 });
 
-                $rootScope.marques=data.marques;
-                $rootScope.modeles=data.modeles;
-                $rootScope.boitiers=data.boitiers;
-                $rootScope.carburants=data.carburants;
+                $rootScope.marques=Restangular.restangularizeCollection(null,data.marques,'marques/');
+                $rootScope.modeles=Restangular.restangularizeCollection(null,data.modeles,'modeles/');
+                $rootScope.boitiers=Restangular.restangularizeCollection(null,data.boitiers,'boitiers/');
+                $rootScope.carburants=Restangular.restangularizeCollection(null,data.carburants,'carburants/');
                 $rootScope.voituresEnVedette=data.voituresEnVedette;
                 $rootScope.$broadcast('parameters.completed.load');
             });

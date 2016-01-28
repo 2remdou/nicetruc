@@ -12247,3 +12247,7 @@ div.title {
   font-size: 22px;
   color: #4c7ed3;
 }
+
+input[type=file] {
+  display: none;
+}
