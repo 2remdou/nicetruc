@@ -4,6 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
+    fos_user.doctrine_registry:
+        alias: doctrine
 
     nicetruc.aws_s3.client:
         class: Aws\S3\S3Client

@@ -32,9 +32,9 @@ class Voiture extends Article
     protected  $id;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="prix", type="bigint")
+     * @ORM\Column(name="prix", type="float")
      * @Expose()
      * @SerializedName("prix")
      * @Assert\GreaterThan(value = 0)
@@ -44,7 +44,7 @@ class Voiture extends Article
     /**
      * @var float
      *
-     * @ORM\Column(name="kmParcouru", type="bigint", nullable=true)
+     * @ORM\Column(name="kmParcouru", type="float", nullable=true)
      * @Expose()
      * @SerializedName("kmParcouru")
      * @Assert\GreaterThan(value = 0)

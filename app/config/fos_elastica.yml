@@ -37,9 +37,9 @@ fos_elastica:
                     mappings:
                         id: ~
                         prix: 
-                            type:  integer
+                            type:  float
                         kmParcouru: 
-                            type: integer
+                            type: float
                         boitier.id: ~
                         boitier.libelleBoitier: { analyzer: custom_analyzer }
                         carburant.id: ~

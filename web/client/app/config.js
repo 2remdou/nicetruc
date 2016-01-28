@@ -16,9 +16,20 @@ app.config(function($interpolateProvider) {
 
         $locationProvider.html5Mode(true); // pour enlever le hastag(#) dans l'url
 
-        jwtInterceptorProvider.tokenGetter = function(){
-            return localStorage.getItem('token');
-        };
+        jwtInterceptorProvider.tokenGetter = ['jwtHelper','UserService','AuthService',
+                    function(jwtHelper, UserService,AuthService){
+            var token= AuthService.get('token');
+            var refreshToken = AuthService.get('refresh_token');
+            if (jwtHelper.isTokenExpired(token)) {
+                UserService.refreshToken().then(function(response){
+                    log(response);
+                    //AuthService.set('token',response.data.t)
+                });
+            }
+            else{
+                return token;
+            }
+        }];
 
         $httpProvider.interceptors.push('jwtInterceptor');
 
@@ -125,16 +136,16 @@ app.config(function($interpolateProvider) {
 
     }]);
 
-app.run(['$rootScope', 'AuthHandler','$timeout','Restangular','Permission','UserService',
+app.run(['$rootScope', 'AuthService','$timeout','Restangular','Permission','UserService',
         '$state','usSpinnerService','Notification','$window',
-        function($rootScope,AuthHandler,$timeout,Restangular,Permission,UserService,$state,
+        function($rootScope,AuthService,$timeout,Restangular,Permission,UserService,$state,
                  usSpinnerService,Notification,$window){
 
             $rootScope.currentYear = new Date().getFullYear();
             var scope = $rootScope.$new();
     // initialisation user
     if(typeof $rootScope.user == 'undefined'){
-        $rootScope.user = AuthHandler.getUser();
+        $rootScope.user = AuthService.getUser();
     };
 
     // verification de l'authentification

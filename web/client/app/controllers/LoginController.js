@@ -10,9 +10,10 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
         $scope.formSubmit = true;
         if(!formIsValid) return;
         usSpinnerService.spin('nt-spinner');
-        TokenHandler.clearCredentials();
+        AuthService.clear();
         UserService.login($scope.user).then(
         function(response){
+            log(response);
             AuthService.setToken(response.token);
             AuthService.setUser(JSON.parse(response.data.user));
             UserService.refresh();

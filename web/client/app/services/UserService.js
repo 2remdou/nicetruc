@@ -13,6 +13,10 @@ app.service('UserService',['$rootScope','Restangular','$cookies','AuthService',
         return _userService.one('').post('login_check',{_username:user.email,_password:user.password});
     };
 
+    this.refreshToken = function(){
+        return _userService.one('').post('refresh_token',{refresh_token:AuthService.get('refresh_token')});
+    };
+
     this.isAuthenticated = function(){
         return typeof $rootScope.user != "undefined";
     };

@@ -5,7 +5,7 @@ app.controller('NavController',['$scope','AuthService','$state','$rootScope',
                     function($scope,AuthService,$state,$rootScope)
 {
     $scope.logout=function(){
-        AuthService.logout();
+        AuthService.clear();
         $state.go('nicetruc');
     };
 

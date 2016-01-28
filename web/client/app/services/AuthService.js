@@ -1,27 +1,32 @@
 /**
  * Created by touremamadou on 14/01/2016.
  */
-app.service('AuthService', ['$window','$cookies','$rootScope', function ($window,$cookies,$rootScope) {
+app.service('AuthService', ['localStorageFactory','$rootScope',
+ function (localStorageFactory,$rootScope) {
 
     this.setToken = function(token){
-        $window.localStorage['token']=token;
+        localStorageFactory.set('token',token);
     };
 
     this.getToken = function(){
-        return $window.localStorage['token'];
+        return localStorageFactory.get('token')
     };
 
     this.setUser = function(user){
-        $cookies.putObject('user',user);
+        localStorageFactory.setObject('user',user);
+        // $cookies.putObject('user',user);
     };
 
     this.getUser= function(){
-        return $cookies.getObject('user');
+        return localStorageFactory.getObject('user');
+        // return $cookies.getObject('user');
     };
 
-    this.logout = function(){
-        $cookies.remove('token');
-        $cookies.remove('user');
+    this.clear = function(){
+        // $window.localStorage
+        // $cookies.remove('token');
+        // $cookies.remove('user');
+        localStorageFactory.clear();
         delete $rootScope.user;
     }
 }]);
