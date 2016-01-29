@@ -10,6 +10,7 @@ app.service('UserService',['$rootScope','Restangular','$cookies','AuthService',
     var scope = $rootScope.$new();
 
     this.login = function(user){
+        if(user)
         return _userService.one('').post('login_check',{_username:user.email,_password:user.password});
     };
 

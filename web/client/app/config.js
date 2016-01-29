@@ -13,26 +13,31 @@ app.config(function($interpolateProvider) {
     function(RestangularProvider,$injector,usSpinnerConfigProvider,
              $locationProvider,NotificationProvider,$locationProvider,$httpProvider, jwtInterceptorProvider) 
     {
-
+        var hasSendRequestForRefresh = false;
         $locationProvider.html5Mode(true); // pour enlever le hastag(#) dans l'url
 
         jwtInterceptorProvider.tokenGetter = ['jwtHelper','UserService','AuthService',
             function(jwtHelper, UserService,AuthService){
-                var token= AuthService.getToken();
-                var refreshToken = AuthService.getRefreshToken();
+               var token= AuthService.getToken();
+               var refreshToken = AuthService.getRefreshToken();
+
+               if(hasSendRequestForRefresh)
+                    return;
 
                 if(!token)
                     return;
 
                 if (jwtHelper.isTokenExpired(token)) {
+                    hasSendRequestForRefresh=true;
                     UserService.refreshToken().then(function(response){
-                        log(response);
-                        //AuthService.set('token',response.data.t)
+                        AuthService.authenticated(response);
+                        hasSendRequestForRefresh=false;
                     });
                 }
                 else{
                     return token;
                 }
+                return token;
         }];
 
         $httpProvider.interceptors.push('jwtInterceptor');
@@ -206,9 +211,17 @@ app.run(['$rootScope', 'AuthService','$timeout','Restangular','Permission','User
     });
 
     Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+        usSpinnerService.stop('nt-spinner');
         if(response.status === 403) {
             displayAlert("Vous ne disposez des autorisations neccessaires pour effectuer cette action",'danger',scope);
-            usSpinnerService.stop('nt-spinner');
+        }
+        else if(response.status === 401) {
+            AuthService.clear();
+            displayAlert("Token expiré, reconnectez vous",'info',scope);
+            $state.go('login');
+        }
+        else{
+            displayAlert("Aie aie aie, nous allons resoudre ce petit problème",'danger',scope);
         }
         return true;
     });

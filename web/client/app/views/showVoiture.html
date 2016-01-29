@@ -1,134 +1,221 @@
-<div class="col-sm-8 col-sm-offset-2">
-    <div class="row">
-        <button class="btn btn-primary" ng-click="editVoiture(voiture.id)" ng-show="isAuthorizedEdit(voiture.user.id)">Modifier</button>
-        <div class="pd-20">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Information Annonceur</div>
-                            <div class="panel-body">
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Nom:</label>
-                                            <div class="col-xs-7 controls">// voiture.user.nomUser //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Prenom:</label>
-                                            <div class="col-xs-7 controls">// voiture.user.prenomUser //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Email:</label>
-                                            <div class="col-xs-7 controls">// voiture.user.email //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Telephone:</label>
-                                            <div class="col-xs-7 controls">// voiture.user.telephone //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Information Annonce</div>
-                            <div class="panel-body">
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Marque:</label>
-                                            <div class="col-xs-7 controls">// voiture.modeleMarque.marque.libelleMarque //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Modele:</label>
-                                            <div class="col-xs-7 controls">// voiture.modeleMarque.modele.libelleModele //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Carburant:</label>
-                                            <div class="col-xs-7 controls">// voiture.carburant.libelleCarburant //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Boitier:</label>
-                                            <div class="col-xs-7 controls">// voiture.boitier.libelleBoitier //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Kilométrage:</label>
-                                            <div class="col-xs-7 controls">// voiture.kmParcouru //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Année :</label>
-                                            <div class="col-xs-7 controls">// voiture.anneeModele //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Prix de vente :</label>
-                                            <div class="col-xs-7 controls">// voiture.prix //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Nombre Portes :</label>
-                                            <div class="col-xs-7 controls">// voiture.nbrePorte //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="row">
-                                            <label class="col-xs-5 control-label">Nombre Sieges :</label>
-                                            <div class="col-xs-7 controls">// voiture.nbreSiege //</div>
-                                            <!-- col-sm-10 -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="control-label">Description</label>
-                                    <div class="well col-sm-12">
-                                        <p>//voiture.description//</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Images</div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-xs-6 col-md-3" ng-repeat="image in voiture.images">
-                                        <div class="thumbnail">
-                                            <img ng-src="//image.downloadUrl//" alt="//image.imageName//">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+<div class="container">
+    <!-- Voiture Detail -->
+    <div class="col-lg-12 col-sm-12">
+        <span class="title">//voiture.modeleMarque.marque.libelleMarque// - //voiture.modeleMarque.modele.libelleModele//</span>
     </div>
+    <div class="col-lg-12 col-sm-12 hero-feature">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <!-- Main Image -->
+                <div class="product-main-image-container">
+                    <!-- <img src="images/loader.gif" alt="" class="product-loader"> -->
+                    <span class="thumbnail product-main-image">
+                        <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//image.imageName//">
+                    </span>
+                </div>
+                <!-- End Main Image -->
+
+                <!-- Thumbnail Image -->
+                <div class="col-xs-3 product-thumb-image" ng-repeat="image in voiture.images">
+                    <a href="//image.downloadUrl//" class="thumbnail">
+                        <img ng-src="//image.downloadUrl//" alt="//image.imageName//">
+                    </a>
+                </div>
+                <!-- End Thumbnail Image -->
+            </div>
+
+            <div class="visible-xs">
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-9">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <div class="well product-short-detail">
+                        <div class="row">
+                            <!-- Prix -->
+                            <div class="the-list">
+                                <h3 class="col-xs-12">
+                                    // voiture.prix|separateurMillier // GNF
+                                </h3>
+                            </div>
+                            <!-- End prix -->
+                            <!-- marque modele -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Marque</div>
+                                <div class="col-xs-8">
+                                    <span class="green">//voiture.modeleMarque.marque.libelleMarque// - //voiture.modeleMarque.modele.libelleModele//</span>
+                                </div>
+                            </div>
+                            <!-- end marque modele -->
+                            <!-- boitier -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Boitier</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.boitier.libelleBoitier // </span>
+                                </div>
+                            </div>
+                            <!-- end boitier -->
+                            <!-- carburant -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Carburant</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.carburant.libelleCarburant //</span>
+                                </div>
+                            </div>
+                            <!-- end carburant -->
+                            <!-- kmParcouru -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Km Parcouru</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.kmParcouru //</span>
+                                </div>
+                            </div>
+                            <!-- end kmParcouru -->
+                            <!-- nbrePorte -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Nombre Portes</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.nbrePorte //</span>
+                                </div>
+                            </div>
+                            <!-- end nbrePorte -->
+                            <!-- nbreSiege -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Nombre Places</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.nbreSiege //</span>
+                                </div>
+                            </div>
+                            <!-- end nbreSiege -->
+                            <div class="clearfix"></div>
+                            <hr/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                        <div class="the-list">
+                                <h3 class="col-xs-12">
+                                    Propriétaire
+                                </h3>
+                            </div>
+                            <!-- nomUser -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Nom</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.user.nomUser //  //voiture.user.prenomUser//</span>
+                                </div>
+                            </div>
+                            <!-- end nomUser -->
+                            <!-- email -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Email</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.user.email //</span>
+                                </div>
+                            </div>
+                            <!-- end email -->
+                            <!-- telephone -->
+                            <div class="the-list">
+                                <div class="col-xs-4">Telephone</div>
+                                <div class="col-xs-8">
+                                    <span>// voiture.user.telephone //</span>
+                                </div>
+                            </div>
+                            <!-- end telephone -->
+
+                            <div class="clearfix"></div><br/>
+                </div>
+            </div>
+
+
+            <div class="clearfix"></div><br clear="all"/>
+
+            
+            <div class="col-xs-12 product-detail-tab">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="desc">
+                        <div class="well">
+                            <p>//voiture.description//</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+            <a class="addthis_button_preferred_1"></a>
+            <a class="addthis_button_preferred_2"></a>
+            <a class="addthis_button_preferred_3"></a>
+            <a class="addthis_button_preferred_4"></a>
+            <a class="addthis_button_compact"></a>
+        </div>
+        <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-4f0c254f1302adf8"></script>
+     -->
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-lg-12 col-sm-12">
+        <span class="title">RELATED PRODUCTS</span>
+    </div>
+    <div class="col-lg-4 col-sm-4 hero-feature text-center">
+        <div class="thumbnail">
+            <a href="detail.html" class="link-p">
+                <img src="images/product-10.jpg" alt="">
+            </a>
+            <div class="caption prod-caption">
+                <h4><a href="detail.html">Adidas Men Blue &amp; Red Striped Polo T-shirt </a></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                <p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">$ 22.22</a>
+                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 hero-feature text-center">
+        <div class="thumbnail">
+            <a href="detail.html" class="link-p">
+                <img src="images/product-11.jpg" alt="">
+            </a>
+            <div class="caption prod-caption">
+                <h4><a href="detail.html">Adidas Men Flame Black T-shirt</a></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                <p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">$ 15.47</a>
+                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-4 hero-feature text-center">
+        <div class="thumbnail">
+            <a href="detail.html" class="link-p">
+                <img src="images/product-12.jpg" alt="">
+            </a>
+            <div class="caption prod-caption">
+                <h4><a href="detail.html">Adidas Men Red Printed T-shirt</a></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                <p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">$ 20.63</a>
+                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+<!-- End Voiture Detail -->
+
 </div>
+

@@ -13,16 +13,13 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
         AuthService.clear();
         UserService.login($scope.user).then(
         function(response){
-            AuthService.setToken(response.token);
-            AuthService.setRefreshToken(response.refresh_token);
-            AuthService.setUser(JSON.parse(response.data.user));
-
+            AuthService.authenticated(response);
             UserService.refresh();
             displayAlert('Salut '+$rootScope.user.nomUser+', super content de vous revoir','success',$scope);
             usSpinnerService.stop('nt-spinner');
             $state.go('nicetruc');
         },function(error){
-            TokenHandler.clearCredentials();
+            AuthService.clear();
             usSpinnerService.stop('nt-spinner');
             displayAlert('Adresse email ou mot de passe incorrect','danger',$scope);
             log(error);

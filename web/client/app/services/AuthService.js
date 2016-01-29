@@ -3,6 +3,12 @@
  */
 app.service('AuthService', ['localStorageFactory','$rootScope',
  function (localStorageFactory,$rootScope) {
+    that=this;
+    this.authenticated = function(response){
+        that.setToken(response.token);
+        that.setRefreshToken(response.refresh_token);
+        that.setUser(JSON.parse(response.data.user));
+    };
 
     this.setToken = function(token){
         localStorageFactory.set('token',token);
@@ -31,9 +37,6 @@ app.service('AuthService', ['localStorageFactory','$rootScope',
      };
 
     this.clear = function(){
-        // $window.localStorage
-        // $cookies.remove('token');
-        // $cookies.remove('user');
         localStorageFactory.clear();
         delete $rootScope.user;
     }
