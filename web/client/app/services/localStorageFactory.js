@@ -10,7 +10,7 @@ app.factory('localStorageFactory', ['$window', function($window) {
       $window.localStorage[key] = JSON.stringify(value);
     },
     getObject: function(key) {
-      return JSON.parse($window.localStorage[key] || '{}');
+      return JSON.parse($window.localStorage[key] || null);
     },
     clear:function(){
     	$window.localStorage.clear();

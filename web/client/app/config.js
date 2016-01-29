@@ -17,18 +17,22 @@ app.config(function($interpolateProvider) {
         $locationProvider.html5Mode(true); // pour enlever le hastag(#) dans l'url
 
         jwtInterceptorProvider.tokenGetter = ['jwtHelper','UserService','AuthService',
-                    function(jwtHelper, UserService,AuthService){
-            var token= AuthService.get('token');
-            var refreshToken = AuthService.get('refresh_token');
-            if (jwtHelper.isTokenExpired(token)) {
-                UserService.refreshToken().then(function(response){
-                    log(response);
-                    //AuthService.set('token',response.data.t)
-                });
-            }
-            else{
-                return token;
-            }
+            function(jwtHelper, UserService,AuthService){
+                var token= AuthService.getToken();
+                var refreshToken = AuthService.getRefreshToken();
+
+                if(!token)
+                    return;
+
+                if (jwtHelper.isTokenExpired(token)) {
+                    UserService.refreshToken().then(function(response){
+                        log(response);
+                        //AuthService.set('token',response.data.t)
+                    });
+                }
+                else{
+                    return token;
+                }
         }];
 
         $httpProvider.interceptors.push('jwtInterceptor');

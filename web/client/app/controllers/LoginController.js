@@ -13,9 +13,10 @@ app.controller('LoginController',['$scope','LoginService','$cookies','Digest','$
         AuthService.clear();
         UserService.login($scope.user).then(
         function(response){
-            log(response);
             AuthService.setToken(response.token);
+            AuthService.setRefreshToken(response.refresh_token);
             AuthService.setUser(JSON.parse(response.data.user));
+
             UserService.refresh();
             displayAlert('Salut '+$rootScope.user.nomUser+', super content de vous revoir','success',$scope);
             usSpinnerService.stop('nt-spinner');

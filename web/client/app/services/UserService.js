@@ -14,11 +14,12 @@ app.service('UserService',['$rootScope','Restangular','$cookies','AuthService',
     };
 
     this.refreshToken = function(){
-        return _userService.one('').post('refresh_token',{refresh_token:AuthService.get('refresh_token')});
+        return _userService.one('').post('refresh_token',{refresh_token:AuthService.getRefreshToken()});
     };
 
     this.isAuthenticated = function(){
-        return typeof $rootScope.user != "undefined";
+        if($rootScope.user) return true;
+        return false;
     };
 
     this.getRole = function(){

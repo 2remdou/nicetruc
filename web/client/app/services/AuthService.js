@@ -9,7 +9,7 @@ app.service('AuthService', ['localStorageFactory','$rootScope',
     };
 
     this.getToken = function(){
-        return localStorageFactory.get('token')
+        return localStorageFactory.get('token');
     };
 
     this.setUser = function(user){
@@ -21,6 +21,14 @@ app.service('AuthService', ['localStorageFactory','$rootScope',
         return localStorageFactory.getObject('user');
         // return $cookies.getObject('user');
     };
+
+     this.getRefreshToken = function(){
+         return localStorageFactory.get('refresh_token');
+     };
+
+     this.setRefreshToken = function(refreshToken){
+       localStorageFactory.set('refresh_token',refreshToken);
+     };
 
     this.clear = function(){
         // $window.localStorage
