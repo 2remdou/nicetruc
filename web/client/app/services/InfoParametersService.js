@@ -2,8 +2,8 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('InfoParametersService',['Restangular','$rootScope',
-    function(Restangular,$rootScope){
+app.service('InfoParametersService',['Restangular','$rootScope','$injector',
+    function(Restangular,$rootScope,$injector){
 
         var that=this;
         var _infoParametersService = Restangular.all('parameters');
@@ -19,8 +19,12 @@ app.service('InfoParametersService',['Restangular','$rootScope',
     };
 
     this.loadParameters = function(){
-        if(!load){
-            load=true;
+        if(!that.load){
+            MarqueService = $injector.get('MarqueService');
+            ModeleService = $injector.get('ModeleService');
+            BoitierService = $injector.get('BoitierService');
+            CarburantService = $injector.get('CarburantService');
+            that.load=true;
             return _infoParametersService.customGET().then(function(response){
                 var data = response.data;
 
@@ -29,17 +33,31 @@ app.service('InfoParametersService',['Restangular','$rootScope',
                         voiture.imagePrincipale = {downloadUrl: voiture.defaultPathImagePrincipale,imageName: "defaultVoiture.jpg"};
                     }
                 });
+                $rootScope.marques = Restangular.restangularizeCollection(null,data.marques,'marques/');
+                MarqueService.setMarques($rootScope.marques);
 
-                $rootScope.marques=Restangular.restangularizeCollection(null,data.marques,'marques/');
                 $rootScope.modeles=Restangular.restangularizeCollection(null,data.modeles,'modeles/');
+                ModeleService.setModeles($rootScope.modeles);
+
                 $rootScope.boitiers=Restangular.restangularizeCollection(null,data.boitiers,'boitiers/');
+                BoitierService.setBoitiers($rootScope.boitiers);
+
                 $rootScope.carburants=Restangular.restangularizeCollection(null,data.carburants,'carburants/');
+                CarburantService.setCarburants($rootScope.carburants);
+                
                 $rootScope.voituresEnVedette=data.voituresEnVedette;
                 $rootScope.$broadcast('parameters.completed.load');
             });
         }
         else{
-            $rootScope.$broadcast('parameters.completed.load');
+            //actualisation de la liste de voitures en vedette
+            VoitureService = $injector.get('VoitureService');
+            VoitureService.listVedette().then(function(response){
+                $rootScope.voituresEnVedette=response.data;
+                $rootScope.$broadcast('parameters.completed.load');
+            },function(error){
+                log(error);
+            })
         }
 
     };

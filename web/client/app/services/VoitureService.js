@@ -4,12 +4,10 @@
 
 app.service('VoitureService',['$rootScope','Restangular','InfoParametersService',
     function($rootScope,Restangular,InfoParametersService){
-
         var _voitureService = Restangular.all('voitures/');
         var voituresEnVedette=[];
         var that = this;
         var nextPage=1;
-
         this.list = function(){
             return _voitureService.customGET(""); //Response for getList SHOULD be an array and not an object or something else
         };
@@ -33,12 +31,7 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
         };
 
         this.listVedette = function(){
-
-            if(InfoParametersService.isLoad())
-                return that.voituresEnVedette;
-            else{
-                InfoParametersService.loadParameters();
-            }
+            return _voitureService.one('voituresEnVedette').customGET("");
         };
 
         this.listByUser= function(userId){

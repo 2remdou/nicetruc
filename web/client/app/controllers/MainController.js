@@ -8,11 +8,11 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService',
         VoitureService,MarqueService,BoitierService,CarburantService,$rootScope)
     {
         usSpinnerService.spin('nt-spinner');
-
+        // $scope.voituresEnVedette={};
         $scope.$emit('parameters.started.load');
 
         $rootScope.$on('parameters.completed.load',function(event,data){
-            $scope.marques = $rootScope.marques;
+            $scope.marques = MarqueService.getMarques();
             $scope.boitiers = $rootScope.boitiers;
             $scope.carburants = $rootScope.carburants;
             $scope.voituresEnVedette = $rootScope.voituresEnVedette;

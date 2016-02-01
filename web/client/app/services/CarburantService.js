@@ -8,7 +8,7 @@ app.service('CarburantService',['$rootScope','Restangular','InfoParametersServic
     var _carburantService = Restangular.all('carburants/');
     var carburants=[];
     var load=false;
-    that=this;
+    var that=this;
 
 
     this.setLoad = function(load){

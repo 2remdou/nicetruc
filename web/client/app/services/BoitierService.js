@@ -4,7 +4,7 @@
 
 app.service('BoitierService',['$rootScope','Restangular','InfoParametersService',
     function($rootScope,Restangular,InfoParametersService){
-
+        var that = this;
     var _boitierService = Restangular.all('boitiers/');
     var boitiers=[];
 

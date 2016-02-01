@@ -2,12 +2,8 @@
         <h4 class="text-left">Recherche</h4>
     </div>
     <form class="form-horizontal" role="form" name="form">
-        <!--mot cle-->
-        <div class="form-group" ng-hide="advancedSearch">
-              <input type="text" class="form-control" placeholder="Mot clé" ng-model="search.key">
-        </div>
         <!--marque-->
-        <div class="form-group" ng-show="advancedSearch">
+        <div class="form-group">
             <select class="form-control" id="marque" ng-model="search.marque" name="marque"
                     ng-options="marque.libelleMarque for marque in marques track by marque.id"
                     ng-change="selectMarque(search.marque)" required>
@@ -15,7 +11,7 @@
             </select>
         </div>
         <!--Modele-->
-        <div class="form-group" ng-show="advancedSearch">
+        <div class="form-group">
             <select class="form-control" id="modele" ng-model="search.modele" name="modele"
                     ng-options="modele.libelleModele for modele in modeles track by modele.id"
                     ng-change="selectModele(voiture.modele)" required>
@@ -23,7 +19,7 @@
             </select>
         </div>
         <!--boitier-->
-        <div class="form-group" ng-show="advancedSearch">
+        <div class="form-group">
             <select class="form-control" id="boitier" ng-model="search.boitier" name="boitier"
                     ng-options="boitier.libelleBoitier for boitier in boitiers track by boitier.id"
                     ng-change="selectBoitier(search.boitier)" required>
@@ -31,7 +27,7 @@
             </select>
         </div>
         <!--carburant-->
-        <div class="form-group" ng-show="advancedSearch">
+        <div class="form-group">
             <select class="form-control" id="carburant" ng-model="search.carburant" name="carburant"
                     ng-options="carburant.libelleCarburant for carburant in carburants track by carburant.id"
                     ng-change="selectCarburant(search.carburant)" required>
@@ -39,7 +35,7 @@
             </select>
         </div>
         <!--Prix-->
-        <div class="form-group" ng-show="advancedSearch">
+        <div class="form-group">
             <div class="center-block">
                 <label for="prix" class="control-label">Prix :</label>
             </div>
@@ -51,7 +47,7 @@
             </div>
         </div>
         <!--kmParcouru-->
-        <div class="form-group" ng-show="advancedSearch">
+        <div class="form-group">
             <div class="center-block">
                 <label for="kmParcouru" class="control-label">Kilométrage :</label>
             </div>

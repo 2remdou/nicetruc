@@ -2,9 +2,12 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('ModeleService',['$rootScope','Restangular','$q',function($rootScope,Restangular,$q){
+app.service('ModeleService',['$rootScope','Restangular','$q','InfoParametersService',
+    function($rootScope,Restangular,$q,InfoParametersService){
 
+    var that = this;
     var _modeleService = Restangular.all('modeles/');
+    var modeles=[];
     var nextPage=1;
 
     this.list = function(){
@@ -14,6 +17,18 @@ app.service('ModeleService',['$rootScope','Restangular','$q',function($rootScope
 
     this.listWithPagination = function(){
         return _modeleService.one('page',nextPage).get();
+    };
+
+    this.getModeles = function(){
+        if(InfoParametersService.isLoad())
+            return that.modeles;
+        else{
+            InfoParametersService.loadParameters();
+        }
+    };
+
+    this.setModeles = function(modeles){
+        that.modeles=modeles;
     };
 
     this.create = function(modele){

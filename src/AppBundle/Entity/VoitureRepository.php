@@ -41,6 +41,16 @@ class VoitureRepository extends EntityRepository
         return $resultat;
     }
 
+    public function findVedette(){
+            $resultat = $this->createQueryBuilder('v')
+                ->where('v.isVedette=:isVedette')
+                ->setParameter('isVedette',true)
+                ->getQuery()
+                ->getResult();
+
+        return $resultat;
+    }
+
     public function countVedette(){
         return $this->createQueryBuilder('v')
             ->select('count(v)')

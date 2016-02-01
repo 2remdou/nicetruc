@@ -4,9 +4,8 @@
 
 app.service('MarqueService',['$rootScope','Restangular','InfoParametersService',
     function($rootScope,Restangular,InfoParametersService){
-
     var _marqueService = Restangular.all('marques/');
-    that=this;
+    var that=this;
     var marques=[];
     var load=false;
     var nextPage=1;
@@ -40,8 +39,8 @@ app.service('MarqueService',['$rootScope','Restangular','InfoParametersService',
     };
 
     this.getModeleByMarque = function(id){
-        if($rootScope.marques){
-            return $rootScope.marques.filter(function(marque){
+        if(that.marques){
+            return that.marques.filter(function(marque){
                 return marque.id == id;
             })[0].modeles
                 ;

@@ -8,21 +8,11 @@ app.controller('AdvancedSearchController',['$scope','VoitureService','usSpinnerS
         VoitureService,MarqueService,BoitierService,CarburantService,$rootScope)
     {
        
-        $scope.advancedSearchText = 'Recherche avancée';
 
-        $scope.advanced = function(){
-            $scope.advancedSearch = ! $scope.advancedSearch;
-            if($scope.advancedSearch) {
-                $scope.advancedSearchText = 'Reduire';
-            }
-            else {
-                $scope.advancedSearchText = 'Recherche avancée';
-            }
-        };
 
         $scope.selectMarque = function(marque){
             if(!marque) return;
-            $scope.modeles=marque.modeles;
+            $scope.modeles=MarqueService.getModeleByMarque(marque.id);
         };
 
         $scope.searchVoiture = function(search){

@@ -114,15 +114,18 @@ class VoitureController extends FOSRestController
      */
     public function getVoitureVedetteAction(){
         $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
 
-        $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('isVedette'=>true));
+
+        $voitures = $em->getRepository('AppBundle:Voiture')->findVedette();
 
         if(!$voitures){
-            $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array(),array(),8);
+            $message->config("Aucune voiture en vedette",'danger',404);
+            return $message->getView();
         }
 
 
-        $view = View::create(array('data'=>$voitures) ,200);
+        $view = View::create(array('data'=>$voitures),200);
 
         return $view;
     }
