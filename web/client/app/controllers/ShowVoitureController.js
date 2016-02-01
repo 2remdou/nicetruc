@@ -7,7 +7,6 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
 
             usSpinnerService.spin('nt-spinner');
         VoitureService.get($stateParams.voitureId).then(function(response){
-            log(response);
             $scope.voiture = response;
             usSpinnerService.stop('nt-spinner');
         });

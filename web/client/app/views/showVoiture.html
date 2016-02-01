@@ -1,35 +1,19 @@
 <div class="container">
-    <!-- Voiture Detail -->
     <div class="col-lg-12 col-sm-12">
-        <span class="title">//voiture.modeleMarque.marque.libelleMarque// - //voiture.modeleMarque.modele.libelleModele//</span>
+        <button class="btn btn-primary" ng-click="editVoiture(voiture.id)" ng-show="isAuthorizedEdit(voiture.user.id)">Modifier</button>
+        <hr>
     </div>
+    <!-- Voiture Detail -->
+
     <div class="col-lg-12 col-sm-12 hero-feature">
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <!-- Main Image -->
-                <div class="product-main-image-container">
-                    <!-- <img src="images/loader.gif" alt="" class="product-loader"> -->
-                    <span class="thumbnail product-main-image">
-                        <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//image.imageName//">
-                    </span>
-                </div>
-                <!-- End Main Image -->
-
-                <!-- Thumbnail Image -->
-                <div class="col-xs-3 product-thumb-image" ng-repeat="image in voiture.images">
-                    <a href="//image.downloadUrl//" class="thumbnail">
-                        <img ng-src="//image.downloadUrl//" alt="//image.imageName//">
-                    </a>
-                </div>
-                <!-- End Thumbnail Image -->
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-8">
+                <nt-images-voiture image-principale="voiture.imagePrincipale" images="voiture.images"></nt-images-voiture>
             </div>
 
-            <div class="visible-xs">
-                <div class="clearfix"></div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-9">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-4">
+
                     <div class="well product-short-detail">
                         <div class="row">
                             <!-- Prix -->
@@ -67,7 +51,7 @@
                             <div class="the-list">
                                 <div class="col-xs-4">Km Parcouru</div>
                                 <div class="col-xs-8">
-                                    <span>// voiture.kmParcouru //</span>
+                                    <span>// voiture.kmParcouru|separateurMillier // Km</span>
                                 </div>
                             </div>
                             <!-- end kmParcouru -->
@@ -87,15 +71,11 @@
                                 </div>
                             </div>
                             <!-- end nbreSiege -->
+
                             <div class="clearfix"></div>
                             <hr/>
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                        <div class="the-list">
+                            <div class="the-list">
                                 <h3 class="col-xs-12">
                                     Propriétaire
                                 </h3>
@@ -120,99 +100,31 @@
                             <div class="the-list">
                                 <div class="col-xs-4">Telephone</div>
                                 <div class="col-xs-8">
-                                    <span>// voiture.user.telephone //</span>
+                                    <span>// voiture.user.telephone|separateurMillier //</span>
                                 </div>
                             </div>
                             <!-- end telephone -->
+                            <div class="clearfix"></div>
+                            <div class="hr"></div>
+                            <!-- description -->
+                            <div class="the-list">
+                                <h5 class="col-xs-12">
+                                    Description
+                                </h5>
+                            </div>
+                            <div class="the-list">
+                                <p>//voiture.description//</p>
+                            </div>
+                            <!-- end description -->
 
-                            <div class="clearfix"></div><br/>
-                </div>
+                        </div>
+                    </div>
+
             </div>
 
 
             <div class="clearfix"></div><br clear="all"/>
 
-            
-            <div class="col-xs-12 product-detail-tab">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#desc" data-toggle="tab">Description</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="desc">
-                        <div class="well">
-                            <p>//voiture.description//</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-            <a class="addthis_button_preferred_1"></a>
-            <a class="addthis_button_preferred_2"></a>
-            <a class="addthis_button_preferred_3"></a>
-            <a class="addthis_button_preferred_4"></a>
-            <a class="addthis_button_compact"></a>
-        </div>
-        <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-4f0c254f1302adf8"></script>
-     -->
-    </div>
-    <div class="clearfix"></div>
-    <div class="col-lg-12 col-sm-12">
-        <span class="title">RELATED PRODUCTS</span>
-    </div>
-    <div class="col-lg-4 col-sm-4 hero-feature text-center">
-        <div class="thumbnail">
-            <a href="detail.html" class="link-p">
-                <img src="images/product-10.jpg" alt="">
-            </a>
-            <div class="caption prod-caption">
-                <h4><a href="detail.html">Adidas Men Blue &amp; Red Striped Polo T-shirt </a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-                <p>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-default">$ 22.22</a>
-                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-                    </div>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-sm-4 hero-feature text-center">
-        <div class="thumbnail">
-            <a href="detail.html" class="link-p">
-                <img src="images/product-11.jpg" alt="">
-            </a>
-            <div class="caption prod-caption">
-                <h4><a href="detail.html">Adidas Men Flame Black T-shirt</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-                <p>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-default">$ 15.47</a>
-                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-                    </div>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-sm-4 hero-feature text-center">
-        <div class="thumbnail">
-            <a href="detail.html" class="link-p">
-                <img src="images/product-12.jpg" alt="">
-            </a>
-            <div class="caption prod-caption">
-                <h4><a href="detail.html">Adidas Men Red Printed T-shirt</a></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-                <p>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-default">$ 20.63</a>
-                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-                    </div>
-                </p>
-            </div>
         </div>
     </div>
 <!-- End Voiture Detail -->

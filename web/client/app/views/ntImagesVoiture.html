@@ -1,0 +1,19 @@
+
+<!-- Thumbnail Image -->
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    <ul>
+        <li  ng-repeat="image in images">
+            <a href="#" ng-click="selectImage(image)" class="thumbnail"><img ng-src="//image.downloadUrl//" alt="//image.imageName//"></a>
+        </li>
+    </ul>
+</div>
+<!-- End Thumbnail Image -->
+<!-- Main Image -->
+<div class="voiture-main-image-container col-xs-9 col-sm-9 col-md-9 col-lg-9">
+    <a href="#" class="thumbnail voiture-main-image">
+        <img id="ntImagePrincipale" ng-src="//imagePrincipale.downloadUrl//" alt="//imagePrincipale.imageName//">
+    </a>
+</div>
+<!-- End Main Image -->
+
+

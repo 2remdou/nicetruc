@@ -221,7 +221,7 @@ app.run(['$rootScope', 'AuthService','$timeout','Restangular','Permission','User
             $state.go('login');
         }
         else{
-            displayAlert("Aie aie aie, nous allons resoudre ce petit problème",'danger',scope);
+            displayAlert("Aie aie aie, nous allons resoudre ce petit souci",'danger',scope);
         }
         return true;
     });

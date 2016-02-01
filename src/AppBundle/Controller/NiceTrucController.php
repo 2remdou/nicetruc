@@ -69,6 +69,7 @@ class NiceTrucController extends FOSRestController
        return $this->indexAction($request);
     }
 
+
     /**
      * Retourne la liste des marques
      *

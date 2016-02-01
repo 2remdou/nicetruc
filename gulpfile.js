@@ -33,7 +33,7 @@ gulp.task('concatJs',function () {
         'web/client/bower_components/angular-jwt/dist/angular-jwt.min.js',
         'web/bundles/fosjsrouting/js/router.js',
         'web/js/fos_js_routes.js',
-        'web/js/mimity.js',
+        //'web/js/mimity.js',
         'web/client/app/**/*.js'
     ])
         .pipe(concat('all.js'))
