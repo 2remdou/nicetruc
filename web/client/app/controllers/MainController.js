@@ -13,9 +13,10 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService',
 
         $rootScope.$on('parameters.completed.load',function(event,data){
             $scope.marques = MarqueService.getMarques();
-            $scope.boitiers = $rootScope.boitiers;
-            $scope.carburants = $rootScope.carburants;
-            $scope.voituresEnVedette = $rootScope.voituresEnVedette;
+            $scope.boitiers = BoitierService.getBoitiers();
+            $scope.carburants = CarburantService.getCarburants();
+            $scope.voituresEnVedette = VoitureService.getVoituresEnVedette();
+            VoitureService.setZoneDeRecherche($scope.voituresEnVedette);
             usSpinnerService.stop('nt-spinner');
 
         });

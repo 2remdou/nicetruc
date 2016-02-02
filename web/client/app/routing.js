@@ -9,7 +9,8 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
         $state.go('nicetruc');
     });
     var nav = {templateUrl: 'client/app/views/nav.html',controller: 'NavController'};
-    var advancedSearch = {templateUrl: 'client/app/views/advancedSearch.html',controller: 'AdvancedSearchController'};
+    var advancedSearch = {templateUrl: 'client/app/views/advancedSearch.html',
+                            controller: 'AdvancedSearchController'};
    $stateProvider
        .state('nicetruc',{
            url:'/',
@@ -366,6 +367,17 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                       only: ['ROLE_ADMIN']
                   }
               }
+       })
+       .state('searchVoiture',{
+             url:'/searchVoiture',
+             views:{
+                 'nav':nav,
+                 'content':{
+                     templateUrl: 'client/app/views/searchVoiture.html',
+                     controller: 'SearchVoitureController'
+                 },
+                 'advancedSearch':advancedSearch
+             }
        })
 
 }]);

@@ -2,13 +2,11 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('AdvancedSearchController',['$scope','VoitureService','usSpinnerService',
-    '$state','Restangular','VoitureService','MarqueService','BoitierService',
-    'CarburantService','$rootScope',
+    '$state','Restangular','VoitureService','MarqueService',
     function($scope,VoitureService,usSpinnerService,$state,Restangular,
-        VoitureService,MarqueService,BoitierService,CarburantService,$rootScope)
+        VoitureService,MarqueService)
     {
        
-
 
         $scope.selectMarque = function(marque){
             if(!marque) return;

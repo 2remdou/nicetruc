@@ -6,6 +6,7 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
     function($rootScope,Restangular,InfoParametersService){
         var _voitureService = Restangular.all('voitures/');
         var voituresEnVedette=[];
+        var zoneDeRecherche=[];
         var that = this;
         var nextPage=1;
         this.list = function(){
@@ -28,6 +29,13 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
             else{
                 InfoParametersService.loadParameters();
             }
+        };
+        this.getZoneDeRecherche = function(){
+            return that.zoneDeRecherche;
+        };
+
+        this.setZoneDeRecherche = function(zoneDeRecherche){
+            that.zoneDeRecherche = zoneDeRecherche;
         };
 
         this.listVedette = function(){
@@ -86,6 +94,14 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
 
         this.setNextPage = function($nextPage){
             nextPage=parseInt($nextPage);
+        };
+
+        this.simpleSearch = function(keySearch){
+            return _voitureService.one('search').customGET(keySearch);
+        };
+
+        this.advancedSearch = function(search){
+            return _voitureService.one('advancedSearch').customPOST(search);
         };
 
 

@@ -19,10 +19,10 @@ app.controller('ResettingController',['$scope','usSpinnerService','UserService',
             log(response);
             usSpinnerService.stop('nt-spinner');
         });
-        
+
         $scope.formSubmit = false;
     };
 
-    
+
     
 }]);

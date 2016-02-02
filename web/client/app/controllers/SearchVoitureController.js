@@ -1,23 +1,32 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('SearchVoitureController',['$scope','MarqueService','ModeleService','CarburantService','BoitierService','ModeleMarqueService',
-                function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService){
+app.controller('SearchVoitureController',['$scope','VoitureService','usSpinnerService',
+    function($scope,VoitureService,usSpinnerService){
 
-    $scope.marques = MarqueService.list().$object;
-    $scope.modeleMarques = ModeleMarqueService.list().$object;
-    $scope.carburants = CarburantService.list().$object;
-    $scope.boitiers = BoitierService.list().$object;
+        $scope.searchVoiture = function(search){
+            usSpinnerService.spin('nt-spinner');
+            VoitureService.advancedSearch(angular.copy(search)).then(function(response){
+                $scope.resultatRecherche = VoitureService.defineImagePrincipale(response.data.voitures);
+                usSpinnerService.stop('nt-spinner');
 
+            },function(error){
+              log(error);
+          });
+        };
 
-    $scope.loadModele = function(marque){
-        $scope.modeles=[];
+/*
+        Restangular.all('search/advanced').post(angular.copy(search)).then(function(response){
+            $scope.voitures=VoitureService.defineImagePrincipale(response.data.voitures);
+            usSpinnerService.stop('nt-spinner');
 
-        angular.forEach($scope.modeleMarques,function(modeleMarque){
-            if(modeleMarque.marque.id===marque.id){
-                $scope.modeles.push(modeleMarque.modele);
+        },function(error){
+            if(error.status === 404){
+                displayAlert('Aucune voiture ne correspond à votre recherche','info',$scope);
             }
-        })
-    };
+            $scope.voitures=[];
+            usSpinnerService.stop('nt-spinner');
+        });
+*/
 
-    }]);
+}]);

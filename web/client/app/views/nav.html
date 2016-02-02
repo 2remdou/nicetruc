@@ -27,14 +27,14 @@
                             <div class="collapse navbar-collapse navbar-ex1-collapse">
                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 hidden-xs">
                                         <div class="well">
-                                            <form action="">
+                                            <form>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control input-search" placeholder="Tapez ce que vous recherchez"/>
+                                                    <input type="text" class="form-control input-search" placeholder="Tapez ce que vous recherchez" ng-model="keySearch"/>
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-default no-border-left" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                                        <button class="btn btn-default no-border-left" ng-click="searchVoiture(keySearch)"><i class="glyphicon glyphicon-search"></i></button>
                                                     </span>
                                                 </div>
-                                                <a href="#" class="white">Recherche avancée</a>
+                                                <a ui-sref="searchVoiture" class="white">Recherche avancée</a>
                                             </form>
                                         </div>
                                     </div>

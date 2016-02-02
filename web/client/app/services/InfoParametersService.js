@@ -19,6 +19,7 @@ app.service('InfoParametersService',['Restangular','$rootScope','$injector',
     };
 
     this.loadParameters = function(){
+        VoitureService = $injector.get('VoitureService');
         if(!that.load){
             MarqueService = $injector.get('MarqueService');
             ModeleService = $injector.get('ModeleService');
@@ -44,16 +45,15 @@ app.service('InfoParametersService',['Restangular','$rootScope','$injector',
 
                 $rootScope.carburants=Restangular.restangularizeCollection(null,data.carburants,'carburants/');
                 CarburantService.setCarburants($rootScope.carburants);
-                
-                $rootScope.voituresEnVedette=data.voituresEnVedette;
+
+                VoitureService.setVoituresEnVedette(data.voituresEnVedette);
                 $rootScope.$broadcast('parameters.completed.load');
             });
         }
         else{
             //actualisation de la liste de voitures en vedette
-            VoitureService = $injector.get('VoitureService');
             VoitureService.listVedette().then(function(response){
-                $rootScope.voituresEnVedette=response.data;
+                VoitureService.setVoituresEnVedette(response.data);
                 $rootScope.$broadcast('parameters.completed.load');
             },function(error){
                 log(error);

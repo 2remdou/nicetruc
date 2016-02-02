@@ -1,0 +1,111 @@
+<div class="containe">
+    <div class="panel panel-default">
+        <div class="panel-heading">Recherche avancée</div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" name="form">
+                <!--marque-->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <select class="form-control" id="marque" ng-model="search.marque" name="marque"
+                            ng-options="marque.libelleMarque for marque in marques track by marque.id"
+                            ng-change="selectMarque(search.marque)" required>
+                        <option value="">Marque</option>
+                    </select>
+                </div>
+                <!--Modele-->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <select class="form-control" id="modele" ng-model="search.modele" name="modele"
+                            ng-options="modele.libelleModele for modele in modeles track by modele.id"
+                            ng-change="selectModele(voiture.modele)" required>
+                        <option value="">Modele</option>
+                    </select>
+                </div>
+                <!--boitier-->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <select class="form-control" id="boitier" ng-model="search.boitier" name="boitier"
+                            ng-options="boitier.libelleBoitier for boitier in boitiers track by boitier.id"
+                            ng-change="selectBoitier(search.boitier)" required>
+                        <option value="">Boitier</option>
+                    </select>
+                </div>
+                <!--carburant-->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <select class="form-control" id="carburant" ng-model="search.carburant" name="carburant"
+                            ng-options="carburant.libelleCarburant for carburant in carburants track by carburant.id"
+                            ng-change="selectCarburant(search.carburant)" required>
+                        <option value="">Carburant</option>
+                    </select>
+                </div>
+                <!--Prix-->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input name="prix" ng-model="search.prixMin" placeholder="Prix Min" type="number" class="form-control col-md-1" min="0">
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input name="prix" ng-model="search.prixMax" placeholder="Prix Max" type="number" class="form-control col-md-1" min="0">
+                    </div>
+                </div>
+                <!--kmParcouru-->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input name="kmParcouru" ng-model="search.kmMin" placeholder="Km Parc. Min" type="number" class="form-control col-md-1" min="0" max="999999">
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input name="kmParcouru" ng-model="search.kmMax" placeholder="Km Parc. Max" type="number" class="form-control col-md-1" min="0" max="999999">
+                    </div>
+                </div>
+                <div class="col-lg-2 pull-right">
+                    <p class="text-right cursorPointer" ng-click="advanced()">//advancedSearchText//</p>
+                    <button type="button" ng-click="searchVoiture(search)" class="btn btn-primary btn-block">Rechercher</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--resultat recherche-->
+    <div>
+        <div class="col-lg-12 col-sm-12">
+            <span class="title">Resultats de la recherche</span>
+        </div>
+        <div class="col-lg-12 col-sm-12 hero-feature">
+            <div class="table-responsive">
+                <table class="table table-bordered tbl-cart">
+                    <thead>
+                    <tr>
+                        <td class="hidden-xs">Image</td>
+                        <td>Marque</td>
+                        <td>Boitier</td>
+                        <td>Carburant</td>
+                        <td>Prix</td>
+                        <td>Km Parcouru</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="voiture in resultatRecherche">
+                        <td class="hidden-xs">
+                            <a ui-sref="showVoiture({voitureId:voiture.id})">
+                                <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//" width="47" height="47" />
+                            </a>
+                        </td>
+                        <td>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//
+                        </td>
+                        <td>
+                            //voiture.boitier.libelleBoitier//
+                        </td>
+                        <td>//voiture.carburant.libelleCarburant//</td>
+                        <td class="price">//voiture.prix|separateurMillier// GNF</td>
+                        <td>//voiture.kmParcouru|separateurMillier// km</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    <!--end resultat recherche-->
+</div>
+
+
+
+
+
+
+
