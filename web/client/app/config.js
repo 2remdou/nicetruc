@@ -95,7 +95,7 @@ app.config(function($interpolateProvider) {
                      element.quartier = extractId(element.quartier);
                  }
              }
-             else if(what === 'search/advanced'){
+             else if(url.search('search')!==-1){
 
                 element.marque = extractId(element.marque);
                 element.modele = extractId(element.modele);
@@ -219,6 +219,9 @@ app.run(['$rootScope', 'AuthService','$timeout','Restangular','Permission','User
             AuthService.clear();
             displayAlert("Token expiré, reconnectez vous",'info',scope);
             $state.go('login');
+        }
+        else if(response.status === 404){
+            displayAlert("Aucune ressource trouvée",'info',scope);
         }
         else{
             displayAlert("Aie aie aie, nous allons resoudre ce petit souci",'danger',scope);

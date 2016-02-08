@@ -37,7 +37,7 @@ class SearchController extends FOSRestController
      *     404 = "Returned when the data is not found"
      *   }
      * )
-     * @Route("/api/voitures/search/{keySearch}",name="nicetruc_search_all", options={"expose"=true})
+     * @Route("/api/search/word/{keySearch}",name="nicetruc_search_word", options={"expose"=true})
      * @Rest\View()
      * @Method({"GET"})
      */
@@ -74,7 +74,7 @@ class SearchController extends FOSRestController
      *     404 = "Returned when the data is not found"
      *   }
      * )
-         * @Route("/api/voitures/advancedSearch",name="nicetruc_advanced", options={"expose"=true})
+         * @Route("/api/search/advancedSearch",name="nicetruc_advanced", options={"expose"=true})
      * @Rest\View()
      * @Method({"POST"})
      */
