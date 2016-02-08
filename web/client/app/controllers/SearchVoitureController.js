@@ -5,7 +5,11 @@ app.controller('SearchVoitureController',['$scope','SearchService','usSpinnerSer
     function($scope,SearchService,usSpinnerService,VoitureService){
         $scope.$emit('parameters.started.load');
         $scope.resultatRecherche=[];
-        $scope.resultatRecherche = SearchService.getListResult();
+
+        $scope.$on('search.completed', function(){
+            $scope.resultatRecherche = SearchService.getListResult();
+        });
+        
         $scope.searchVoiture = function(search){
             usSpinnerService.spin('nt-spinner');
             SearchService.advancedSearch(angular.copy(search)).then(function(response){

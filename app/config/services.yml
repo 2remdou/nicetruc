@@ -4,6 +4,12 @@ parameters:
 #    parameter_name: value
 
 services:
+    app.exception_listener:
+        class: AppBundle\EventListener\ExceptionListener
+        arguments: ["@service_container","@router"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
     fos_user.doctrine_registry:
         alias: doctrine
 

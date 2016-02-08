@@ -25,7 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class NiceTrucController extends FOSRestController
 {
     /**
-     * @Route("/", name="homepage", options={"expose"=true})
+     * @Route("/", name="nicetruc_homepage", options={"expose"=true})
      */
     public function indexAction(Request $request)
     {

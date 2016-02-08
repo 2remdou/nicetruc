@@ -9,8 +9,8 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
         $state.go('nicetruc');
     });
     var nav = {templateUrl: 'client/app/views/nav.html',controller: 'NavController'};
-    var advancedSearch = {templateUrl: 'client/app/views/advancedSearch.html',
-                            controller: 'AdvancedSearchController'};
+    var advancedSearch = {templateUrl: 'client/app/views/bestOf.html',
+                            controller: 'BestOfController'};
    $stateProvider
        .state('nicetruc',{
            url:'/',
@@ -19,8 +19,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                'content':{
                    templateUrl: 'client/app/views/main.html',
                    controller: 'MainController'
-               },
-               'advancedSearch':advancedSearch
+               }
            }
        })
        .state('main',{
@@ -340,10 +339,6 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                'content':{
                    templateUrl: 'client/app/views/voitureByUser.html',
                    controller: 'VoitureByUserController'
-               },
-               'advancedSearch':{
-                   templateUrl: 'client/app/views/advancedSearch.html',
-                   controller: 'AdvancedSearchController'
                }
            },
            data: {
@@ -359,8 +354,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                  'content':{
                      templateUrl: 'client/app/views/voituresEnVedette.html',
                      controller: 'VoituresEnVedetteController'
-                 },
-                 'advancedSearch':advancedSearch
+                 }
              },
               data: {
                   permissions: {
@@ -375,8 +369,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                  'content':{
                      templateUrl: 'client/app/views/searchVoiture.html',
                      controller: 'SearchVoitureController'
-                 },
-                 'advancedSearch':advancedSearch
+                 }
              }
        })
 

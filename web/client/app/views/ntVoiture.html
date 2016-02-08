@@ -1,0 +1,20 @@
+<div class="thumbnail">
+    <a ui-sref="showVoiture({voitureId:voiture.id})" class="link-p">
+        <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
+    </a>
+    <div class="caption prod-caption">
+        <a ui-sref="showVoiture({voitureId:voiture.id})">
+            <div>
+                <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
+            </div>
+            <div>
+                //voiture.boitier.libelleBoitier//-//voiture.carburant.libelleCarburant//
+            </div>
+           <div class="prix">//voiture.prix|separateurMillier// GNF</div>
+           <div class="km">//voiture.kmParcouru|separateurMillier// km</div>
+    </a>
+    </div>
+</div>
+
+
+

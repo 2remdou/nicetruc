@@ -27,6 +27,7 @@ app.controller('NavController',['$scope','AuthService','$state','$rootScope','us
 
                 $scope.voitures=VoitureService.defineImagePrincipale(response.data.voitures);
                 SearchService.setListResult($scope.voitures);
+                $rootScope.$broadcast('search.completed');
                 usSpinnerService.stop('nt-spinner');
                 $state.go('searchVoiture');
             },function(error){
@@ -36,8 +37,7 @@ app.controller('NavController',['$scope','AuthService','$state','$rootScope','us
                 SearchService.setListResult([]);
                 usSpinnerService.stop('nt-spinner');
             })
-    }
+    };
 
 
-    //$state.go('nicetruc.main');
 }]);
