@@ -4,7 +4,7 @@
 app.controller('SearchVoitureController',['$scope','SearchService','usSpinnerService','VoitureService',
     function($scope,SearchService,usSpinnerService,VoitureService){
         $scope.$emit('parameters.started.load');
-        $scope.resultatRecherche=[];
+        $scope.resultatRecherche= SearchService.getListResult();
 
         $scope.$on('search.completed', function(){
             $scope.resultatRecherche = SearchService.getListResult();

@@ -5,12 +5,21 @@
 
     <div ui-view="nav">
     </div>
-
     <br>
-
-    <span us-spinner spinner-key="nt-spinner"></span>
-    <div ui-view="content">
+    <div id="ntSpinner" us-spinner spinner-key="nt-spinner"></div>
+    <div ui-view="body">
+        <div class="container-fluid">
+            <div ui-view="content">
+            </div>
+        </div>
     </div>
+
+
+
+
+    <a href="#top" class="back-top text-center" onclick="$('body,html').animate({scrollTop:0},500); return false">
+        <i class="fa fa-angle-double-up"></i>
+    </a>
 
     <script src="https://cdn.jsdelivr.net/g/jquery@2.1.4,angularjs@1.4.7(angular.min.js+angular-animate.min.js+angular-cookies.min.js),bootstrap@3.3.6,lodash@3.10.1,angular.ui-router@0.2.15,restangular@1.5.1,es5.shim@4.1.13(es5-shim.min.js+es5-sham.min.js),spinjs@2.3.2,bxslider@4.2.5,angular.bootstrap@0.13.3(ui-bootstrap-tpls.min.js),jquery.zoom@1.7.14,crypto-js@3.1.2(components/core-min.js)"></script>
     <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-file-upload/2.1.4/angular-file-upload.min.js"></script>
