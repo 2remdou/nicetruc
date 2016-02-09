@@ -44,16 +44,13 @@ gulp.task('concatJs',function () {
 gulp.task('concatCss',function(){
     return gulp.src([
         'web/client/bower_components/bootstrap/dist/css/bootstrap.min.css',
+        'web/client/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+        
         'web/client/app/views/css/font-awesome.min.css',
         'web/client/bower_components/angular-ui-notification/dist/angular-ui-notification.min.css',
-        'web/client/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
         'web/client/bower_components/bxslider-4/dist/jquery.bxslider.min.css',
-        'web/client/app/views/css/font-awesome.min.css',
         'web/client/app/views/css/style.css',
-        'web/client/app/views/css/nicetruc.css',
-        // 'web/client/app/views/css/inscription.css',
-        // 'web/client/app/views/css/search.css',
-        // 'web/client/app/views/css/annonce.css'
+        'web/client/app/views/css/nicetruc.css'
     ])
         .pipe(concatCss('all.css',{rebaseUrls:false}))
         .pipe(gulp.dest('web/client/app/views/css'));

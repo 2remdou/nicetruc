@@ -39,6 +39,13 @@ class Categorie
      */
     private $libelleCategorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="categorie")
+     * @SerializedName("voitures")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $voitures;
+
 
     /**
      * Get id

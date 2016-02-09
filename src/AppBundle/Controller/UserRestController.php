@@ -189,8 +189,8 @@ class UserRestController extends FOSRestController
         $user->setPlainPassword($paramFetcher->get('password'));
         $user->setNomUser($paramFetcher->get('nomUser'));
         $user->setPrenomUser($paramFetcher->get('prenomUser'));
-//        $user->setEnabled(true);
         $user->addRole('ROLE_API');
+
 
 
         $errors = $this->get('validator')->validate($user, array('Registration'));
@@ -198,7 +198,6 @@ class UserRestController extends FOSRestController
         if (count($errors) == 0) {
             $event = new UserEvent($user,$request);
             $dispatcher->dispatch(NicetrucEvents::REGISTRATION_SUCCESS, $event);
-
             $userManager->updateUser($user);
             $view->setData(array(
                'data'=> array(

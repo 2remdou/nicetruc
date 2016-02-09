@@ -2,10 +2,9 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope',
-    '$state','usSpinnerService','MarqueService',
-    'BoitierService','CarburantService',
-    function($scope,VoitureService,$rootScope,$state,usSpinnerService,
-        MarqueService,BoitierService,CarburantService){
+    '$state','usSpinnerService',
+        function($scope,VoitureService,$rootScope,$state,usSpinnerService
+        ){
 
         usSpinnerService.spin('nt-spinner');
         $scope.formSubmit = false;

@@ -61,24 +61,24 @@ services:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }        
     
-    nicetruc.login.success.handler:
-        class: AppBundle\Handler\LoginSuccessHandler
-        arguments: [@security.token_storage,@security.authorization_checker,@router]
+    # nicetruc.login.success.handler:
+    #     class: AppBundle\Handler\LoginSuccessHandler
+    #     arguments: [@security.token_storage,@security.authorization_checker,@router]
 
-    nicetruc.login.failure.handler:
-        class: AppBundle\Handler\LoginFailureHandler
-        arguments: [@router]
-        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    # nicetruc.login.failure.handler:
+    #     class: AppBundle\Handler\LoginFailureHandler
+    #     arguments: [@router]
+    #     arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    wsse.security.authentication.provider:
-        class: AppBundle\Security\Authentication\Provider\WsseProvider
-        arguments: ["", "%kernel.cache_dir%/security/nonces"]
-        public: false
+    # wsse.security.authentication.provider:
+    #     class: AppBundle\Security\Authentication\Provider\WsseProvider
+    #     arguments: ["", "%kernel.cache_dir%/security/nonces"]
+    #     public: false
 
-    wsse.security.authentication.listener:
-        class: AppBundle\Security\Firewall\WsseListener
-        arguments: ["@security.token_storage", "@security.authentication.manager"]
-        public: false
+    # wsse.security.authentication.listener:
+    #     class: AppBundle\Security\Firewall\WsseListener
+    #     arguments: ["@security.token_storage", "@security.authentication.manager"]
+    #     public: false
 
     nicetruc.namer.voiture:
         class: AppBundle\Naming\Namer
