@@ -13,8 +13,8 @@
 /web/client/bower_components/
 /.idea/
 web/client/compiled/
+/web/client/app/views/css/all.css
 /web/300
 /web/client/app/images/voitures
 /src/AppBundle/Resources/public/js/bower_components/
 /node_modules
-/web/client/app/views/css/all.css
