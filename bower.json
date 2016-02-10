@@ -33,7 +33,7 @@
     "bootstrap-touchspin": "~3.1.1",
     "jquery-zoom": "~1.7.14",
     "bxslider-4": "~4.2.5",
-    "ngInfiniteScroll": "~1.2.2",
+    "ngInfiniteScroll": "~1.2.2"
   },
   "resolutions": {
     "angular": "1.4.7"
