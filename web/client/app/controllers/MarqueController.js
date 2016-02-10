@@ -75,7 +75,7 @@ app.controller('MarqueController',['$scope','MarqueService','usSpinnerService','
 
 
         var refreshList = function(){
-            return;
+            usSpinnerService.stop('nt-spinner');
             // listWithPagination(MarqueService.getNextPage()-1);
         };
 

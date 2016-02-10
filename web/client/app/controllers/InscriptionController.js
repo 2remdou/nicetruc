@@ -13,14 +13,15 @@ app.controller('InscriptionController',['$scope','InscriptionService','usSpinner
         usSpinnerService.spin('nt-spinner');
         AuthService.clear();
             InscriptionService.create(user).then(function(response){
-                log(response);
-                //AuthService.authenticated(response);
+                AuthService.authenticated(response);
                 UserService.refresh();
+                displayAlert('Creation de compte reussie','info',$scope);
                 successRequest(response,$scope);
                 usSpinnerService.stop('nt-spinner');
                  $state.go('nicetruc');
             },function(response){
-                successRequest(response,$scope);
+                AuthService.clear();
+                displayAlert('Erreur lors de la creation du compte','danger',$scope);
                 usSpinnerService.stop('nt-spinner');
             });
         $scope.formSubmit = false;

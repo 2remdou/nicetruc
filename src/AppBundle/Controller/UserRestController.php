@@ -21,6 +21,8 @@ use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,6 +30,9 @@ use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
+use Lexik\Bundle\JWTAuthenticationBundle\Events;
+
 
 class UserRestController extends FOSRestController
 {
@@ -199,20 +204,21 @@ class UserRestController extends FOSRestController
             $event = new UserEvent($user,$request);
             $dispatcher->dispatch(NicetrucEvents::REGISTRATION_SUCCESS, $event);
             $userManager->updateUser($user);
-            $view->setData(array(
-               'data'=> array(
-                   array('texte' => 'Utilisateur crée avec succès','typeAlert'=>'success')
-               ),
-                'user'=> $user
-            ))
-                ->setStatusCode(200);
-            return $view;
+
+            $jwt  = $this->get('lexik_jwt_authentication.jwt_manager')->create($user);
+            $response = new JsonResponse();
+            $event    = new AuthenticationSuccessEvent(['token' => $jwt], $user, $request, $response);
+            $dispatcher->dispatch(Events::AUTHENTICATION_SUCCESS, $event);
+            $response->setData($event->getData());
+            
+            return $response;
+
         } else {
             $view = $this->getErrorsView($errors);
             return $view;
         }
 
-    }
+    }   
 
     /**
      * confirmation user email
