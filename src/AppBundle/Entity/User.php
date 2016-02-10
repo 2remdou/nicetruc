@@ -76,6 +76,14 @@ class User extends BaseUser
     private $quartier;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="actived",type="boolean")
+     * @Expose()
+     * @SerializedName("actived")
+     */
+    protected $actived;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="user")
      */
     private $voitures;
@@ -305,4 +313,62 @@ class User extends BaseUser
     }
 
 
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     *
+     * @return User
+     */
+    public function setActived($actived)
+    {
+        $this->actived = $actived;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function isActived()
+    {
+        return $this->actived;
+    }
+
+    /**
+     * Add voiture
+     *
+     * @param \AppBundle\Entity\Voiture $voiture
+     *
+     * @return User
+     */
+    public function addVoiture(\AppBundle\Entity\Voiture $voiture)
+    {
+        $this->voitures[] = $voiture;
+
+        return $this;
+    }
+
+    /**
+     * Remove voiture
+     *
+     * @param \AppBundle\Entity\Voiture $voiture
+     */
+    public function removeVoiture(\AppBundle\Entity\Voiture $voiture)
+    {
+        $this->voitures->removeElement($voiture);
+    }
+
+    /**
+     * Get voitures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVoitures()
+    {
+        return $this->voitures;
+    }
 }

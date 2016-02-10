@@ -9,9 +9,9 @@ app.controller('NavController',['$scope','AuthService','$state','$rootScope','us
         $state.go('nicetruc');
     };
 
-    $scope.isEnabled = function(){
+    $scope.isActived = function(){
     	if($rootScope.user){
-    		return $rootScope.user.enabled;
+    		return $rootScope.user.actived;
     	}
     	return true;
     };

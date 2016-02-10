@@ -13,7 +13,9 @@ app.controller('InscriptionController',['$scope','InscriptionService','usSpinner
         usSpinnerService.spin('nt-spinner');
         AuthService.clear();
             InscriptionService.create(user).then(function(response){
-                UserService.refresh(response.user);
+                log(response);
+                //AuthService.authenticated(response);
+                UserService.refresh();
                 successRequest(response,$scope);
                 usSpinnerService.stop('nt-spinner');
                  $state.go('nicetruc');

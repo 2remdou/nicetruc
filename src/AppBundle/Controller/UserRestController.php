@@ -255,7 +255,7 @@ class UserRestController extends FOSRestController
         $dispatcher = $this->get('event_dispatcher');
 
         $user->setConfirmationToken(null);
-        $user->setEnabled(true);
+        $user->setActived(true);
 
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);

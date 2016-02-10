@@ -9,6 +9,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -35,13 +36,14 @@ class User extends BaseUser
      * @ORM\Column(name="nomUser", type="string", length=255)
      * @Expose()
      * @SerializedName("nomUser")
+     * @Assert\NotBlank()
      */
     private $nomUser;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenomUser", type="string", length=255)
+     * @ORM\Column(name="prenomUser", type="string", length=255, nullable=true)
      * @Expose()
      * @SerializedName("prenomUser")
      */
@@ -69,15 +71,22 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Quartier",inversedBy="users")
      * @ORM\JoinColumn(nullable=true)
      * @Expose()
-     * @SerializedName("quartiers")
+     * @SerializedName("quartier")
      */
     private $quartier;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="users")
+     * @var boolean
+     * @ORM\Column(name="active",type="boolean")
      * @Expose()
+     * @SerializedName("active")
      */
-    private $articles;
+    protected $active;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Voiture",mappedBy="user")
+     */
+    private $voitures;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Group")
@@ -302,5 +311,6 @@ class User extends BaseUser
 
         return $this;
     }
+
 
 }
