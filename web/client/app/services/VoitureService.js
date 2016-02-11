@@ -17,6 +17,10 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
             return _voitureService.one('page',nextPage).get();
         };
 
+        this.paging = function(page){
+            return _voitureService.one('page',page).get();
+        };
+
 
         this.setVoituresEnVedette = function(voituresEnVedette){
             that.voituresEnVedette = voituresEnVedette;

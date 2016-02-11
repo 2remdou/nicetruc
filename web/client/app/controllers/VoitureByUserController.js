@@ -1,14 +1,19 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('VoitureByUserController',['$scope','usSpinnerService','VoitureService','$rootScope','$state',
-    function($scope,usSpinnerService,VoitureService,$rootScope,$state){
+app.controller('VoitureByUserController',
+    ['$scope','usSpinnerService','VoitureService','$state','$stateParams',
+    function($scope,usSpinnerService,VoitureService,$state,$stateParams){
 
+
+        if(!$stateParams.idUser){
+            return;
+        }
         usSpinnerService.spin('nt-spinner');
-
-        VoitureService.listByUser($rootScope.user.id).then(function(response){
-           $scope.voitures = response.data;
-
+        
+        VoitureService.listByUser($stateParams.idUser).then(function(response){
+           $scope.voitures = response.voitures;
+           $scope.user = response.user;
             if($scope.voitures.length===0){
                 var response={};
                 response.data = [{texte:"Aucune Annonce pour le moment",'typeAlert':'info'}];

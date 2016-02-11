@@ -1,8 +1,8 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','VoitureService','$rootScope','$timeout',
-    function($scope,usSpinnerService,VoitureService,$rootScope,$timeout){
+app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','VoitureService','$rootScope',
+    function($scope,usSpinnerService,VoitureService,$rootScope){
 		var LIMIT_VEDETTE = 9;
 		$scope.voitures=[];
 		var listeVoituresEnVedette={forInsert:[],forDelete:[],oldVedette:[]};
@@ -10,7 +10,7 @@ app.controller('VoituresEnVedetteController',['$scope','usSpinnerService','Voitu
 		$scope.fin=false;
 
 		var listWithPagination = function(){
-			if($scope.fin)
+			if($scope.fin) // arrivee à la fin, plus de scroll
 				return;
 
 			usSpinnerService.spin('nt-spinner');

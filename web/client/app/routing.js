@@ -330,7 +330,7 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
            }
        })
        .state('voitureByUser',{
-           url:'/listVoiture',
+           url:'/listVoiture/users/:idUser',
            views:{
                 'nav':{
                    templateUrl: 'client/app/views/nav.html',

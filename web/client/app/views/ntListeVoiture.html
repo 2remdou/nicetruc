@@ -1,6 +1,6 @@
-<div class="col-lg-3 col-sm-3 hero-feature text-center" ng-repeat="voiture in voitures">
+<div class="col-lg-3 col-sm-3 hero-feature text-center" infinite-scroll="Paging()" infinite-scroll-disabled="isLoad" ng-repeat="voiture in voitures">
     <nt-voiture voiture="voiture"></nt-voiture voiture="voiture">
-</div>
+</div>	
 
 
 

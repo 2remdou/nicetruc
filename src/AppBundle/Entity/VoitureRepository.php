@@ -41,6 +41,25 @@ class VoitureRepository extends EntityRepository
         return $resultat;
     }
 
+    public function customFindAll(){
+        $resultat = $this->createQueryBuilder('v')
+                ->join('v.modeleMarque','modeleMarque')
+                ->addSelect('modeleMarque')
+                ->join('v.boitier','boitier')
+                ->addSelect('boitier')
+                ->join('v.carburant','carburant')
+                ->addSelect('carburant')
+                ->join('v.user','user')
+                ->addSelect('user')
+                ->leftJoin('v.images','image')
+                ->addSelect('image')
+                ->leftJoin('v.imagePrincipale','imagePrincipale')
+                ->addSelect('imagePrincipale')
+                ->orderBy('v.isVedette','DESC')
+                ->getQuery();
+                return $resultat;
+    }
+
     public function findVedette(){
             $resultat = $this->createQueryBuilder('v')
                 ->where('v.isVedette=:isVedette')

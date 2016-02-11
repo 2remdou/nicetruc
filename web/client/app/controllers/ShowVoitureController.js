@@ -5,7 +5,11 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
     'VoitureService','$state','Restangular',
     function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,Restangular){
 
-            usSpinnerService.spin('nt-spinner');
+            
+        if(!$stateParams.voitureId){
+            return;
+        }
+        usSpinnerService.spin('nt-spinner');
         VoitureService.get($stateParams.voitureId).then(function(response){
             $scope.voiture = response;
             usSpinnerService.stop('nt-spinner');

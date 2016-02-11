@@ -45,7 +45,7 @@ class VoitureController extends FOSRestController
         $paginator  = $this->get('knp_paginator');
 
         $voitures = $paginator->paginate(
-            $em->getRepository('AppBundle:Voiture')->findBy(array(),array('datePublication'=>'DESC')),
+            $em->getRepository('AppBundle:Voiture')->customFindAll(),
             $page,
             $this->getParameter('maxpage')
         );
@@ -59,7 +59,6 @@ class VoitureController extends FOSRestController
             ->view()
             ->setData(array("data"=>$voitures));
 
-        sleep(5);
         return $view;
     }
 
@@ -150,7 +149,7 @@ class VoitureController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $message = new MessageResponse(View::create());
 
-        $user = $em->getRepository('AppBundle:User')->findBy(array('id'=>$userId));
+        $user = $em->getRepository('AppBundle:User')->findOneBy(array('id'=>$userId));
 
         if(!$user){
             $message->config("Utilisateur introuvable",'danger',404);
@@ -159,7 +158,7 @@ class VoitureController extends FOSRestController
 
         $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('user'=>$user));
 
-        $view = View::create(array('data'=>$voitures) ,200);
+        $view = View::create(array('voitures'=>$voitures,'user'=>$user) ,200);
 
         return $view;
     }
