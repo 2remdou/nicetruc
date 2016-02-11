@@ -52,7 +52,8 @@ gulp.task('concatCss',function(){
         'web/client/app/views/css/style.css',
         'web/client/app/views/css/nicetruc.css'
     ])
-        .pipe(concatCss('all.css',{rebaseUrls:false}))
+        .pipe(concatCss('all.css'))
+        // .pipe(concatCss('all.css',{rebaseUrls:false}))
         .pipe(gulp.dest('web/client/app/views/css'));
 });
 gulp.task('clean', function() {
