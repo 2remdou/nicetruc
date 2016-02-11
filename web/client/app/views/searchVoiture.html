@@ -72,15 +72,21 @@
                     <thead>
                     <tr>
                         <td class="hidden-xs">Image</td>
-                        <td>Marque</td>
+                        <td>Marque </td>
                         <td>Boitier</td>
                         <td>Carburant</td>
-                        <td>Prix</td>
-                        <td>Km Parcouru</td>
+                        <td>Prix
+                            <i ng-click="sortByPrix()" ng-show="prixCroissant" class="glyphicon glyphicon-sort-by-attributes pull-right"></i>
+                            <i ng-click="sortByPrix()" ng-hide="prixCroissant" class="glyphicon glyphicon-sort-by-attributes-alt pull-right" ></i>
+                        </td>
+                        <td>Km Parcouru
+                            <i ng-click="sortByKmParcouru()" ng-show="kmCroissant" class="glyphicon glyphicon-sort-by-attributes pull-right"></i>
+                            <i ng-click="sortByKmParcouru()" ng-hide="kmCroissant" class="glyphicon glyphicon-sort-by-attributes-alt pull-right" ></i>
+                        </td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="voiture in resultatRecherche">
+                    <tr ng-repeat="voiture in resultatRecherche" class="mouse-pointer" ui-sref="showVoiture({voitureId:voiture.id})">
                         <td class="hidden-xs">
                             <a ui-sref="showVoiture({voitureId:voiture.id})">
                                 <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//" width="47" height="47" />

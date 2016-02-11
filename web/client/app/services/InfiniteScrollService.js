@@ -10,8 +10,9 @@ app.service('InfiniteScrollService',['VoitureService','$rootScope',
         var loadVoiture = function(page){
             VoitureService.paging(page).then(function(response){
                 nombrePage.voiture= Math.ceil(parseInt(response.data.total_count)/parseInt(response.data.num_items_per_page));
-                $rootScope.$broadcast('load.completed.scrollvoiture', ({voitures:response.data.items}));
-                },function(error){
+                voitures=VoitureService.defineImagePrincipale(response.data.items);
+                $rootScope.$broadcast('load.completed.scrollvoiture', ({voitures:voitures}));
+            },function(error){
 
             });
         }
@@ -22,7 +23,7 @@ app.service('InfiniteScrollService',['VoitureService','$rootScope',
             } 
             else{
                 if(page>nombrePage.voiture){// ne rien faire,si la page demandée n'existe pas
-                    return [];
+                    $rootScope.$broadcast('load.completed.scrollvoiture', ({voitures:[]}));
                 }else{
                     loadVoiture(page);
                 }

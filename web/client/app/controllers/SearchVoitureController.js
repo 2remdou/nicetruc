@@ -1,8 +1,9 @@
 /**
  * Created by touremamadou on 12/09/2015.
  */
-app.controller('SearchVoitureController',['$scope','SearchService','usSpinnerService','VoitureService',
-    function($scope,SearchService,usSpinnerService,VoitureService){
+app.controller('SearchVoitureController',['$scope','SearchService','usSpinnerService','VoitureService','$filter',
+    function($scope,SearchService,usSpinnerService,VoitureService,$filter){
+
         $scope.$emit('parameters.started.load');
         $scope.resultatRecherche= SearchService.getListResult();
 
@@ -28,5 +29,28 @@ app.controller('SearchVoitureController',['$scope','SearchService','usSpinnerSer
             {
                 $scope.resultatRecherche.length == 0 ? $scope.displayResult = false:$scope.displayResult=true;
             }
-        })
+        });
+
+        $scope.sortByPrix = function(){
+            if($scope.prixCroissant){
+                $scope.resultatRecherche=$filter('orderBy')($scope.resultatRecherche,'prix');
+            }
+            else{
+                $scope.resultatRecherche=$filter('orderBy')($scope.resultatRecherche,'-prix');
+            }
+            SearchService.setListResult($scope.resultatRecherche);
+            $scope.prixCroissant = !$scope.prixCroissant;
+        };
+
+        $scope.sortByKmParcouru = function(){
+            if($scope.kmCroissant){
+                $scope.resultatRecherche=$filter('orderBy')($scope.resultatRecherche,'kmParcouru');
+            }
+            else{
+                $scope.resultatRecherche=$filter('orderBy')($scope.resultatRecherche,'-kmParcouru');
+            }
+            SearchService.setListResult($scope.resultatRecherche);
+
+            $scope.kmCroissant = !$scope.kmCroissant;
+        }
 }]);

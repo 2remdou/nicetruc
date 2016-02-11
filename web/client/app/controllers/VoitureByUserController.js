@@ -12,13 +12,13 @@ app.controller('VoitureByUserController',
         usSpinnerService.spin('nt-spinner');
         
         VoitureService.listByUser($stateParams.idUser).then(function(response){
-           $scope.voitures = response.voitures;
-           $scope.user = response.user;
+           $scope.voitures = VoitureService.defineImagePrincipale(response.voitures);
             if($scope.voitures.length===0){
-                var response={};
-                response.data = [{texte:"Aucune Annonce pour le moment",'typeAlert':'info'}];
-                successRequest(response,$scope);
+                displayAlert("Aucune Annonce pour le moment pour cet utilisateur",'info',$scope);
                 usSpinnerService.stop('nt-spinner');
+            }else{
+                $scope.user = response.user;
+                $scope.isLoaded = true;
             }
 
             angular.forEach(response.data,function(voiture){

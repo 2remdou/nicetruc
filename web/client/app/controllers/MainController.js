@@ -2,7 +2,7 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('MainController',['$scope','VoitureService','usSpinnerService',
-    ,'VoitureService','MarqueService','BoitierService',
+    'VoitureService','MarqueService','BoitierService',
     'CarburantService','$rootScope','InfiniteScrollService',
     function($scope,VoitureService,usSpinnerService,
         VoitureService,MarqueService,BoitierService,CarburantService,$rootScope,InfiniteScrollService)
@@ -27,9 +27,9 @@ app.controller('MainController',['$scope','VoitureService','usSpinnerService',
             usSpinnerService.spin('nt-spinner');
             InfiniteScrollService.scrollVoiture(page++);
             $scope.isLoad = true;
-            if($scope.nbreLoader<=0){ // chargement parallele
+            /*if($scope.nbreLoader<=0){ // chargement parallele
                 usSpinnerService.stop('nt-spinner');
-            }
+            }*/
         };
 
         $scope.$on('load.completed.scrollvoiture', function(event,args){
