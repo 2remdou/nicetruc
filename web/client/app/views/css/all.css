@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*!
  *  Font Awesome 4.4.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -2641,6 +2642,8 @@
 .fa-fonticons:before {
   content: "\f280";
 }
+=======
+>>>>>>> 77de2973710efc3cb4232dc066e16d424b77a798
 /**
  * angular-ui-notification - Angular.js service providing simple notifications using Bootstrap 3 styles with css transitions for animating
  * @author Alex_Crack
@@ -2715,6 +2718,7 @@
 .ui-notification:hover {
   opacity: .7;
 }
+<<<<<<< HEAD
 /**
  * bxSlider v4.2.5
  * Copyright 2013-2015 Steven Wanderski
@@ -2913,6 +2917,8 @@ ul.bxslider {
   font-size: .85em;
   padding: 10px;
 }
+=======
+>>>>>>> 77de2973710efc3cb4232dc066e16d424b77a798
 .img-thumbnail {
   border-radius: 0;
 }
@@ -3243,33 +3249,57 @@ select {
 
 @font-face {
   font-family: 'open_sanscondensed_light';
+<<<<<<< HEAD
   src: url("fonts/OpenSans-CondLight-webfont.eot");
   src: url("fonts/OpenSans-CondLight-webfont.eot?#iefix") format('embedded-opentype'),
          url("fonts/OpenSans-CondLight-webfont.woff") format('woff'),
          url("fonts/OpenSans-CondLight-webfont.ttf") format('truetype'),
          url("fonts/OpenSans-CondLight-webfont.svg#open_sanscondensed_light") format('svg');
+=======
+  src: url('../fonts/OpenSans-CondLight-webfont.eot');
+  src: url('../fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-CondLight-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-CondLight-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-CondLight-webfont.svg#open_sanscondensed_light') format('svg');
+>>>>>>> 77de2973710efc3cb4232dc066e16d424b77a798
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'source_sans_proregular';
+<<<<<<< HEAD
   src: url("fonts/sourcesanspro-regular-webfont.eot");
   src: url("fonts/sourcesanspro-regular-webfont.eot?#iefix") format('embedded-opentype'),
          url("fonts/sourcesanspro-regular-webfont.woff") format('woff'),
          url("fonts/sourcesanspro-regular-webfont.ttf") format('truetype'),
          url("fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular") format('svg');
+=======
+  src: url('../fonts/sourcesanspro-regular-webfont.eot');
+  src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'),
+         url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
+         url('../fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
+>>>>>>> 77de2973710efc3cb4232dc066e16d424b77a798
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'DroidSansRegular';
+<<<<<<< HEAD
   src: url("fonts/DroidSans-webfont.eot");
   src: url("fonts/DroidSans-webfont.eot?#iefix") format('embedded-opentype'),
          url("fonts/DroidSans-webfont.woff") format('woff'),
          url("fonts/DroidSans-webfont.ttf") format('truetype'),
          url("fonts/DroidSans-webfont.svg#DroidSansRegular") format('svg');
+=======
+  src: url('../fonts/DroidSans-webfont.eot');
+  src: url('../fonts/DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/DroidSans-webfont.woff') format('woff'),
+         url('../fonts/DroidSans-webfont.ttf') format('truetype'),
+         url('../fonts/DroidSans-webfont.svg#DroidSansRegular') format('svg');
+>>>>>>> 77de2973710efc3cb4232dc066e16d424b77a798
   font-weight: normal;
   font-style: normal;
 }
