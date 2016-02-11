@@ -2,81 +2,46 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('MainController',['$scope','VoitureService','usSpinnerService',
-    '$state','Restangular','VoitureService','MarqueService','BoitierService',
-    'CarburantService','$rootScope',
-    function($scope,VoitureService,usSpinnerService,$state,Restangular,
-        VoitureService,MarqueService,BoitierService,CarburantService,$rootScope)
+    ,'VoitureService','MarqueService','BoitierService',
+    'CarburantService','$rootScope','InfiniteScrollService',
+    function($scope,VoitureService,usSpinnerService,
+        VoitureService,MarqueService,BoitierService,CarburantService,$rootScope,InfiniteScrollService)
     {
         usSpinnerService.spin('nt-spinner');
-        // $scope.voituresEnVedette={};
+        $scope.voitures=[];
+        $scope.nbreLoader=2;
+        $scope.isLoad = false;
+        var page=1;
         $scope.$emit('parameters.started.load');
 
         $rootScope.$on('parameters.completed.load',function(event,data){
+            $scope.nbreLoader--;
             $scope.marques = MarqueService.getMarques();
             $scope.boitiers = BoitierService.getBoitiers();
             $scope.carburants = CarburantService.getCarburants();
-            $scope.voituresEnVedette = VoitureService.getVoituresEnVedette();
-            VoitureService.setZoneDeRecherche($scope.voituresEnVedette);
-            usSpinnerService.stop('nt-spinner');
+            // VoitureService.setZoneDeRecherche($scope.voituresEnVedette);
 
         });
 
-
-        $scope.advancedSearchText = 'Recherche avancée';
-
-        
-        $scope.showVoiture = function(voitureId){
-            $state.go('showVoiture',{voitureId:voitureId});
-        };
-
-        $scope.advanced = function(){
-            $scope.advancedSearch = ! $scope.advancedSearch;
-            if($scope.advancedSearch) {
-                $scope.advancedSearchText = 'Reduire';
-            }
-            else {
-                $scope.advancedSearchText = 'Recherche avancée';
-            }
-        };
-
-        $scope.selectMarque = function(marque){
-            if(!marque) return;
-            $scope.modeles=marque.modeles;
-        };
-
-        $scope.searchVoiture = function(search){
+        $scope.Paging = function(){
             usSpinnerService.spin('nt-spinner');
-            if(!$scope.advancedSearch){
-                if(search){
-                    key = search.key;
-                }
-                else{
-                    key='';
-                }
-
-                Restangular.all('search').customGET(key).then(function(response){
-                    $scope.voitures=VoitureService.defineImagePrincipale(response.data.voitures);
-                    usSpinnerService.stop('nt-spinner');
-                },function(error){
-                    if(error.status === 404){
-                        displayAlert('Aucune voiture ne correspond à votre recherche','info',$scope);
-                    }
-                    $scope.voitures=[];
-                    usSpinnerService.stop('nt-spinner');
-                })
+            InfiniteScrollService.scrollVoiture(page++);
+            $scope.isLoad = true;
+            if($scope.nbreLoader<=0){ // chargement parallele
+                usSpinnerService.stop('nt-spinner');
             }
-            else{
-                Restangular.all('search/advanced').post(angular.copy(search)).then(function(response){
-                    $scope.voitures=VoitureService.defineImagePrincipale(response.data.voitures);
-                    usSpinnerService.stop('nt-spinner');
+        };
 
-                },function(error){
-                    if(error.status === 404){
-                        displayAlert('Aucune voiture ne correspond à votre recherche','info',$scope);
-                    }
-                    $scope.voitures=[];
-                    usSpinnerService.stop('nt-spinner');
-                 });
+        $scope.$on('load.completed.scrollvoiture', function(event,args){
+            $scope.nbreLoader--;
+            $scope.voitures=$scope.voitures.concat(args.voitures);
+            $scope.isLoad = false;
+        });
+
+        $scope.$watch('nbreLoader', function(newValue, oldValue, scope) {
+            if(newValue<=0){
+                usSpinnerService.stop('nt-spinner');
             }
-        }
+        });
+
     }]);

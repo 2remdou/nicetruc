@@ -3,7 +3,10 @@
         <img ng-src="//voiture.imagePrincipale.downloadUrl//" alt="//voiture.imagePrincipale.imageName//">
     </a>
     <div class="caption prod-caption">
-        <a ui-sref="showVoiture({voitureId:voiture.id})">
+        <!-- <a ui-sref="showVoiture({voitureId:voiture.id})"></a> -->
+            <div>
+                <a ui-sref="voitureByUser({idUser:voiture.user.id})"><h4>//voiture.user.nomUser//</h4></a>
+            </div>
             <div>
                 <h4>//voiture.modeleMarque.marque.libelleMarque//-//voiture.modeleMarque.modele.libelleModele//</h4>
             </div>
@@ -12,7 +15,7 @@
             </div>
            <div class="prix">//voiture.prix|separateurMillier// GNF</div>
            <div class="km">//voiture.kmParcouru|separateurMillier// km</div>
-    </a>
+        
     </div>
 </div>
 

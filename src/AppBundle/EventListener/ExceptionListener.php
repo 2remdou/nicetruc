@@ -22,9 +22,9 @@ class ExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $env=$this->container->get('kernel')->getEnvironment();
-        if($env !== 'prod'){
-            return;
-        }
+            if($env !== 'prod'){
+                return;
+            }
         $exception = $event->getException();
         $response = new Response();
         $response->setContent($this->container->get('templating')->render('AppBundle::index_'.$env.'.html.twig', array()));
