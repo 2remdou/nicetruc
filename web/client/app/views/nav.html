@@ -3,13 +3,16 @@
             <div class="row">
 
                 <!-- Logo -->
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="col-lg-3 col-md-3 col-xs-12 col-sm-11">
                     <div class="well logo">
                         <a ui-sref="nicetruc">
                                  <span>NiceTruc</span>
                         </a>
                         <div>Vendez, achetez plus simplement</div>
                     </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <button type="button" class="btn btn-default">button</button>
                 </div>
                 <!-- End Logo -->
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
@@ -51,37 +54,10 @@
                                                     <a href="#" class="dropdown-toggle white hidden-xs" data-toggle="dropdown">
                                                         <i class="glyphicon glyphicon-user"></i>// user.nomUser // <span class="caret"></span>
                                                     </a>
-                                                    <ul class="dropdown-menu hidden-xs">
-                                                        <li><a ui-sref="profil">Profil</a></li>
-                                                        <li><a ui-sref="annonces">Ajouter une annonce</a></li>
-                                                        <li><a ui-sref="voitureByUser({idUser:user.id})">Mes annonce</a></li>
-                                                        <li><a ui-sref="voitures">Recherche</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="marques">Ajouter une marque</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="modeles">Ajouter un modele</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="villes">Ville</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="quartiers">Quartier</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="categories">Categorie</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="carburants">Carburant</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="boitiers">Boitier</a></li>
-                                                        <li ng-show="isAdmin()"><a ui-sref="voituresEnVedette">Vedette</a></li>
-                                                        <!--{% endif %}-->
-                                                        <li ng-click="logout()" class="mouse-pointer"><a href="#"><i class="glyphicon glyphicon-log-out"></i>Deconnexion</a></li>
+                                                    <ul class="dropdown-menu hidden-xs" nt-menu>
                                                    </ul>
                                                     <div class="visible-xs">
-                                                        <ul class="list-li">
-                                                            <li><a ui-sref="profil">Profil</a></li>
-                                                            <li><a ui-sref="annonces">Ajouter une annonce</a></li>
-                                                            <li><a ui-sref="voitureByUser">Mes annonce</a></li>
-                                                            <li><a ui-sref="voitures">Recherche</a></li>
-                                                            <li ng-show="isAdmin()"><a ui-sref="marques">Ajouter une marque</a></li>
-                                                            <li ng-show="isAdmin()"><a ui-sref="modeles">Ajouter un modele</a></li>
-                                                            <li ng-show="isAdmin()"><a ui-sref="villes">Ville</a></li>
-                                                            <li ng-show="isAdmin()"><a ui-sref="quartiers">Quartier</a></li>
-                                                            <li ng-show="isAdmin()"><a ui-sref="categories">Categorie</a></li>
-                                                            <li ng-show="isAdmin()"><a ui-sref="carburants">Carburant</a></li>
-                                                            <li ng-show="isAdmin()"><a ui-sref="boitiers">Boitier</a></li>
-                                                            <!--{% endif %}-->
-                                                            <li ng-click="logout()" class="mouse-pointer"><a href="#"><i class="glyphicon glyphicon-log-out"></i>Deconnexion</a></li>
+                                                        <ul class="list-li" nt-menu>
                                                         </ul>
                                                     </div>
                                                 </li>

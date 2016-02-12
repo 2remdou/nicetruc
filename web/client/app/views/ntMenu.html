@@ -1,0 +1,15 @@
+<li><a ui-sref="profil">Profil</a></li>
+<li><a ui-sref="annonces">Ajouter une annonce</a></li>
+<li><a ui-sref="voitureByUser({idUser:user.id})">Mes annonce</a></li>
+<li><a ui-sref="voitures">Recherche</a></li>
+<li ng-show="isAdmin()"><a ui-sref="marques">Ajouter une marque</a></li>
+<li ng-show="isAdmin()"><a ui-sref="modeles">Ajouter un modele</a></li>
+<li ng-show="isAdmin()"><a ui-sref="villes">Ville</a></li>
+<li ng-show="isAdmin()"><a ui-sref="quartiers">Quartier</a></li>
+<li ng-show="isAdmin()"><a ui-sref="categories">Categorie</a></li>
+<li ng-show="isAdmin()"><a ui-sref="carburants">Carburant</a></li>
+<li ng-show="isAdmin()"><a ui-sref="boitiers">Boitier</a></li>
+<li ng-show="isAdmin()"><a ui-sref="voituresEnVedette">Vedette</a></li>
+<li ng-click="logout()" class="mouse-pointer"><a href="#"><i class="glyphicon glyphicon-log-out"></i>Deconnexion</a></li>
+
+
