@@ -53,7 +53,8 @@ gulp.task('concatCss',function(){
         .pipe(concatCss('all.css',{rebaseUrls:false}))
         .pipe(gulp.dest('web/client/app/views/css'));
 });
-
+    //aws s3 cp web/bundles/compiled/all.js s3://nicetruc/js/
+    //aws s3 cp web/client/app/views/css/all.css s3://nicetruc/css/
 gulp.task('clean', function() {
     return del(['web/bundles/compiled/']);
 });
