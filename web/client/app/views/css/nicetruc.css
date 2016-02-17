@@ -141,6 +141,24 @@ input[type=file]{
     background-color: #ec971f;
     border-color: #d58512;
 }
+
+.addAnnonce{
+    padding: 0;
+    text-align: center;
+    border: solid 2px;
+}
+.addAnnonce a{
+    color: #333;
+    font-size: 20px;
+    font-family: 'open_sanscondensed_light';
+}
+.addAnnonce a span{
+    color: #428bca;
+}
+.addAnnonce a:hover{
+    text-decoration: none;
+}
+
 /*****tablette*****/
 @media (min-width: 480px) and (max-width: 768px) {
     .voiture-main-image-container a{
@@ -154,25 +172,6 @@ input[type=file]{
     .voiture-main-image-container a{
         max-height: 400px;
     }
-}
-
-.addAnnonce{
-    color: #333;
-    font-size: 20px;
-    font-family: 'open_sanscondensed_light';
-    margin-bottom: 10px;
-}
-
-.addAnnonce a{
-    color: #fff;
-    border-radius: 4px;
-    background-color: #3498DB;
-    border-color: #3498DB;
-    padding: 4px;
-    text-align: center;
-}
-.addAnnonce a:hover{
-    text-decoration: none;
 }
 
 
