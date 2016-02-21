@@ -4,9 +4,9 @@
 
 app.controller('ProfilController',
     ['$scope','VilleService','QuartierService','$rootScope','UserService',
-        'Restangular','$state','usSpinnerService',
+        'Restangular','$state','usSpinnerService','AuthService',
         function($scope,VilleService,QuartierService,$rootScope,UserService,
-            Restangular,$state,usSpinnerService){
+            Restangular,$state,usSpinnerService,AuthService){
             
             $scope.villes = VilleService.list().$object;
             $scope.quartiers = [];
@@ -56,7 +56,7 @@ app.controller('ProfilController',
                 newPass.confirmationPassword = user.confirmationPassword;
 
                 newPass.put().then(function(response){
-                    TokenHandler.clearCredentials();
+                    AuthService.clear();
                     successRequest(response,$scope)
                     usSpinnerService.stop('nt-spinner');
                     $state.go('nicetruc');
