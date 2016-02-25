@@ -342,6 +342,24 @@ app.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlR
                }
            }
          })
+       .state('disabledVoiture',{
+           url:'/disabledVoiture',
+           views:{
+                'nav':{
+                   templateUrl: 'client/app/views/nav.html',
+                   controller: 'NavController'
+               },
+               'content':{
+                   templateUrl: 'client/app/views/disabledVoiture.html',
+                   controller: 'VoitureByUserController'
+               }
+           },
+           data: {
+               permissions: {
+                   only: ['ROLE_API','ROLE_ADMIN']
+               }
+           }
+       })
        .state('voituresEnVedette',{
              url:'/voituresEnVedette',
              views:{

@@ -1,0 +1,13 @@
+    <div class="col-lg-12 col-sm-12">
+        <div class="title" >
+            <span>LISTE DE VOS VOITURES</span>
+        </div>
+    </div>
+    <div ng-show="voiture.isPublish" class="col-lg-3 col-sm-3 hero-feature text-center" ng-repeat="voiture in voitures track by $index" infinite-scroll="Paging()" infinite-scroll-disabled="isLoad">
+        <button type="button" class="btn btn-xs btn-danger pull-right" ng-click="disabled(voiture)">Desactiver</button>
+        <div class="clearfix"></div>
+        <nt-voiture  voiture="voiture"></nt-voiture voiture="voiture">
+    </div>
+
+
+

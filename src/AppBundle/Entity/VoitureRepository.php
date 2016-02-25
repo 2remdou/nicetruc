@@ -14,6 +14,21 @@ use Doctrine\ORM\NoResultException;
  */
 class VoitureRepository extends EntityRepository
 {
+    public function custom(){
+        return $this->createQueryBuilder('v')
+                ->join('v.modeleMarque','modeleMarque')
+                ->addSelect('modeleMarque')
+                ->join('v.boitier','boitier')
+                ->addSelect('boitier')
+                ->join('v.carburant','carburant')
+                ->addSelect('carburant')
+                ->join('v.user','user')
+                ->addSelect('user')
+                ->leftJoin('v.images','image')
+                ->addSelect('image')
+                ->leftJoin('v.imagePrincipale','imagePrincipale')
+                ->addSelect('imagePrincipale');
+    }
     public function customFind($id){
         try{
             $resultat = $this->createQueryBuilder('v')
@@ -42,21 +57,23 @@ class VoitureRepository extends EntityRepository
     }
 
     public function customFindAll(){
-        $resultat = $this->createQueryBuilder('v')
-                ->join('v.modeleMarque','modeleMarque')
-                ->addSelect('modeleMarque')
-                ->join('v.boitier','boitier')
-                ->addSelect('boitier')
-                ->join('v.carburant','carburant')
-                ->addSelect('carburant')
-                ->join('v.user','user')
-                ->addSelect('user')
-                ->leftJoin('v.images','image')
-                ->addSelect('image')
-                ->leftJoin('v.imagePrincipale','imagePrincipale')
-                ->addSelect('imagePrincipale')
+        $resultat = $this->custom()
+                ->where('v.isPublish=:isPublish')
+                ->setParameter('isPublish',true)
                 ->orderBy('v.isVedette','DESC')
                 ->getQuery();
+                return $resultat;
+    }
+
+    public function customFindByUser(User $user){
+        $resultat = $this->custom()
+                ->where('v.isPublish=:isPublish')
+                ->setParameter('isPublish',true)
+                ->andWhere('user.id=:user')
+                ->setParameter('user',$user)
+                ->orderBy('v.isVedette','DESC')
+                ->getQuery()
+                ->getResult();
                 return $resultat;
     }
 

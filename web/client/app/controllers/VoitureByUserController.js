@@ -2,30 +2,32 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('VoitureByUserController',
-    ['$scope','usSpinnerService','VoitureService','$state','$stateParams',
-    function($scope,usSpinnerService,VoitureService,$state,$stateParams){
+    ['$scope','usSpinnerService','VoitureService','$state','$stateParams','$rootScope',
+    function($scope,usSpinnerService,VoitureService,$state,$stateParams,$rootScope){
 
-
-        if(!$stateParams.idUser){
-            return;
+        var idUser;
+        if(!isDefined($stateParams.idUser)){//si idUser n'est passé en parametre
+            if(!isDefined($rootScope.user)){ // si l'utilisateur n'est pas connecté
+                return;
+            }
+            else{
+                idUser=$rootScope.user.id;//liste des voitures du user connecté
+            }
+        }
+        else{
+            idUser=$stateParams.idUser;//liste des voitures d'un autre user
         }
         usSpinnerService.spin('nt-spinner');
-        
-        VoitureService.listByUser($stateParams.idUser).then(function(response){
-           $scope.voitures = VoitureService.defineImagePrincipale(response.voitures);
+
+        $scope.$emit('started.load.listvoiturebyuser',{idUser:idUser});
+
+        $scope.$on('completed.load.listvoiturebyuser',function(event,args){
+            $scope.voitures=args.voitures;
             if($scope.voitures.length===0){
                 displayAlert("Aucune Annonce pour le moment pour cet utilisateur",'info',$scope);
-                usSpinnerService.stop('nt-spinner');
             }else{
-                $scope.user = response.user;
-                $scope.isLoaded = true;
+                $scope.user = args.user;
             }
-
-            angular.forEach(response.data,function(voiture){
-                if(!voiture.imagePrincipale){
-                    voiture.imagePrincipale = {downloadUrl: voiture.defaultPathImagePrincipale,imageName: "defaultVoiture.jpg"};
-                }
-            });
             usSpinnerService.stop('nt-spinner');
         });
 
@@ -33,4 +35,16 @@ app.controller('VoitureByUserController',
             $state.go('showVoiture',{voitureId:voitureId});
         };
 
+        $scope.disabled = function(voiture){
+            usSpinnerService.spin('nt-spinner');
+          VoitureService.disabledVoiture(voiture).then(function(response){
+              voiture.isPublish=false;
+              displayAlert('Votre annonce a été desactivé','success',$scope);
+              usSpinnerService.stop('nt-spinner');
+          },function(error){
+              log(error);
+          });
+        };
+
     }]);
+

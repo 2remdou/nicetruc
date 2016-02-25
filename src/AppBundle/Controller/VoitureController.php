@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
 use AppBundle\MessageResponse\MessageResponse;
+use Elastica\Transport\Http;
 use FOS\RestBundle\Request\ParamFetcher;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\View\View;
@@ -156,7 +157,7 @@ class VoitureController extends FOSRestController
             return $message->getView();
         }
 
-        $voitures = $em->getRepository('AppBundle:Voiture')->findBy(array('user'=>$user));
+        $voitures = $em->getRepository('AppBundle:Voiture')->customFindByUser($user);
 
         $view = View::create(array('voitures'=>$voitures,'user'=>$user) ,200);
 
@@ -211,6 +212,52 @@ class VoitureController extends FOSRestController
         $view = $this
             ->view()
             ->setData('Modification vedette effectuée ')
+            ->setStatusCode(200);
+
+        return $view;
+    }
+     /**
+     * Desactiver une voiture
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Desactiver une voiture",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the user is not found"
+     *   }
+     * )
+     * @Route("api/voitures/disabled/{id}", requirements={"id" = "\d+"}, name="nicetruc_disabled_voiture", options={"expose"=true})
+     * @Method({"PUT"})
+     */
+    public function putDisableVoitureAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $message = new MessageResponse(View::create());
+
+        $voiture = $em->getRepository('AppBundle:Voiture')->find($id);
+
+        if(!$voiture){
+            return $this
+                ->view()
+                ->setData('Voiture introuvable')
+                ->setStatusCode(404);
+        }
+
+        if($voiture->getUser() !== $this->getUser()){
+            return $this
+                ->view()
+                ->setData('Modification non autorisée')
+                ->setStatusCode(401);
+
+        }
+
+        $voiture->setIsPublish(false);
+        $em->persist($voiture);
+        $em->flush();
+
+        $view = $this
+            ->view()
+            ->setData('Annonce desactivée ')
             ->setStatusCode(200);
 
         return $view;

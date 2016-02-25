@@ -9,6 +9,7 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
         var zoneDeRecherche=[];
         var that = this;
         var nextPage=1;
+
         this.list = function(){
             return _voitureService.customGET(""); //Response for getList SHOULD be an array and not an object or something else
         };
@@ -25,6 +26,10 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
         this.setVoituresEnVedette = function(voituresEnVedette){
             that.voituresEnVedette = voituresEnVedette;
 
+        };
+
+        this.disabledVoiture = function(voiture){
+            return _voitureService.customPUT({voiture:voiture},'disabled/'+voiture.id);
         };
 
         this.getVoituresEnVedette = function(){
@@ -47,7 +52,10 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
         };
 
         this.listByUser= function(userId){
-            return _voitureService.one('users',userId).get();
+            return _voitureService.one('users',userId).get().then(function(response){
+                var voitures = that.defineImagePrincipale(response.voitures);
+                $rootScope.$broadcast('completed.load.listvoiturebyuser',{voitures:voitures,user:response.user});
+            });
         };
 
         this.get = function(id){
@@ -107,6 +115,10 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
         this.advancedSearch = function(search){
             return _voitureService.one('advancedSearch').customPOST(search);
         };
+
+        $rootScope.$on('started.load.listvoiturebyuser',function(event,args){
+            that.listByUser(args.idUser);
+        });
 
 
     }]);
