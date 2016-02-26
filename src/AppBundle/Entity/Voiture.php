@@ -477,6 +477,7 @@ class Voiture extends Article
      */
     public function prePersist(){
         $this->setDatePublication(new \DateTime());
+        $this->setIsPublish(true);
     }
 
     /**
