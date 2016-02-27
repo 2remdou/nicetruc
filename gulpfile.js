@@ -21,13 +21,12 @@ gulp.task('concatJs',function () {
          'web/client/bower_components/angular-file-upload/dist/angular-file-upload.min.js',
          'web/client/bower_components/spin.js/spin.js',
          'web/client/bower_components/angular-spinner/angular-spinner.min.js',
-         'web/client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
          'web/client/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
-         'web/client/bower_components/bl-jquery-image-center/js/jquery.blImageCenter.js',
-         'web/client/bower_components/jquery-zoom/jquery.zoom.min.js',
-         'web/client/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
-
         'web/client/bower_components/bl-jquery-image-center/js/jquery.blImageCenter.js',
+        'web/client/bower_components/jquery-zoom/jquery.zoom.min.js',
+        'web/client/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
+
+        'web/client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
         'web/client/bower_components/angular-permission/dist/angular-permission.js',
         'web/client/bower_components/angular-ui-notification/dist/angular-ui-notification.min.js',
         'web/client/bower_components/angular-jwt/dist/angular-jwt.min.js',

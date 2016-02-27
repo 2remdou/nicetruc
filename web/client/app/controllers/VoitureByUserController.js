@@ -27,6 +27,7 @@ app.controller('VoitureByUserController',
                 displayAlert("Aucune Annonce pour le moment pour cet utilisateur",'info',$scope);
             }else{
                 $scope.user = args.user;
+                $scope.isLoaded=true;
             }
             usSpinnerService.stop('nt-spinner');
         });
