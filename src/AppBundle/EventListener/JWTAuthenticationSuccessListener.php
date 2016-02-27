@@ -2,6 +2,7 @@
 
 namespace AppBundle\EventListener;
 
+use FOS\UserBundle\Model\UserManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Symfony\Component\Security\Core\User\UserInterface;
 use JMS\Serializer\Serializer;
@@ -13,9 +14,11 @@ use JMS\Serializer\Serializer;
 class JWTAuthenticationSuccessListener
 {
     private $serializer;
+    private $userManager;
 
-    public function __construct(Serializer $serializer){
+    public function __construct(Serializer $serializer,UserManager $userManager){
         $this->serializer = $serializer;
+        $this->userManager=$userManager;
     }
     /**
      * Add public data to the authentication response
@@ -25,7 +28,7 @@ class JWTAuthenticationSuccessListener
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event)
     {
         $data = $event->getData();
-        $user = $event->getUser();
+        $user = $this->userManager->findUserByUsernameOrEmail($event->getUser()->getUsername());
         if (!$user instanceof UserInterface) {
             return;
         }

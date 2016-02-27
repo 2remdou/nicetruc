@@ -57,7 +57,7 @@ services:
 
     nicetruc.jwt.authentication.success.listener:
         class: AppBundle\EventListener\JWTAuthenticationSuccessListener
-        arguments: ['@jms_serializer']
+        arguments: ['@jms_serializer', "@fos_user.user_manager"]
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }        
     
