@@ -51,15 +51,15 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
+            "php ./app/console doctrine:schema:update --force",
+            "php ./app/console fos:elastica:populate",
             "npm install bower",
             "npm install gulp",
             "npm install gulp-concat",
             "npm install del",
             "npm install gulp-concat-css",
             "./node_modules/.bin/bower install",
-            "./node_modules/.bin/gulp",
-            "php ./app/console doctrine:schema:update --force",
-            "php ./app/console fos:elastica:populate"
+            "./node_modules/.bin/gulp"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -69,15 +69,15 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
+            "php ./app/console doctrine:schema:update --force",
+            "php ./app/console fos:elastica:populate",
             "npm install bower",
             "npm install gulp",
             "npm install gulp-concat",
             "npm install del",
             "npm install gulp-concat-css",
             "./node_modules/.bin/bower install",
-            "./node_modules/.bin/gulp",
-            "php ./app/console doctrine:schema:update --force",
-            "php ./app/console fos:elastica:populate"
+            "./node_modules/.bin/gulp"
 
         ]
     },
