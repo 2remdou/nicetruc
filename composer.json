@@ -40,6 +40,10 @@
         "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
+        "compile": [
+            "php ./app/console doctrine:schema:update --force",
+            "php ./app/console fos:elastica:populate"
+        ],
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
@@ -51,8 +55,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
-            "php ./app/console doctrine:schema:update --force",
-            "php ./app/console fos:elastica:populate",
             "npm install bower",
             "npm install gulp",
             "npm install gulp-concat",
@@ -69,8 +71,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
-            "php ./app/console doctrine:schema:update --force",
-            "php ./app/console fos:elastica:populate",
             "npm install bower",
             "npm install gulp",
             "npm install gulp-concat",
