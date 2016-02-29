@@ -19,6 +19,14 @@ monolog:
             type:           stream
             path:           'php://stderr'
             level:          info
+        main_error:
+            type:           fingers_crossed
+            action_level:   error
+            handler:        streamed_error
+        streamed_error:
+            type:           stream
+            path:           'php://stderr'
+            level:          info
         main_critical:
             type:           fingers_crossed
             action_level:   critical
