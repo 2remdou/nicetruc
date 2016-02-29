@@ -10,7 +10,7 @@ class VoitureRepository extends Repository
 
 	public function searchKey($key){
 		if($key){	
-			$bool = new \Elastica\Query\Bool();
+			$bool = new \Elastica\Query\BoolQuery();
 
 			$bool->addShould(new \Elastica\Query\Match('boitier.libelleBoitier',$key));
 			$bool->addShould(new \Elastica\Query\Match('carburant.libelleCarburant',$key));
@@ -37,7 +37,7 @@ class VoitureRepository extends Repository
 		}
 		else{
 
-			$match = new \Elastica\Query\Bool();
+			$match = new \Elastica\Query\BoolQuery();
 
 			if($advancedSearch->getMarque()){
 				$match->addMust(new \Elastica\Query\Match('modeleMarque.marque.id',$advancedSearch->getMarque()));
@@ -57,7 +57,7 @@ class VoitureRepository extends Repository
 		}
 
 
-		$boolFilter = new \Elastica\Filter\Bool();
+		$boolFilter = new \Elastica\Filter\BoolFilter();
 
 		if($advancedSearch->getPrixMin()){
 			$boolFilter->addMust(new \Elastica\Filter\Range('prix',array('gte'=>intval($advancedSearch->getPrixMin()))));
