@@ -3,7 +3,9 @@
  */
 app.controller('VoitureByUserController',
     ['$scope','usSpinnerService','VoitureService','$state','$stateParams','$rootScope',
-    function($scope,usSpinnerService,VoitureService,$state,$stateParams,$rootScope){
+    'ModalService',
+    function($scope,usSpinnerService,VoitureService,$state,$stateParams,$rootScope,
+        ModalService){
 
         var idUser;
         if(!isDefined($stateParams.idUser)){//si idUser n'est passé en parametre
@@ -45,6 +47,17 @@ app.controller('VoitureByUserController',
           },function(error){
               log(error);
           });
+        };
+
+        $scope.showModal = function(){
+            $scope.texte='Votre annonce ne sera plus visible';
+            ModalService.showModal({
+                templateUrl : 'client/app/views/modalConfirmation.html',
+                controller: 'ModalConfirmationController',
+                scope:$scope
+            }).then(function(modal){
+                log(modal);
+            })
         };
 
     }]);

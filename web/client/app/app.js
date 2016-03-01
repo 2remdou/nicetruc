@@ -13,5 +13,6 @@ var app = angular.module('app',[
     'permission',
     'ui-notification',
     'angular-jwt',
-    'infinite-scroll'
+    'infinite-scroll',
+    'angularModalService'
 ]);

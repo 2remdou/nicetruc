@@ -30,6 +30,7 @@ gulp.task('concatJs',function () {
         'web/client/bower_components/angular-permission/dist/angular-permission.js',
         'web/client/bower_components/angular-ui-notification/dist/angular-ui-notification.min.js',
         'web/client/bower_components/angular-jwt/dist/angular-jwt.min.js',
+        'web/client/bower_components/angular-modal-service/dst/angular-modal-service.min.js',
         'web/bundles/fosjsrouting/js/router.js',
         'web/js/fos_js_routes.js',
         'web/client/app/**/*.js'
