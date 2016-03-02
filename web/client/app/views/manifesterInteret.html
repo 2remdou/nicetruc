@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content col-lg-6">
             <div class="modal-header">
-                <button type="button" id="close" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" id="btnClose" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Manifestez votre intérêt</h4>
             </div>
             <div class="modal-body">
@@ -25,7 +25,7 @@
 
                     <div class="form-group">
                         <hr>
-                        <button type="button" ng-click="send(postulant,form.$valid)" class="btn btn-success btn-sm pull-right" nt-close-modal formIsValid="form.$valid">Postuler</button>
+                        <a  ng-click="send(postulant,form.$valid)" class="btn btn-success btn-sm pull-right"  formIsValid="form.$valid">Postuler</a>
                         <button type="button" ng-click="close(false)" class="btn btn-danger btn-sm" data-dismiss="modal">Annuler</button>
                     </div>
 

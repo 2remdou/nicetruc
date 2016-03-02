@@ -1,5 +1,5 @@
 /**
- * Created by touremamadou on 12/02/2016.
+ * Created by touremamadou on 01/03/2016.
  */
 app.directive('ntCloseModal',function(){
     return {
@@ -10,8 +10,11 @@ app.directive('ntCloseModal',function(){
         link: function(scope,elem,attrs){
             elem.on('click',function(){
                 if(scope.formIsValid) {
-                    cible = $('#close');
-                    $(cible).trigger('click');
+                    cible = $('#btnClose');
+                    //$(cible).trigger('click');
+                    // $('body').removeClass('modal-open')
+                    // $('.modal-backdrop').removeClass('in')
+                    // $('.modal-backdrop').removeClass('modal-backdrop')
                 }
             });
         }
