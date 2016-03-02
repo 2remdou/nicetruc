@@ -2,8 +2,8 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerService','$rootScope',
-    'VoitureService','$state','Restangular',
-    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,Restangular){
+    'VoitureService','$state','ModalService',
+    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,ModalService){
 
             
         if(!$stateParams.voitureId){
@@ -34,6 +34,20 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
         $scope.isAuthorizedEdit = function(userId){
             if(!$rootScope.user) return false;
             return $rootScope.user.id === userId;
+        };
+
+        $scope.manifesterInteret = function(){
+            ModalService.showModal({
+                templateUrl: 'client/app/views/manifesterInteret.html',
+                controller: 'ManifesterInteretController'
+            }).then(function(modal){
+                modal.element.modal();
+                modal.close.then(function(result){
+                   if(typeof  result === "object"){
+                       log(result);
+                   }
+                });
+            })
         };
 
     }]);

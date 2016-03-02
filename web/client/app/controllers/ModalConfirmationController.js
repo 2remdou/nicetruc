@@ -1,12 +1,10 @@
 /**
  * Created by touremamadou on 01/03/2016.
  */
-app.controller('ModalConfirmationController',
-    ['$scope',close,
+app.controller('ModalConfirmationController',['$scope','close',
     function($scope,close){
         $scope.close = function(result) {
-            log(result);
-            //close(result, 500); 
+            close(result, 500);
         };
     }]);
 

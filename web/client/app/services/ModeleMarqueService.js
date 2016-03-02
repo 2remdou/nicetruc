@@ -2,7 +2,8 @@
  * Created by touremamadou on 12/09/2015.
  */
 
-app.service('ModeleMarqueService',['$rootScope','Restangular',function($rootScope,Restangular){
+app.service('ModeleMarqueService',['$rootScope','Restangular',
+    function($rootScope,Restangular){
 
     var _modelemarqueService = Restangular.all('modelemarques/');
     var nextPage=1;

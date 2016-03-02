@@ -1,0 +1,38 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content col-lg-6">
+            <div class="modal-header">
+                <button type="button" id="close" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Manifestez votre intérêt</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" name="form">
+                    <div class="form-group" ng-class="{'has-error' : form.nom.$invalid  && formSubmit }">
+                        <div class="input-group login-input">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Nom"  name="nom" ng-model="postulant.nom" required>
+                            <p ng-show="form.nom.$invalid  && formSubmit" class="help-block">Veuillez fournir votre nom</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error' : form.telephone.$invalid  && formSubmit }">
+                        <div class="input-group login-input">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" class="form-control" placeholder="Telephone" ng-model="postulant.telephone" name="telephone" required>
+                            <p ng-show="form.telephone.$invalid  && formSubmit" class="help-block">Veuillez fournir votre N° telephone</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <hr>
+                        <button type="button" ng-click="send(postulant,form.$valid)" class="btn btn-success btn-sm pull-right" nt-close-modal formIsValid="form.$valid">Postuler</button>
+                        <button type="button" ng-click="close(false)" class="btn btn-danger btn-sm" data-dismiss="modal">Annuler</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

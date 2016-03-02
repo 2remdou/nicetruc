@@ -49,14 +49,17 @@ app.controller('VoitureByUserController',
           });
         };
 
-        $scope.showModal = function(){
-            $scope.texte='Votre annonce ne sera plus visible';
+        $scope.showModal = function(voiture){
+            $scope.texte='Voulez-vous vraiment desactiver cette annonnce? Elle ne sera plus visible après cette opération';
             ModalService.showModal({
                 templateUrl : 'client/app/views/modalConfirmation.html',
                 controller: 'ModalConfirmationController',
                 scope:$scope
             }).then(function(modal){
-                log(modal);
+                modal.element.modal();
+                modal.close.then(function(result){
+                    if(result) $scope.disabled(voiture);
+                })
             })
         };
 
