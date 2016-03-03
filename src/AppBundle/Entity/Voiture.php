@@ -131,6 +131,14 @@ class Voiture extends Article
     protected $images;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Postulant",mappedBy="voiture",cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Expose()
+     * @SerializedName("postulants")
+     */
+    protected $postulants;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="isVedette", type="boolean",nullable=true)

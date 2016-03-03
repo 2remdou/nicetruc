@@ -29,7 +29,8 @@ class VoitureRepository extends EntityRepository
                 ->leftJoin('v.imagePrincipale','imagePrincipale')
                 ->addSelect('imagePrincipale');
     }
-    public function customFind($id){
+    public function customFind($id=null){
+        if(!$id) return null;
         try{
             $resultat = $this->createQueryBuilder('v')
                 ->join('v.modeleMarque','modeleMarque')
@@ -76,6 +77,7 @@ class VoitureRepository extends EntityRepository
                 ->getResult();
                 return $resultat;
     }
+
 
     public function findVedette(){
             $resultat = $this->createQueryBuilder('v')
