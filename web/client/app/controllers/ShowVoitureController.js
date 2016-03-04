@@ -2,11 +2,12 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerService','$rootScope',
-    'VoitureService','$state','ModalService',
-    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,ModalService){
+    'VoitureService','$state','ModalService','PostulantService',
+    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,ModalService,PostulantService){
 
             
-        if(!$stateParams.voitureId){
+        if(!isDefined($stateParams.voitureId)){
+            displayAlert('Voiture invalide','danger',$scope);
             return;
         }
         usSpinnerService.spin('nt-spinner');
@@ -43,11 +44,19 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
             }).then(function(modal){
                 modal.element.modal();
                 modal.close.then(function(result){
+                    usSpinnerService.spin('nt-spinner');
                    if(typeof  result === "object"){
-                       log(result);
+                       var postulant = result;
+                       postulant.idVoiture=$stateParams.voitureId;
+                       PostulantService.add(postulant);
                    }
                 });
             })
         };
+
+        $scope.$on('added.postulant',function(event,args){
+            displayAlert(args.message,'success',$scope);
+            usSpinnerService.stop('nt-spinner');
+        });
 
     }]);

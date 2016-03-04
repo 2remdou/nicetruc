@@ -6,6 +6,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -22,11 +23,10 @@ class ExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $env=$this->container->get('kernel')->getEnvironment();
-/*        if($env !== 'prod'){
-            return;
-        }*/
-        $response = new Response();
-        $response->setContent($this->container->get('templating')->render('AppBundle::index_'.$env.'.html.twig', array()));
-        $event->setResponse($response);
+        if($event->getException() instanceof NotFoundHttpException){
+            $response = new Response();
+            $response->setContent($this->container->get('templating')->render('AppBundle::index_'.$env.'.html.twig', array()));
+            $event->setResponse($response);
+        }
     }
 }

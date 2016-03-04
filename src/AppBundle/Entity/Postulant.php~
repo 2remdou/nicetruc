@@ -4,21 +4,27 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Postulant
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PostulantRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class Postulant
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="guid")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
+     * @Expose()
      */
     private $id;
 
@@ -27,6 +33,7 @@ class Postulant
      *
      * @ORM\Column(name="nomPostulant", type="string", length=255)
      * @Assert\NotBlank()
+     * @Expose()
      */
     private $nomPostulant;
 
@@ -35,12 +42,20 @@ class Postulant
      *
      * @ORM\Column(name="telephone", type="string", length=255)
      * @Assert\NotBlank()
+     * @Expose()
      */
     private $telephone;
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="datePostule", type="datetime")
+     * @SerializedName("datePostule")
+     * @Expose()
+     */
+    protected  $datePostule;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture",inversedBy="images")
-     * @Assert\NotBlank()
      */
     private $voiture;
 
@@ -102,5 +117,36 @@ class Postulant
     {
         return $this->telephone;
     }
-}
 
+    /**
+     * Set voiture
+     *
+     * @param \AppBundle\Entity\Voiture $voiture
+     *
+     * @return Postulant
+     */
+    public function setVoiture(\AppBundle\Entity\Voiture $voiture = null)
+    {
+        $this->voiture = $voiture;
+
+        return $this;
+    }
+
+    /**
+     * Get voiture
+     *
+     * @return \AppBundle\Entity\Voiture
+     */
+    public function getVoiture()
+    {
+        return $this->voiture;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(){
+        return ;
+    }
+
+}

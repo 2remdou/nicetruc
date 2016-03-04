@@ -81,31 +81,45 @@ class PostulantController extends FOSRestController
      */
     public function postPostulant(ParamFetcher $paramFetcher){
 
-        $em = $this->getDoctrine()->getManager();
-        $voiture = $em->getRepository('AppBundle:Voiture')->customFind(null);
-        if(!$voiture){
-            return $this->view('Voiture introuvable',404);
-        }
+        try{
+            $em = $this->getDoctrine()->getManager();
+            $voiture = $em->getRepository('AppBundle:Voiture')->customFind($paramFetcher->get('idVoiture'));
+            if(!$voiture){
+                return $this->view('Voiture introuvable',404);
+            }
 
-        $postulant = new Postulant();
-        $postulant->setNomPostulant($paramFetcher->get('nomPostulant'));
-        $postulant->setTelephone($paramFetcher->get('telephone'));
-        $postulant->setVoiture($voiture);
+            $postulant = $em->getRepository('AppBundle:Postulant')->findBy(array('telephone'=>$paramFetcher->get('telephone')));
 
-        $validator = $this->get('validator');
-        $error = $validator->validate($postulant);
+            if($postulant){
+                return $this->view()
+                    ->setData('Ce numero a déjà postulé à cette annonce')
+                    ->setStatusCode(200);
+            }
 
-        if(count($error)>0){
+            $postulant = new Postulant();
+            $postulant->setNomPostulant($paramFetcher->get('nomPostulant'));
+            $postulant->setTelephone($paramFetcher->get('telephone'));
+            $postulant->setVoiture($voiture);
+
+            $validator = $this->get('validator');
+            $error = $validator->validate($postulant);
+
+            if(count($error)>0){
+                dump($error);
+                return $this->view()
+                    ->setData((string) $error)
+                    ->setStatusCode(500);
+            }
+            $em->persist($postulant);
+            $em->flush();
+
             return $this->view()
-                        ->setData((string) $error)
-                        ->setStatusCode(500);
+                ->setData('Enregistrement effectué avec succes')
+                ->setStatusCode(201);
+        }catch (BadRequestHttpException $e){
+            return $this->view($e->getMessage(),400);
         }
-        $em->persist($postulant);
-        $em->flush();
 
-        return $this->view()
-                        ->setData('Enregistrement effectué avec succes')
-                        ->setStatusCode(201);
     }
 
 

@@ -116,6 +116,8 @@ app.service('VoitureService',['$rootScope','Restangular','InfoParametersService'
             return _voitureService.one('advancedSearch').customPOST(search);
         };
 
+
+
         $rootScope.$on('started.load.listvoiturebyuser',function(event,args){
             that.listByUser(args.idUser);
         });

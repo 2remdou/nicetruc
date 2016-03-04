@@ -7,11 +7,11 @@
             </div>
             <div class="modal-body">
                 <form role="form" name="form">
-                    <div class="form-group" ng-class="{'has-error' : form.nom.$invalid  && formSubmit }">
+                    <div class="form-group" ng-class="{'has-error' : form.nomPostulant.$invalid  && formSubmit }">
                         <div class="input-group login-input">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" placeholder="Nom"  name="nom" ng-model="postulant.nom" required>
-                            <p ng-show="form.nom.$invalid  && formSubmit" class="help-block">Veuillez fournir votre nom</p>
+                            <input type="text" class="form-control" placeholder="Nom"  name="nomPostulant" ng-model="postulant.nomPostulant" required>
+                            <p ng-show="form.nomPostulant.$invalid  && formSubmit" class="help-block">Veuillez fournir votre nom</p>
                         </div>
                     </div>
 

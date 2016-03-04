@@ -181,6 +181,11 @@ app.run(['$rootScope', 'AuthService','$timeout','Restangular','Permission','User
         }
     });
 
+            $rootScope.$on('show.error',function(event,args){
+
+                displayAlert(args.message,'danger',scope);
+            });
+
     $rootScope.$on('showMessage',function(event,messages){
         angular.forEach(messages,function(message){
             var opt= {'message': message.texte}
@@ -222,9 +227,6 @@ app.run(['$rootScope', 'AuthService','$timeout','Restangular','Permission','User
         }
         else if(response.status === 404){
             displayAlert("Aucune ressource trouvée",'info',scope);
-        }
-        else{
-            displayAlert("Aie aie aie, nous allons resoudre ce petit souci",'danger',scope);
         }
         return true;
     });

@@ -3,21 +3,29 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as NicetrucAssert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Postulant
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PostulantRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("all")
  */
 class Postulant
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="guid")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
+     * @Expose()
      */
     private $id;
 
@@ -25,6 +33,8 @@ class Postulant
      * @var string
      *
      * @ORM\Column(name="nomPostulant", type="string", length=255)
+     * @Assert\NotBlank(message="le nom du postulant est obligatoire")
+     * @Expose()
      */
     private $nomPostulant;
 
@@ -32,11 +42,23 @@ class Postulant
      * @var string
      *
      * @ORM\Column(name="telephone", type="string", length=255)
+     * @Assert\NotBlank(message="le numero de telephone est obligatoire")
+     * @Expose()
+     * @NicetrucAssert\IsGuineanPhone()
      */
     private $telephone;
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="datePostule", type="datetime")
+     * @SerializedName("datePostule")
+     * @Expose()
+     */
+    protected  $datePostule;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture",inversedBy="images")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $voiture;
 
@@ -121,5 +143,37 @@ class Postulant
     public function getVoiture()
     {
         return $this->voiture;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(){
+        $this->setDatePostule(new \DateTime());
+    }
+
+
+    /**
+     * Set datePostule
+     *
+     * @param \DateTime $datePostule
+     *
+     * @return Postulant
+     */
+    public function setDatePostule($datePostule)
+    {
+        $this->datePostule = $datePostule;
+
+        return $this;
+    }
+
+    /**
+     * Get datePostule
+     *
+     * @return \DateTime
+     */
+    public function getDatePostule()
+    {
+        return $this->datePostule;
     }
 }
