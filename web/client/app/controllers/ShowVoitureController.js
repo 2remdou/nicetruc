@@ -38,20 +38,7 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
         };
 
         $scope.manifesterInteret = function(){
-            ModalService.showModal({
-                templateUrl: 'client/app/views/manifesterInteret.html',
-                controller: 'ManifesterInteretController'
-            }).then(function(modal){
-                modal.element.modal();
-                modal.close.then(function(result){
-                    usSpinnerService.spin('nt-spinner');
-                   if(typeof  result === "object"){
-                       var postulant = result;
-                       postulant.idVoiture=$stateParams.voitureId;
-                       PostulantService.add(postulant);
-                   }
-                });
-            })
+            PostulantService.manifesterInteret($scope.voiture);
         };
 
         $scope.$on('added.postulant',function(event,args){

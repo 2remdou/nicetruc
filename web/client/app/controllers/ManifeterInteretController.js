@@ -5,14 +5,15 @@ app.controller('ManifesterInteretController',['$scope','usSpinnerService','$elem
     function($scope,usSpinnerService,$element,close){
 
         $scope.close = function(result){
-            close(result,200);
+            $element.modal('hide');
+            close(resul,500);
         };
 
         $scope.send = function(postulant,formIsValid){
             $scope.formSubmit = true;
             if(!formIsValid) return;
             $element.modal('hide');
-            close(postulant,200);
+            close(postulant,500);
 
 
             $scope.formSubmit = false;

@@ -332,7 +332,7 @@ class UserRestController extends FOSRestController
 
         if (count($errors) == 0) {
             $userManager->updateUser($user);
-            $view = $this->configError($view,'Utilisateur modifié avec succès','success',200);
+            return $this->view(array('data'=>array('user'=>$user,'textAlert'=>'Utilisateur modifié avec succès','typeAlert'=>'success')),200);
             return $view;
         } else {
             $view = $this->getErrorsView($errors);
@@ -600,7 +600,7 @@ class UserRestController extends FOSRestController
     /**
      * Get the truncated email displayed when requesting the resetting.
      *
-     * The default implementation only keeps the part following @ in the address.
+     * The default implementation only keeps the part following @   the address.
      *
      * @param \FOS\UserBundle\Model\UserInterface $user
      *

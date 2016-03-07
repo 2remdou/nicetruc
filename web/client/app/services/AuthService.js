@@ -37,9 +37,9 @@ app.service('AuthService', ['localStorageFactory','$rootScope',
     };
 
      this.authenticated = function(response){
-         that.setToken(response.token);
-         that.setRefreshToken(response.refresh_token);
-         that.setUser(JSON.parse(response.data.user));
+         if(isDefined(response.token)) that.setToken(response.token);
+         if(isDefined(response.refresh_token)) that.setRefreshToken(response.refresh_token);
+         if(isDefined(response.data.user)) that.setUser(response.data.user);
      };
 
  }]);

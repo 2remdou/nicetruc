@@ -34,7 +34,8 @@ app.controller('ProfilController',
                 if(!formIsValid) return;
                 usSpinnerService.spin('nt-spinner');
                 user.put().then(function(response){
-                    successRequest(response,$scope);
+                    AuthService.authenticated(response);
+                    displayAlert(response.data.textAlert,response.data.typeAlert,$scope);
                     usSpinnerService.stop('nt-spinner');
                     $state.go('nicetruc');
                 },function(response){

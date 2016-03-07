@@ -33,7 +33,7 @@ class JWTAuthenticationSuccessListener
             return;
         }
         $data['data'] = array(
-            'user' => $this->serializer->serialize($user,'json'),
+            'user' => $this->serializer->deserialize($this->serializer->serialize($user,'json'),'array','json') ,
         );
         $event->setData($data);
     }
