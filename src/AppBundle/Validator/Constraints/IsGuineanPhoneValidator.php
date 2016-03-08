@@ -28,6 +28,8 @@ class IsGuineanPhoneValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        $this->context->addViolation($constraint->message,array("%telephone%"=>$value));
+        if(!preg_match('#^((\+)?(0{2})?224)?6[2356][\d]{7}$#', preg_replace('#[.\- ]#','', $value)) && strlen($value)!==0){
+            $this->context->addViolation($constraint->message,array("%telephone%"=>$value));
+        }
     }
 }

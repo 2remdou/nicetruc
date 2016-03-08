@@ -12,6 +12,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\MessageResponse\MessageResponse;
 use AppBundle\NicetrucEvents;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\RequestParam;
@@ -304,25 +305,25 @@ class UserRestController extends FOSRestController
 
         $user = $em->getRepository('AppBundle:User')->findOneBy(array('id'=>$id));
         if(!$user){
-            $view = $this->configError($view,'User introuvable','danger',404);
-            return $view;
+            return MessageResponse::message('User introuvable','danger',404);
         }
 
         $userManager = $this->container->get('fos_user.user_manager');
 
         $user = $userManager->findUserByUsername($user->getUsername());
 
+
         if($paramFetcher->get('email')){ $user->setUsername($paramFetcher->get('email')); $user->setEmail($paramFetcher->get('email'));}
         if($paramFetcher->get('nomUser')){ $user->setNomUser($paramFetcher->get('nomUser'));}
         if($paramFetcher->get('prenomUser')){ $user->setPrenomUser($paramFetcher->get('prenomUser'));}
-        if($paramFetcher->get('telephone')){ $user->setTelephone($paramFetcher->get('telephone'));}
+//        if($paramFetcher->get('telephone')){ $user->setTelephone($paramFetcher->get('telephone'));}
+        $user->setTelephone($paramFetcher->get('telephone'));
         if($paramFetcher->get('siteWeb')){ $user->setSiteWeb($paramFetcher->get('siteWeb'));}
 
         if($paramFetcher->get('quartier')){
             $quartier = $em->getRepository('AppBundle:Quartier')->find($paramFetcher->get('quartier'));
             if(!$quartier){
-                $view=$this->configError($view,'Le quartier inconnu,veuillez le creer','danger',404);
-                return $view;
+                return MessageResponse::message('Le quartier inconnu,veuillez le creer','danger',404);
             }
             $user->setQuartier($quartier);
         }
@@ -331,9 +332,10 @@ class UserRestController extends FOSRestController
         $errors = $this->get('validator')->validate($user, array('Update'));
 
         if (count($errors) == 0) {
+
             $userManager->updateUser($user);
-            return $this->view(array('data'=>array('user'=>$user,'textAlert'=>'Utilisateur modifié avec succès','typeAlert'=>'success')),200);
-            return $view;
+
+            return MessageResponse::message('Utilisateur modifié avec succès','success',200,array('user'=>$user));
         } else {
             $view = $this->getErrorsView($errors);
             return $view;

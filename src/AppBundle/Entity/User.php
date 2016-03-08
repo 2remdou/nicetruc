@@ -10,6 +10,8 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as NicetrucAssert;
+
 
 /**
  * User
@@ -55,6 +57,7 @@ class User extends BaseUser
      * @ORM\Column(name="telephone",type="string",length=255,nullable=true)
      * @Expose()
      * @SerializedName("telephone")
+     * @NicetrucAssert\IsGuineanPhone(groups={"Update"})
      */
     private $telephone;
 

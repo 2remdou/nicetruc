@@ -85,15 +85,14 @@ class PostulantController extends FOSRestController
             $em = $this->getDoctrine()->getManager();
             $voiture = $em->getRepository('AppBundle:Voiture')->customFind($paramFetcher->get('idVoiture'));
             if(!$voiture){
-                return $this->view('Voiture introuvable',404);
+                return MessageResponse::message('Voiture introuvable','danger',404);
             }
 
-            $postulant = $em->getRepository('AppBundle:Postulant')->findBy(array('telephone'=>$paramFetcher->get('telephone')));
+            $postulant = $em->getRepository('AppBundle:Postulant')->findBy(array('telephone'=>$paramFetcher->get('telephone'),
+                                                                                'voiture'=>$voiture));
 
             if($postulant){
-                return $this->view()
-                    ->setData('Ce numero a déjà postulé à cette annonce')
-                    ->setStatusCode(200);
+                return MessageResponse::message('Ce numero a déjà postulé à cette annonce','warning',200);
             }
 
             $postulant = new Postulant();
@@ -113,9 +112,7 @@ class PostulantController extends FOSRestController
             $em->persist($postulant);
             $em->flush();
 
-            return $this->view()
-                ->setData('Enregistrement effectué avec succes')
-                ->setStatusCode(201);
+            return MessageResponse::message('Enregistrement effectué avec succes','success',201);
         }catch (BadRequestHttpException $e){
             return $this->view($e->getMessage(),400);
         }

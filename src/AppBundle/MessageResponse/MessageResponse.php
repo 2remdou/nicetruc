@@ -14,6 +14,15 @@ class MessageResponse {
 
     private $view;
 
+    public static function message($textAlert='',$typeAlert='success',$codeStatus=200,$data=null){
+
+        $message=array(
+            'textAlert'=> $textAlert,
+            'typeAlert'=> $typeAlert,
+        );
+        return View::create(array('data'=>array_merge($message,is_array($data)?$data:array())),$codeStatus);
+    }
+
     public function __construct(View $view){
         $this->view=$view;
     }

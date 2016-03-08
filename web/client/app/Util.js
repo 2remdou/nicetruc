@@ -64,6 +64,5 @@ var displayAlert = function(message,typeAlert,scope){
           return result;
     };
     var isDefined = function(object){
-        if(object) return true;
-        return false;
+        return angular.isDefined(object);
     }

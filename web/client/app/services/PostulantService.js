@@ -3,15 +3,15 @@
  */
 
 app.service('PostulantService',
-    ['$rootScope','Restangular','ModalService','$state',
-    function($rootScope,Restangular,ModalService,$state){
+    ['$rootScope','Restangular','ModalService','$state','usSpinnerService',
+    function($rootScope,Restangular,ModalService,$state,usSpinnerService){
         var that = this;
 
         var _postulantService = Restangular.all('postulants');
 
         this.add = function(postulant){
             _postulantService.post(postulant).then(function(response){
-                $rootScope.$broadcast('added.postulant',{message:''});
+                $rootScope.$broadcast('added.postulant',{message:response.data.textAlert});
             },function(error){
                 $rootScope.$broadcast('show.error',{message:error.data  });
             });
@@ -37,11 +37,14 @@ app.service('PostulantService',
                     })
                 }
                 else{
+                    var nomPostulant=$rootScope.user.nomUser;
+                    if(isDefined($rootScope.user.prenomUser)) nomPostulant=nomPostulant+' '+$rootScope.user.prenomUser;
+
                     var postulant = {
-                        nomPostulant:$rootScope.user.nomUser+' '+ $rootScope.user.prenomUser,
+                        nomPostulant:nomPostulant,
                         telephone : $rootScope.user.telephone,
                         idVoiture:voiture.id
-                    }
+                    };
                     that.add(postulant);
                 }
 

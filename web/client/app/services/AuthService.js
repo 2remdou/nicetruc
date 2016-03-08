@@ -40,6 +40,7 @@ app.service('AuthService', ['localStorageFactory','$rootScope',
          if(isDefined(response.token)) that.setToken(response.token);
          if(isDefined(response.refresh_token)) that.setRefreshToken(response.refresh_token);
          if(isDefined(response.data.user)) that.setUser(response.data.user);
+         $rootScope.user=that.getUser();
      };
 
  }]);

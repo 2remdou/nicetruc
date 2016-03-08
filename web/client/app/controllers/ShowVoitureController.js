@@ -5,14 +5,16 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
     'VoitureService','$state','ModalService','PostulantService',
     function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,ModalService,PostulantService){
 
-            
-        if(!isDefined($stateParams.voitureId)){
+        $scope.finishedLoading = false;
+
+        if(!isDefined($stateParams.voitureId) || $stateParams.voitureId.length===0){
             displayAlert('Voiture invalide','danger',$scope);
             return;
         }
         usSpinnerService.spin('nt-spinner');
         VoitureService.get($stateParams.voitureId).then(function(response){
             $scope.voiture = response;
+            $scope.finishedLoading = true;
             usSpinnerService.stop('nt-spinner');
         });
 

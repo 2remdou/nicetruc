@@ -14,7 +14,6 @@ app.controller('LoginController',['$scope','$state','$rootScope',
         UserService.login($scope.user).then(
             function(response){
                 AuthService.authenticated(response);
-                UserService.refresh();
                 displayAlert('Salut '+$rootScope.user.nomUser+', super content de vous revoir','success',$scope);
                 usSpinnerService.stop('nt-spinner');
                 $state.go('nicetruc');
