@@ -52,8 +52,7 @@ class VoitureController extends FOSRestController
         );
 
         if(!$voitures){
-            $message->config("Voiture introuvable",'danger',404);
-            return $message->getView();
+            return MessageResponse::message('Voiture introuvable','danger',404);
         }
 
         $view = $this
@@ -85,8 +84,7 @@ class VoitureController extends FOSRestController
         $voitures = $em->getRepository('AppBundle:Voiture')->customFind($id);
 
         if(!$voitures){
-            $message->config("Voiture introuvable",'danger',404);
-            return $message->getView();
+            return MessageResponse::message('Voiture introuvable','danger',404);
         }
 
         $view = $this

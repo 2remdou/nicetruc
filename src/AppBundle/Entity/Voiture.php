@@ -574,4 +574,38 @@ class Voiture extends Article
     {
         return $this->isPublish;
     }
+
+    /**
+     * Add postulant
+     *
+     * @param \AppBundle\Entity\Postulant $postulant
+     *
+     * @return Voiture
+     */
+    public function addPostulant(\AppBundle\Entity\Postulant $postulant)
+    {
+        $this->postulants[] = $postulant;
+
+        return $this;
+    }
+
+    /**
+     * Remove postulant
+     *
+     * @param \AppBundle\Entity\Postulant $postulant
+     */
+    public function removePostulant(\AppBundle\Entity\Postulant $postulant)
+    {
+        $this->postulants->removeElement($postulant);
+    }
+
+    /**
+     * Get postulants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPostulants()
+    {
+        return $this->postulants;
+    }
 }

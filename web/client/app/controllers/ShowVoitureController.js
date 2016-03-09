@@ -16,6 +16,8 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
             $scope.voiture = response;
             $scope.finishedLoading = true;
             usSpinnerService.stop('nt-spinner');
+        },function(error){
+            $rootScope.$broadcast('show.error',{alert:error.data});
         });
 
         $scope.selectMarque = function(marque){
@@ -43,8 +45,16 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
             PostulantService.manifesterInteret($scope.voiture);
         };
 
+        $scope.listePostulant = function(postulants){
+            if(postulants.length===0){
+                displayAlert('Aucun postulant pour cette annonce encore','info',$scope);
+                return;
+            }
+            PostulantService.listePostulant(postulants);
+        };
+
         $scope.$on('added.postulant',function(event,args){
-            displayAlert(args.message,'success',$scope);
+            displayAlert(args.alert.textAlert,args.alert.typeAlert,$scope);
             usSpinnerService.stop('nt-spinner');
         });
 

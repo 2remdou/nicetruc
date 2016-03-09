@@ -1,10 +1,10 @@
 /**
  * Created by touremamadou on 01/03/2016.
  */
-app.controller('ManifesterInteretController',['$scope','postulant','usSpinnerService','$element','close',
-    function($scope,postulant,usSpinnerService,$element,close){
+app.controller('ListePostulantController',['$scope','postulants','usSpinnerService','$element','close',
+    function($scope,postulants,usSpinnerService,$element,close){
 
-        $scope.postulant = postulant;
+        $scope.postulants = postulants;
         $scope.close = function(result){
             $element.modal('hide');
             close(result,500);

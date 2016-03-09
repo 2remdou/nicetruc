@@ -2,6 +2,8 @@
     <div class="col-lg-12 col-sm-12">
         <button class="btn btn-primary" ng-click="editVoiture(voiture.id)" ng-disabled="!finishedLoading" ng-show="isAuthorizedEdit(voiture.user.id)">Modifier</button>
         <button class="btn btn-success" ng-click="manifesterInteret()" ng-disabled="!finishedLoading" ng-hide="isAuthorizedEdit(voiture.user.id)">Je suis intéressé</button>
+        <button type="button" class="btn btn-primary pull-right" ng-click="listePostulant(voiture.postulants)" ng-disabled="!finishedLoading" ng-show="isAuthorizedEdit(voiture.user.id)">Postulants<span class="badge">//voiture.postulants.length//</span></button>
+
         <hr>
     </div>
     <!-- Voiture Detail -->

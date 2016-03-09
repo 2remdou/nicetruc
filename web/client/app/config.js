@@ -183,7 +183,7 @@ app.run(['$rootScope', 'AuthService','$timeout','Restangular','Permission','User
 
             $rootScope.$on('show.error',function(event,args){
 
-                displayAlert(args.message,'danger',scope);
+                displayAlert(args.alert.textAlert,args.alert.typeAlert,scope);
                 usSpinnerService.stop('nt-spinner');
             });
 

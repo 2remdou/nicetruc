@@ -35,6 +35,7 @@ class Postulant
      * @ORM\Column(name="nomPostulant", type="string", length=255)
      * @Assert\NotBlank(message="le nom du postulant est obligatoire")
      * @Expose()
+     * @SerializedName("nomPostulant")
      */
     private $nomPostulant;
 
@@ -45,6 +46,7 @@ class Postulant
      * @Assert\NotBlank(message="le numero de telephone est obligatoire")
      * @Expose()
      * @NicetrucAssert\IsGuineanPhone()
+     * @SerializedName("telephone")
      */
     private $telephone;
     /**
@@ -54,6 +56,15 @@ class Postulant
      * @Expose()
      */
     protected  $datePostule;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="disabled",type="boolean",options={"default":false})
+     * @Expose()
+     * @SerializedName("disabled")
+     */
+    protected $disabled;
+
 
 
     /**
@@ -175,5 +186,29 @@ class Postulant
     public function getDatePostule()
     {
         return $this->datePostule;
+    }
+
+    /**
+     * Set disabled
+     *
+     * @param boolean $disabled
+     *
+     * @return Postulant
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+
+        return $this;
+    }
+
+    /**
+     * Get disabled
+     *
+     * @return boolean
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
     }
 }

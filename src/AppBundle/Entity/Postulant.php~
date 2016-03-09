@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as NicetrucAssert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
@@ -32,8 +33,9 @@ class Postulant
      * @var string
      *
      * @ORM\Column(name="nomPostulant", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="le nom du postulant est obligatoire")
      * @Expose()
+     * @SerializedName("nomPostulant")
      */
     private $nomPostulant;
 
@@ -41,8 +43,10 @@ class Postulant
      * @var string
      *
      * @ORM\Column(name="telephone", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="le numero de telephone est obligatoire")
      * @Expose()
+     * @NicetrucAssert\IsGuineanPhone()
+     * @SerializedName("telephone")
      */
     private $telephone;
     /**
@@ -53,9 +57,19 @@ class Postulant
      */
     protected  $datePostule;
 
+    /**
+     * @var boolean
+     * @ORM\Column(name="disabled",type="boolean",options={"default":false})
+     * @Expose()
+     * @SerializedName("disabled")
+     */
+    protected $disabled;
+
+
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture",inversedBy="images")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $voiture;
 
@@ -146,7 +160,31 @@ class Postulant
      * @ORM\PrePersist
      */
     public function prePersist(){
-        return ;
+        $this->setDatePostule(new \DateTime());
     }
 
+
+    /**
+     * Set datePostule
+     *
+     * @param \DateTime $datePostule
+     *
+     * @return Postulant
+     */
+    public function setDatePostule($datePostule)
+    {
+        $this->datePostule = $datePostule;
+
+        return $this;
+    }
+
+    /**
+     * Get datePostule
+     *
+     * @return \DateTime
+     */
+    public function getDatePostule()
+    {
+        return $this->datePostule;
+    }
 }

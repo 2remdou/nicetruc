@@ -20,6 +20,9 @@ class MessageResponse {
             'textAlert'=> $textAlert,
             'typeAlert'=> $typeAlert,
         );
+        if($codeStatus>=400){
+            return View::create(array_merge($message,is_array($data)?$data:array()),$codeStatus);
+        }
         return View::create(array('data'=>array_merge($message,is_array($data)?$data:array())),$codeStatus);
     }
 

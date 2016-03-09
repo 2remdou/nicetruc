@@ -1,0 +1,37 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content col-lg-10">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Liste des postulants</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered tbl-cart">
+                        <thead>
+                        <tr>
+                            <td class="hidden-xs">N°</td>
+                            <td>Nom </td>
+                            <td>Telephone</td>
+                            <td>Date
+                                <i ng-click="sortByDate()" ng-show="dateCroissant" class="glyphicon glyphicon-sort-by-attributes pull-right"></i>
+                                <i ng-click="sortByDate()" ng-hide="dateCroissant" class="glyphicon glyphicon-sort-by-attributes-alt pull-right" ></i>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="postulant in postulants" class="mouse-pointer">
+                            <td>//$index+1//</td>
+                            <td>//postulant.nomPostulant//</td>
+                            <td>//postulant.telephone//</td>
+                            <td>//postulant.datePostule| date:'dd/MM/yyyy HH:mm:ss '//</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

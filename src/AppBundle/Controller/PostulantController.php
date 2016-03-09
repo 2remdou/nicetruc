@@ -74,14 +74,14 @@ class PostulantController extends FOSRestController
      *   }
      * )
      * @RequestParam(name="nomPostulant", nullable=false, strict=true, description="nom postulant.")
-     * @RequestParam(name="telephone", nullable=false, strict=true, description="telephone postulant.")
+     * @RequestParam(name="telephone", nullable=true, strict=true, description="telephone postulant.")
      * @RequestParam(name="idVoiture", nullable=false,requirements="\d+", strict=true, description="id voiture postulant.")
      * @Route("api/postulants",name="nicetruc_post_postulant", options={"expose"=true})
      * @Method({"POST"})
      */
     public function postPostulant(ParamFetcher $paramFetcher){
 
-        try{
+//        try{
             $em = $this->getDoctrine()->getManager();
             $voiture = $em->getRepository('AppBundle:Voiture')->customFind($paramFetcher->get('idVoiture'));
             if(!$voiture){
@@ -104,18 +104,20 @@ class PostulantController extends FOSRestController
             $error = $validator->validate($postulant);
 
             if(count($error)>0){
-                dump($error);
-                return $this->view()
-                    ->setData((string) $error)
-                    ->setStatusCode(500);
+                $message="";
+                foreach($error as $er){
+                    $message=$message.$er->getMessage().'<br>';
+                }
+                return MessageResponse::message($message,'danger',400);
             }
             $em->persist($postulant);
             $em->flush();
 
             return MessageResponse::message('Enregistrement effectué avec succes','success',201);
-        }catch (BadRequestHttpException $e){
-            return $this->view($e->getMessage(),400);
-        }
+//        }catch (BadRequestHttpException $e){
+//            dump($e);
+//            return MessageResponse::message($e->getMessage(),'danger',400);
+//        }
 
     }
 

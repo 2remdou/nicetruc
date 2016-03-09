@@ -15,6 +15,8 @@ class PostulantRepository extends \Doctrine\ORM\EntityRepository
         		->join('p.voiture','voiture')
                 ->where('voiture.isPublish=:isPublish')
                 ->setParameter('isPublish',true)
+                ->andWhere('p.disabled=:disabled')
+                ->setParameter('disabled',false)
                 ->getQuery()
                 ->getResult();
                 return $resultat;

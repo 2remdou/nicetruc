@@ -30,7 +30,6 @@ app.controller('ProfilController',
             };
 
             $scope.saveInfo = function(user,formIsValid){
-                log(user);
                 $scope.formSubmit = true;
                 if(!formIsValid) return;
                 usSpinnerService.spin('nt-spinner');

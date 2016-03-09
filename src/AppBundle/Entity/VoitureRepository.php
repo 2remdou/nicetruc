@@ -27,7 +27,9 @@ class VoitureRepository extends EntityRepository
                 ->leftJoin('v.images','image')
                 ->addSelect('image')
                 ->leftJoin('v.imagePrincipale','imagePrincipale')
-                ->addSelect('imagePrincipale');
+                ->addSelect('imagePrincipale')
+                ->leftJoin('v.postulants','postulant')
+                ->addSelect('postulant');
     }
     public function customFind($id=null){
         if(!$id) return null;
@@ -45,8 +47,12 @@ class VoitureRepository extends EntityRepository
                 ->addSelect('image')
                 ->leftJoin('v.imagePrincipale','imagePrincipale')
                 ->addSelect('imagePrincipale')
+                ->leftJoin('v.postulants','postulant')
+                ->addSelect('postulant')
                 ->where('v.id=:id')
                 ->setParameter('id',$id)
+                ->andWhere('postulant.disabled=:disabled')
+                ->setParameter('disabled',true)
                 ->getQuery()
                 ->getSingleResult();
         }catch (NoResultException $ex){
