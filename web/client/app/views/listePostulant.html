@@ -21,13 +21,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="postulant in postulants" class="mouse-pointer">
+                        <tr ng-repeat="postulant in postulants|filter:{disabled:false}" class="mouse-pointer">
                             <td>//$index+1//</td>
                             <td>//postulant.nomPostulant//</td>
                             <td>//postulant.telephone//</td>
                             <td>//postulant.datePostule| date:'dd/MM/yyyy HH:mm:ss '//</td>
                             <td class="text-center">
-                                <a href="#" class="remove_cart">
+                                <a href="#" ng-click="disabledPostulant(postulant)" class="remove_cart">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>

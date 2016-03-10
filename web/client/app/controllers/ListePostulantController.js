@@ -1,8 +1,11 @@
 /**
  * Created by touremamadou on 01/03/2016.
  */
-app.controller('ListePostulantController',['$scope','postulants','usSpinnerService','$element','close',
-    function($scope,postulants,usSpinnerService,$element,close){
+app.controller('ListePostulantController',
+    ['$scope','postulants','usSpinnerService','$element','close','PostulantService',
+    'usSpinnerService','$filter',
+    function($scope,postulants,usSpinnerService,$element,close,PostulantService,
+        usSpinnerService,$filter){
 
         $scope.postulants = postulants;
         $scope.close = function(result){
@@ -20,9 +23,25 @@ app.controller('ListePostulantController',['$scope','postulants','usSpinnerServi
             $scope.formSubmit = false;
         };
 
-        $scope.disabled = function(postulant){
+        $scope.disabledPostulant = function(postulant){
+            usSpinnerService.spin('nt-spinner');
+            PostulantService.disabledPostulant(postulant);
+        };
 
-        }
+        $scope.$on('disabled.postulant',function(event,args){
+            displayAlert(args.alert.textAlert,args.alert.typeAlert,$scope);
+            usSpinnerService.stop('nt-spinner');
+        });
+
+        $scope.sortByDate = function(){
+            if($scope.dateCroissant){
+                $scope.postulants=$filter('orderBy')($scope.postulants,'datePostule');
+            }
+            else{
+                $scope.postulants=$filter('orderBy')($scope.postulants,'-datePostule');
+            }
+            $scope.dateCroissant = !$scope.dateCroissant;
+        };
 
 
 }]);

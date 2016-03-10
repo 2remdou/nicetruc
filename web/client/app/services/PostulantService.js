@@ -71,6 +71,12 @@ app.service('PostulantService',
         };
 
         this.disabledPostulant = function(postulant){
-
+            postulant = Restangular.restangularizeElement(null,postulant,_postulantService.route);
+            postulant.customPUT(null,'disabled').then(function(response){
+                postulant.disabled=true;
+                 $rootScope.$broadcast('disabled.postulant',{alert:response.data});
+            },function(error){
+                $rootScope.$broadcast('show.error',{alert:error.data});
+            })
         };
 }]);

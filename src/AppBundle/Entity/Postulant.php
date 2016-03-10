@@ -161,6 +161,7 @@ class Postulant
      */
     public function prePersist(){
         $this->setDatePostule(new \DateTime());
+        $this->setDisabled(false);
     }
 
 
