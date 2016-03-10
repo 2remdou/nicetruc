@@ -68,7 +68,7 @@ class Postulant
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture",inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Voiture",inversedBy="postulants")
      * @ORM\JoinColumn(nullable=false)
      */
     private $voiture;

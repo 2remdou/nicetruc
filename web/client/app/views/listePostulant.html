@@ -17,6 +17,7 @@
                                 <i ng-click="sortByDate()" ng-show="dateCroissant" class="glyphicon glyphicon-sort-by-attributes pull-right"></i>
                                 <i ng-click="sortByDate()" ng-hide="dateCroissant" class="glyphicon glyphicon-sort-by-attributes-alt pull-right" ></i>
                             </td>
+                            <td>Supprimer</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -25,6 +26,11 @@
                             <td>//postulant.nomPostulant//</td>
                             <td>//postulant.telephone//</td>
                             <td>//postulant.datePostule| date:'dd/MM/yyyy HH:mm:ss '//</td>
+                            <td class="text-center">
+                                <a href="#" class="remove_cart">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

@@ -51,8 +51,6 @@ class VoitureRepository extends EntityRepository
                 ->addSelect('postulant')
                 ->where('v.id=:id')
                 ->setParameter('id',$id)
-                ->andWhere('postulant.disabled=:disabled')
-                ->setParameter('disabled',true)
                 ->getQuery()
                 ->getSingleResult();
         }catch (NoResultException $ex){

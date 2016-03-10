@@ -39,16 +39,24 @@ class PostulantController extends FOSRestController
      * )
      * @Route("api/voitures/{idVoiture}/postulants/page/{page}",name="nicetruc_voiture_postulant", options={"expose"=true})
      * @Method({"GET"})
+     * @Security("has_role('ROLE_API')")
      */
     public function getPostulantsByVoitureAction($idVoiture,$page){
+
+        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $paginator  = $this->get('knp_paginator');
 
         $postulants = $em->getRepository('AppBundle:Postulant')->customFindByVoiture($idVoiture);
+
+        if($postulants->getVoiture()->getUser()!==$user){
+            return MessageResponse::message('Vous n\'êtes pas autorisé à acceder à cette ressource','danger',401);
+        }
         
         if(!$postulants){
-            return $this->view('Aucun postulant pour cette annonce',404);
+            return MessageResponse::message('Aucun postulant pour cette annonce','danger',404);
         }
 
         $postulants = $paginator->paginate(
@@ -73,9 +81,9 @@ class PostulantController extends FOSRestController
      *     404 = "Returned when the voiture is not found"
      *   }
      * )
-     * @RequestParam(name="nomPostulant", nullable=false, strict=true, description="nom postulant.")
+     * @RequestParam(name="nomPostulant", nullable=true, strict=true, description="nom postulant.")
      * @RequestParam(name="telephone", nullable=true, strict=true, description="telephone postulant.")
-     * @RequestParam(name="idVoiture", nullable=false,requirements="\d+", strict=true, description="id voiture postulant.")
+     * @RequestParam(name="idVoiture", nullable=true,requirements="\d+", strict=true, description="id voiture postulant.")
      * @Route("api/postulants",name="nicetruc_post_postulant", options={"expose"=true})
      * @Method({"POST"})
      */
@@ -120,6 +128,49 @@ class PostulantController extends FOSRestController
 //        }
 
     }
+
+    /**
+     * desactiver un postulant à une voiture
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Desactiver un postulant à une voiture",
+     *   statusCodes = {
+     *     200 = "success",
+     *     404 = "Returned when the voiture is not found"
+     *   }
+     * )
+     * @Route("api/postulants/{idPostulant}/disabled",name="nicetruc_disabled_postulant", options={"expose"=true})
+     * @Method({"PUT"})
+     */
+    public function disabledPostulantAction($idPostulant){
+
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        $postulant = $em->getRepository('AppBundle:Postulant')->find($idPostulant);
+
+        if(!$postulant){
+            return MessageResponse::message('Postulant introuvable','danger',404);
+        }
+
+
+        if($postulant->getVoiture()->getUser()!==$user){
+            return MessageResponse::message('Vous n\'êtes pas autorisé à acceder à cette ressource','danger',401);
+        }
+
+        $postulant->setDisabled(true);
+
+        $em->persist($postulant);
+        $em->flush();
+
+        return MessageResponse::message('Postulant desactivé avec success','success',200);
+
+
+    }
+
 
 
 }
