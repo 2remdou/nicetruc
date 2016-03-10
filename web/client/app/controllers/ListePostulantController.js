@@ -20,5 +20,9 @@ app.controller('ListePostulantController',['$scope','postulants','usSpinnerServi
             $scope.formSubmit = false;
         };
 
+        $scope.disabled = function(postulant){
+
+        }
+
 
 }]);

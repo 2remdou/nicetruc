@@ -69,4 +69,8 @@ app.service('PostulantService',
 
           });
         };
+
+        this.disabledPostulant = function(postulant){
+
+        };
 }]);
