@@ -2,8 +2,9 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerService','$rootScope',
-    'VoitureService','$state','ModalService','PostulantService',
-    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,ModalService,PostulantService){
+    'VoitureService','$state','ModalService','PostulantService','$filter',
+    function($scope,$stateParams,usSpinnerService,$rootScope,VoitureService,$state,ModalService,
+             PostulantService,$filter){
 
         $scope.finishedLoading = false;
 
@@ -15,6 +16,7 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
         VoitureService.get($stateParams.voitureId).then(function(response){
             $scope.voiture = response;
             $scope.finishedLoading = true;
+            $scope.countPostulantEnabled = $filter('filter')($scope.voiture.postulants,{disabled:false}).length;
             usSpinnerService.stop('nt-spinner');
         },function(error){
             $rootScope.$broadcast('show.error',{alert:error.data});
@@ -56,6 +58,10 @@ app.controller('ShowVoitureController',['$scope','$stateParams','usSpinnerServic
         $scope.$on('added.postulant',function(event,args){
             displayAlert(args.alert.textAlert,args.alert.typeAlert,$scope);
             usSpinnerService.stop('nt-spinner');
+        });
+
+        $scope.$on('disabled.postulant',function(event,args){
+            $scope.countPostulantEnabled = $filter('filter')($scope.voiture.postulants,{disabled:false}).length;
         });
 
     }]);

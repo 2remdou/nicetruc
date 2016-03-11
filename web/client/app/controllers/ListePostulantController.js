@@ -3,9 +3,9 @@
  */
 app.controller('ListePostulantController',
     ['$scope','postulants','usSpinnerService','$element','close','PostulantService',
-    'usSpinnerService','$filter',
+    'usSpinnerService','$filter','ModalService',
     function($scope,postulants,usSpinnerService,$element,close,PostulantService,
-        usSpinnerService,$filter){
+        usSpinnerService,$filter,ModalService){
 
         $scope.postulants = postulants;
         $scope.close = function(result){
@@ -24,8 +24,21 @@ app.controller('ListePostulantController',
         };
 
         $scope.disabledPostulant = function(postulant){
-            usSpinnerService.spin('nt-spinner');
-            PostulantService.disabledPostulant(postulant);
+            ModalService.showModal({
+                templateUrl : 'client/app/views/modalConfirmation.html',
+                controller: 'ModalConfirmationController',
+                inputs:{
+                    texte : 'Voulez-vous vraiment supprimer ce postulant?'
+                },
+            }).then(function(modal){
+                modal.element.modal();
+                modal.close.then(function(result){
+                    if(result) {
+                        usSpinnerService.spin('nt-spinner');
+                        PostulantService.disabledPostulant(postulant);
+                    }
+                })
+            })
         };
 
         $scope.$on('disabled.postulant',function(event,args){
