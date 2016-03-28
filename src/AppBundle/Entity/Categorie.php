@@ -21,9 +21,9 @@ class Categorie
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="guid")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="UUID")
      * @Expose()
      * @SerializedName("id")
      */
@@ -88,4 +88,38 @@ class Categorie
     }
 
 
+
+    /**
+     * Add voiture
+     *
+     * @param \AppBundle\Entity\Voiture $voiture
+     *
+     * @return Categorie
+     */
+    public function addVoiture(\AppBundle\Entity\Voiture $voiture)
+    {
+        $this->voitures[] = $voiture;
+
+        return $this;
+    }
+
+    /**
+     * Remove voiture
+     *
+     * @param \AppBundle\Entity\Voiture $voiture
+     */
+    public function removeVoiture(\AppBundle\Entity\Voiture $voiture)
+    {
+        $this->voitures->removeElement($voiture);
+    }
+
+    /**
+     * Get voitures
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVoitures()
+    {
+        return $this->voitures;
+    }
 }

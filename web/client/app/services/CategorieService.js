@@ -4,7 +4,9 @@
 
 app.service('CategorieService',['$rootScope','Restangular',function($rootScope,Restangular){
 
+    var that = this;
     var _categorieService = Restangular.all('categories/');
+    var categories;
 
     this.list = function(){
         $rootScope.$broadcast('categorie.list');
@@ -19,6 +21,10 @@ app.service('CategorieService',['$rootScope','Restangular',function($rootScope,R
         _categorieService.post(categorie).then(function(){
             $rootScope.$broadcast('categorie.create');
         });
+    };
+
+    this.setCategories = function(categories){
+        that.categories = categories;
     };
 
     this.update = function(categorie){

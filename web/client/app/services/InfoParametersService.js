@@ -25,6 +25,7 @@ app.service('InfoParametersService',['Restangular','$rootScope','$injector',
             ModeleService = $injector.get('ModeleService');
             BoitierService = $injector.get('BoitierService');
             CarburantService = $injector.get('CarburantService');
+            CategorieService = $injector.get('CategorieService');
             that.load=true;
             return _infoParametersService.customGET().then(function(response){
                 var data = response.data;
@@ -45,6 +46,9 @@ app.service('InfoParametersService',['Restangular','$rootScope','$injector',
 
                 $rootScope.carburants=Restangular.restangularizeCollection(null,data.carburants,'carburants/');
                 CarburantService.setCarburants($rootScope.carburants);
+
+                $rootScope.categories=Restangular.restangularizeCollection(null,data.categories,'categories/');
+                CategorieService.setCategories($rootScope.categories);
 
                 VoitureService.setVoituresEnVedette(data.voituresEnVedette);
                 $rootScope.$broadcast('parameters.completed.load');

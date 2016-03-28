@@ -22,7 +22,7 @@ class Postulant
     /**
      * @var integer
      *
-     * @ORM\Column(type="guid")
+         * @ORM\Column(type="guid")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
      * @Expose()

@@ -3,10 +3,10 @@
  */
 app.controller('EditVoitureController',['$scope','MarqueService','ModeleService',
     'CarburantService','BoitierService','ModeleMarqueService','VoitureService','$rootScope',
-    '$state','usSpinnerService','$stateParams','FileUploader','ImageService',
+    '$state','usSpinnerService','$stateParams','FileUploader','ImageService','filterFilter',
     function($scope,MarqueService,ModeleService,CarburantService,BoitierService,ModeleMarqueService
         ,VoitureService,$rootScope,$state,usSpinnerService,$stateParams,
-        FileUploader,ImageService){
+        FileUploader,ImageService,filterFilter){
 
         $scope.$emit('parameters.started.load');
 
@@ -15,6 +15,7 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
             $scope.marques = $rootScope.marques;
             $scope.boitiers = $rootScope.boitiers;
             $scope.carburants = $rootScope.carburants;
+            $scope.categories = $rootScope.categories;
             $scope.voituresEnVedette = $rootScope.voituresEnVedette;
             usSpinnerService.stop('nt-spinner');
         });
@@ -66,8 +67,8 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
             usSpinnerService.stop('nt-spinner');
             usSpinnerService.spin('nt-spinner');
             voiture.modeleMarque= voiture.modele.modeleMarque;
-            voiture.categorie = 1; //voiture
-
+            voiture.categorie = filterFilter($scope.categories,{libelleCategorie:'Voiture'})[0]; //voiture
+            log(voiture.categorie);
             voiture.route=""; // enlever l'id de la voiture dans l'url pour eviter (/api/voitures/11/11)
             VoitureService.update(voiture).then(function(){
 

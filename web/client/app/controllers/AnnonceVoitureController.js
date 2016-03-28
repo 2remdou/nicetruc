@@ -2,8 +2,8 @@
  * Created by touremamadou on 12/09/2015.
  */
 app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope',
-    '$state','usSpinnerService',
-        function($scope,VoitureService,$rootScope,$state,usSpinnerService
+    '$state','usSpinnerService','filterFilter',
+        function($scope,VoitureService,$rootScope,$state,usSpinnerService,filterFilter
         ){
 
         usSpinnerService.spin('nt-spinner');
@@ -16,6 +16,7 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
             $scope.marques = $rootScope.marques;
             $scope.boitiers = $rootScope.boitiers;
             $scope.carburants = $rootScope.carburants;
+            $scope.categories = $rootScope.categories;
             $scope.voituresEnVedette = $rootScope.voituresEnVedette;
             usSpinnerService.stop('nt-spinner');
         });
@@ -33,7 +34,8 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
             voiture.modeleMarque=voiture.modele.modeleMarque;
 
             voiture.user = $rootScope.user;
-            voiture.categorie = 1; //voiture
+            voiture.categorie = filterFilter($scope.categories,{libelleCategorie:'Voiture'})[0]; //voiture
+            log(voiture.categorie);
             VoitureService.create(angular.copy(voiture)).then(function(response){
 
                 var idVoiture = response.id;

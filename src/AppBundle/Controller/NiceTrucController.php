@@ -302,6 +302,7 @@ class NiceTrucController extends FOSRestController
         $boitiers = $em->getRepository('AppBundle:Boitier')->findAll();
         $carburants = $em->getRepository('AppBundle:Carburant')->findAll();
         $modeles = $em->getRepository('AppBundle:Modele')->findAll();
+        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
 
         
         $view = View::create();
@@ -312,6 +313,7 @@ class NiceTrucController extends FOSRestController
             'boitiers'=>$boitiers,
             'carburants'=>$carburants,
             'modeles'=>$modeles,
+            'categories'=>$categories,
             )
 
         );

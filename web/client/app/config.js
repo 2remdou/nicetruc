@@ -81,13 +81,14 @@ app.config(function($interpolateProvider) {
             }
             else if(url.search('voitures')!==-1){
 
-                ['marque','modele','id','images','defaultPathImagePrincipale'].forEach(function(property){
+                ['marque','modele','id','images','defaultPathImagePrincipale','postulants'].forEach(function(property){
                     deleteProperty(element,property);
                 });
                  //element.modeleMarque = extractId(element.modeleMarque);
                  element.boitier = extractId(element.boitier);
                  element.carburant = extractId(element.carburant);
                  element.imagePrincipale=extractId(element.imagePrincipale);
+                 element.categorie=extractId(element.categorie);
                  element.user = extractId(element.user);
              }
              else if(what === 'users'){

@@ -174,7 +174,7 @@ class VoitureController extends FOSRestController
      *   }
      * )
      * @RequestParam(name="isVedette", nullable=false)
-     * @Route("api/voitures/vedette/{id}", requirements={"id" = "\d+"}, name="nicetruc_voiture_en_vedette", options={"expose"=true})
+     * @Route("api/voitures/vedette/{id}", name="nicetruc_voiture_en_vedette", options={"expose"=true})
      * @Method({"PUT"})
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -225,7 +225,7 @@ class VoitureController extends FOSRestController
      *     404 = "Returned when the user is not found"
      *   }
      * )
-     * @Route("api/voitures/disabled/{id}", requirements={"id" = "\d+"}, name="nicetruc_disabled_voiture", options={"expose"=true})
+     * @Route("api/voitures/disabled/{id}", name="nicetruc_disabled_voiture", options={"expose"=true})
      * @Method({"PUT"})
      */
     public function putDisableVoitureAction($id){
