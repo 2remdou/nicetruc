@@ -68,7 +68,6 @@ app.controller('EditVoitureController',['$scope','MarqueService','ModeleService'
             usSpinnerService.spin('nt-spinner');
             voiture.modeleMarque= voiture.modele.modeleMarque;
             voiture.categorie = filterFilter($scope.categories,{libelleCategorie:'Voiture'})[0]; //voiture
-            log(voiture.categorie);
             voiture.route=""; // enlever l'id de la voiture dans l'url pour eviter (/api/voitures/11/11)
             VoitureService.update(voiture).then(function(){
 

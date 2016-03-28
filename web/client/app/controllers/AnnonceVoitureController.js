@@ -35,7 +35,6 @@ app.controller('AnnonceVoitureController',['$scope','VoitureService','$rootScope
 
             voiture.user = $rootScope.user;
             voiture.categorie = filterFilter($scope.categories,{libelleCategorie:'Voiture'})[0]; //voiture
-            log(voiture.categorie);
             VoitureService.create(angular.copy(voiture)).then(function(response){
 
                 var idVoiture = response.id;
